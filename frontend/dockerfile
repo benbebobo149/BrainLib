@@ -1,0 +1,12 @@
+FROM node:lts-alpine
+
+ARG USER_ID
+ARG GROUP_ID
+
+WORKDIR /app/frontend/
+
+COPY . /app/frontend/
+
+RUN npm install
+
+CMD ["/bin/ash", "-c", "npm i && npm run dev"]
