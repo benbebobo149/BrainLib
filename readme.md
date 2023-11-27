@@ -3,15 +3,22 @@ This is the application that let scholor to publish post and create the event.
 
 ## commit style
 init: 初始化專案
+
 add: 新增項目（但功能未完成）
+
 feat: 新增功能（功能已完成）
+
 RWD: RWD 的功能修正
+
 chore: 雜務（如新增附件檔、上傳字體檔等等）
+
 fix: 修正 bug 或 issue
+
 hotfix: 「即時」修正嚴重 bug
 
 ## set up
 git clone https://github.com/benbebobo149/BrainLib.git
+
 docker-compose up -d
 
 ## set up only one container
@@ -33,5 +40,7 @@ docker exec -it nuxt /bin/sh
 
 ## framework and library 
 frontend : nuxt3 + tailwind
+
 database : postgres + adminer
+
 backend : spring + hibernate
