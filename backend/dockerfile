@@ -1,0 +1,10 @@
+# java jdk
+# FROM maven:3.8.5-openjdk-17
+FROM openjdk:17-alpine
+WORKDIR /app/backend/
+
+COPY . .
+
+RUN chmod +x ./gradlew
+CMD ["sh", "-c", "./gradlew bootRun"]
+

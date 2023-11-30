@@ -1,8 +1,5 @@
 FROM node:lts-alpine
 
-ARG USER_ID
-ARG GROUP_ID
-
 WORKDIR /app/frontend/
 
 COPY . /app/frontend/

@@ -1,0 +1,4 @@
+# database
+pgdata/*
+
+!/pgdata/.gitkeep

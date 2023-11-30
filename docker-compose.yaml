@@ -7,3 +7,28 @@ services:
       - ./frontend/:/app/frontend/
     ports:
       - 3000:3000
+  backend:
+    build:
+      context: ./backend
+    volumes:
+      - ./backend/:/app/backend/
+    ports:
+      - 1234:8080
+  db:
+    image: postgres
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: db
+      PGDATA: /var/lib/postgresql/data/pgdata
+    volumes:
+      - ./pgdata/:/var/lib/postgresql/data/
+  adminer:
+    image: adminer
+    restart: always
+    environment:
+    - ADMINER_DEFAULT_SERVER=db
+    ports:
+      - 8080:8080
