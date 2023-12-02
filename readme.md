@@ -12,6 +12,8 @@ sudo git clone https://github.com/benbebobo149/BrainLib.git
 
 sudo chown -R <your-username> /home/BrainLib/ 
 
+cd /home/BrainLib/ 
+
 sudo docker compose up -d
 
 ```
