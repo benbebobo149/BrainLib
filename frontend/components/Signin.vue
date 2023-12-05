@@ -14,9 +14,6 @@
             <Google class="w-24 h-24"></Google>
           </div>
         </div>
-        <div class="flex justify-center">
-          <Confirm class="w-24 h-24"></Confirm>
-        </div>
       </div>
     </div>
   </div>
@@ -24,13 +21,11 @@
 
 <script>
 import Google from '@/components/Google.vue'; // 替换为你的实际组件路径
-import Confirm from '@/components/Confirm.vue'; 
 
 export default {
   name: "Signin",
   components: {
     Google,
-    Confirm
   },
   data() {
     return {

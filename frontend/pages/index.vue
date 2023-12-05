@@ -23,7 +23,10 @@
       </div>
     </div>
     <div class="flex w-full h-1/10 bg-yellow-100">
-      <DoubleDown class="m-auto w-1vw h-1vh"></DoubleDown>
+      <NuxtLink to="./" class="flex w-auto h-full bg-green-100 items-center mr-[1vw]">
+        <img src="PencilSquare.png" alt="PencilButton" class="w-auto h-3/4">
+      </NuxtLink>
+      <DoubleDown class="flex m-auto "></DoubleDown>
     </div>
   </div>
 </template>
@@ -44,7 +47,8 @@ export default {
   },
   data() {
     return {
-      isModalVisible: false // 控制模态框显示与隐藏
+      isModalVisible: false, // 控制模态框显示与隐藏
+      ListNavVisible: false
     };
   },
   methods: {
@@ -54,6 +58,14 @@ export default {
     },
     closeModal() {
       this.isModalVisible = false; // 点击 "X" 按钮关闭模态框
+    },
+
+    toggleModal(value) {
+      // 接收从 Signin 组件传递过来的值，控制显示与隐藏模态框
+      this.ListNavVisible = value;
+    },
+    closeModal() {
+      this.ListNavVisible = false; // 点击 "ListNav" 按钮关闭模态框
     }
   }
 };
