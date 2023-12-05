@@ -12,10 +12,10 @@ const handleClick = () => {
 	<div class="bg-green-300 ">
 		<div class="w-1/4 h-[10vh] bg-green-400 flex">
 			<img class="w-12/96 h-12/96 rounded-full" src="https://via.placeholder.com/95x96" />
-			<div class="left-6 w-36/96 bg-green-200 text-black text-xl font-normal font-['Roboto'] leading-loose relative">
+			<div class="left-6 w-36/96 bg-green-200 text-black text-xl font-normal font-['Roboto'] leading-loose relative flex items-center">
 				benbenboo
 			</div>
-			<img class="left-[20vw] w-[3vw] h-[3vw] ml-[0.5rem] cursor-pointer relative" src="@/PageAdmini/GearFill.png" @click="handleClick" />
+			<img class="left-[20vw] w-[3vw] h-[3vw] ml-[0.5rem] relative flex items-center" src="@/PageAdmini/GearFill.png" @click="handleClick" />
 		</div>
 	</div>
 
