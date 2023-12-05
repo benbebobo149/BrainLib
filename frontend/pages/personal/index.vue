@@ -22,7 +22,6 @@
             </div>
             <div class="w-full h-1/3 bg-red-300"></div>
         </div>
-
     </div>
 </template>   
 
