@@ -3,10 +3,10 @@ import PostPreview from '@/components/PostPreview'
 </script>
 <template>
   <div class="w-full">
-    <div class=" bg-white w-screen">
+    <div class=" bg-bgcolor w-screen">
 
       <!-- temp navbar -->
-      <div class=" bg-indigo-200 w-screen h-[8vh]">
+      <div class=" bg-primary w-screen h-[8vh]">
         <div>
           <h1> this is temp navbar</h1>
         </div>
@@ -20,13 +20,15 @@ import PostPreview from '@/components/PostPreview'
             <h1> </h1>
           </div>
           <div class=" top-100 h-[10vh]">
-            <div class=" w-[20vw] ml-20 text-black text-3xl font-normal font-['Roboto'] leading-10">
+            <div class=" w-[20vw] ml-20 text-black text-3xl font-normal font-Roboto leading-10">
               <h1 class=" left-[6rem]">適合你的文章</h1>
             </div>
           </div>
 
           <!-- 預覽文章1 -->
           <div class=" bg-slate-50 content-center">
+            <PostPreview />
+            <PostPreview />
             <PostPreview />
             <PostPreview />
             <PostPreview />
@@ -76,7 +78,7 @@ import PostPreview from '@/components/PostPreview'
               </div>
 
             </div>
-            
+
           </div>
         </div>
 

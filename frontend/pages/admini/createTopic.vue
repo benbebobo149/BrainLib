@@ -48,7 +48,7 @@ const topicName = ref('Enter topic name');
 					<div
 						class=" left-[8vw] w-[18vw] h-[8vh]  bg-white mx-[20vw] rounded-md border border-black border-opacity-10  relative">
 						<input
-							class="left-[8vw] w-[18vw] h-[8vh] grow shrink basis-0  text-black text-opacity-50 text-lg font-normal font-['Roboto'] leading-7"
+							class="left-[8vw] w-[18vw] h-[8vh] grow shrink basis-0  text-black text-opacity-50 text-lg font-normal font-Roboto leading-7"
 							type="text" v-model="topicName">
 					</div>
 
