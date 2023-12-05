@@ -15,7 +15,7 @@ const goToPage = () => {
 	<div class=" bg-#E8DEF8 w-screen h-[8vh]">
 		<div class=" bg-#E8DEF8 w-screen h-[8vh]">
 			<div class="bg-primary">
-				<h1> this is temp navbar</h1>
+				<h1> this is temp navbar THIS IS ACTIVITY PAGE</h1>
 			</div>
 
 		</div>
@@ -31,7 +31,7 @@ const goToPage = () => {
 			<div class="w-4/5 h-[100vh] bg-indigo-200">
 				<div class="h-[10vh] bg-white ">
 					<div class=" text-stone-400 ">
-						<h1 class="left-20 w-[45vw]  h-[0.5vw] text-[3vw] font-normal font-['Roboto'] relative">Reported Posts</h1>
+						<h1 class="left-20 w-[45vw]  h-[0.5vw] text-[3vw] font-normal font-['Roboto'] relative">Activity Approvals</h1>
 					</div>
 				</div>
 				<div class="flex">
