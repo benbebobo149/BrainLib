@@ -1,7 +1,8 @@
 <script setup>
 import PostPreview from '@/components/PostPreview';
 import { useRouter } from 'vue-router';
-import AdiminiLeftBar from '~/components/AdiminiLeftBar.vue';
+import AdiminiLeftBar from '~/components/Admini/AdiminiLeftBar.vue';
+import InPageNav from '~/components/InPageNav.vue';
 
 const router = useRouter()
 
@@ -12,30 +13,26 @@ const goToPage = () => {
 
 <template>
 	<!-- temp navbar -->
-	<div class=" bg-#E8DEF8 w-screen h-[8vh]">
-		<div class=" bg-#E8DEF8 w-screen h-[8vh]">
-			<div class="bg-primary">
-				<h1> this is temp navbar</h1>
-			</div>
+	<div class=" bg-bgcolor  w-screen h-[8vh]">
+		<InPageNav></InPageNav>
 
-		</div>
 		<div class="flex ">
 			<!-- 左邊列表 -->
-			<div class="w-1/5  bg-indigo-100 overflow-x-auto">
+			<div class="w-1/5  rounded-sm border-r border-terotory bg-bgcolor">
 				<div class=" bg-#E8DEF8 w-screen ">
 					<AdiminiLeftBar />
 				</div>
 			</div>
 
 			<!-- 右邊部分 -->
-			<div class="w-4/5 h-[100vh] bg-indigo-200">
-				<div class="h-[10vh] bg-white ">
+			<div class="w-4/5 h-[100vh] bg-bgcolor">
+				<div class="h-[10vh] bg-bgcolor ">
 					<div class=" text-stone-400 ">
 						<h1 class="left-20 w-[45vw]  h-[0.5vw] text-[3vw] font-normal font-['Roboto'] relative">Reported Posts</h1>
 					</div>
 				</div>
 				<div class="flex">
-					<div class=" bg-slate-50 content-center">
+					<div class=" bg-bgcolor content-center">
 						<PostPreview />
 						<PostPreview />
 						<PostPreview />

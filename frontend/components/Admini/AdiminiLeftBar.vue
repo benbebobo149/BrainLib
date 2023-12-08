@@ -1,22 +1,22 @@
 <template>
 	<div>
 		<!-- 左邊列表 -->
-		<div class="w-1/5  bg-indigo-100 ">
+		<div class="w-1/5   bg-bgcolor  rounded-sm border-r border-terotory">
 			<div class="">
-				<button class="bg-indigo-100 hover:bg-indigo-200 ease-in-out duration-200">
+				<button class=" hover:bg-error ease-in-out duration-200">
 					<NuxtLink to="./">
 						<div class="flex relative my-2 justify-center content-center">
 								<img class="left-2 w-[5vw] h-[3vw] ml-[0.5rem] relative" src="@/PageAdmini/ExclamationOctagonFill.png" />
 							<div>
 								<div
-									class="w-[16vw] h-[4vw] left-[1vw] text-left mx-auto ml-[1rem] text-black text-[1.5vw] font-normal font-['Roboto'] text-leftleading-10 relative">
+									class="w-[16vw] h-[4vw] left-[1vw] text-left mx-auto ml-[1rem] text-black text-[1.5vw] font-normal font-'Roboto' text-leftleading-10 relative">
 									Reported Posts</div>
 							</div>
 						</div>
 					</NuxtLink>
 				</button>
 
-				<button class="hover:bg-indigo-200 ease-in-out duration-200">
+				<button class="hover:bg-error ease-in-out duration-200">
 					<NuxtLink to="./activity">
 						<div class="flex relative my-2 justify-center content-center">
 								<img class="left-2 w-[5vw] h-[3vw] ml-[0.5rem] relative" src="@/PageAdmini/CalendarCheckFill.png" />
@@ -29,7 +29,7 @@
 					</NuxtLink>
 				</button>
 
-				<button class="hover:bg-indigo-200 ease-in-out duration-200">
+				<button class="hover:bg-error ease-in-out duration-200">
 					<NuxtLink to="./createTopic">
 						<div class="flex relative my-2 justify-center content-center">
 								<img class="left-2 w-[5vw] h-[3vw] ml-[0.5rem] relative" src="@/PageAdmini/Vector.png" />
@@ -42,7 +42,7 @@
 					</NuxtLink>
 				</button>
 
-				<button class="hover:bg-indigo-200 ease-in-out duration-200">
+				<button class="hover:bg-error ease-in-out duration-200">
 					<NuxtLink to="./userManage">
 						<div class="flex relative my-2 justify-center content-center">
 								<img class="left-2 w-[5vw] h-[3vw] ml-[0.5rem] relative" src="@/PageAdmini/PeopleFill.png" />
