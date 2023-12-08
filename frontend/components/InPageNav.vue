@@ -9,7 +9,7 @@
                 <label for="name" class="w-auto h-full flex items-center">
                     <img src="Search.png" alt="Search" class="w-auto h-full cursor-pointer p-2.5">
                 </label>
-                <input type="text" id="name" placeholder="       Search" class="w-5/6 h-3/4 rounded-full bg-secondary2">
+                <input type="text" id="name" placeholder="    Search" v-model="SearchContent" class="w-5/6 h-3/4 rounded-full bg-secondary2">
             </div>
         </div>
         <div v-if="!SigninVisible" class="flex w-1/2 h-full justify-end">
@@ -54,11 +54,14 @@ export default defineComponent({
         const Photo = ref('');
         Photo.value = 'PhotoSticker.png';
 
+        const SearchContent = ref('');
+
         return {
             SigninVisible,
             openModal,
             closeModal,
-            Photo
+            Photo,
+            SearchContent
         };
     }
 });

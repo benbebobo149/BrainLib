@@ -15,6 +15,7 @@ module.exports = {
     theme: {
       extend: {
         colors: {
+          'neutral96': '#F7F2FA',
           'tertiary': '#FFD8E4',
           'primary': '#6750A4',
           'secondary': '#D0BCFF',
