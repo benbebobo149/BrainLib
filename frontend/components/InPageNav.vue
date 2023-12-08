@@ -1,46 +1,65 @@
 <template>
-    <div class="flex w-screen h-[7vh] bg-gray-200">
-        <div class="flex w-1/2 h-[7vh] bg-blue-200">
-            <div class="flex w-1/5 h-full bg-purple-100">
-                <ListNav class="w-1/2 h-full" />
+    <div class="flex w-screen max-w-full h-[7vh] bg-bgcolor shadow-md"></div>
+    <div class="top-0 flex w-screen max-w-full h-[7vh] fixed bg-purple-50 shadow-md">
+        <div class="flex w-1/2 h-full">
+            <div class="flex w-auto h-full ml-4">
+                <ListNav class="w-auto h-[8vh]" />
             </div>
-            <div class="flex w-4/5 h-full bg-purple-300 items-center">
-                <label for="name">
-                    <img src="Search.png" alt="Search" class="w-1/6 h-full cursor-pointer">
+            <div class="flex w-4/5 h-full items-center ml-5">
+                <label for="name" class="w-auto h-full flex items-center">
+                    <img src="Search.png" alt="Search" class="w-auto h-full cursor-pointer p-2.5">
                 </label>
-                <input type="text" id="name" placeholder="Search" class="w-5/6 h-3/4 rounded-full">
-                <!-- <SearchButton /> -->
+                <input type="text" id="name" placeholder="       Search" class="w-5/6 h-3/4 rounded-full bg-secondary2">
             </div>
         </div>
-        <div class="flex w-1/2 h-[7vh] bg-red-200 justify-end">
-            <NuxtLink to="./" class="flex w-auto h-full bg-green-100 items-center mr-[1vw]">
-                <img src="PencilSquare.png" alt="PencilButton" class="w-auto h-3/4">
+        <div v-if="!SigninVisible" class="flex w-1/2 h-full justify-end">
+            <Signin class="w-[13%] h-auto mr-2 flex items-center" @click="openModal" />
+        </div>
+        <div v-else class="flex w-1/2 h-full justify-end">
+            <NuxtLink to="./" class="flex w-auto h-full items-center mr-[3vw]">
+                <img src="PencilSquare.png" alt="PencilButton" class="w-auto h-[85%]">
             </NuxtLink>
-            <NuxtLink to="./" class="flex w-auto h-full items-center bg-green-200 mr-[1vw]">
-                <img src="Chat.png" alt="Chat" class="w-auto h-3/4">
+            <NuxtLink to="./" class="flex w-auto h-full items-center mr-[3vw]">
+                <img src="Chat.png" alt="Chat" class="w-auto h-[85%]">
             </NuxtLink>
-            <NuxtLink to="./" class="w-auto h-full flex items-center bg-green-300 mr-[1vw]">
-                <img src="PhotoSticker.png" alt="PhotoSticker" class="w-auto h-3/4">
+            <NuxtLink to="http://localhost:3000/personal" class="w-auto h-full flex items-center mr-[2vw]">
+                <img src="PhotoSticker.png" alt="PhotoSticker" class="w-auto h-[85%]">
             </NuxtLink>
         </div>
+
     </div>
 </template>
 
 <script>
-export default {
-    name: "InPageNav",
-};
-import SearchButton from "./SearchButton.vue";
-import Chat from "./Chat.vue";
-import PencilButton from "./PencilButton.vue";
-import PhotoSticker from "./PhotoSticker.vue";
+import { defineComponent, ref } from 'vue';
 import ListNav from "./ListNav.vue";
+import Signin from "./Signin.vue";
 
-components: {
-    SearchButton,
-        Chat,
-        PencilButton,
-        PhotoSticker,
-        ListNav
-}
+export default defineComponent({
+    name: "InPageNav",
+    components: {
+        ListNav,
+        Signin
+    },
+    setup() {
+        const SigninVisible = ref(false);
+        const openModal = () => {
+            SigninVisible.value = true;
+            console.log("open model in InPageNav.vue");
+        };
+        const closeModal = () => {
+            SigninVisible.value = false;
+            console.log("close model in InPageNav.vue");
+        };
+        const Photo = ref('');
+        Photo.value = 'PhotoSticker.png';
+
+        return {
+            SigninVisible,
+            openModal,
+            closeModal,
+            Photo
+        };
+    }
+});
 </script>
