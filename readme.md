@@ -19,8 +19,8 @@ sudo docker compose up -d
 ```
 If you use the Window system, openning the Docker Desktop before running docker compose.
 
-
 ## git commit
+
 init: 初始化專案
 
 add: 新增項目（但功能未完成）
@@ -32,6 +32,7 @@ RWD: RWD 的功能修正
 chore: 雜務（如新增附件檔、上傳字體檔等等）
 
 fix: 修正 bug 或 issue
+
 
 hotfix: 「即時」修正嚴重 bug
 
@@ -86,7 +87,7 @@ ex: avatar.png will be used in /pages/posts/index.vue, so it will be put in /pub
 
 The components should be put in the components/ and create a directory corresponding to the pages directory.
 
-ex: ToDoListModal.vue3 will be used in /pages/posts/index.vue, so it will be put in /components/posts/.
+ex: ToDoListModal.vue will be used in /pages/posts/index.vue, so it will be put in /components/posts/.
 
 ### backend 
 
