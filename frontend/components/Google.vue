@@ -5,15 +5,18 @@
 </template>
 
 <script>
-// import { mapActions } from 'vuex';
+import { ref } from 'vue';
 
 export default {
     name: 'Google',
-    // methods: {
-    //     ...mapActions(['navigateTo']),
-    //     goToOtherPage() {
-    //         this.navigateTo('/other-page'); // 替換 '/other-page' 為你想要跳轉的路徑
-    //     }
-    // }
+    setup() {
+        const Google = () => {
+            // Google button click logic here
+        };
+
+        return {
+            Google
+        };
+    }
 }
 </script>

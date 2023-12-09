@@ -11,7 +11,7 @@
         </div>
         <div class="flex justify-center gap-4">
           <div>
-            <Google class="w-24 h-24"></Google>
+            <Google class="w-24 h-24" @click="checkSingIn"></Google>
           </div>
         </div>
       </div>
@@ -20,26 +20,41 @@
 </template>
 
 <script>
-import Google from '@/components/Google.vue'; // 替换为你的实际组件路径
+import { ref } from 'vue';
+import Google from '@/components/Google.vue';
 
 export default {
   name: "Signin",
   components: {
     Google,
   },
-  data() {
-    return {
-      isModalVisible: false
+  setup() {
+    const isModalVisible = ref(false);
+
+    const openModal = () => {
+      isModalVisible.value = true;
+      console.log("open model in signin.vue");
     };
-  },
-  methods: {
-    openModal() {
-      this.isModalVisible = true;
-    },
-    closeModal() {
-      this.isModalVisible = false;
-    }
+
+    const closeModal = () => {
+      isModalVisible.value = false;
+      console.log("close model in signin.vue");
+    };
+
+    // const checkSingIn = () => {
+    //   // 接收从 Signin 组件传递过来的值，控制显示与隐藏模态框
+    //   SigninVisible.value = true;
+    //   console.log("checkSingIn in signin.vue");
+    // };
+
+    return {
+      isModalVisible,
+      openModal,
+      closeModal,
+      // checkSingIn
+    };
   }
 };
 </script>
+
  
