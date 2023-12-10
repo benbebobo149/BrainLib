@@ -5,18 +5,13 @@
         @click="closePopup">
       <p class="text-3xl text-black font-bold m-10">Registration successful</p>
       <img src="/hello/Confirm.png" alt="Register Button" class="h-[5vh] w-auto" @click="closePopup">
-
     </div>
   </div>
 </template>
 
-<script>
-export default {
-  methods: {
-    closePopup() {
-      this.$emit('close'); // Emit an event to close the popup
-    },
-  },
+<script setup>
+const closePopup = () => {
+  emit('close'); // Emit an event to close the popup
 };
 </script>
 

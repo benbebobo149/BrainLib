@@ -21,31 +21,18 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import RegistrationSuccessPopup from './RegistrationSuccessPopup.vue';
 import { ref } from 'vue';
 
-export default {
-  components: {
-    RegistrationSuccessPopup,
-  },
-  setup() {
-    const showPopup = ref(false);
+const showPopup = ref(false);
 
-    const showRegistrationPopup = () => {
-      showPopup.value = true;
-    };
+const showRegistrationPopup = () => {
+  showPopup.value = true;
+};
 
-    const closeRegistrationPopup = () => {
-      showPopup.value = false;
-    };
-
-    return {
-      showPopup,
-      showRegistrationPopup,
-      closeRegistrationPopup,
-    };
-  },
+const closeRegistrationPopup = () => {
+  showPopup.value = false;
 };
 </script>
 
@@ -62,26 +49,5 @@ export default {
 .scrollable-box {
   padding: 16px;
   background-color: #fff;
-}
-
-.overlay {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background-color: #fff;
-  z-index: 10;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.modal {
-  width: 750px;
-  background-color: #fff;
-  border-radius: 10px;
-  padding: 30px;
-  position: relative;
-  display: flex;
-  flex-direction: column;
 }
 </style>

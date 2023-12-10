@@ -1,12 +1,11 @@
 <script setup>
 //  import the Footer component
-import Header from '~/components/Activity/Header.vue'
+import Header from '~/components/InPageNav.vue'
 import Main from '~/components/Activity/Main.vue'
 </script>
 <template>
   <div>
-    <Header /> <!-- Import and use the Header component -->
+    <Header />
     <Main />
-    <!-- Import and use the Footer component -->
   </div>
 </template>

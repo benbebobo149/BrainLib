@@ -11,7 +11,6 @@
             alt="Centered Image" class="absolute top-1/4 left-1/4 h-[8vh] w-auto" />
         </label>
 
-
         <!-- Other content -->
         <div class="flex flex-row">
           <img src="/hello/MainPic2.png" alt="Activity Pic" class="h-[20vh] w-auto mt-8 mb-8" />
@@ -34,35 +33,27 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import RegistrationSuccessPopup from './RegistrationSuccessPopup.vue';
 import Location from './Location.vue';
 
-export default {
-  components: {
-    RegistrationSuccessPopup,
-    Location,
-  },
-  data() {
-    return {
-      showPopup: false,
-      showLocationPopup: false,
-    };
-  },
-  methods: {
-    showRegistrationPopup() {
-      this.showPopup = true;
-    },
-    closeRegistrationPopup() {
-      this.showPopup = false;
-    },
-    showLocation() {
-      this.showLocationPopup = true;
-    },
-    closeLocation() {
-      this.showLocationPopup = false;
-    },
-  },
+const showPopup = ref(false);
+const showLocationPopup = ref(false);
+
+const showRegistrationPopup = () => {
+  showPopup.value = true;
+};
+
+const closeRegistrationPopup = () => {
+  showPopup.value = false;
+};
+
+const showLocation = () => {
+  showLocationPopup.value = true;
+};
+
+const closeLocation = () => {
+  showLocationPopup.value = false;
 };
 </script>
 

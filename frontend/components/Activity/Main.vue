@@ -6,7 +6,9 @@
         <button @click="sortByDistance" class="text-2xl font-bold text-black ml-4">Sort by distance</button>
       </div>
       <component :is="currentScrollBox" class="scrollable-box" />
-      <img src="/hello/CreateActivity.png" alt="Create Activity" class="w-auto h-[8vh] self-end justify-self-end">
+      <NuxtLink to="http://localhost:3000/activity2" class="self-end justify-self-end">
+        <img src="/hello/CreateActivity.png" alt="Create Activity" class="w-auto h-[8vh]">
+      </NuxtLink>
     </div>
   </div>
 </template>
@@ -19,31 +21,25 @@
 }
 </style>
 
-<script>
+<script setup>
+import { ref } from 'vue';
 import ScrollableBox from './ScrollableBox.vue';
-import ScrollBoxByTime from './ScrollBoxByTime.vue'; // Import the component for sorting by time
-import ScrollBoxByDistance from './ScrollBoxByDistance.vue'; // Import the component for sorting by distance
+import ScrollBoxByTime from './ScrollBoxByTime.vue';
+import ScrollBoxByDistance from './ScrollBoxByDistance.vue';
 
-export default {
-  components: {
-    ScrollableBox,
-    ScrollBoxByTime,
-    ScrollBoxByDistance,
-  },
-  data() {
-    return {
-      currentScrollBox: 'ScrollableBox', // Default scroll box
-    };
-  },
-  methods: {
-    sortByTime() {
-      // Handle sorting by time logic
-      this.currentScrollBox = 'ScrollBoxByTime';
-    },
-    sortByDistance() {
-      // Handle sorting by distance logic
-      this.currentScrollBox = 'ScrollBoxByDistance';
-    },
-  },
-}
+const components = {
+  ScrollableBox,
+  ScrollBoxByTime,
+  ScrollBoxByDistance,
+};
+
+const currentScrollBox = ref(components.ScrollableBox);
+
+const sortByTime = () => {
+  currentScrollBox.value = components.ScrollBoxByTime;
+};
+
+const sortByDistance = () => {
+  currentScrollBox.value = components.ScrollBoxByDistance;
+};
 </script>

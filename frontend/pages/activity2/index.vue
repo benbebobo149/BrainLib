@@ -1,6 +1,6 @@
 <script setup>
 //  import the Footer component
-import Header from '~/components/CreateActivity/Header.vue'
+import Header from '~/components/InPageNav.vue'
 import Main from '~/components/CreateActivity/Main.vue'
 </script>
 <template>

@@ -1,8 +1,7 @@
 <template>
   <div class="popup-overlay">
     <div class="rounded-lg flex flex-col bg-white justify-center items-center p-5">
-      <img src="/hello/XLg.png" alt="Close Button" class="h-[3vh] w-auto justify-self-end self-end"
-        @click="closePopup">
+      <img src="/hello/XLg.png" alt="Close Button" class="h-[3vh] w-auto justify-self-end self-end" @click="closePopup">
 
       <!-- Rectangle7.png image as a background -->
       <div class="relative mb-4">
@@ -20,25 +19,19 @@
   </div>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      enteredText: '', // Variable to store the entered text
-    };
-  },
-  methods: {
-    closePopup() {
-      this.$emit('close'); // Emit an event to close the popup
-    },
-    saveAndClosePopup() {
-      // Do something with the entered text (e.g., save to a variable or perform an action)
-      console.log('Entered Text:', this.enteredText);
+<script setup>
+const enteredText = ref(''); // Variable to store the entered text
 
-      // Close the popup
-      this.closePopup();
-    },
-  },
+const closePopup = () => {
+  emit('close'); // Emit an event to close the popup
+};
+
+const saveAndClosePopup = () => {
+  // Do something with the entered text (e.g., save to a variable or perform an action)
+  console.log('Entered Text:', enteredText.value);
+
+  // Close the popup
+  closePopup();
 };
 </script>
 
@@ -60,4 +53,3 @@ export default {
   position: relative;
 }
 </style>
-
