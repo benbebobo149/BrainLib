@@ -1,5 +1,5 @@
 <template>
-	<div class="flex mx-1">
+	<div class="flex mx-1 z-0">
 		<!-- 預覽文章1 -->
 		<div class="w-full h-[24vh]  box-border my-[0.7rem] relative flex items-start inline-flex">
 			<div class="w-[8vw] bg-bgcolor"></div>
