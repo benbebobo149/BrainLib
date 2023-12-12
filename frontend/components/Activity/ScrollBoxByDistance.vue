@@ -18,7 +18,7 @@
           <div class="ml-10">
             <p class="text-2xl text-black font-bold underline mt-2">Title</p>
             <p class="text-xl text-black mt-10">Location</p>
-            <img src="/hello/Rectangle8.png" alt="Register Button" class="h-[2vh] w-10 mt-10" />
+            <img src="/hello/Rectangle8.png" alt="Register Button" class="h-[2vh] w-10 mt-10 rounded-full" />
           </div>
           <div class="ml-auto mb-2 flex items-start justify-end">
             <p class="text-xl text-end text-black mt-2">Date</p>

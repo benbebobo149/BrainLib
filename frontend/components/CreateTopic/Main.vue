@@ -17,36 +17,20 @@
         </div>
       </div>
       <div class="h-3/4 flex bg-slate-50 p-6 items-start justify-end">
-        <!-- Right Subsection (1/2 width) -->
-        <div class="h-full flex flex-col">
-          <!-- Top Section (1/3 height) -->
-          <div class="h-1/3">
-            <!-- Upload Button with Text -->
-            <label for="fileInput" class="cursor-pointer flex items-center">
-              <div class="text-black text-3xl text-bold mr-2">Upload Picture</div>
-              <img src="/hello/Vector2.png" alt="Upload Button" class="w-auto h-[5vh] mr-10">
-            </label>
-            <!-- Actual File Input (hidden) -->
-            <input id="fileInput" type="file" style="display: none;" @change="handleFileChange">
+
+        <div class="flex-col justify-start">
+          <div>
+            <input type="text" class="text-black text-2xl" :style="{ fontSize: fontSize[0] }" @input="updateContent(0)"
+              placeholder="Add Topic">
           </div>
-
-          <!-- Bottom Section (2/3 height) -->
-          <div class="h-2/3 flex-col justify-start">
-            <div>
-              <input type="text" class="text-black text-2xl" :style="{ fontSize: fontSize[0] }" @input="updateContent(0)"
-                placeholder="Enter Title">
-            </div>
-            <div class="mt-10">
-              <input type="text" class="text-black text-2xl" :style="{ fontSize: fontSize[1] }" @input="updateContent(1)"
-                placeholder="Enter Address">
-            </div>
-            <div class="mt-10">
-              <input type="text" class="text-black text-2xl" :style="{ fontSize: fontSize[2] }" @input="updateContent(2)"
-                placeholder="Enter Description">
-            </div>
+          <div class="mt-10">
+            <input type="text" class="text-black text-2xl" :style="{ fontSize: fontSize[1] }" @input="updateContent(1)"
+              placeholder="Add Title">
           </div>
-
-
+          <div class="mt-10">
+            <input type="text" class="text-black text-2xl" :style="{ fontSize: fontSize[2] }" @input="updateContent(2)"
+              placeholder="Description">
+          </div>
         </div>
       </div>
 
@@ -62,10 +46,7 @@
         <label for="tagInput" class="cursor-pointer" @click="showRegistrationPopup">
           <img src="/hello/AddTag.png" alt="Add tag" class="w-auto h-[4vh] mr-10">
         </label>
-        <NuxtLink to="http://localhost:3000/activityPage" class="self-end justify-self-end">
-          <img src="/hello/Preview.png" alt="Preview" class="w-auto h-[4vh] mr-10">
-        </NuxtLink>
-
+        <img src="/hello/Preview.png" alt="Preview" class="w-auto h-[4vh] mr-10">
         <input id="fileInput" type="file" style="display: none;" @change="handleFileChange" />
         <AddTag v-if="showPopup" @close="closeRegistrationPopup" />
       </div>
