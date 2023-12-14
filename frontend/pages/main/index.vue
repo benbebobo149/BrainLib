@@ -68,7 +68,7 @@ import InPageNav from '~/components/InPageNav.vue';
               <div class="w-3/12 h-[10vh] mx-[2rem] relative ">
 
                 <div class="w-[20vw] h-[10vh]  bg-purple-200 rounded-3xl  top-[6rem]  absolute 
-                        text-center text-neutral-900 text-xl font-normal font-['Roboto']">DevFest Tainan
+                        text-center text-neutral-900 text-xl font-normal font-'Roboto'">DevFest Tainan
                   2023
                   <br />
                 </div>

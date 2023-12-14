@@ -8,11 +8,11 @@ import InPageNav from '~/components/InPageNav.vue';
 
 <template>
 	<!-- temp navbar -->
-	<div class=" bg-bgcolor w-screen h-[8vh]">
+	<div class=" bg-bgcolor w-screen h-[8vh] ">
 	      <InPageNav></InPageNav>
 		<div class="flex ">
 			<!-- 左邊列表 -->
-			<div class="w-1/5  bg-bgcolor rounded-sm border-r border-terotory">
+			<div class="w-1/5  bg-bgcolor rounded-sm border-r border-terotory ">
 				<div class=" bg-#E8DEF8 w-screen ">
 					<AdiminiLeftBar />
 				</div>

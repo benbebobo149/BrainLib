@@ -3,7 +3,8 @@ import PostPreview from '@/components/PostPreview';
 import { useRouter } from 'vue-router';
 import AdiminiLeftBar from '~/components/Admini/AdiminiLeftBar.vue';
 import InPageNav from '~/components/InPageNav.vue';
-
+import AdminiActivity from '~/components/Admini/AdminiActivity.vue';
+import Main from '~/components/Activity/Main.vue';
 const router = useRouter()
 
 const goToPage = () => {
@@ -18,8 +19,8 @@ const goToPage = () => {
 
 		<div class="flex ">
 			<!-- 左邊列表 -->
-			<div class="w-1/5 rounded-sm border-r border-terotory bg-bgcolor">
-				<div class=" bg-#E8DEF8 w-screen ">
+			<div class="w-1/5 rounded-sm border-r border-terotory bg-bgcolor ">
+				<div class=" bg-#E8DEF8 w-screen overflow-y-scroll ">
 					<AdiminiLeftBar />
 				</div>
 			</div>
@@ -33,13 +34,12 @@ const goToPage = () => {
 					</div>
 				</div>
 				<div class="flex">
-					<div class=" bg-slate-50 content-center">
-						<PostPreview />
-						<PostPreview />
-						<PostPreview />
-						<PostPreview />
-						<PostPreview />
-						<PostPreview />
+					<div class=" bg-slate-50 w-full h-[30vh] content-center">
+						<AdminiActivity></AdminiActivity>
+						<AdminiActivity></AdminiActivity>
+						<AdminiActivity></AdminiActivity>
+						<AdminiActivity></AdminiActivity>
+						<AdminiActivity></AdminiActivity>
 					</div>
 
 				</div>

@@ -52,6 +52,7 @@ const sendData = async () => {
 getData()
 </script>
 <template>
+    
     <h1 class="bg-black text-white">This is Header</h1>
     <button type="button" @click="open()"> Open footer</button>
     <Modal :user="userData" :area="areData" @close="close()"/>

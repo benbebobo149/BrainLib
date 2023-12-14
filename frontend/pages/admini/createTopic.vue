@@ -17,8 +17,8 @@ const topicName = ref('Enter topic name');
 
 		<div class="flex ">
 			<!-- 左邊列表 -->
-			<div class="w-1/5 rounded-sm border-r border-terotory  bg-bgcolor">
-				<div class=" bg-#E8DEF8 w-screen ">
+			<div class="w-1/5 rounded-sm border-r border-terotory  bg-bgcolor ">
+				<div class=" bg-#E8DEF8 w-screen overflow-y-scroll ">
 					<AdiminiLeftBar />
 				</div>
 			</div>
