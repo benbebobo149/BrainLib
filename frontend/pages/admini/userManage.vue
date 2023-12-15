@@ -27,7 +27,7 @@ import InPageNav from '~/components/InPageNav.vue';
 					</div>
 				</div>
 				<div class="flex">
-					<div class=" content-center relative mx-[25vw]">
+					<div class=" content-center relative ml-[20vw]">
 						<AdminiUser />
 						<AdminiUser />
 						<AdminiUser />

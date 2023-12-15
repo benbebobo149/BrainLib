@@ -6,32 +6,15 @@ import InPageNav from '~/components/InPageNav.vue';
 <template>
 	<!-- temp navbar -->
 	<div class=" bg-bgcolor w-screen h-[8vh]">
-		<!-- <div class=" bg-#E8DEF8 w-screen h-[8vh]">
-			<div>
-			</div>
-<<<<<<< HEAD
 			<InPageNav></InPageNav>
-		</div>
-=======
-
-		</div> -->
->>>>>>> d3de0ee47f5f329341944375dadef42a44fff716
-		<div class="flex h-full">
-			<!-- 左邊對話列表 -->
+		 <div class="flex h-full"> 
+			 <!-- 左邊對話列表 -->
 			<div class="w-1/5 h-[100vh] ">
 				<div class="h-[12vh] bg-bgcolor  bg-error border-b border-terotory  flex">
 					<div>
-<<<<<<< HEAD
 						<img class=" mx-auto ml-[1rem] w-[4vw] h-[4vw] rounded-full" src="https://via.placeholder.com/95x96" />
 					</div >
 					<div class=" mx-auto ml-[1rem] text-black text-xl font-normalfont-'Roboto' leading-10"> create group</div>
-=======
-						<img class=" mx-auto ml-[1rem] w-[4vw] h-[4vw] rounded-full"
-							src="https://via.placeholder.com/95x96" />
-					</div>
-					<div class=" mx-auto ml-[1rem] text-black text-xl font-normal font-['Roboto'] leading-10"> create group
-					</div>
->>>>>>> d3de0ee47f5f329341944375dadef42a44fff716
 				</div>
 
 				<!-- 好友名單 -->
@@ -80,17 +63,12 @@ import InPageNav from '~/components/InPageNav.vue';
 			</div>
 
 			<!-- 右邊聊天室 -->
-<<<<<<< HEAD
 			<div class="w-4/5 h-[120vh] bg-indigo-200">
 				<div class="w-2/3  h-[6vh] top-[90vh] left-[70vh] mx-auto bg-zinc-300 bg-opacity-80 rounded-3xl z-10   fixed">
-=======
-			<div class="w-4/5 h-[100vh] bg-indigo-200">
-				<div
-					class="w-2/3  h-[6vh] top-[90vh] left-[70vh] mx-auto bg-zinc-300 bg-opacity-80 rounded-3xl z-10   fixed">
->>>>>>> d3de0ee47f5f329341944375dadef42a44fff716
 					<h1 class="items-end">hello</h1>
 			</div>
 		</div>
 	</div>
 
-</div></template>
+</div>
+</template>

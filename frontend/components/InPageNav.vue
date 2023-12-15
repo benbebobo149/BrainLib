@@ -1,6 +1,6 @@
 <template>
-    <div class="flex w-screen max-w-full h-[7vh] bg-bgcolor shadow-md"></div>
-    <div class="top-0 flex w-screen max-w-full h-[7vh] fixed bg-purple-50 shadow-md">
+    <div class="flex x-0 w-screen max-w-full h-[7vh] bg-bgcolor shadow-md " ></div>
+    <div class="top-0 z-10 flex w-screen max-w-full h-[7vh] fixed bg-purple-50 shadow-md">
         <div class="flex w-1/2 h-full">
             <div class="flex w-auto h-full ml-4">
                 <ListNav class="w-auto h-[8vh]" />

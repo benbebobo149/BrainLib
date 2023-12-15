@@ -28,6 +28,7 @@ const getData = async () => {
     const data = await res.json()
     console.log(res)
 }
+
 // read data from database
 const readData = async () =>
 {

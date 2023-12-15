@@ -22,7 +22,7 @@
 								<img class="left-2 w-[5vw] h-[3vw] ml-[0.5rem] relative" src="@/PageAdmini/CalendarCheckFill.png" />
 							<div>
 								<div
-									class="w-[16vw] h-[4vw] left-[1vw] text-left mx-auto ml-[1rem] text-black text-[1.5vw] font-normal font-['Roboto'] text-leftleading-10 relative">
+									class="w-[16vw] h-[4vw] left-[1vw] text-left mx-auto ml-[1rem] text-black text-[1.5vw] font-normal font-'Roboto' text-leftleading-10 relative">
 									Activities Approvals </div>
 							</div>
 						</div>
@@ -35,7 +35,7 @@
 								<img class="left-2 w-[5vw] h-[3vw] ml-[0.5rem] relative" src="@/PageAdmini/Vector.png" />
 							<div>
 								<div
-									class="w-[16vw] h-[4vw] left-[1vw] text-left mx-auto ml-[1rem] text-black text-[1.5vw] font-normal font-['Roboto'] text-leftleading-10 relative">
+									class="w-[16vw] h-[4vw] left-[1vw] text-left mx-auto ml-[1rem] text-black text-[1.5vw] font-normal font-'Roboto' text-leftleading-10 relative">
 									Create Topic </div>
 							</div>
 						</div>

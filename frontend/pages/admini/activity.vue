@@ -27,14 +27,14 @@ const goToPage = () => {
 
 			<!-- 右邊部分 -->
 			<div class="w-4/5 h-[100vh] bg-bgcolor">
-				<div class="h-[10vh] bg-white ">
-					<div class=" text-stone-400 ">
-						<h1 class="left-20 w-[45vw]  h-[0.5vw] text-[3vw] font-normal font-['Roboto'] relative">Activity Approvals
+				<div class="h-[10vh] bg-bgcolor ">
+					<div class=" text-bgcolor ">
+						<h1 class="left-20 w-[45vw] h-[0.5vw] text-[3vw] text-terotory font-normal font-'Roboto' relative">Activity Approvals
 						</h1>
 					</div>
 				</div>
-				<div class="flex">
-					<div class=" bg-slate-50 w-full h-[30vh] content-center">
+				<div class="ml-[10vw] flex">
+					<div class=" bg-bgcolor w-full h-[30vh] content-center">
 						<AdminiActivity></AdminiActivity>
 						<AdminiActivity></AdminiActivity>
 						<AdminiActivity></AdminiActivity>

@@ -17,7 +17,10 @@ export default {
     extend: {
       colors: {
         primary: "#7FC6A4"
-      }
+      },
+      fontFamily: {
+        'sans': ['Roboto'],
+      },
     },
   },
   plugins: [],
