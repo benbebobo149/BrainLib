@@ -1,6 +1,6 @@
 <script setup>
 import InPageNav from '~/components/InPageNav.vue';
-
+import ChatMenber from '~/components/Chat/ChatMenber.vue';
 // import  ChatFreinds  from '#build/components';
 </script>
 <template>
@@ -29,37 +29,16 @@ import InPageNav from '~/components/InPageNav.vue';
 								benbenboo</div>
 						</div>
 					</div>
-					<div class="flex relative my-2">
-						<div>
-							<img class="w-[4vw] h-[4vw] ml-[0.5rem] rounded-full" src="https://via.placeholder.com/95x96" />
-						</div>
-						<div>
-							<div
-								class="w-[4vw] h-[4vw] mx-auto ml-[1rem] text-black text-xl font-normal font-['Roboto'] leading-10">
-								benbenboo</div>
-						</div>
-					</div>
+					<ChatMenber></ChatMenber>
+					<ChatMenber></ChatMenber>
+					<ChatMenber></ChatMenber>
+					<ChatMenber></ChatMenber>
+					<ChatMenber></ChatMenber>
+					<ChatMenber></ChatMenber>
+
 				</div>
-				<div class="flex relative my-2">
-					<div>
-						<img class="w-[4vw] h-[4vw] ml-[0.5rem] rounded-full" src="https://via.placeholder.com/95x96" />
-					</div>
-					<div>
-						<div
-							class="w-[4vw] h-[4vw] mx-auto ml-[1rem] text-black text-xl font-normal font-['Roboto'] leading-10">
-							benbenboo</div>
-					</div>
-				</div>
-				<div class="flex relative my-2">
-					<div>
-						<img class="w-[4vw] h-[4vw] ml-[0.5rem] rounded-full" src="https://via.placeholder.com/95x96" />
-					</div>
-					<div>
-						<div
-							class="w-[4vw] h-[4vw] mx-auto ml-[1rem] text-black text-xl font-normal font-['Roboto'] leading-10">
-							benbenboo</div>
-					</div>
-				</div>
+
+
 			</div>
 
 			<!-- 右邊聊天室 -->

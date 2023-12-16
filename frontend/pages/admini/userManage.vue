@@ -3,7 +3,6 @@ import PostPreview from '@/components/PostPreview';
 import AdiminiLeftBar from '~/components/Admini/AdiminiLeftBar.vue';
 import AdminiUser from '~/components/Admini/AdminiUser.vue';
 import InPageNav from '~/components/InPageNav.vue';
-
 </script>
 
 <template>

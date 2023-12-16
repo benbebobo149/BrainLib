@@ -16,7 +16,13 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: "#7FC6A4"
+        'primary': '#6750A4',
+        'secondary': '#D0BCFF',
+        'secondary2': '#E8DEF8',
+        'terotory': '#A39292',
+        'bgcolor': '#FFFBFF',
+        'error': '#FFF0F0',
+        // other new colors...
       },
       fontFamily: {
         'sans': ['Roboto'],

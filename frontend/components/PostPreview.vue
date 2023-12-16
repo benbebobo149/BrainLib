@@ -17,7 +17,6 @@
 					<h2 class="w-[20vw] h-[2vw] text-black text-[1.25vw] font-normal font-Roboto leading-loose">
 						{{ post.author }}
 					</h2>
-
 					<h1
 						class="w-[8vw] h-[2vw] left-[20vw] ml-8 bg-purple-200 rounded absolute text-center text-neutral-900 text-[1.25vw] font-normal font-'Roboto'">
 						{{ post.topic }}</h1>

@@ -28,7 +28,7 @@ const topicName = ref('Enter topic name');
 				<div class="h-[10vh] bg-white ">
 
 					<div class=" text-stone-400 ">
-						<h1 class="left-[8vw] w-[45vw]  h-[0.5vw] text-[3vw] font-normal font-['Roboto']
+						<h1 class="left-[8vw] w-[45vw]  h-[0.5vw] text-[3vw] font-normal font-'Roboto'
 						 relative">Create New Topic</h1>
 					</div>
 				</div>
@@ -46,23 +46,23 @@ const topicName = ref('Enter topic name');
 						class=" left-[8vw] w-[18vw] h-[8vh]  bg-white mx-[20vw] rounded-md border border-black border-opacity-10  relative">
 						<input
 							class="left-[8vw] w-[18vw] h-[8vh] grow shrink basis-0 rounded-lg text-black text-opacity-50 text-lg font-normal font-Roboto leading-7"
-							type="text" v-model="topicName">
+							type="text"  placeholder="    topicName">
 					</div>
 
-					<div class="left-[25vw] my-[4vh]  text-black text-xl font-normal font-['Roboto'] leading-7 relative">Description
+					<div class="left-[25vw] my-[4vh]  text-black text-xl font-normal font-'Roboto' leading-7 relative">Description
 					</div>
 
 					<div
 						class=" left-[8vw] w-[18vw] h-[8vh]  bg-white mx-[20vw] rounded-md border border-black border-opacity-10  relative">
 						<input
-							class="left-[8vw] w-[18vw] h-[8vh] grow shrink basis-0  rounded-lg text-black text-opacity-50 text-lg font-normal font-['Roboto'] leading-7"
-							type="text" v-model="topicDescription">
+							class="left-[8vw] w-[18vw] h-[8vh] grow shrink basis-0  rounded-lg text-black text-opacity-50 text-lg font-normal font-'Roboto' leading-7"
+							type="text"  placeholder="    topicDescription">
 					</div>
 
 					<div class=" w-[25vw] h-[4vw] my-[10vh] mx-[25vw]">
 						<div
 							class="left-[8vw] w-[8vw] h-[8vh]  p-3 bg-primary rounded-lg flex-col justify-center items-center inline-flex relative">
-							<div class="text-white  text-xl font-normal font-['Roboto'] leading-7">Create</div>
+							<div class="text-white  text-xl font-normal font-'Roboto' leading-7  cursor-pointer" @click="createEvent">Create</div>
 						</div>
 					</div>
 				</div>

@@ -64,7 +64,7 @@ const props = defineProps({
 })
 const { activity } = toRefs(props);
 
-const showPopup = ref(false);
+const showPopup = ref(true);
 
 // define emit 通過或拒絕活動
 const emit = defineEmits(['passActivity', 'rejectActivity'])
