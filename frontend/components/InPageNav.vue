@@ -14,13 +14,14 @@
             </div>
         </div>
 
-        <div v-if="SigninVisible" class="flex justify-end">
-            <button @click="openModal()" class="w-[20%] h-auto">
-                <img src="Signin.png" alt="Signin" >
+        <div v-if="NotSignin" class="flex justify-end w-1/2 h-auto">
+            <button @click="openModal()" class="w-[15%] h-auto">
+                <img src="Signin.png" alt="Signin" class="w-auto h-[80%]">
             </button>
-            <Signin class="w-[13%] h-auto mr-2 flex items-center" @close_modal="closeModal()" />
+
 
         </div>
+
 
         <div v-else class="flex w-1/2 h-full justify-end">
             <NuxtLink to="./" class="flex w-auto h-full items-center mr-[3vw]">
@@ -35,6 +36,7 @@
         </div>
 
     </div>
+    <Signin v-if="EnterVisible" @close_modal="closeModal()" @GoogleClick="GoogleClick" class="z-20" />
 </template>
 
 <script setup>
@@ -42,17 +44,41 @@ import { ref } from 'vue';
 import ListNav from "./ListNav.vue";
 import Signin from "./Signin.vue";
 
-const SigninVisible = ref(true);
+//觸發openModal()時，props給Signin.vue
+// const props = defineProps({
+//     NotSignin: {
+//         type: Boolean,
+//         default: false
+//     }
+// })
+
+const EnterVisible = ref(false);
+// const openModal = () => {
+//   GoogleVisible.value = true;
+// };
+// const closeModal = () => {
+//   GoogleVisible.value = false;
+// };
+const NotSignin = ref(true);
 const openModal = () => {
-    SigninVisible.value = true;
+    EnterVisible.value = true;
     console.log("open model in InPageNav.vue");
 };
 const closeModal = () => {
-    SigninVisible.value = false;
+    EnterVisible.value = false;
     console.log("close model in InPageNav.vue");
 };
 const Photo = ref('');
 Photo.value = 'PhotoSticker.png';
 
 const SearchContent = ref('');
+
+const GoogleClick = () => {
+    NotSignin.value = false;
+    console.log("GoogleClick in InPageNav.vue");
+    // const NotSignin = useCookie(false)
+    // console.log(NotSignin)
+};
+
+
 </script>

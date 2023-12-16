@@ -9,7 +9,7 @@ const userData ={
     name: 'ben',
     age: 20
 }
-const areData = 'Vietnam'
+const areaData = 'Vietnam'
 const footerState = ref(false)
 const open = () => {
     footerState.value = true
@@ -56,7 +56,7 @@ getData()
     
     <h1 class="bg-black text-white">This is Header</h1>
     <button type="button" @click="open()"> Open footer</button>
-    <Modal :user="userData" :area="areData" @close="close()"/>
+    <Modal :user="userData" :area="areaData" @close="close()"/>
     <input type="text">
     <button>
 

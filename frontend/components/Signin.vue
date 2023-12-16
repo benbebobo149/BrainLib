@@ -1,7 +1,6 @@
 <template>
-  <div>
-   
-    <div class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+  <div class="popup-overlay">
+    <div  class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
       <div class="bg-white p-6 rounded shadow-md relative">
         <button @click="closeModal" class="absolute top-2 right-2 text-xl font-bold cursor-pointer">&times;</button>
         <div class="text-center mb-4">
@@ -9,7 +8,7 @@
         </div>
         <div class="flex justify-center gap-4">
           <div>
-            <Google class="w-24 h-24" @click="closeModal "></Google>
+            <Google class="w-24 h-24" @click="GoogleClick "></Google>
           </div>
         </div>
       </div>
@@ -21,16 +20,7 @@
 // import { ref } from 'vue';
 import Google from '@/components/Google.vue';
 
-const emit = defineEmits(['close_modal'], ['open_modal']);
-
-// const GoogleVisible = ref(false);
-// const openModal = () => {
-//   GoogleVisible.value = true;
-// };
-// const closeModal = () => {
-//   GoogleVisible.value = false;
-// };
-
+const emit = defineEmits(['close_modal'], ['open_modal'], ['GoogleClick']);
 
 const openModal = () => {
   console.log("open model in signin.vue");
@@ -42,4 +32,30 @@ const closeModal = () => {
   console.log("close model in signin.vue");
 };
 
+const GoogleClick = () => {
+  console.log("GoogleClick in signin.vue");
+  emit('close_modal')
+  emit('GoogleClick')
+};
+//接收InPageNav.vue的props
+// const props = defineProps({
+//   SigninVisible: {
+//     type: Boolean,
+//     default: false
+//   }
+// })
+
 </script>
+<style scoped>
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+</style>
