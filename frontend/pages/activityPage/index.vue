@@ -6,7 +6,7 @@ import Footer from '~/components/ActivityPage/Footer.vue'
 </script>
 <template>
   <div>
-    <Header />
+    <!-- <Header /> -->
     <Main />
     <Footer />
   </div>

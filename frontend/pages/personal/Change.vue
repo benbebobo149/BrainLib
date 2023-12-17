@@ -92,7 +92,6 @@ const handleFileChange = (event) => {
         alert('請上傳 .jpg 或 .png 格式的文件');
         return;
     }
-
 };
 
 const DeleteAccount = () => {

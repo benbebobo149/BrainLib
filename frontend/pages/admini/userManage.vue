@@ -3,6 +3,14 @@ import PostPreview from '@/components/PostPreview';
 import AdiminiLeftBar from '~/components/Admini/AdiminiLeftBar.vue';
 import AdminiUser from '~/components/Admini/AdminiUser.vue';
 import InPageNav from '~/components/InPageNav.vue';
+
+const SelectAllModerators = () => {	
+	console.log("Select All Moderators");
+};
+const SelectAllAdministrators = () => {	
+	console.log("Select All Administrators");
+};
+
 </script>
 
 <template>
@@ -23,8 +31,10 @@ import InPageNav from '~/components/InPageNav.vue';
 						<!-- <h1 class="left-[25vw] w-[45vw]  h-[0.5vw] text-[3vw] font-normal font-['Roboto']
 						 relative">here comes a search box</h1> -->
 						<div class="flex w-4/5 h-full items-center ml-5">
-							<input type="text" id="" placeholder="    Search user" v-model="SearchContent"
-								class="w-5/6 h-[6vh] rounded-full bg-secondary2">
+							<div class="w-full">
+								<button @click="SelectAllModerators" class="text-2xl font-bold text-black ">Select All Moderators</button>
+								<button @click="SelectAllAdministrators" class="text-2xl font-bold text-black ml-4">Select All Administrators</button>
+							</div>
 						</div>
 					</div>
 				</div>
