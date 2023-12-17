@@ -1,11 +1,11 @@
-// com.example.demo.model.Member.java
+// com.example.demo.model.User.java
 package com.example.demo.model;
 
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "Members")
-public class Member {
+@Table(name = "Users")
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
