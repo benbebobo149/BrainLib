@@ -1,0 +1,31 @@
+{
+  "title": "Awesome Event",
+  "location": "City Center",
+  "activityDetails": "Exciting event with lots of fun",
+  "relatedTag": "Community",
+  "tags": [
+    "Fun",
+    "Community",
+    "Networking"
+  ],
+  "aboutEvent": "Join us for a fantastic event with amazing activities and networking opportunities!",
+  "eventDetails": "Details about the event will be shared during the session.",
+  "agenda": [
+    "12:00 PM - 12:30 PM: Registration and Networking",
+    "12:30 PM - 1:00 PM: Opening Ceremony",
+    "1:00 PM - 2:00 PM: Keynote Speaker Session",
+    "2:00 PM - 3:00 PM: Workshop - Interactive Discussions",
+    "3:00 PM - 3:30 PM: Break and Refreshments",
+    "3:30 PM - 4:30 PM: Panel Discussion",
+    "4:30 PM - 5:00 PM: Closing Ceremony and Thank You Note"
+  ],
+  "time": "12:00 PM - 4:00 PM",
+  "whenDetails": "Saturday, January 1, 2023 from 12:00 PM - 5:00 PM",
+  "whereDetails": "City Hall, Main Street, City",
+  "organizer": "/hello/Ellipse2.png",
+  "people2": "/hello/Ellipse2.png",
+  "people3": "/hello/Ellipse2.png",
+  "name1": "benbenboo",
+  "name2": "booohhlala",
+  "name3": "beooeoeo"
+}

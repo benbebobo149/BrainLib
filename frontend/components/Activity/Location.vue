@@ -3,16 +3,14 @@
     <div class="rounded-lg flex flex-col bg-white justify-center items-center p-5">
       <img src="/hello/XLg.png" alt="Close Button" class="h-[3vh] w-auto justify-self-end self-end" @click="closePopup">
 
-      <!-- Rectangle7.png image as a background -->
       <div class="relative mb-4">
         <img src="/hello/Rectangle7.png" alt="Rectangle Box" class="h-[8vh] w-auto cursor-pointer" />
-        <!-- Entered text overlay -->
+
         <input v-model="enteredText"
-          class="absolute top-0 left-0 right-0 bottom-0 p-2 w-full h-full bg-transparent border-none rounded-full text-black"
+          class="absolute top-0 left-0 right-0 bottom-0 p-2 w-full h-full bg-transparent border-none rounded-full"
           placeholder="Enter your text" />
       </div>
 
-      <!-- Confirm.png image to save and close -->
       <img src="/hello/Confirm.png" alt="Save and Close Button" class="h-[5vh] w-auto mt-4 cursor-pointer"
         @click="saveAndClosePopup">
     </div>
@@ -20,17 +18,17 @@
 </template>
 
 <script setup>
-const enteredText = ref(''); // Variable to store the entered text
+import { ref, defineEmits } from 'vue';
 
+const enteredText = ref('');
+const emit = defineEmits();
 const closePopup = () => {
-  emit('close'); // Emit an event to close the popup
+  emit('close');
 };
 
 const saveAndClosePopup = () => {
-  // Do something with the entered text (e.g., save to a variable or perform an action)
   console.log('Entered Text:', enteredText.value);
 
-  // Close the popup
   closePopup();
 };
 </script>
@@ -48,7 +46,6 @@ const saveAndClosePopup = () => {
   align-items: center;
 }
 
-/* Adjust the styling as needed for the overlay */
 .relative {
   position: relative;
 }

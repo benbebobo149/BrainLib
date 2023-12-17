@@ -1,3 +1,4 @@
+<!-- AddTag.vue -->
 <template>
   <div class="popup-overlay">
     <div class="rounded-lg flex flex-col bg-white justify-center items-center p-5">
@@ -28,7 +29,6 @@ const closePopup = () => {
 
 const saveAndClosePopup = () => {
   console.log('Entered Text:', enteredText.value);
-
   closePopup();
 };
 </script>
@@ -50,4 +50,3 @@ const saveAndClosePopup = () => {
   position: relative;
 }
 </style>
-

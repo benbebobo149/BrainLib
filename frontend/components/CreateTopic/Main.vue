@@ -81,6 +81,11 @@ const showRegistrationPopup = () => {
 const closeRegistrationPopup = () => {
   showPopup.value = false;
 };
+
+const tags = ref([]);
+const addTags = (tag) => {
+  tags.value.push(tag);
+};
 </script>
 
 <style scoped>
