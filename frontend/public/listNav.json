@@ -1,0 +1,26 @@
+{
+    "listNav":[
+        {
+            "name": "首頁",
+            "url": "/"
+        },
+        {
+            "name": "關於我們",
+            "url": "/about"
+        },
+        {
+            "name": "產品",
+            "url": "/products"
+        },
+        {
+            "name": "聯絡我們",
+            "url": "/contact"
+        },{
+            "name": "聯絡我們",
+            "url": "/contact"
+        },{
+            "name": "聯絡我們",
+            "url": "/contact"
+        }
+    ]
+}
