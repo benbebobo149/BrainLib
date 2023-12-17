@@ -1,8 +1,8 @@
-// com.example.demo.controller.MemberController.java
+// com.example.demo.controller.UserController.java
 package com.example.demo.controller;
 
-import com.example.demo.model.Member;
-import com.example.demo.repository.MemberRepository;
+import com.example.demo.model.User;
+import com.example.demo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,51 +11,51 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/members")
-public class MemberController {
+@RequestMapping("/users")
+public class UserController {
     @Autowired
-    private MemberRepository memberRepository;
+    private UserRepository userRepository;
 
     @GetMapping
-    public List<Member> getAllMembers() {
-        return memberRepository.findAll();
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
     }
 
-    @GetMapping("/members/{id}")
-    public ResponseEntity<Member> getMemberById(@PathVariable Integer id) {
-        Optional<Member> member = memberRepository.findById(id);
-        if (member.isPresent()) {
-            return ResponseEntity.ok(member.get());
+    @GetMapping("/users/{id}")
+    public ResponseEntity<User> getUserById(@PathVariable Integer id) {
+        Optional<User> user = userRepository.findById(id);
+        if (user.isPresent()) {
+            return ResponseEntity.ok(user.get());
         } else {
             return ResponseEntity.notFound().build();
         }
     }
 
     @PostMapping
-    public Member createMember(@RequestBody Member newMember) {
-        return memberRepository.save(newMember);
+    public User createUser(@RequestBody User newUser) {
+        return userRepository.save(newUser);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Member> updateMember(@PathVariable Integer id, @RequestBody Member updatedMember) {
-        Optional<Member> member = memberRepository.findById(id);
-        if (member.isPresent()) {
-            Member existingMember = member.get();
-            existingMember.setName(updatedMember.getName());
-            existingMember.setEmail(updatedMember.getEmail());
-            existingMember.setPermission(updatedMember.getPermission());
-            existingMember.setProfile(updatedMember.getProfile());
-            existingMember.setImage(updatedMember.getImage());
-            return ResponseEntity.ok(memberRepository.save(existingMember));
+    public ResponseEntity<User> updateUser(@PathVariable Integer id, @RequestBody User updatedUser) {
+        Optional<User> user = userRepository.findById(id);
+        if (user.isPresent()) {
+            User existingUser = user.get();
+            existingUser.setName(updatedUser.getName());
+            existingUser.setEmail(updatedUser.getEmail());
+            existingUser.setPermission(updatedUser.getPermission());
+            existingUser.setProfile(updatedUser.getProfile());
+            existingUser.setImage(updatedUser.getImage());
+            return ResponseEntity.ok(userRepository.save(existingUser));
         } else {
             return ResponseEntity.notFound().build();
         }
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteMember(@PathVariable Integer id) {
-        if (memberRepository.existsById(id)) {
-            memberRepository.deleteById(id);
+    public ResponseEntity<Void> deleteUser(@PathVariable Integer id) {
+        if (userRepository.existsById(id)) {
+            userRepository.deleteById(id);
             return ResponseEntity.ok().build();
         } else {
             return ResponseEntity.notFound().build();
