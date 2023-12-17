@@ -73,14 +73,11 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import { ref } from 'vue';
 //匯入TopicName.json
 // import TopicName from '@/assets/TopicName.json';
 
-export default {
-  name: 'ListNav',
-  setup() {
     const ListNavVisible = ref(false);
 
     const openModal = () => {
@@ -91,13 +88,6 @@ export default {
       ListNavVisible.value = false;
     };
 
-    return {
-      ListNavVisible,
-      openModal,
-      closeModal,
-    };
-  }
-}
 </script>
 
 <style scoped>
