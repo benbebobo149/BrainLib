@@ -1,13 +1,13 @@
 <template>
   <button @click="openModal" class="w-auto h-full">
-    <img src="ListNav.png" class="w-auto h-[80%]" alt="ListNav">
+    <img src="@/ListNav.png" class="w-auto h-[80%]" alt="ListNav">
   </button>
   <div v-if="ListNavVisible" class="fixed inset-0 flex bg-black bg-opacity-30 w-screen h-screen max-h-full">
     <div class="relative w-[25%] h-auto bg-violet-100">
       <button @click="closeModal" class="absolute right-2 text-xl font-bold cursor-pointer">&times;</button>
       <div class="w-auto h-[8%] flex bg-violet-100 items-center border-b border-terotory">
         <NuxtLink to="http://localhost:3000/main" class="flex w-auto h-[80%] ml-[.5vw]">
-          <img src="logo.png" alt="logo" class="w-full h-auto">
+          <img src="@/logo.png" alt="logo" class="w-full h-auto">
         </NuxtLink>
         <NuxtLink to="http://localhost:3000/main" class="flex w-auto h-[80%] items-center ">
           <p class="text-[2vw] ml-[2vw] ">Home Page</p>

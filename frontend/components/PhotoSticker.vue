@@ -1,9 +1,9 @@
 <template>
     <button @click="openModal" class="w-auto h-full">
-        <img src="PhotoSticker.png" class="w-auto h-[80%]" alt="PhotoSticker">
+        <img src="@/PhotoSticker.png" class="w-auto h-[80%]" alt="PhotoSticker">
     </button>
     <div v-if="PhotoListVisible" class="fixed w-[15%] h-[25%] bg-purple-50 flex  mt-[7vh]">
-        <button @click="closeModal" class="h-[3%] absolute left-0 t-0 m-0 text-md font-bold cursor-pointer">&times;</button>
+        <button @click="closeModal" class="h-[3%] absolute left-0 text-md font-bold cursor-pointer">&times;</button>
         <div class="w-full h-auto bg-purple-50 items-center justify-center ml-2">
             <div class="flex h-[25%] w-auto p-1">
                 <NuxtLink to="http://localhost:3000/personal" class="w-[20%] h-auto flex justify-center">
@@ -11,6 +11,14 @@
                 </NuxtLink>
                 <NuxtLink to="http://localhost:3000/personal" class="text-[1vw] flex items-center w-[80%] h-auto ml-5">
                     <p>Personal Profile</p>
+                </NuxtLink>
+            </div>
+            <div class="flex h-1/4 w-full p-1">
+                <NuxtLink to="http://localhost:3000/personal/Change" class="w-[20%] h-auto flex justify-center">
+                    <img src="/PhotoSticker/Edit.png" alt="" class="w-full h-auto">
+                </NuxtLink>
+                <NuxtLink to="http://localhost:3000/personal/Change" class="text-[1vw] flex items-center ml-5 w-[80%] h-auto">
+                    <p>Edit Profile</p>
                 </NuxtLink>
             </div>
             <div class="flex h-1/4 w-full p-1">
@@ -22,14 +30,7 @@
                 </button>
                 
             </div>
-            <div class="flex h-1/4 w-full p-1">
-                <button @click="DeleteAccount" class="w-[20%] h-auto flex justify-center">
-                    <img src="/PhotoSticker/DeleteAccount.png" alt="" class="w-full h-auto">
-                </button>
-                <button @click="DeleteAccount" class="text-[1vw] flex items-center ml-5 w-[80%] h-auto">
-                    <p>Delete Account</p>
-                </button>
-            </div>
+            
             <div v-if="Admin" class="flex h-1/4 w-full p-1">
                 <NuxtLink to="./" class="w-[20%] h-auto flex justify-center">
                     <img src="/PhotoSticker/Admin.png" alt="" class="w-full h-auto">
@@ -60,9 +61,5 @@ const LogOut = () => {
     alert("確認是否登出");
 };
 
-const DeleteAccount = () => {
-    console.log("DeleteAccount in PhotoSticker.vue");
-    alert("確認是否刪除帳號");
-};
 const Admin = ref(false);
 </script>

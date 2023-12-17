@@ -1,6 +1,5 @@
 <script setup>
 //  import the Footer component
-import Header from '~/components/Activity/Header.vue'
 import Main from '~/components/Activity/Main.vue'
 </script>
 <template>

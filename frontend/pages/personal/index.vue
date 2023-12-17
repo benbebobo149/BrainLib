@@ -20,7 +20,7 @@
         <div class="w-[30%] h-auto bg-bgcolor">
             <div class="w-full h-[60%] bg-bgcolor">
                 <div class="flex w-full h-[80%] bg-bgcolor justify-center items-end">
-                    <img src="UserPhoto.png" alt="UserPhoto" class="w-auto h-[70%] rounded-full border-2 border-terotory">
+                    <img src="@/UserPhoto.png" alt="UserPhoto" class="w-auto h-[70%] rounded-full border-2 border-terotory">
                 </div>
                 <div class="flex justify-center items-center w-full h-[20%] bg-bgcolor">
                     <div class=" w-1/2 h-full border-b border-terotory flex items-center justify-center">
@@ -35,18 +35,12 @@
     </div>
 </template>
 
-<script>
+<script setup>
 import { defineComponent, ref } from 'vue';
-import InPageNav from "@/components/InPageNav.vue";
+//import InPageNav from "@/components/InPageNav.vue";
 import PostPreview from '@/components/PostPreview.vue';
 
-export default defineComponent({
-    name: "personal",
-    components: {
-        InPageNav,
-        PostPreview
-    },
-    setup() {
+
         const name = ref('');
         name.value = "jake";
 
@@ -55,13 +49,6 @@ export default defineComponent({
 
         const introduction = ref('');
         introduction.value = "在求職之路上遇到許多人的幫助，於是決定撰寫求職相關文章回饋社會的少女。以吃食社會學與哲學維生。在求職之路上遇到許多人的幫助，於是決定撰寫求職相關文章回饋社會的少女。以吃食社會學與哲學維生。在求職之路上遇到許多人的幫助，於是決定撰寫求職相關文章回饋社會的少女。以吃食社會學與哲學維生。";
-        return {
-            name,
-            introduction,
-            Photo
-        };
-    }
-});
 </script>
 
 
