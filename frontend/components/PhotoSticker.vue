@@ -2,7 +2,6 @@
     <button @click="openModal" class="w-auto h-full">
         <img src="PhotoSticker.png" class="w-auto h-[80%]" alt="PhotoSticker">
     </button>
-    <!-- <div v-if="PhotoListVisible" class="fixed inset-0 flex bg-black bg-opacity-30 w-screen h-screen max-h-full"> -->
     <div v-if="PhotoListVisible" class="fixed w-[15%] h-[25%] bg-purple-50 flex  mt-[7vh]">
         <button @click="closeModal" class="h-[3%] absolute left-0 t-0 m-0 text-md font-bold cursor-pointer">&times;</button>
         <div class="w-full h-auto bg-purple-50 items-center justify-center ml-2">
@@ -31,7 +30,7 @@
                     <p>Delete Account</p>
                 </button>
             </div>
-            <div class="flex h-1/4 w-full p-1">
+            <div v-if="Admin" class="flex h-1/4 w-full p-1">
                 <NuxtLink to="./" class="w-[20%] h-auto flex justify-center">
                     <img src="/PhotoSticker/Admin.png" alt="" class="w-full h-auto">
                 </NuxtLink>
@@ -65,4 +64,5 @@ const DeleteAccount = () => {
     console.log("DeleteAccount in PhotoSticker.vue");
     alert("確認是否刪除帳號");
 };
+const Admin = ref(false);
 </script>
