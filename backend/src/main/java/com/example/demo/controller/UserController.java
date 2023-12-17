@@ -1,11 +1,6 @@
-// com.example.demo.controller.UserController.java
-package com.example.demo.controller;
-
-import com.example.demo.model.User;
-import com.example.demo.repository.UserRepository;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -14,16 +9,16 @@ import java.util.Optional;
 @RequestMapping("/user")
 public class UserController {
     @Autowired
-    private UserRepository userRepository;
+    private UserService userService;
 
     @GetMapping
     public List<User> getAllUsers() {
-        return userRepository.findAll();
+        return userService.getAllUsers();
     }
 
     @GetMapping("/user/{id}")
     public ResponseEntity<User> getUserById(@PathVariable Integer id) {
-        Optional<User> user = userRepository.findById(id);
+        Optional<User> user = userService.getUserById(id);
         if (user.isPresent()) {
             return ResponseEntity.ok(user.get());
         } else {
@@ -33,7 +28,7 @@ public class UserController {
 
     @PutMapping("/{id}")
     public ResponseEntity<User> updateUser(@PathVariable Integer id, @RequestBody User updatedUser) {
-        Optional<User> user = userRepository.findById(id);
+        Optional<User> user = userService.findById(id);
         if (user.isPresent()) {
             User existingUser = user.get();
             existingUser.setName(updatedUser.getName());
@@ -41,7 +36,7 @@ public class UserController {
             existingUser.setPermission(updatedUser.getPermission());
             existingUser.setProfile(updatedUser.getProfile());
             existingUser.setImage(updatedUser.getImage());
-            return ResponseEntity.ok(userRepository.save(existingUser));
+            return ResponseEntity.ok(userService.save(existingUser));
         } else {
             return ResponseEntity.notFound().build();
         }
@@ -49,8 +44,8 @@ public class UserController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteUser(@PathVariable Integer id) {
-        if (userRepository.existsById(id)) {
-            userRepository.deleteById(id);
+        if (userService.existsById(id)) {
+            userService.deleteById(id);
             return ResponseEntity.ok().build();
         } else {
             return ResponseEntity.notFound().build();

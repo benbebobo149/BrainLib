@@ -19,7 +19,7 @@ public class User {
     @Column(name = "permission", nullable = false)
     private Integer permission;
 
-    @Column(name = "profile")
+    @Column(name = "profile", nullable = true)
     private String profile;
 
     @Column(name = "image", columnDefinition = "VARCHAR(255) DEFAULT 'default_image.jpg'")

@@ -11,10 +11,6 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    public User findByGoogleId(String googleId) {
-        return userRepository.findByGoogleId(googleId);
-    }
-
     public User findByEmail(String email) {
         return userRepository.findByEmail(email);
     }
