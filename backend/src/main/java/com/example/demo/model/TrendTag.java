@@ -4,14 +4,14 @@ package com.example.demo.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "TrandTopics")
-public class TrendTopic {
+@Table(name = "TrandTag")
+public class TrendTag {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "topic_id", nullable = false)
-    private Integer topic_id;
+    @Column(name = "tag_id", nullable = false)
+    private Integer tag_id;
 
     // getters and setters
 
@@ -20,10 +20,10 @@ public class TrendTopic {
     }
 
     public Integer getTopic_id() {
-        return topic_id;
+        return tag_id;
     }
 
-    public void setTopic_id(Integer topic_id) {
-        this.topic_id = topic_id;   
+    public void setTopic_id(Integer tag_id) {
+        this.tag_id = tag_id;   
     }
 }
