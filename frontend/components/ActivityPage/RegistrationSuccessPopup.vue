@@ -1,10 +1,9 @@
 <template>
-  <div class="popup-overlay">
+  <div class="popup-overlay" @click="closePopup">
     <div class="rounded-lg flex flex-col bg-white justify-center items-center">
-      <img src="/hello/XLg.png" alt="Register Button" class="h-[3vh] w-auto justify-self-end self-end"
-        @click="closePopup">
+      <img src="/hello/XLg.png" alt="Register Button" class="h-[3vh] w-auto justify-self-end self-end">
       <p class="text-3xl text-black font-bold m-10">Registration successful</p>
-      <img src="/hello/Confirm.png" alt="Register Button" class="h-[5vh] w-auto" @click="closePopup">
+      <img src="/hello/Confirm.png" alt="Register Button" class="h-[5vh] w-auto">
     </div>
   </div>
 </template>
@@ -29,5 +28,6 @@ const closePopup = () => {
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 }
 </style>
