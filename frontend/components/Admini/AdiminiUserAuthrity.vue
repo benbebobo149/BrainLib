@@ -1,3 +1,8 @@
+<script setup>
+import { ref } from 'vue'
+
+const selectedRole = ref('normal');
+</script>
 <template>
     <div>
         <!-- Your other content... -->
@@ -12,8 +17,3 @@
     </div>
 </template>
 
-<script setup>
-import { ref } from 'vue'
-
-const selectedRole = ref('normal');
-</script>

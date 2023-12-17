@@ -1,3 +1,50 @@
+
+<script setup>
+import ScrollableBox from '@/components/Activity/ScrollableBox.vue';
+import AdiminiActivityPassPopup from './AdiminiActivityPassPopup.vue';
+
+
+const props = defineProps({
+    activity: {
+        type: Object,
+        default: () => ({
+            title: 'Activity Title',
+            time: 'Activity Time',
+            location: 'Activity Location',
+            distance: 'Activity Distance',
+            description: 'Activity Description',
+            image: 'Activity Image',
+            participants: 'Activity Participants',
+            comments: 'Activity Comments',
+            likes: 'Activity Likes',
+            topic: 'Activity Topic',
+            creator: 'Activity Creator',
+        })
+    }, showPopup: {
+        type: Boolean,
+        default: false,
+    }
+})
+const { activity } = toRefs(props);
+
+const showPopup = ref(false);
+
+// define emit 通過或拒絕活動
+const emit = defineEmits(['passActivity', 'rejectActivity'])
+const passActivity = () => {
+    emit('passActivity', activity.value);
+    showPopup.value = true;
+    console.log(showPopup); // cant get the value
+}
+const rejectActivity = () => {
+    emit('rejectActivity', activity.value);
+    alert('reject');
+}
+
+const closePopup = () => {
+    showPopup.value = false;
+}
+</script>
 <template>
     <div class="w-[56vw] h-[30vh] bg-bgcolor border-b border-terotory mx-2 my-5 flex">
         <div class=" w-[14vw] h-[20vh] my-[4vh] mx-[2vw] bg-orange-500 flex">
@@ -35,50 +82,3 @@
 </template>
 
 <style scoped></style>
-
-<script setup>
-import ScrollableBox from '@/components/Activity/ScrollableBox.vue';
-import AdiminiActivityPassPopup from './AdiminiActivityPassPopup.vue';
-
-
-const props = defineProps({
-    activity: {
-        type: Object,
-        default: () => ({
-            title: 'Activity Title',
-            time: 'Activity Time',
-            location: 'Activity Location',
-            distance: 'Activity Distance',
-            description: 'Activity Description',
-            image: 'Activity Image',
-            participants: 'Activity Participants',
-            comments: 'Activity Comments',
-            likes: 'Activity Likes',
-            topic: 'Activity Topic',
-            creator: 'Activity Creator',
-        })
-    },showPopup: {
-        type: Boolean,
-        default: false,
-    }
-})
-const { activity } = toRefs(props);
-
-const showPopup = ref(true);
-
-// define emit 通過或拒絕活動
-const emit = defineEmits(['passActivity', 'rejectActivity'])
-const passActivity = () => {
-    emit('passActivity', activity.value);
-    showPopup.value = true;
-    console.log(showPopup); // cant get the value
-}
-const rejectActivity = () => {
-    emit('rejectActivity', activity.value);
-    alert('reject');
-}
-
-const closePopup = () => {
-    showPopup.value = false;
-}
-</script>

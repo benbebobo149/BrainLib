@@ -14,8 +14,7 @@ const goToPage = () => {
 
 <template>
 	<!-- temp navbar -->
-	<div class=" bg-bgcolor  w-screen h-[8vh]">
-		<InPageNav></InPageNav>
+	<div class=" bg-bgcolor  w-screen">
 
 		<div class="flex ">
 			<!-- 左邊列表 -->

@@ -6,16 +6,15 @@ import ChatMenber from '~/components/Chat/ChatMenber.vue';
 <template>
 	<!-- temp navbar -->
 	<div class=" bg-bgcolor w-screen h-[8vh]">
-			<InPageNav></InPageNav>
 		 <div class="flex h-full"> 
 			 <!-- 左邊對話列表 -->
 			<div class="w-1/5 h-[100vh] ">
-				<div class="h-[12vh] bg-bgcolor  bg-error border-b border-terotory  flex">
+				<!-- <div class="h-[12vh] bg-bgcolor  bg-error border-b border-terotory  flex">
 					<div>
 						<img class=" mx-auto ml-[1rem] w-[4vw] h-[4vw] rounded-full" src="https://via.placeholder.com/95x96" />
 					</div >
 					<div class=" mx-auto ml-[1rem] text-black text-xl font-normalfont-'Roboto' leading-10"> create group</div>
-				</div>
+				</div> -->
 
 				<!-- 好友名單 -->
 				<div>

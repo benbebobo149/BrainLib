@@ -2,7 +2,8 @@
     <button @click="openModal" class="w-auto h-full">
         <img src="PhotoSticker.png" class="w-auto h-[80%]" alt="PhotoSticker">
     </button>
-    <div v-if="PhotoListVisible" class="fixed w-[15%] h-[25%] bg-purple-50 flex  mt-[7vh]">
+
+    <div v-if="PhotoListVisible" class="fixed w-[15%] h-[25%] bg-purple-50 flex  mt-[7vh]" @click.self="closeModal">
         <button @click="closeModal" class="h-[3%] absolute left-0 t-0 m-0 text-md font-bold cursor-pointer">&times;</button>
         <div class="w-full h-auto bg-purple-50 items-center justify-center ml-2">
             <div class="flex h-[25%] w-auto p-1">
@@ -49,6 +50,7 @@ const PhotoListVisible = ref(false);
 
 const openModal = () => {
     PhotoListVisible.value = true;
+    console.log("open model in PhotoSticker.vue");
 };
 
 const closeModal = () => {

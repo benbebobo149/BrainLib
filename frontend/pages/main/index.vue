@@ -5,26 +5,15 @@ import MainPageActivityTags from '@/components/Main/MainPageActivityTags.vue';
 import MainTrendingTopic from '~/components/Main/MainTrendingTopic.vue';
 // import MainPageActivityTags from '@/components/MainPage/MainPageActivityTags.vue';
 
-
-
 </script>
 <template>
-  <div class="">
-    <InPageNav></InPageNav>
-  </div>
-
   <div class="w-full">
     <div class=" bg-bgcolor w-screen">
-
-      <!-- temp navbar -->
-
 
       <!-- 左半邊 -->
       <div class="flex">
         <div class=" w-9/12 bg-bgcolor h-full rounded-sm border-r border-terotory">
-          <div class=" bg-bgcolor h-[10vh] ">
-            <h1> </h1>
-          </div>
+
           <div class=" top-100 h-[10vh]">
             <div
               class=" w-[20vw] ml-[5rem] text-terotory text-xl font-normal font-Roboto leading-10   rounded-sm border-b border-terotory">

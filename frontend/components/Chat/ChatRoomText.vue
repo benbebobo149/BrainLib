@@ -1,0 +1,22 @@
+<script setup>
+const props = defineProps({
+    user: {
+        type: Object,
+        default: () => ({
+            name: 'DefaultName',
+            email: 'Default User Email',
+            role: 'Default User Role',
+        })
+    }, Text: {
+        type: String,
+        default: 'Default Text',
+    }
+});
+const { user } = toRefs(props); // 解構props
+
+</script>
+<template>
+    <div class="bg-secondiry ml-[1rem] text-black text-xl font-normal font-'Roboto'">
+        {{ Text }}
+    </div>
+</template>

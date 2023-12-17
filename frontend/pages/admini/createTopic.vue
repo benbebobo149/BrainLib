@@ -13,7 +13,6 @@ const topicName = ref('Enter topic name');
 <template>
 	<!-- temp navbar -->
 	<div class=" bg-bgcolor  w-screen h-[8vh]">
-		<InPageNav></InPageNav>
 
 		<div class="flex ">
 			<!-- 左邊列表 -->

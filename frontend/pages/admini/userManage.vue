@@ -8,7 +8,6 @@ import InPageNav from '~/components/InPageNav.vue';
 <template>
 	<!-- temp navbar -->
 	<div class=" bg-bgcolor w-screen h-[8vh] ">
-	      <InPageNav></InPageNav>
 		<div class="flex ">
 			<!-- 左邊列表 -->
 			<div class="w-1/5  bg-bgcolor rounded-sm border-r border-terotory ">
@@ -20,13 +19,17 @@ import InPageNav from '~/components/InPageNav.vue';
 			<!-- 右邊部分 -->
 			<div class="w-4/5 h-[100vh] bg-bgcolor">
 				<div class="h-[10vh]  ">
-					<div class=" text-stone-400 ">
-						<h1 class="left-[25vw] w-[45vw]  h-[0.5vw] text-[3vw] font-normal font-['Roboto']
-						 relative">here comes a search box</h1>
+					<div class="mt-[5vh] ml-[10vw] text-stone-400 ">
+						<!-- <h1 class="left-[25vw] w-[45vw]  h-[0.5vw] text-[3vw] font-normal font-['Roboto']
+						 relative">here comes a search box</h1> -->
+						<div class="flex w-4/5 h-full items-center ml-5">
+							<input type="text" id="" placeholder="    Search user" v-model="SearchContent"
+								class="w-5/6 h-[6vh] rounded-full bg-secondary2">
+						</div>
 					</div>
 				</div>
 				<div class="flex">
-					<div class=" content-center relative ml-[20vw]">
+					<div class=" content-center relative ml-[10vw]">
 						<AdminiUser />
 						<AdminiUser />
 						<AdminiUser />
