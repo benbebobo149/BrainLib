@@ -37,13 +37,6 @@ const GoogleClick = () => {
   emit('close_modal')
   emit('GoogleClick')
 };
-//接收InPageNav.vue的props
-// const props = defineProps({
-//   SigninVisible: {
-//     type: Boolean,
-//     default: false
-//   }
-// })
 
 </script>
 <style scoped>

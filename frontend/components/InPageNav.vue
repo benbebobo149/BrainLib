@@ -30,35 +30,26 @@
             <NuxtLink to="http://localhost:3000/chat" class="flex w-auto h-full items-center mr-[3vw]">
                 <img src="Chat.png" alt="Chat" class="w-auto h-[85%]">
             </NuxtLink>
-            <NuxtLink to="http://localhost:3000/personal" class="w-auto h-full flex items-center mr-[2vw]">
-                <img src="PhotoSticker.png" alt="PhotoSticker" class="w-auto h-[85%]">
-            </NuxtLink>
+            <!-- <button class="flex w-auto h-full items-center mr-[3vw]">
+                <img src="PhotoSticker.png" alt="" class="w-auto h-[85%]">
+            </button> -->
+            <PhotoSticker class="flex w-auto h-full items-center mr-[3vw]"/>
         </div>
 
     </div>
     <Signin v-if="EnterVisible" @close_modal="closeModal()" @GoogleClick="GoogleClick" class="z-20" />
+   
 </template>
 
 <script setup>
 import { ref } from 'vue';
 import ListNav from "./ListNav.vue";
 import Signin from "./Signin.vue";
+import PhotoSticker from "./PhotoSticker.vue";
 
-//觸發openModal()時，props給Signin.vue
-// const props = defineProps({
-//     NotSignin: {
-//         type: Boolean,
-//         default: false
-//     }
-// })
 
 const EnterVisible = ref(false);
-// const openModal = () => {
-//   GoogleVisible.value = true;
-// };
-// const closeModal = () => {
-//   GoogleVisible.value = false;
-// };
+
 const NotSignin = ref(true);
 const openModal = () => {
     EnterVisible.value = true;
