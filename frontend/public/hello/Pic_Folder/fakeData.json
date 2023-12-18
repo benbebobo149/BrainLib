@@ -5,7 +5,7 @@
     "title": "Fake Activity 1",
     "location": "Fake Location 1",
     "date": "11/11/2023",
-    "buttonText": "cars"
+    "buttonTexts":[{"1":"cars", "2":"bikes", "3":"trucks"}]
   },
     {
     "id": 2,
@@ -13,6 +13,6 @@
     "title": "Fake Activity 2",
     "location": "Fake Location 2",
     "date": "11/11/2023",
-    "buttonText": "cars"
+    "buttonTexts": [{"1":"cars", "2":"bikes", "3":"trucks"}]
   }
 ]

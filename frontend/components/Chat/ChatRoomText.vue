@@ -1,18 +1,11 @@
 <script setup>
 const props = defineProps({
-    user: {
-        type: Object,
-        default: () => ({
-            name: 'DefaultName',
-            email: 'Default User Email',
-            role: 'Default User Role',
-        })
-    }, Text: {
+    Text: {
         type: String,
         default: 'Default Text',
     }
 });
-const { user } = toRefs(props); // 解構props
+// const { user } = toRefs(props); // 解構props
 
 </script>
 <template>

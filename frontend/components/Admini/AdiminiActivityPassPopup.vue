@@ -13,6 +13,9 @@ const props = defineProps({
     default: 'Default Popup Message',
   }
 }) 
+
+
+
 </script>
 <template>
 <div class="popup-overlay">

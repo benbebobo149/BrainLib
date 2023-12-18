@@ -9,6 +9,7 @@ import ChatMenber from '~/components/Chat/ChatMenber.vue';
 		 <div class="flex h-full"> 
 			 <!-- 左邊對話列表 -->
 			<div class="w-1/5 h-[100vh] ">
+				<!-- create group -->
 				<!-- <div class="h-[12vh] bg-bgcolor  bg-error border-b border-terotory  flex">
 					<div>
 						<img class=" mx-auto ml-[1rem] w-[4vw] h-[4vw] rounded-full" src="https://via.placeholder.com/95x96" />
@@ -18,21 +19,7 @@ import ChatMenber from '~/components/Chat/ChatMenber.vue';
 
 				<!-- 好友名單 -->
 				<div>
-					<div class="flex relative my-2">
-						<div>
-							<img class="w-[4vw] h-[4vw] ml-[0.5rem] rounded-full" src="https://via.placeholder.com/95x96" />
-						</div>
-						<div>
-							<div
-								class="w-[4vw] h-[4vw] mx-auto ml-[1rem] text-black text-xl font-normal font-['Roboto'] leading-10">
-								benbenboo</div>
-						</div>
-					</div>
-					<ChatMenber></ChatMenber>
-					<ChatMenber></ChatMenber>
-					<ChatMenber></ChatMenber>
-					<ChatMenber></ChatMenber>
-					<ChatMenber></ChatMenber>
+
 					<ChatMenber></ChatMenber>
 
 				</div>

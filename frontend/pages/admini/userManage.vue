@@ -41,11 +41,7 @@ const SelectAllAdministrators = () => {
 				<div class="flex">
 					<div class=" content-center relative ml-[10vw]">
 						<AdminiUser />
-						<AdminiUser />
-						<AdminiUser />
-						<AdminiUser />
-						<AdminiUser />
-						<AdminiUser />
+
 					</div>
 
 				</div>

@@ -1,5 +1,5 @@
 <script setup>
-import AdiminiUserAuthrity from '~/components/Admini/AdiminiUserAuthrity.vue';
+import users from '@/public/hello/Pic_Folder/fakeDataUser.json'
 
 import { ref } from 'vue'
 const showOverlay = ref(false)
@@ -9,28 +9,30 @@ const handleClick = () => {
 }
 
 // define props 用戶資料
-const props = defineProps({
-    user: {
-        type: Object,
-        default: () => ({
-            name: 'DefaultName',
-            email: 'Default User Email',
-            role: 'Default User Role',
-        })
-    }
-})
+// const props = defineProps({
+//     user: {
+//         type: Object,
+//         default: () => ({
+//             name: 'DefaultName',
+//             email: 'Default User Email',
+//             role: 'Default User Role',
+//         })
+//     }
+// })
 
 </script>
 
 <template>
-    <div class="flex relative my-2">
+    <div v-for="user in users" :key="user.id" class="flex relative my-2">
         <div>
             <img class="w-[4vw] h-[4vw] ml-[0.5rem] rounded-full" src="https://via.placeholder.com/95x96" />
         </div>
         <div>
-            <div class="w-[4vw] h-[4vw] mx-auto ml-[1rem] text-black text-xl font-normal font-'Roboto'">
-                {{user.name}}</div>
+            <p
+                class="ml-[2vh] mt-[2vh] h-[full] w-[14vw] bg-text-black text-[1.4vw] font-normal font-'Roboto' flex-auto item-center">
+                {{ user.name }}</p>
         </div>
+
     </div>
 </template>
 
