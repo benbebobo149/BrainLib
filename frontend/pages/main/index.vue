@@ -3,8 +3,9 @@ import PostPreview from '@/components/PostPreview';
 import InPageNav from '~/components/InPageNav.vue';
 import MainPageActivityTags from '@/components/Main/MainPageActivityTags.vue';
 import MainTrendingTopic from '~/components/Main/MainTrendingTopic.vue';
+import SuccBox from '@/components/ModelBox/SuccBox.vue';
 // import MainPageActivityTags from '@/components/MainPage/MainPageActivityTags.vue';
-
+const popupState = ref(true);
 </script>
 <template>
   <div class="w-full">
@@ -25,7 +26,7 @@ import MainTrendingTopic from '~/components/Main/MainTrendingTopic.vue';
           <div class=" bg-bgcolor content-center -z-10" v-for="index in 10" :key="index">
             <PostPreview />
           </div>
-
+          <SuccBox v-if="popupState" @close="()=> popupState=false"></SuccBox>
         </div>
 
         <!-- 右半邊 -->
@@ -59,9 +60,8 @@ import MainTrendingTopic from '~/components/Main/MainTrendingTopic.vue';
               <div class="w-[16vw] mx-auto">
                 <div class=" text-black text-xl font-normal font-Roboto">Recent Activity</div>
               </div>
-              <div class="flex w-3/12 h-[10vh] mx-[2rem] my-[2vh] relative " v-for="index in 10" :key="index">
+              <div class="flex w-3/12 h-[10vh] mx-[2rem] my-[2vh] relative" >
 
-                <MainPageActivityTags />
                 <MainPageActivityTags />
                 <!-- <div class="w-[20vw] h-[10vh]  bg-purple-200 rounded-3xl  top-[6rem]  absolute 
                         text-center text-neutral-900 text-xl font-normal font-'Roboto'">DevFest Tainan
