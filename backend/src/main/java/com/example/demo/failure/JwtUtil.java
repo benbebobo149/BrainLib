@@ -4,6 +4,8 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import com.example.demo.model.User;
+
 import java.util.Date;
 import java.util.function.Function;
 
@@ -26,11 +28,11 @@ public class JwtUtil {
     }
 
     public Boolean validateToken(String token, User user) {
-        final String username = extractUsername(token);
-        return (username.equals(user.getEmail()) && !isTokenExpired(token));
+        final String usermail = extractUserMail(token);
+        return (usermail.equals(user.getEmail()) && !isTokenExpired(token));
     }
 
-    public String extractUsername(String token) {
+    public String extractUserMail(String token) {
         return extractClaim(token, Claims::getSubject);
     }
 
