@@ -1,7 +1,8 @@
 // ChatMessage.java
 package com.example.demo.model;
 
-import com.example.demo.model.BrainUser;
+import com.example.demo.model.User;
+
 import jakarta.persistence.*;
 import java.util.Date;
 
@@ -14,11 +15,11 @@ public class Chat {
 
     @ManyToOne
     @JoinColumn(name = "sender", nullable = false, referencedColumnName = "id")
-    private BrainUser sender;
+    private User sender;
 
     @ManyToOne
     @JoinColumn(name = "receiver", nullable = false, referencedColumnName = "id")
-    private BrainUser receiver;
+    private User receiver;
 
     @Column(name = "content", nullable = false)
     private String content;
@@ -32,11 +33,11 @@ public class Chat {
         return id;
     }
 
-    public BrainUser getSender() {
+    public User getSender() {
         return sender;
     }
 
-    public BrainUser getReceiver() {
+    public User getReceiver() {
         return receiver;
     }
 
@@ -48,11 +49,11 @@ public class Chat {
         return timestamp;
     }
 
-    public void setSender_id(BrainUser sender) {
+    public void setSender_id(User sender) {
         this.sender = sender;
     }
 
-    public void setReceiver(BrainUser receiver) {
+    public void setReceiver(User receiver) {
         this.receiver = receiver;
     }
 

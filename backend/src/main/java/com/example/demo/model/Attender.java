@@ -1,21 +1,21 @@
 // BrainUserActivityMapping.java
 package com.example.demo.model;
 
-import com.example.demo.model.BrainUser;
+import com.example.demo.model.User;
 import com.example.demo.model.Activity;
 
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "UserActivityMapping")
-public class UserActivityMapping {
+@Table(name = "Attenders")
+public class Attender {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @ManyToOne
-    @JoinColumn(name = "brainUser", nullable = false)
-    private BrainUser brainUser;
+    @JoinColumn(name = "users", nullable = false)
+    private User user;
 
     @ManyToOne
     @JoinColumn(name = "activity", nullable = false)
@@ -27,16 +27,16 @@ public class UserActivityMapping {
         return id;
     }
 
-    public BrainUser getBrainUser() {
-        return brainUser;
+    public User getUser() {
+        return user;
     }
 
     public Activity getActivity() {
         return activity;
     }
 
-    public void setBrainUser(BrainUser brainUser) {
-        this.brainUser = brainUser;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public void setActivity(Activity activity) {

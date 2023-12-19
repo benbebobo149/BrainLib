@@ -1,8 +1,8 @@
 // Activity.java
 package com.example.demo.model;
 
-import com.example.demo.model.BrainUser;
-import com.example.demo.model.UserActivityMapping;
+import com.example.demo.model.User;
+import com.example.demo.model.Attender;
 
 import jakarta.persistence.*;
 import java.util.Date;
@@ -17,26 +17,26 @@ public class Activity {
     private Integer id;
 
     @ManyToOne
-    @JoinColumn(name = "brainUser", nullable = false, referencedColumnName = "id")
-    private BrainUser brainUser;
-
-    @OneToMany(mappedBy = "activity")
-    private Set<UserActivityMapping> participants;
+    @JoinColumn(name = "users", nullable = false, referencedColumnName = "id")
+    private User user;
 
     @Column(name = "title", nullable = false)
     private String title;
-
+    
     @Column(name = "content", nullable = false)
     private String content;
-
+    
     @Column(name = "location", nullable = false)
     private String location;
 
     @Column(name = "visible", columnDefinition = "boolean default false")
     private Boolean visible;
-
+    
     @Column(name = "dateTime", nullable = false)
     private Date dateTime;
+
+    @OneToMany(mappedBy = "activity")
+    private Set<Attender> attenders;
 
     // getters and setters
 
@@ -44,12 +44,12 @@ public class Activity {
         return id;
     }
 
-    public BrainUser getBrainUser() {
-        return brainUser;
+    public User getUser() {
+        return user;
     }
 
-    public Set<UserActivityMapping> getParticipants() {
-        return participants;
+    public Set<Attender> getAttenders() {
+        return attenders;
     }
 
     public String getTitle() {
@@ -72,14 +72,10 @@ public class Activity {
         return dateTime;
     }
 
-    public void setBrainUser(BrainUser brainUser) {
-        this.brainUser = brainUser;
+    public void setUser(User user) {
+        this.user = user;
     }
-
-    public void setParticipants(Set<UserActivityMapping> participants) {
-        this.participants = participants;
-    }
-
+    
     public void setTitle(String title) {
         this.title = title;
     }

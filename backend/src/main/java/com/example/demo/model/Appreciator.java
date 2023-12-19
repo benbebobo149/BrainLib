@@ -1,14 +1,14 @@
-// Comment.java
+// UserPostMapping.java
 package com.example.demo.model;
 
-import com.example.demo.model.User;
 import com.example.demo.model.Post;
+import com.example.demo.model.User;
 
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "Comments")
-public class Comment {
+@Table(name = "Appreciators")
+public class Appreciator {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -18,11 +18,8 @@ public class Comment {
     private Post post;
 
     @ManyToOne
-    @JoinColumn(name = "users", nullable = false, referencedColumnName = "id")
-    private User user;
-
-    @Column(name = "content", nullable = false)
-    private String content;
+    @JoinColumn(name = "appreciator", nullable = false, referencedColumnName = "id")
+    private User appreciator;
 
     // getters and setters
 
@@ -34,23 +31,15 @@ public class Comment {
         return post;
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public String getContent() {
-        return content;
+    public User getAppreciator() {
+        return appreciator;
     }
 
     public void setPost(Post post) {
         this.post = post;
     }
 
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
+    public void setAppreciator(User appreciator) {
+        this.appreciator = appreciator;
     }
 }
