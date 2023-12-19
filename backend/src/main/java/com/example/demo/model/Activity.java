@@ -1,50 +1,55 @@
 // Activity.java
 package com.example.demo.model;
 
+import com.example.demo.model.User;
+import com.example.demo.model.Attender;
+
 import jakarta.persistence.*;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "Activities")
 public class Activity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer activity_id;
+    private Integer id;
 
-    @Column(name = "user_id", nullable = false)
-    private Integer user_id;
+    @ManyToOne
+    @JoinColumn(name = "users", nullable = false, referencedColumnName = "id")
+    private User user;
 
     @Column(name = "title", nullable = false)
     private String title;
-
+    
     @Column(name = "content", nullable = false)
     private String content;
-
+    
     @Column(name = "location", nullable = false)
     private String location;
 
-    @Column(name = "visible", nullable = false)
+    @Column(name = "visible", columnDefinition = "boolean default false")
     private Boolean visible;
-
+    
     @Column(name = "dateTime", nullable = false)
     private Date dateTime;
 
-    @ManyToMany
-    @JoinTable(
-        name = "activity_tags",
-        joinColumns = @JoinColumn(name = "activity_id"),
-        inverseJoinColumns = @JoinColumn(name = "tag_id"))
-    private List<Tag> tags;
+    @OneToMany(mappedBy = "activity")
+    private Set<Attender> attenders;
 
     // getters and setters
 
-    public Integer getActivity_id() {
-        return activity_id;
+    public Integer getActivityId() {
+        return id;
     }
 
-    public Integer getUser_id() {
-        return user_id;
+    public User getUser() {
+        return user;
+    }
+
+    public Set<Attender> getAttenders() {
+        return attenders;
     }
 
     public String getTitle() {
@@ -67,14 +72,10 @@ public class Activity {
         return dateTime;
     }
 
-    public List<Tag> getTags() {
-        return tags;
+    public void setUser(User user) {
+        this.user = user;
     }
-
-    public void setUser_id(Integer user_id) {
-        this.user_id = user_id;
-    }
-
+    
     public void setTitle(String title) {
         this.title = title;
     }
@@ -93,9 +94,5 @@ public class Activity {
 
     public void setDateTime(Date dateTime) {
         this.dateTime = dateTime;
-    }
-
-    public void setTags(List<Tag> tags) {
-        this.tags = tags;
     }
 }

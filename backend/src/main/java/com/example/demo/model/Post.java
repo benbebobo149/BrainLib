@@ -1,33 +1,35 @@
 // Post.java
 package com.example.demo.model;
 
-import javax.persistence.*;
-import org.hibernate.annotations.Type;
-import org.hibernate.annotations.TypeDef;
-import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
+import com.example.demo.model.User;
+import com.example.demo.model.PostTag;
+import com.example.demo.model.SusPost;
+import com.example.demo.model.Appreciator;
+
+import jakarta.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "posts")
-@TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)
 public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "user_id", nullable = false)
-    private Integer userId;
+    @ManyToOne
+    @JoinColumn(name = "users", nullable = false)
+    private User user;
 
     @Column(name = "title", nullable = false)
     private String title;
 
-    @Type(type = "jsonb")
-    @Column(columnDefinition = "jsonb", name = "content", nullable = false)
+    @Column(name = "content", nullable = false)
     private String content;
 
     @Column(name = "image", nullable = false)
     private String image;
 
-    @Column(name = "thumb_up", nullable = true)
+    @Column(name = "thumb_up", nullable = false)
     private Integer thumbUp;
 
     @Column(name = "visible", nullable = false)
@@ -36,16 +38,25 @@ public class Post {
     @Column(name = "is_suspend", nullable = false)
     private Boolean isSuspend;
 
-    @Column(name = "suspender_id", nullable = true)
-    private Integer suspenderId;
+    @OneToMany(mappedBy = "post")
+    private Set<PostTag> tags;
+
+    @OneToMany(mappedBy = "post")
+    private Set<Comment> comments;
+
+    @OneToMany(mappedBy = "post")
+    private Set<SusPost> suspendInfo;
+
+    @OneToMany(mappedBy = "post")
+    private Set<Appreciator> appreciators;
 
     // getters and setters
     public Integer getId() {
         return id;
     }
 
-    public Integer getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
     public String getTitle() {
@@ -72,16 +83,24 @@ public class Post {
         return isSuspend;
     }
 
-    public Integer getSuspenderId() {
-        return suspenderId;
+    public Set<PostTag> getTags() {
+        return tags;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public Set<Comment> getComments() {
+        return comments;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public Set<SusPost> getSuspendInfo() {
+        return suspendInfo;
+    }
+
+    public Set<Appreciator> getAppreciators() {
+        return appreciators;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public void setTitle(String title) {
@@ -106,9 +125,5 @@ public class Post {
 
     public void setIsSuspend(Boolean isSuspend) {
         this.isSuspend = isSuspend;
-    }
-
-    public void setSuspenderId(Integer suspenderId) {
-        this.suspenderId = suspenderId;
     }
 }

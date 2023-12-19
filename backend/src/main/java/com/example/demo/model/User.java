@@ -1,7 +1,16 @@
 // com.example.demo.model.User.java
 package com.example.demo.model;
 
+import com.example.demo.model.Activity;
+import com.example.demo.model.Comment;
+import com.example.demo.model.Chat;
+import com.example.demo.model.Post;
+import com.example.demo.model.Attender;
+import com.example.demo.model.Appreciator;
+import com.example.demo.model.SusPost;
+
 import jakarta.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "Users")
@@ -24,6 +33,31 @@ public class User {
 
     @Column(name = "image", columnDefinition = "VARCHAR(255) DEFAULT 'default_image.jpg'")
     private String image;
+
+    @OneToMany(mappedBy = "user")
+    private List<Activity> activities;
+
+    @OneToMany(mappedBy = "user")
+    private List<Post> posts;
+
+    @OneToMany(mappedBy = "user")
+    private List<Attender> joinActivity;
+
+    @OneToMany(mappedBy = "appreciator")
+    private List<Appreciator> appreciatedPosts;
+
+    @OneToMany(mappedBy = "suspender")
+    private List<SusPost> suspendedPosts;
+
+    @OneToMany(mappedBy = "user")
+    private List<Comment> comments;
+
+    @OneToMany(mappedBy = "sender")
+    private List<Chat> sentChat;
+
+    @OneToMany(mappedBy = "receiver")
+    private List<Chat> receivedChat;
+
 
     // getters
     public Integer getId() {
@@ -48,6 +82,34 @@ public class User {
 
     public String getImage() {
         return image;
+    }
+
+    public List<Activity> getActivities() {
+        return activities;
+    }
+
+    public List<Attender> getJoinActivity() {
+        return joinActivity;
+    }
+
+    public List<Post> getPosts() {
+        return posts;
+    }
+
+    public List<SusPost> getSusPost() {
+        return suspendedPosts;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public List<Chat> getSentChat() {
+        return sentChat;
+    }
+
+    public List<Chat> getReceivedChat() {
+        return receivedChat;
     }
 
     // setters

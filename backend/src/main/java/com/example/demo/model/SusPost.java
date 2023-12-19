@@ -1,20 +1,25 @@
 // SusPostMapping.java
 package com.example.demo.model;
 
+import com.example.demo.model.Post;
+import com.example.demo.model.User;
+
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "SusPostsMappings")
-public class SusPostMapping {
+@Table(name = "SusPosts")
+public class SusPost {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "post_id", nullable = false)
-    private Integer post_id;
+    @ManyToOne
+    @JoinColumn(name = "post", nullable = false)
+    private Post post;
 
-    @Column(name = "user_id", nullable = false)
-    private Integer user_id;
+    @ManyToOne
+    @JoinColumn(name = "suspender", nullable = false)
+    private User suspender;
 
     @Column(name = "is_reviewed", nullable = false)
     private Boolean is_reviewed;
@@ -28,12 +33,12 @@ public class SusPostMapping {
         return id;
     }
 
-    public Integer getPost_id() {
-        return post_id;
+    public Post getPost() {
+        return post;
     }
 
-    public Integer getUser_id() {
-        return user_id;
+    public User getUser() {
+        return suspender;
     }
 
     public Boolean getIs_reviewed() {
@@ -48,12 +53,12 @@ public class SusPostMapping {
         this.id = id;
     }
 
-    public void setPost_id(Integer post_id) {
-        this.post_id = post_id;
+    public void setPost(Post post) {
+        this.post = post;
     }
 
-    public void setUser_id(Integer user_id) {
-        this.user_id = user_id;
+    public void setUser(User suspender) {
+        this.suspender = suspender;
     }
 
     public void setIs_reviewed(Boolean is_reviewed) {
