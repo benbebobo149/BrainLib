@@ -1,11 +1,13 @@
 // com.example.demo.model.User.java
 package com.example.demo.model;
 
+import com.example.demo.model.Activity;
 import jakarta.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "Users")
-public class User {
+public class BrainUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -24,6 +26,9 @@ public class User {
 
     @Column(name = "image", columnDefinition = "VARCHAR(255) DEFAULT 'default_image.jpg'")
     private String image;
+
+    @OneToMany(mappedBy = "brainUser")
+    private List<Activity> activities;
 
     // getters
     public Integer getId() {
