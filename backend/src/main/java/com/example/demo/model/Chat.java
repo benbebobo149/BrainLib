@@ -1,21 +1,24 @@
 // ChatMessage.java
 package com.example.demo.model;
 
+import com.example.demo.model.BrainUser;
 import jakarta.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "ChatMessages")
-public class ChatMessage {
+@Table(name = "Chat")
+public class Chat {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer message_id;
+    private Integer id;
 
-    @Column(name = "sender_id", nullable = false)
-    private Integer sender_id;
+    @ManyToOne
+    @JoinColumn(name = "sender", nullable = false, referencedColumnName = "id")
+    private BrainUser sender;
 
-    @Column(name = "receiver_id", nullable = false)
-    private Integer receiver_id;
+    @ManyToOne
+    @JoinColumn(name = "receiver", nullable = false, referencedColumnName = "id")
+    private BrainUser receiver;
 
     @Column(name = "content", nullable = false)
     private String content;
@@ -26,15 +29,15 @@ public class ChatMessage {
     // getters and setters
 
     public Integer getMessage_id() {
-        return message_id;
+        return id;
     }
 
-    public Integer getSender_id() {
-        return sender_id;
+    public BrainUser getSender() {
+        return sender;
     }
 
-    public Integer getReceiver_id() {
-        return receiver_id;
+    public BrainUser getReceiver() {
+        return receiver;
     }
 
     public String getContent() {
@@ -45,12 +48,12 @@ public class ChatMessage {
         return timestamp;
     }
 
-    public void setSender_id(Integer sender_id) {
-        this.sender_id = sender_id;
+    public void setSender_id(BrainUser sender) {
+        this.sender = sender;
     }
 
-    public void setReceiver_id(Integer receiver_id) {
-        this.receiver_id = receiver_id;
+    public void setReceiver(BrainUser receiver) {
+        this.receiver = receiver;
     }
 
     public void setContent(String content) {

@@ -1,14 +1,11 @@
 // Post.java
 package com.example.demo.model;
 
-import javax.persistence.*;
-import org.hibernate.annotations.Type;
-import org.hibernate.annotations.TypeDef;
-import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
+import jakarta.persistence.*;
+
 
 @Entity
 @Table(name = "posts")
-@TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)
 public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,8 +17,7 @@ public class Post {
     @Column(name = "title", nullable = false)
     private String title;
 
-    @Type(type = "jsonb")
-    @Column(columnDefinition = "jsonb", name = "content", nullable = false)
+    @Column(name = "content", columnDefinition = "jsonb", nullable = false)
     private String content;
 
     @Column(name = "image", nullable = false)
@@ -74,10 +70,6 @@ public class Post {
 
     public Integer getSuspenderId() {
         return suspenderId;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public void setUserId(Integer userId) {

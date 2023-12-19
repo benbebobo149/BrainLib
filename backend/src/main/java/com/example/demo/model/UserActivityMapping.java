@@ -1,5 +1,8 @@
-// UserActivityMapping.java
+// BrainUserActivityMapping.java
 package com.example.demo.model;
+
+import com.example.demo.model.BrainUser;
+import com.example.demo.model.Activity;
 
 import jakarta.persistence.*;
 
@@ -10,11 +13,13 @@ public class UserActivityMapping {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "user_id", nullable = false)
-    private Integer user_id;
+    @ManyToOne
+    @JoinColumn(name = "brainUser", nullable = false)
+    private BrainUser brainUser;
 
-    @Column(name = "activity_id", nullable = false)
-    private Integer activity_id;
+    @ManyToOne
+    @JoinColumn(name = "activity", nullable = false)
+    private Activity activity;
 
     // getters and setters
 
@@ -22,19 +27,19 @@ public class UserActivityMapping {
         return id;
     }
 
-    public Integer getUser_id() {
-        return user_id;
+    public BrainUser getBrainUser() {
+        return brainUser;
     }
 
-    public Integer getActivity_id() {
-        return activity_id;
+    public Activity getActivity() {
+        return activity;
     }
 
-    public void setUser_id(Integer user_id) {
-        this.user_id = user_id;
+    public void setBrainUser(BrainUser brainUser) {
+        this.brainUser = brainUser;
     }
 
-    public void setActivity_id(Integer activity_id) {
-        this.activity_id = activity_id;
+    public void setActivity(Activity activity) {
+        this.activity = activity;
     }
 }
