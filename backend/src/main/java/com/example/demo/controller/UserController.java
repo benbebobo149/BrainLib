@@ -2,8 +2,13 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 
+import com.example.demo.model.User;
+
+import com.example.demo.dto.UserListResult;
+
+import com.example.demo.service.UserService;
+
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/user")
@@ -11,44 +16,110 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @GetMapping
-    public List<User> getAllUsers() {
-        return userService.findAll();
+    @GetMapping("/all")
+    public ResponseEntity<?> getAllUsers() {
+        try {
+            List<User> users = userService.findAll();
+    
+            if (users != null) {
+                return ResponseEntity.ok(users);
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 
     @GetMapping("/user/{id}")
-    public ResponseEntity<User> getUserById(@PathVariable Integer id) {
-        Optional<User> user = userService.getUserById(id);
-        if (user.isPresent()) {
-            return ResponseEntity.ok(user.get());
-        } else {
-            return ResponseEntity.notFound().build();
+    public ResponseEntity<?> getUserById(@PathVariable Integer id) {
+        try {
+            User user = userService.getUserById(id);
+    
+            if (user != null) {
+                return ResponseEntity.ok(user);
+            } else {
+                return ResponseEntity.satus(HttpStatus.NOT_FOUND).build();
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<User> updateUser(@PathVariable Integer id, @RequestBody User updatedUser) {
-        Optional<User> user = userService.findById(id);
-        if (user.isPresent()) {
-            User existingUser = user.get();
-            existingUser.setName(updatedUser.getName());
-            existingUser.setEmail(updatedUser.getEmail());
-            existingUser.setPermission(updatedUser.getPermission());
-            existingUser.setProfile(updatedUser.getProfile());
-            existingUser.setImage(updatedUser.getImage());
-            return ResponseEntity.ok(userService.save(existingUser));
-        } else {
-            return ResponseEntity.notFound().build();
+    public ResponseEntity<?> updateUser(@PathVariable Integer id, @RequestBody User userDetails) {
+        try {
+            UserResult result = userService.updateUser(id, userDetails);
+    
+            switch (result.getResultCode()) {
+                case 0: // 成功
+                    return ResponseEntity.ok(result.getUser());
+                case 1: // 沒有權限
+                    return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+                case 2: // 找不到
+                    return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+                default: // 其他錯誤
+                    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+            }
+        } catch (Exception e) {
+            // 處理其他可能的錯誤
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteUser(@PathVariable Integer id) {
-        if (userService.existsById(id)) {
-            userService.deleteById(id);
-            return ResponseEntity.ok().build();
-        } else {
-            return ResponseEntity.notFound().build();
+    public ResponseEntity<?> deleteUser(@PathVariable Integer id) {
+        try {
+            UserResult result = userService.deleteUser();
+    
+            switch (result.getResultCode()) {
+                case 0: // 成功
+                    return ResponseEntity.ok().build();
+                case 1: // 沒有權限
+                    return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+                case 2: // 找不到
+                    return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+                default: // 其他錯誤
+                    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+            }
+        } catch (Exception e) {
+            // 處理其他可能的錯誤
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
+    @GetMapping("/user/all/{permission}")
+    public ResponseEntity<?> getUserByPermission(@PathVariable Integer permission) {
+        try {
+            UserListResult result = userService.getUserByPermission(permission);
+    
+            switch (result.getResultCode()) {
+                case 0: // 成功
+                    return ResponseEntity.ok(result.getUsers());
+                case 1: // 沒有權限
+                    return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+                case 2: // 找不到
+                    return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+                default: // 其他錯誤
+                    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
+    @GetMapping("/user/by-username/{username}")
+    public ResponseEntity<?> getUserByUsername(@PathVariable String username) {
+        try {
+            User user = userService.getUserByUsername(username);
+    
+            if (user != null) {
+                return ResponseEntity.ok(user);
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
 }

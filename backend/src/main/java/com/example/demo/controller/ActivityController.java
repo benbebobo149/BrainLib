@@ -4,7 +4,9 @@ package com.example.demo.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import com.example.demo.model.Activity;
+
 import com.example.demo.service.ActivityService;
 
 import com.example.demo.dto.ActivityResult;
@@ -18,9 +20,9 @@ public class ActivityController {
     private ActivityService activityService;
 
     @GetMapping("/all")
-    public List<Activity> getAllActivities() {
+    public ResponseEntity<?> getAllActivities() {
         try {
-            List<Tag> allActivities = activityService.getAllActivities();
+            List<Activity> allActivities = activityService.getAllActivities();
     
             if (allActivities != null) {
                 return ResponseEntity.ok(allActivities);
@@ -33,7 +35,7 @@ public class ActivityController {
     }
 
     @PostMapping
-    public Activity createActivity(@RequestBody Activity activity) {
+    public ResponseEntity<?> createActivity(@RequestBody Activity activity) {
         try {
             ActivityResult result = activityService.createActivity(activity);
     
@@ -73,7 +75,7 @@ public class ActivityController {
     }
 
     @PutMapping("/{activity_id}")
-    public Activity updateActivity(@PathVariable Integer activity_id, @RequestBody Activity activityDetails) {
+    public ResponseEntity<?> updateActivity(@PathVariable Integer activity_id, @RequestBody Activity activityDetails) {
         try {
             ActivityResult result = activityService.updateActivity(activity_id, activityDetails);
     
@@ -94,9 +96,9 @@ public class ActivityController {
     }
 
     @GetMapping("/{activity_id}")
-    public Activity getActivityById(@PathVariable Integer activity_id) {
+    public ResponseEntity<?> getActivityById(@PathVariable Integer activity_id) {
         try {
-            List<Tag> allActivities = activityService.getActivityById(activity_id);
+            List<Activity> allActivities = activityService.getActivityById(activity_id);
     
             if (allActivities != null) {
                 return ResponseEntity.ok(allActivities);
