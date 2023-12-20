@@ -78,15 +78,16 @@ import { ref } from 'vue';
 //匯入TopicName.json
 // import TopicName from '@/assets/TopicName.json';
 
-    const ListNavVisible = ref(false);
+const ListNavVisible = ref(false);
 
-    const openModal = () => {
-      ListNavVisible.value = true;
-    };
+const openModal = () => {
+  ListNavVisible.value = true;
+};
 
-    const closeModal = () => {
-      ListNavVisible.value = false;
-    };
+const closeModal = () => {
+  ListNavVisible.value = false;
+};
+
 
 </script>
 

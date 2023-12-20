@@ -76,11 +76,13 @@
         </div>
     </div>
 </template>
+
 <script setup>
 import { ref } from 'vue';
 
 const ChangeNmae = ref('');
 const ChangeIntroduction = ref('');
+
 const handleFileChange = (event) => {
     const file = event.target.files[0];
     const acceptedExtensions = ['image/jpeg', 'image/png'];
@@ -94,7 +96,8 @@ const handleFileChange = (event) => {
     }
 
 };
-
+const Photo = ref('');
+Photo.value = 'UserPhoto.png';
 const DeleteAccount = () => {
     console.log("DeleteAccount in PhotoSticker.vue");
     alert("確認是否刪除帳號");

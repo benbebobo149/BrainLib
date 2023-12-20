@@ -17,8 +17,8 @@
 </template>
 
 <script setup>
-// import { ref } from 'vue';
 import Google from '@/components/Google.vue';
+//import { useCookies } from 'vue-universal-cookies';
 
 const emit = defineEmits(['close_modal'], ['open_modal'], ['GoogleClick']);
 

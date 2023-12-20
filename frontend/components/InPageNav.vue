@@ -9,8 +9,8 @@
                 <label for="name" class="w-auto h-full flex items-center">
                     <img src="@/Search.png" alt="Search" class="w-auto h-full cursor-pointer p-2.5">
                 </label>
-                <input type="text" id="name" placeholder="    Search" v-model="SearchContent"
-                    class="w-5/6 h-3/4 rounded-full bg-secondary2">
+                <input type="text" id="name" placeholder="Search" v-model="SearchContent"
+                    class="w-5/6 h-3/4 rounded-full bg-secondary2 pl-[2vw] box-border">
             </div>
         </div>
 
@@ -18,10 +18,7 @@
             <button @click="openModal()" class="w-[15%] h-auto">
                 <img src="@/Signin.png" alt="Signin" class="w-auto h-[80%]">
             </button>
-
-
         </div>
-
 
         <div v-else class="flex w-1/2 h-full justify-end">
             <NuxtLink to="./" class="flex w-auto h-full items-center mr-[3vw]">
@@ -32,7 +29,6 @@
             </NuxtLink>
             <PhotoSticker class="flex w-auto h-full items-center mr-[3vw]"/>
         </div>
-
     </div>
     <Signin v-if="EnterVisible" @close_modal="closeModal()" @GoogleClick="GoogleClick" class="z-20" />
    
@@ -44,10 +40,10 @@ import ListNav from "./ListNav.vue";
 import Signin from "./Signin.vue";
 import PhotoSticker from "./PhotoSticker.vue";
 
-
 const EnterVisible = ref(false);
 
 const NotSignin = ref(true);
+
 const openModal = () => {
     EnterVisible.value = true;
     console.log("open model in InPageNav.vue");
