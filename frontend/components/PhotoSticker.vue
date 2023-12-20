@@ -2,10 +2,10 @@
     <button @click="openModal" class="w-auto h-full">
         <img src="@/PhotoSticker.png" class="w-auto h-[80%]" alt="PhotoSticker">
     </button>
-    <div v-if="PhotoListVisible" class="fixed w-[15%] h-[25%] bg-purple-50 flex  mt-[7vh]">
+    <div v-if="PhotoListVisible" class="PhotoList fixed w-[15%] h-[25%] bg-purple-50 flex  mt-[7vh]">
         <button @click="closeModal" class="h-[3%] absolute left-0 text-md font-bold cursor-pointer">&times;</button>
         <div class="w-full h-auto bg-purple-50 items-center justify-center ml-2">
-            <div class="flex h-[25%] w-auto p-1">
+            <div class="hover:bg-fuchsia-100 ease-in-out flex h-[25%] w-auto p-1">
                 <NuxtLink to="http://localhost:3000/personal" class="w-[20%] h-auto flex justify-center">
                     <img src="/PhotoSticker/PersonalProfile.png" alt="" class="w-full h-auto">
                 </NuxtLink>
@@ -64,3 +64,8 @@ const LogOut = () => {
 
 const Admin = ref(false);
 </script>
+<style scoped>
+    .PhotoList{
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    }
+</style>
