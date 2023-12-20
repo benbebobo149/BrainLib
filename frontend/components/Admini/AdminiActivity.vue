@@ -64,8 +64,8 @@ const activities = ref(fakeData);
             <div class="h-[5vh] my-[6vh]">
                 {{ activity.location }}
             </div>
-            <div v-for="buttonText in activity.buttonTexts" :key="buttonText.id">
-                <div
+            <div>
+                <div v-for="buttonText in activity.buttonTexts" :key="buttonText.id"
                     class="w-[8vw] h-[2vw] ml-[1vw] bg-purple-200 rounded absolute text-center text-neutral-900 text-[1.25vw] font-normal font-'Roboto'">
                     {{ buttonText }}
                 </div>

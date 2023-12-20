@@ -35,7 +35,6 @@ const goToPage = () => {
 				<div class="ml-[10vw] flex">
 					<div class=" bg-bgcolor w-full h-[30vh] content-center">
 						<AdminiActivity></AdminiActivity>
-
 					</div>
 
 				</div>

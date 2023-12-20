@@ -3,7 +3,7 @@ import PostPreview from '@/components/PostPreview';
 import InPageNav from '~/components/InPageNav.vue';
 import MainPageActivityTags from '@/components/Main/MainPageActivityTags.vue';
 import MainTrendingTopic from '~/components/Main/MainTrendingTopic.vue';
-import SuccBox from '@/components/ModelBox/SuccBox.vue';
+import BoxSucc from '@/components/ModelBox/BoxSucc.vue';
 // import MainPageActivityTags from '@/components/MainPage/MainPageActivityTags.vue';
 const popupState = ref(true);
 </script>
@@ -26,7 +26,7 @@ const popupState = ref(true);
           <div class=" bg-bgcolor content-center -z-10" v-for="index in 10" :key="index">
             <PostPreview />
           </div>
-          <SuccBox v-if="popupState" @close="()=> popupState=false"></SuccBox>
+          <BoxSucc v-if="popupState" @close="()=> popupState=false"></BoxSucc>
         </div>
 
         <!-- 右半邊 -->

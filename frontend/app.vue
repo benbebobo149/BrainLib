@@ -1,4 +1,4 @@
-<script setup>
+<script setup >
   import InPageNav from "@/components/InPageNav.vue";
 </script>
 
