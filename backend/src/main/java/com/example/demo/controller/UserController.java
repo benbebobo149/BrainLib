@@ -49,9 +49,9 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateUser(@PathVariable Integer id, @RequestBody User userDetails) {
+    public ResponseEntity<?> updateUser(@PathVariable Integer id, @RequestBody User userDetails, HttpServletRequest request) {
         try {
-            UserResult result = userService.updateUser(id, userDetails);
+            UserResult result = userService.updateUser(id, userDetails, request);
     
             switch (result.getResultCode()) {
                 case 0: // 成功
