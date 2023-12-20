@@ -1,11 +1,11 @@
-// import org.apache.http.HttpEntity;
-// import org.apache.http.HttpResponse;
-// import org.apache.http.client.HttpClient;
-// import org.apache.http.client.methods.HttpPost;
-// import org.apache.http.entity.ContentType;
-// import org.apache.http.entity.mime.MultipartEntityBuilder;
-// import org.apache.http.impl.client.HttpClients;
-// import org.apache.http.util.EntityUtils;
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.ContentType;
+import org.apache.http.entity.mime.MultipartEntityBuilder;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.util.EntityUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,9 +18,9 @@ public class FileUploadController {
 
     @PostMapping("/uploadFile")
     public String uploadFile(@RequestParam("file") MultipartFile file) throws IOException {
-        // HttpClient httpclient = HttpClients.createDefault();
-        // HttpPost httppost = new HttpPost("https://api.imgur.com/3/image");
-        // httppost.setHeader("Authorization", "Client-ID {your-client-id}");
+        HttpClient httpclient = HttpClients.createDefault();
+        HttpPost httppost = new HttpPost("https://api.imgur.com/3/image");
+        httppost.setHeader("Authorization", "Client-ID {your-client-id}");
 
         // HttpEntity reqEntity = MultipartEntityBuilder.create()
         //         .addBinaryBody("image", file.getInputStream(), ContentType.create(file.getContentType()), file.getOriginalFilename())
