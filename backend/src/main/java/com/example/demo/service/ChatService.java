@@ -1,33 +1,33 @@
-// ChatMessageService.java
+// ChatService.java
 package com.example.demo.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.example.demo.model.ChatMessage;
-import com.example.demo.repository.ChatMessageRepository;
+import com.example.demo.model.Chat;
+import com.example.demo.repository.ChatRepository;
 import com.example.demo.model.ResourceNotFoundException;
 
 import java.util.List;
 
 @Service
-public class ChatMessageService {
+public class ChatService {
     @Autowired
-    private ChatMessageRepository chatMessageRepository;
+    private ChatRepository chatRepository;
 
-    public List<ChatMessage> getAllChatMessages() {
-        return chatMessageRepository.findAll();
+    public List<Chat> getAllChats() {
+        return chatRepository.findAll();
     }
 
-    public ChatMessage createChatMessage(ChatMessage chatMessage) {
-        return chatMessageRepository.save(chatMessage);
+    public Chat createChat(Chat chat) {
+        return chatRepository.save(chat);
     }
 
-    public List<ChatMessage> getChatMessagesByUserId(Integer user_id) {
+    public List<Chat> getChatsByUserId(Integer user_id) {
         // Implement the logic to retrieve chat messages by user_id
         return null;
     }
 
-    private ChatMessage getChatMessage(Integer id) {
-        return chatMessageRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("ChatMessage", "id", id));
+    private Chat getChat(Integer id) {
+        return chatRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Chat", "id", id));
     }
 }

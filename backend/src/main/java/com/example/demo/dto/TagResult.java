@@ -1,6 +1,6 @@
 package com.example.demo.dto;
 
-import com.example.demo.entity.Tag;
+import com.example.demo.model.Tag;
 
 public class TagResult {
     private Tag tag;

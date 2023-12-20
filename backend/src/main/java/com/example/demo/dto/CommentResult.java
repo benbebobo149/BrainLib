@@ -1,6 +1,6 @@
 package com.example.demo.dto;
 
-import com.example.demo.entity.Comment;
+import com.example.demo.model.Comment;
 
 public class CommentResult {
     private Comment comment;

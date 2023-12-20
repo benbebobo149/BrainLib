@@ -14,11 +14,11 @@ public class Tag {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "tag_name", nullable = false)
-    private String tag_name;
+    @Column(name = "tagName", nullable = false)
+    private String tagName;
 
-    @Column(name = "tag_abbr", nullable = false)
-    private String tag_abbr;
+    @Column(name = "tagAbbr", nullable = false)
+    private String tagAbbr;
 
     @OneToOne(mappedBy = "tag", cascade = CascadeType.ALL)
     private TrendTag trendTag;
@@ -32,23 +32,23 @@ public class Tag {
         return id;
     }
 
-    public String getTag_name() {
-        return tag_name;
+    public String getTagName() {
+        return tagName;
     }
 
-    public String getTag_abbr() {
-        return tag_abbr;
+    public String getTagAbbr() {
+        return tagAbbr;
     }
 
     public Set<PostTag> getPosts() {
         return posts;
     }
 
-    public void setTag_name(String tag_name) {
-        this.tag_name = tag_name;
+    public void setTagName(String tagName) {
+        this.tagName = tagName;
     }
 
-    public void setTag_abbr(String tag_abbr) {
-        this.tag_abbr = tag_abbr;
+    public void setTagAbbr(String tagAbbr) {
+        this.tagAbbr = tagAbbr;
     }
 }

@@ -1,6 +1,8 @@
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpStatus;
+import javax.servlet.http.HttpServletRequest;
 
 import com.example.demo.model.User;
 
@@ -39,7 +41,7 @@ public class UserController {
             if (user != null) {
                 return ResponseEntity.ok(user);
             } else {
-                return ResponseEntity.satus(HttpStatus.NOT_FOUND).build();
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
             }
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();

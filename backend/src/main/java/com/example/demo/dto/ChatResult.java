@@ -1,6 +1,6 @@
 package com.example.demo.dto;
 
-import com.example.demo.entity.Chat;
+import com.example.demo.model.Chat;
 
 public class ChatResult {
     private Chat chat;

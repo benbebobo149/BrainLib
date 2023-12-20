@@ -1,6 +1,6 @@
 package com.example.demo.dto;
 
-import com.example.demo.entity.Comment;
+import com.example.demo.model.Comment;
 
 import java.util.List;
 

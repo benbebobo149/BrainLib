@@ -1,6 +1,6 @@
 package com.example.demo.dto;
 
-import com.example.demo.entity.Activity;
+import com.example.demo.model.Activity;
 
 public class ActivityResult {
     private Activity activity;

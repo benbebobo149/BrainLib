@@ -1,6 +1,6 @@
 package com.example.demo.dto;
 
-import com.example.demo.entity.Post;
+import com.example.demo.model.Post;
 
 import java.util.List;
 
