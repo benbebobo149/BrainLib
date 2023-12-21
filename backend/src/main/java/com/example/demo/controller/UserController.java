@@ -23,7 +23,7 @@ public class UserController {
         try {
             List<User> users = userService.findAll();
     
-            if (users != null) {
+            if (users.size() > 0) {
                 return ResponseEntity.ok(users);
             } else {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
@@ -70,9 +70,9 @@ public class UserController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteUser(@PathVariable Integer id) {
+    public ResponseEntity<?> deleteUser(@PathVariable Integer id, HttpServletRequest request) {
         try {
-            UserResult result = userService.deleteUser();
+            UserResult result = userService.deleteById(id, request);
     
             switch (result.getResultCode()) {
                 case 0: // 成功
@@ -93,17 +93,12 @@ public class UserController {
     @GetMapping("/user/all/{permission}")
     public ResponseEntity<?> getUserByPermission(@PathVariable Integer permission) {
         try {
-            UserListResult result = userService.getUserByPermission(permission);
+            List<User> users = userService.getByPermission(permission);
     
-            switch (result.getResultCode()) {
-                case 0: // 成功
-                    return ResponseEntity.ok(result.getUsers());
-                case 1: // 沒有權限
-                    return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-                case 2: // 找不到
-                    return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-                default: // 其他錯誤
-                    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+            if (users.size() > 0) {
+                return ResponseEntity.ok(users);
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
             }
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
@@ -113,7 +108,7 @@ public class UserController {
     @GetMapping("/user/by-username/{username}")
     public ResponseEntity<?> getUserByUsername(@PathVariable String username) {
         try {
-            User user = userService.getUserByUsername(username);
+            User user = userService.getByName(username);
     
             if (user != null) {
                 return ResponseEntity.ok(user);
