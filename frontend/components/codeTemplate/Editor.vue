@@ -47,10 +47,15 @@ const editor = new EditorJS({
 </script>
 
 <style>
+
 .ce-header {
     font-size: 2.5rem;
     font-weight: bold;
 }
+.ce-header h1{
+
+}
+
 </style>
 <template>
     <div class="flex flex-col justify-center">

@@ -1,4 +1,6 @@
 /** @type {import('tailwindcss').Config} */
+import '@/public/fonts.css'
+
 export default {
   content: [
     `./components/**/*.{vue,js,ts}`,
@@ -22,10 +24,10 @@ export default {
         'terotory': '#A39292',
         'bgcolor': '#FFFBFF',
         'error': '#FFF0F0',
-        // other new colors...
       },
       fontFamily: {
-        'sans': ['Roboto'],
+        roboto: ['Roboto', 'sans-serif'],
+
       },
     },
   },

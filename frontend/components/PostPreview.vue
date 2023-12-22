@@ -1,5 +1,37 @@
+
+<script setup>
+import PostFakeDatas from '@/public/PostFakeData/PostFakeData.json'
+
+const Posts = ref(PostFakeDatas);
+
+
+// define emit
+const emit = defineEmits(['close'])
+
+
+// define props
+// const props = defineProps({
+// 	post: {
+// 		type: Object,
+// 		default: () => ({
+// 			title: 'Not Found', author: 'Author Not Found',
+// 			content: 'Content Not Found', topic: 'Topic ', likes: 0, comments: 0
+// 		})
+// 	}
+// });
+// change props to ref 
+// const { post } = toRefs(props);
+
+// define methods
+const clickButton = () => {
+	console.log('click button')
+	emit('close')
+}
+
+</script>
+
 <template>
-	<div class="flex mx-1 z-0">
+	<div v-for="post in Posts" :key="post.post_id" class="flex mx-1 z-0">
 		<!-- 預覽文章1 -->
 		<div class="w-full h-[24vh]  box-border my-[0.7rem] relative flex items-start ">
 			<div class="w-[8vw] bg-bgcolor"></div>
@@ -21,9 +53,9 @@
 						class="w-[8vw] h-[2vw] left-[20vw] ml-8 bg-purple-200 rounded absolute text-center text-neutral-900 text-[1.25vw] font-normal font-'Roboto'">
 						{{ post.topic }}</h1>
 
-					<img class=" w-[4vh] h-[4vh] ml-[2vw] " src="@/PostPreview/Thumb.png" />
-					<h2 class="w-[6vw] h-[2vw] text-black text-[1.25vw] font-normal font-Roboto leading-loose">
-						{{ post.likes }}
+					<img class=" w-[4vh] h-[4vh] ml-[3vw] " src="@/PostPreview/Thumb.png" />
+					<h2 class="w-[6vw] h-[2vw] ml-[1vw] text-black text-[1.25vw] font-normal font-Roboto leading-loose">
+						{{ post.thumb_up }}
 					</h2>
 
 					<img class=" w-[4vh] h-[4vh]  mx-[1vw]" src="@/PostPreview/ChatRightDots.png" />
@@ -43,26 +75,3 @@
 
 	</div>
 </template>
-
-<script setup>
-// define emit
-const emit = defineEmits(['close'])
-
-// define props
-const props = defineProps({
-	post: {
-		type: Object,
-		default: () => ({ title: 'Not Found', author: 'Author Not Found', 
-						content: 'Content Not Found', topic: 'Topic ',likes: 0,comments: 0 })
-	}
-});
-// change props to ref 
-const { post } = toRefs(props);
-
-// define methods
-const clickButton = () => {
-	console.log('click button')
-	emit('close')
-}
-
-</script>
