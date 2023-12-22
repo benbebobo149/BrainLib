@@ -115,6 +115,10 @@ public class Post {
         this.image = image;
     }
 
+    public void setTags(Set<PostTag> tags) {
+        this.tags = tags;
+    }
+
     public void setThumbUp(Integer thumbUp) {
         this.thumbUp = thumbUp;
     }

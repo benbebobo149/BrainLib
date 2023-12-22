@@ -25,7 +25,7 @@ public class ActivityController {
         try {
             List<Activity> allActivities = activityService.getAllActivities();
     
-            if (allActivities != null) {
+            if (allActivities.size() > 0) {
                 return ResponseEntity.ok(allActivities);
             } else {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
@@ -99,10 +99,10 @@ public class ActivityController {
     @GetMapping("/{activity_id}")
     public ResponseEntity<?> getActivityById(@PathVariable Integer activity_id) {
         try {
-            List<Activity> allActivities = activityService.getActivityById(activity_id);
+            Activity activity = activityService.getActivityById(activity_id);
     
-            if (allActivities != null) {
-                return ResponseEntity.ok(allActivities);
+            if (activity != null) {
+                return ResponseEntity.ok(activity);
             } else {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
             }

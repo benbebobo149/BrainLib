@@ -42,11 +42,11 @@ public class PostController {
     }
 
     @GetMapping("/search")
-    public ResponseEntity<?> searchPost(@RequestParam String keywords) {
+    public ResponseEntity<?> searchPosts(@RequestParam String keyword) {
         try {
-            List<Post> allPosts = postService.searchPost(keywords);
+            List<Post> allPosts = postService.searchPosts(keyword);
     
-            if (allPosts != null) {
+            if (allPosts.size() > 0) {
                 return ResponseEntity.ok(allPosts);
             } else {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
@@ -227,9 +227,9 @@ public class PostController {
     @GetMapping("/all/{tag_id}")
     public ResponseEntity<?> searchTagsPost(@PathVariable Integer tag_id) {
         try {
-            PostListResult tagPosts = postService.searchTagsPost(id);
+            List<Post> tagPosts = postService.searchTagsPost(id);
     
-            if (tagPosts != null) {
+            if (tagPosts.size() > 0) {
                 return ResponseEntity.ok(tagPosts);
             } else {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
@@ -242,10 +242,10 @@ public class PostController {
     @PostMapping("/all")
     public ResponseEntity<?> getAllPosts() {
         try {
-            PostListResult Posts = postService.getAllPosts();
+            List<Post> posts = postService.getAllPosts();
     
-            if (Posts != null) {
-                return ResponseEntity.ok(Posts);
+            if (posts.size() > 0) {
+                return ResponseEntity.ok(posts);
             } else {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
             }
@@ -255,12 +255,15 @@ public class PostController {
     }
 
     @DeleteMapping("/my/all")
-    public ResponseEntity<Post> getMyAllPosts() {
+    public ResponseEntity<Post> getPostsByUser(HttpServletRequest request) {
         try {
-            PostListResult Posts = postService.getMyAllPosts();
+            String token = request.getHeader("Authorization").substring(7);
+            String userId = extractUserId(token);
+
+            List<Post> posts = postService.getPostsByUser(userId);
     
-            if (Posts != null) {
-                return ResponseEntity.ok(Posts);
+            if (posts.size() > 0) {
+                return ResponseEntity.ok(posts);
             } else {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
             }
@@ -269,7 +272,7 @@ public class PostController {
         }
     }
 
-    @PostMapping("/posts/{post_od/approve}")
+    @PostMapping("/posts/{post_id}/approve}")
     public ResponseEntity<?> approvePost(@PathVariable Integer post_id, @RequestBody boolean approve) {
         try {
             PostResult result = postService.approvePost(post_id, approve);

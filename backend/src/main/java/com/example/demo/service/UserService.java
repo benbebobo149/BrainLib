@@ -27,6 +27,10 @@ public class UserService {
         return userRepository.findById(id).orElse(null);
     }
 
+    public User getByEmail(String email) {
+        return userRepository.findByEmail(email).orElse(null);
+    }
+
     public User getByName(String name) {
         return userRepository.findByName(name).orElse(null);
     }
@@ -36,16 +40,15 @@ public class UserService {
     }
 
     public UserResult deleteById(Integer id, HttpServletRequest request) {
-        String token = request.getHeader("Authorization").substring(7);
-        String userId = jwtService.extractUserId(token);
-        User user = userRepository.findById(userId);
-        UserResult result = new UserResult();
 
-        if (!jwtService.validateToken(token, user)) {
+        JwtResult jwtResult = jwtService.parseRequest(request);
+        UserResult result = new UserResult();
+        
+        if (!(jwtResult != null) && (!jwtResult.getPassed())) {
             result.setResultCode(1);
             return result;
         }
-
+        
         User user = userRepository.findById(id).orElse(null);
 
         if (user != null) {
@@ -67,12 +70,12 @@ public class UserService {
     }
 
     public UserResult updateUser(Integer id, User userDetails, HttpServletRequest request) {
-        String token = request.getHeader("Authorization").substring(7);
-        String userId = jwtService.extractUserId(token);
-        User user = userRepository.findById(userId);
+
+        JwtResult jwtResult = jwtService.parseRequest(request);
+
         UserResult result = new UserResult();
 
-        if (!jwtService.validateToken(token, user)) {
+        if (!(jwtResult != null) && (!jwtResult.getPassed())) {
             result.setResultCode(1);
             return result;
         }

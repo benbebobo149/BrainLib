@@ -8,9 +8,9 @@ import javax.servlet.http.HttpServletRequest;
 import com.example.demo.model.Tag;
 
 import com.example.demo.service.JwtService;
-import com.example.demo.service.UserService;
 
 import com.example.demo.dto.TagResult;
+import com.example.demo.dto.JwtResult;
 
 import com.example.demo.repository.TagRepository;
 
@@ -24,23 +24,22 @@ public class TagService {
     @Autowired
     private JwtService jwtService;
 
-    @Autowired
-    private UserService userService;
-
     public List<Tag> getAllTags() {
         return tagRepository.findAll();
     }
 
     public TagResult createTag(Tag tag, HttpServletRequest request) {
-        String token = request.getHeader("Authorization").substring(7);
-        String userId = jwtService.extractUserId(token);
-        User user = userService.findById(userId);
+
+        JwtResult jwtResult = jwtService.parseRequest(request);
+        
         TagResult result = new TagResult();
 
-        if (!jwtService.validateToken(token, user)) {
+        if (!(jwtResult != null) && (!jwtResult.getPassed())) {
             result.setResultCode(1);
             return result;
         }
+
+        User user = jwtResult.getUser();
 
         if (user.getPermission() == 0) {
             result.setResultCode(1);
@@ -53,15 +52,15 @@ public class TagService {
     }
 
     public int deleteTag(Integer id, HttpServletRequest request) {
-        String token = request.getHeader("Authorization").substring(7);
-        String userId = jwtService.extractUserId(token);
-        User user = userService.findById(userId);
 
-        if (!jwtService.validateToken(token, user)) {
+        JwtResult jwtResult = jwtService.parseRequest(request);
+        
+        if (!(jwtResult != null) && (!jwtResult.getPassed())) {
             return 1;
         }
-
-        Tag tag = getTag(id);
+        
+        User user = jwtResult.getUser();
+        Tag tag = tagRepository.findById(id);
 
         if (user.getPermission() == 0) {
             return 1;
@@ -74,17 +73,18 @@ public class TagService {
     }
 
     public TagResult updateTag(Integer id, Tag tagDetails, HttpServletRequest request) {
-        String token = request.getHeader("Authorization").substring(7);
-        String userId = jwtService.extractUserId(token);
-        User user = userService.findById(userId);
+
+        JwtResult jwtResult = jwtService.parseRequest(request);
+
         TagResult result = new TagResult();
-        
-        if (!jwtService.validateToken(token, user)) {
+
+        if (!(jwtResult != null) && (!jwtResult.getPassed())) {
             result.setResultCode(1);
             return result;
         }
-        
-        Tag tag = getTag(id);
+
+        User user = jwtResult.getUser();
+        Tag tag = tagRepository.findById(id);
 
         if (user.getPermission() == 0) {
             result.setResultCode(1);

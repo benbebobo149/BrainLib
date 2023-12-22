@@ -16,7 +16,7 @@ public class CommentResult {
         return resultCode;
     }
 
-    public void setComments(Comment comment) {
+    public void setComment(Comment comment) {
         this.comment = comment;
     }
 
