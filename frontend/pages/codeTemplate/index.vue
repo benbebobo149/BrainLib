@@ -37,17 +37,41 @@ const readData = async () =>
 }
 
 // send data to database
-const sendData = async () => {
-    const res = await fetch('http://localhost:3000/api/user', {
-        method: 'POST',
+// const sendData = async () => {
+//     const res = await fetch('http://localhost:3000/api/user', {
+//         method: 'POST',
+//         headers: {
+//             'Content-Type': 'application/json'
+//         },
+//         body: JSON.stringify(user.value)
+//     })
+//     const data = await res.json()
+//     console.log(data)
+// }
+
+import axios from 'axios'
+const config = useRuntimeConfig()
+
+const getArea = async () => {
+    axios.get(`${config.public.apiURL}/areas/?skip=0&limit=100`, {
         headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(user.value)
+            'Content-Type': 'application/json', 
+        }
     })
-    const data = await res.json()
-    console.log(data)
-}
+    .then((res) => {
+        // if code is 200, then hide the modal
+        if(res.status == 200){
+            console.log(res.data);
+            areaList.value = res.data;
+        }
+    })
+    .catch((err) => {
+        // if code is 401, then show error message 
+        console.log(err);
+        if(err.response.status == 401){
+        }
+    })
+};
 
 getData()
 </script>
