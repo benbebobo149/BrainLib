@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
+import javax.servlet.http.HttpServletRequest;
 
 import com.example.demo.model.Activity;
 
@@ -36,9 +37,9 @@ public class ActivityController {
     }
 
     @PostMapping
-    public ResponseEntity<?> createActivity(@RequestBody Activity activity) {
+    public ResponseEntity<?> createActivity(@RequestBody Activity activity, HttpServletRequest request) {
         try {
-            ActivityResult result = activityService.createActivity(activity);
+            ActivityResult result = activityService.createActivity(activity, request);
     
             switch (result.getResultCode()) {
                 case 0: // 成功
@@ -55,9 +56,9 @@ public class ActivityController {
     }
 
     @DeleteMapping("/{activity_id}")
-    public ResponseEntity<?> deleteActivity(@PathVariable Integer activity_id) {
+    public ResponseEntity<?> deleteActivity(@PathVariable Integer activity_id, HttpServletRequest request) {
         try {
-            int result = activityService.deleteActivity(activity_id);
+            int result = activityService.deleteActivity(activity_id, request);
     
             switch (result) {
                 case 0: // 成功
@@ -76,9 +77,9 @@ public class ActivityController {
     }
 
     @PutMapping("/{activity_id}")
-    public ResponseEntity<?> updateActivity(@PathVariable Integer activity_id, @RequestBody Activity activityDetails) {
+    public ResponseEntity<?> updateActivity(@PathVariable Integer activity_id, @RequestBody Activity activityDetails, HttpServletRequest request) {
         try {
-            ActivityResult result = activityService.updateActivity(activity_id, activityDetails);
+            ActivityResult result = activityService.updateActivity(activity_id, activityDetails, request);
     
             switch (result.getResultCode()) {
                 case 0: // 成功

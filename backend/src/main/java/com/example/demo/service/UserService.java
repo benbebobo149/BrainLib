@@ -13,7 +13,6 @@ import com.example.demo.dto.UserListResult;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class UserService {

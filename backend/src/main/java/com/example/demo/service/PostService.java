@@ -54,8 +54,21 @@ public class PostService {
     @Autowired
     private UserService userService;
 
-    public Post createPost(Post post) {
-        return postRepository.save(post);
+    public Post createPost(Post post, HttpServletRequest request) {
+        JwtResult jwtResult = jwtService.parseRequest(request);
+
+        PostResult result = new PostResult();
+
+        if (!(jwtResult != null) && (!jwtResult.getPassed())) {
+            result.setResultCode(1);
+            return result;
+        }
+
+        post = postRepository.save(post);
+        result.setPost(post);
+        result.setResultCode(0);
+
+        return result;
     }
 
     public List<Post> searchPosts(String keyword) {
@@ -311,7 +324,7 @@ public class PostService {
         return result;
     }
 
-    public CommentResult deleteComment(Integer id) {
+    public CommentResult deleteComment(Integer id, HttpServletRequest request) {
         JwtResult jwtResult = jwtService.parseRequest(request);
 
         CommentResult result = new CommentResult();

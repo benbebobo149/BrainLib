@@ -3,6 +3,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
+import javax.servlet.http.HttpServletRequest;
 
 import com.example.demo.model.Post;
 import com.example.demo.model.Comment;
@@ -11,7 +12,6 @@ import com.example.demo.model.Tag;
 import com.example.demo.service.PostService;
 
 import com.example.demo.dto.PostResult;
-import com.example.demo.dto.PostListResult;
 import com.example.demo.dto.CommentListResult;
 
 import java.util.List;
@@ -23,9 +23,9 @@ public class PostController {
     private PostService postService;
 
     @PostMapping
-    public ResponseEntity<?> createPost(@RequestBody Post post) {
+    public ResponseEntity<?> createPost(@RequestBody Post post, HttpServletRequest request) {
         try {
-            PostListResult result = postService.createPost(post);
+            PostResult result = postService.createPost(post, request);
     
             switch (result.getResultCode()) {
                 case 0: // 成功
@@ -57,9 +57,9 @@ public class PostController {
     }
 
     @PutMapping("/{post_id}")
-    public ResponseEntity<?> updatePost(@PathVariable Integer post_id, @RequestBody Post post) {
+    public ResponseEntity<?> updatePost(@PathVariable Integer post_id, @RequestBody Post post, HttpServletRequest request) {
         try {
-            PostResult result = postService.updatePost(post_id, post);
+            PostResult result = postService.updatePost(post_id, post, request);
     
             switch (result.getResultCode()) {
                 case 0: // 成功
@@ -78,9 +78,9 @@ public class PostController {
     }
 
     @DeleteMapping("/{post_id}")
-    public ResponseEntity<?> deletePost(@PathVariable Integer post_id) {
+    public ResponseEntity<?> deletePost(@PathVariable Integer post_id, HttpServletRequest request) {
         try {
-            PostResult result = postService.deletePost(post_id);
+            PostResult result = postService.deletePost(post_id, request);
     
             switch (result.getResultCode()) {
                 case 0: // 成功
@@ -99,9 +99,9 @@ public class PostController {
     }
 
     @PutMapping("/{post_id}/like")
-    public ResponseEntity<?> likePost(@PathVariable Integer post_id) {
+    public ResponseEntity<?> likePost(@PathVariable Integer post_id, HttpServletRequest request) {
         try {
-            PostResult result = postService.likePost(post_id);
+            PostResult result = postService.likePost(post_id, request);
     
             switch (result.getResultCode()) {
                 case 0: // 成功
@@ -120,9 +120,9 @@ public class PostController {
     }
 
     @PutMapping("/{post_id}/report")
-    public ResponseEntity<?> reportPost(@PathVariable Integer id, @RequestBody String reason) {
+    public ResponseEntity<?> reportPost(@PathVariable Integer id, @RequestBody String reason, HttpServletRequest request) {
         try {
-            PostResult result = postService.reportPost(id, reason);
+            PostResult result = postService.reportPost(id, reason, request);
     
             switch (result.getResultCode()) {
                 case 0: // 成功
@@ -141,9 +141,9 @@ public class PostController {
     }
 
     @GetMapping("/{post_id}/comments")
-    public ResponseEntity<?> getComments(@PathVariable Integer post_id) {
+    public ResponseEntity<?> getComments(@PathVariable Integer post_id, httpServletRequest request) {
         try {
-            CommentListResult result = postService.getComments(post_id);
+            CommentListResult result = postService.getComments(post_id, request);
     
             switch (result.getResultCode()) {
                 case 0: // 成功
@@ -162,9 +162,9 @@ public class PostController {
     }
 
     @PostMapping("/{post_id}/comments")
-    public ResponseEntity<?> addComment(@PathVariable Integer post_id, @RequestBody Comment comment) {
+    public ResponseEntity<?> addComment(@PathVariable Integer post_id, @RequestBody Comment comment, HttpServletRequest request) {
         try {
-            CommentResult result = postService.addComment(post_id, comment);
+            CommentResult result = postService.addComment(post_id, comment, request);
     
             switch (result.getResultCode()) {
                 case 0: // 成功
@@ -183,9 +183,9 @@ public class PostController {
     }
 
     @PutMapping("/comments/{comment_id}")
-    public ResponseEntity<?> updateComment(@PathVariable Integer comment_id, @RequestBody Comment newComment) {
+    public ResponseEntity<?> updateComment(@PathVariable Integer comment_id, @RequestBody Comment newComment, HttpServletRequest request) {
         try {
-            CommentResult result = postService.updateComment(id, newComment);
+            CommentResult result = postService.updateComment(id, newComment, request);
     
             switch (result.getResultCode()) {
                 case 0: // 成功
@@ -204,9 +204,9 @@ public class PostController {
     }
 
     @DeleteMapping("/comments/{comment_id}")
-    public ResponseEntity<?> deleteComment(@PathVariable Integer comment_id) {
+    public ResponseEntity<?> deleteComment(@PathVariable Integer comment_id, HttpServletRequest request) {
         try {
-            CommentResult result = postService.deleteComment(comment_id);
+            CommentResult result = postService.deleteComment(comment_id, request);
     
             switch (result.getResultCode()) {
                 case 0: // 成功
@@ -273,9 +273,9 @@ public class PostController {
     }
 
     @PostMapping("/posts/{post_id}/approve}")
-    public ResponseEntity<?> approvePost(@PathVariable Integer post_id, @RequestBody boolean approve) {
+    public ResponseEntity<?> approvePost(@PathVariable Integer post_id, @RequestBody boolean approve, HttpServletRequest request) {
         try {
-            PostResult result = postService.approvePost(post_id, approve);
+            PostResult result = postService.approvePost(post_id, approve, request);
     
             switch (result.getResultCode()) {
                 case 0: // 成功

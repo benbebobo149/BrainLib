@@ -5,15 +5,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
+import javax.servlet.http.HttpServletRequest;
 
 import com.example.demo.model.Chat;
+import com.example.demo.model.User;
 
 import com.example.demo.service.ChatService;
 import com.example.demo.service.UserService;
 
 import com.example.demo.dto.ChatResult;
+import com.example.demo.dto.ChatSendResult;
 
-import java.util.Set;
+import java.util.List;
 
 @RestController
 @RequestMapping("/chat")
@@ -26,11 +29,18 @@ public class ChatController {
 
 
     @GetMapping("/user-list")
-    public ResponseEntity<?> getConversation() {
+    public ResponseEntity<?> getConversation(HttpServletRequest request) {
         try {
-            Set<Chat> conversation = userService.getConversation();
+            String token = request.getHeader("Authorization").substring(7);
+            String userId = extractUserId(token);
+
+            if (userId == null) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+            }
+
+            List<User> conversation = chatService.getConversation(userId);
     
-            if (conversation != null) {
+            if (conversation.size() > 0) {
                 return ResponseEntity.ok(conversation);
             } else {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
@@ -41,9 +51,16 @@ public class ChatController {
     }
 
     @PostMapping
-    public ResponseEntity<?> createChat(@RequestBody Chat chat) {
+    public ResponseEntity<?> sendChat(@RequestBody ChatSendResult chat, HttpServletRequest request) {
         try {
-            ChatResult result = chatService.createChat(chat);
+            String token = request.getHeader("Authorization").substring(7);
+            String userId = extractUserId(token);
+
+            if (userId == null) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+            }
+
+            ChatSendResult result = chatService.sendChat(chat, userId, request);
     
             switch (result.getResultCode()) {
                 case 0: // 成功
@@ -60,9 +77,9 @@ public class ChatController {
     }
 
     @GetMapping("/{user_id}")
-    public ResponseEntity<?> getChatByUserId(@PathVariable Integer user_id) {
+    public ResponseEntity<?> getChatByUserId(@PathVariable Integer user_id, HttpServletRequest request) {
         try {
-            Chat chat = chatService.getChatByUserId(user_id);
+            Chat chat = chatService.getChatByUserId(user_id, request);
     
             if (chat != null) {
                 return ResponseEntity.ok(chat);
