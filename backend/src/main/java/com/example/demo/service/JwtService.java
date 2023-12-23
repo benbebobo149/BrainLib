@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import jakarta.servlet.http.HttpServletRequest;
+import javax.crypto.SecretKey;
 import io.jsonwebtoken.SignatureException;
+import io.jsonwebtoken.security.Keys;
 
 import com.example.demo.model.User;
 
@@ -22,11 +24,10 @@ import java.util.Optional;
 @Component
 public class JwtService {
 
+    SecretKey key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
+
     @Autowired
     private UserRepository userRepository;
-
-    @Value("${jwt.secret}")
-    private String secret;
 
     @Value("${jwt.expiration}")
     private Long expirationTime;
@@ -38,7 +39,7 @@ public class JwtService {
                 .claim("email", user.getEmail())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + expirationTime * 1000))
-                .signWith(SignatureAlgorithm.HS256, secret)
+                .signWith(key)
                 .compact();
     }
 
@@ -101,7 +102,7 @@ public class JwtService {
 
     private Claims extractAllClaims(String token) {
         try {
-            return Jwts.parser().setSigningKey(secret).build().parseClaimsJws(token).getBody();
+            return Jwts.parser().setSigningKey(key).build().parseClaimsJws(token).getBody();
         } catch (SignatureException e) {
             return null;
         }
