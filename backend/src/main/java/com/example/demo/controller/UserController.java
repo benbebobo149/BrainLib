@@ -1,12 +1,15 @@
+package com.example.demo.controller;
+
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 import com.example.demo.model.User;
 
 import com.example.demo.dto.UserListResult;
+import com.example.demo.dto.UserResult;
 
 import com.example.demo.service.UserService;
 
@@ -33,7 +36,7 @@ public class UserController {
         }
     }
 
-    @GetMapping("/user/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<?> getUserById(@PathVariable Integer id) {
         try {
             User user = userService.getUserById(id);
@@ -90,7 +93,7 @@ public class UserController {
         }
     }
 
-    @GetMapping("/user/all/{permission}")
+    @GetMapping("/all/{permission}")
     public ResponseEntity<?> getUserByPermission(@PathVariable Integer permission) {
         try {
             List<User> users = userService.getByPermission(permission);
@@ -105,7 +108,7 @@ public class UserController {
         }
     }
 
-    @GetMapping("/user/by-username/{username}")
+    @GetMapping("/by-username/{username}")
     public ResponseEntity<?> getUserByUsername(@PathVariable String username) {
         try {
             User user = userService.getByName(username);

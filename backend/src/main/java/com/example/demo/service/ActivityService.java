@@ -3,15 +3,17 @@ package com.example.demo.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 import com.example.demo.model.Activity;
+import com.example.demo.model.User;
 
 import com.example.demo.repository.ActivityRepository;
 
 import com.example.demo.service.JwtService;
 
 import com.example.demo.dto.ActivityResult;
+import com.example.demo.dto.JwtResult;
 
 import java.util.List;
 
@@ -66,7 +68,7 @@ public class ActivityService {
         }
     }
 
-    public Activity updateActivity(Integer id, Activity activityDetails, HttpServletRequest request) {
+    public ActivityResult updateActivity(Integer id, Activity activityDetails, HttpServletRequest request) {
         
         JwtResult jwtResult = jwtService.parseRequest(request);
         ActivityResult result = new ActivityResult();

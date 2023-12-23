@@ -2,10 +2,10 @@
 package com.example.demo.model;
 
 import com.example.demo.model.TrendTag;
-import com.example.demo.model.PostTag;
+import com.example.demo.model.Post;
 
 import jakarta.persistence.*;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Table(name = "Tags")
@@ -24,7 +24,7 @@ public class Tag {
     private TrendTag trendTag;
 
     @OneToMany(mappedBy = "tag", cascade = CascadeType.ALL)
-    private Set<PostTag> posts;
+    private List<PostTag> posts;
 
     // getters and setters
 
@@ -40,7 +40,7 @@ public class Tag {
         return tagAbbr;
     }
 
-    public Set<PostTag> getPosts() {
+    public List<PostTag> getPosts() {
         return posts;
     }
 

@@ -1,25 +1,29 @@
+package com.example.demo.service;
+
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
+import io.jsonwebtoken.SignatureException;
 
 import com.example.demo.model.User;
 
 import com.example.demo.dto.JwtResult;
 
-import com.example.demo.service.UserService;
+import com.example.demo.repository.UserRepository;
 
 import java.util.Date;
 import java.util.function.Function;
+import java.util.Optional;
 
 @Component
 public class JwtService {
 
     @Autowired
-    private UserService userService;
+    private UserRepository userRepository;
 
     @Value("${jwt.secret}")
     private String secret;
@@ -44,7 +48,7 @@ public class JwtService {
                 return false;
             }
 
-            final String userId = extractUserId(token);
+            final Integer userId = extractUserId(token);
             return (userId != null && userId.equals(user.getId()) && !isTokenExpired(token));
         } catch (SignatureException e) {
             return false;
@@ -61,14 +65,14 @@ public class JwtService {
         return (String) claims.get("email");
     }
 
-    public String extractUserId(String token) {
+    public Integer extractUserId(String token) {
         Claims claims = extractAllClaims(token);
 
         if (claims == null) {
             return null;
         }
 
-        return (String) claims.get("id");
+        return (Integer) claims.get("id");
     }
 
     public String extractUserName(String token) {
@@ -97,7 +101,7 @@ public class JwtService {
 
     private Claims extractAllClaims(String token) {
         try {
-            return Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
+            return Jwts.parser().setSigningKey(secret).build().parseClaimsJws(token).getBody();
         } catch (SignatureException e) {
             return null;
         }
@@ -105,13 +109,21 @@ public class JwtService {
 
     public JwtResult parseRequest(HttpServletRequest request) {
         String token = request.getHeader("Authorization").substring(7);
-        String userId = extractUserId(token);
+        Integer userId = extractUserId(token);
 
         if (userId == null) {
             return null;
         }
 
-        User user = userService.getUserById(userId);
+        User user = null;
+        Optional<User> OptionalUser = userRepository.findById(userId);
+
+        if (!OptionalUser.isPresent()) {
+            return null;
+        } else {
+            user = OptionalUser.get();
+        }
+
         JwtResult result = new JwtResult();
         result.setUser(user);
         result.setPassed(validateToken(token, user));

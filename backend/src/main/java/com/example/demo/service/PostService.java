@@ -4,13 +4,15 @@ package com.example.demo.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 import com.example.demo.model.Post;
 import com.example.demo.model.Comment;
 import com.example.demo.model.Appreciator;
 import com.example.demo.model.SusPost;
 import com.example.demo.model.Tag;
+import com.example.demo.model.User;
+import com.example.demo.model.PostTag;
 
 import com.example.demo.service.JwtService;
 import com.example.demo.service.UserService;
@@ -28,8 +30,8 @@ import com.example.demo.repository.CommentRepository;
 import com.example.demo.repository.TagRepository;
 
 import java.util.List;
-import java.util.Set;
 import java.util.ArrayList;
+import java.util.Optional;
 
 @Service
 public class PostService {
@@ -54,7 +56,7 @@ public class PostService {
     @Autowired
     private UserService userService;
 
-    public Post createPost(Post post, HttpServletRequest request) {
+    public PostResult createPost(Post post, HttpServletRequest request) {
         JwtResult jwtResult = jwtService.parseRequest(request);
 
         PostResult result = new PostResult();
@@ -79,7 +81,7 @@ public class PostService {
         return postRepository.findAll();
     }
 
-    public List<Post> getPostsByUser(Integer id) {
+    public List<Post> getPostsByUserId(Integer id) {
         User user = userService.getUserById(id);
         return postRepository.findByUser(user);
     }
@@ -94,14 +96,30 @@ public class PostService {
             return result;
         }
         
-        Post post = postRepository.findById(id).orElse(null);
-        SusPost susPost = susPostRepository.findByPost(post).orElse(null);
+        Post post = null;
+        SusPost susPost = null;
+        Optional<Post> OptionalPost = postRepository.findById(id);
+        
+        if (OptionalPost.isPresent()) {
+            post = OptionalPost.get();
+        }
+
+        if (post == null) {
+            result.setResultCode(2);
+            return result;
+        }
+
+        Optional<SusPost> OptionalSusPost = susPostRepository.findByPost(post);
+
+        if (OptionalSusPost.isPresent()) {
+            susPost = OptionalSusPost.get();
+        }
 
         if (post != null && susPost != null && !approve) {
             postRepository.delete(post);
             susPostRepository.delete(susPost);
             result.setResultCode(0);
-            return result
+            return result;
         }
 
         if (post == null || susPost == null) {
@@ -110,9 +128,8 @@ public class PostService {
         } else {
             post.setIsSuspend(false);
             postRepository.save(post);
-
             susPostRepository.delete(susPost);
-
+            
             result.setPost(post);
             result.setResultCode(0);
         }
@@ -197,21 +214,32 @@ public class PostService {
 
         User user = jwtResult.getUser();
 
-        Set<Appreciator> appreciators = post.getAppreciators();
+        List<Appreciator> appreciators = post.getAppreciators();
+        List<User> users = appreciators.stream().map(Appreciator::getAppreciator).toList();
+        Appreciator appreciator = null;
 
-        if (appreciators.contains(user)) {
-            appreciators.remove(user);
+        if (users.contains(user)) {
             post.setThumbUp(post.getThumbUp() - 1);
-            Appreciator appreciator = appreciatorRepository.findByPostAndUser(post, user);
+            Optional<Appreciator> OptionalAppreciator = appreciatorRepository.findByPostAndAppreciator(post, user);
+            
+            if (OptionalAppreciator.isPresent()) {
+                appreciator = OptionalAppreciator.get();
+            }
+
+            if (appreciator == null) {
+                result.setResultCode(2);
+                return result;
+            }
+
             appreciatorRepository.delete(appreciator);
         } else {
-            appreciators.add(user);
             post.setThumbUp(post.getThumbUp() + 1);
-            Appreciator appreciator = new Appreciator(post, user);
-            appreciatorRepository.save(appreciator);
+            Appreciator newAppreciator = new Appreciator();
+            newAppreciator.setPost(post);
+            newAppreciator.setAppreciator(user);
+            appreciatorRepository.save(newAppreciator);
         }
 
-        post.setAppreciators(appreciators);
         result.setPost(postRepository.save(post));
         result.setResultCode(0);
 
@@ -252,7 +280,7 @@ public class PostService {
         return result;
     }
 
-    public List<Comment> getComments(Integer id, HttpServletRequest request) {
+    public CommentListResult getComments(Integer id, HttpServletRequest request) {
         JwtResult jwtResult = jwtService.parseRequest(request);
 
         CommentListResult result = new CommentListResult();
@@ -356,7 +384,8 @@ public class PostService {
             return new ArrayList<>();
         }
 
-        List<Post> posts = tag.getPosts();
+        List<PostTag> postTags = tag.getPosts();
+        List<Post> posts = postTags.stream().map(PostTag::getPost).toList();
 
         return posts;
     }

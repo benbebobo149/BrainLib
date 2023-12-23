@@ -40,7 +40,7 @@ public class Activity {
 
     // getters and setters
 
-    public Integer getActivityId() {
+    public Integer getId() {
         return id;
     }
 

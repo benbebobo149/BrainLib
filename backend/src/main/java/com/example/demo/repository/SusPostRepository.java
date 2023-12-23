@@ -6,7 +6,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.example.demo.model.Post;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface SusPostRepository extends JpaRepository<SusPost, Integer> {
-    SusPost findByPost(Post post);
+    Optional<SusPost> findByPost(Post post);
 }

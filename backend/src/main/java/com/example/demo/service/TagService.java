@@ -3,9 +3,10 @@ package com.example.demo.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 import com.example.demo.model.Tag;
+import com.example.demo.model.User;
 
 import com.example.demo.service.JwtService;
 
@@ -15,6 +16,7 @@ import com.example.demo.dto.JwtResult;
 import com.example.demo.repository.TagRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class TagService {
@@ -60,7 +62,12 @@ public class TagService {
         }
         
         User user = jwtResult.getUser();
-        Tag tag = tagRepository.findById(id);
+        Tag tag = null;
+        Optional<Tag> OptionalTag = tagRepository.findById(id);
+
+        if (OptionalTag.isPresent()) {
+            tag = OptionalTag.get();
+        }
 
         if (user.getPermission() == 0) {
             return 1;
@@ -68,7 +75,7 @@ public class TagService {
             return 2;
         } else {
             tagRepository.delete(tag);
-            return 0
+            return 0;
         }
     }
 
@@ -84,7 +91,13 @@ public class TagService {
         }
 
         User user = jwtResult.getUser();
-        Tag tag = tagRepository.findById(id);
+        Tag tag = null;
+
+        Optional<Tag> OptionalTag = tagRepository.findById(id);
+
+        if (OptionalTag.isPresent()) {
+            tag = OptionalTag.get();
+        }
 
         if (user.getPermission() == 0) {
             result.setResultCode(1);

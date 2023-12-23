@@ -2,14 +2,17 @@
 package com.example.demo.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.model.User;
 import com.example.demo.repository.UserRepository;
 
+import com.example.demo.service.JwtService;
+
 import com.example.demo.dto.UserResult;
 import com.example.demo.dto.UserListResult;
+import com.example.demo.dto.JwtResult;
 
 import java.util.List;
 import java.util.Optional;

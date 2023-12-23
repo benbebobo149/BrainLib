@@ -1,3 +1,5 @@
+package com.example.demo.dto;
+
 public class AuthenticationResult {
     private String token;
     private boolean register;

@@ -1,18 +1,22 @@
 // PostController.java
+package com.example.demo.controller;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 import com.example.demo.model.Post;
 import com.example.demo.model.Comment;
 import com.example.demo.model.Tag;
 
 import com.example.demo.service.PostService;
+import com.example.demo.service.JwtService;
 
 import com.example.demo.dto.PostResult;
 import com.example.demo.dto.CommentListResult;
+import com.example.demo.dto.CommentResult;
 
 import java.util.List;
 
@@ -21,6 +25,9 @@ import java.util.List;
 public class PostController {
     @Autowired
     private PostService postService;
+
+    @Autowired
+    private JwtService jwtService;
 
     @PostMapping
     public ResponseEntity<?> createPost(@RequestBody Post post, HttpServletRequest request) {
@@ -141,7 +148,7 @@ public class PostController {
     }
 
     @GetMapping("/{post_id}/comments")
-    public ResponseEntity<?> getComments(@PathVariable Integer post_id, httpServletRequest request) {
+    public ResponseEntity<?> getComments(@PathVariable Integer post_id, HttpServletRequest request) {
         try {
             CommentListResult result = postService.getComments(post_id, request);
     
@@ -185,7 +192,7 @@ public class PostController {
     @PutMapping("/comments/{comment_id}")
     public ResponseEntity<?> updateComment(@PathVariable Integer comment_id, @RequestBody Comment newComment, HttpServletRequest request) {
         try {
-            CommentResult result = postService.updateComment(id, newComment, request);
+            CommentResult result = postService.updateComment(comment_id, newComment, request);
     
             switch (result.getResultCode()) {
                 case 0: // 成功
@@ -227,7 +234,7 @@ public class PostController {
     @GetMapping("/all/{tag_id}")
     public ResponseEntity<?> searchTagsPost(@PathVariable Integer tag_id) {
         try {
-            List<Post> tagPosts = postService.searchTagsPost(id);
+            List<Post> tagPosts = postService.searchTagsPost(tag_id);
     
             if (tagPosts.size() > 0) {
                 return ResponseEntity.ok(tagPosts);
@@ -255,12 +262,12 @@ public class PostController {
     }
 
     @DeleteMapping("/my/all")
-    public ResponseEntity<Post> getPostsByUser(HttpServletRequest request) {
+    public ResponseEntity<List<Post>> getPostsByUser(HttpServletRequest request) {
         try {
             String token = request.getHeader("Authorization").substring(7);
-            String userId = extractUserId(token);
+            Integer userId = jwtService.extractUserId(token);
 
-            List<Post> posts = postService.getPostsByUser(userId);
+            List<Post> posts = postService.getPostsByUserId(userId);
     
             if (posts.size() > 0) {
                 return ResponseEntity.ok(posts);
@@ -272,7 +279,7 @@ public class PostController {
         }
     }
 
-    @PostMapping("/posts/{post_id}/approve}")
+    @PostMapping("/posts/{post_id}/approve")
     public ResponseEntity<?> approvePost(@PathVariable Integer post_id, @RequestBody boolean approve, HttpServletRequest request) {
         try {
             PostResult result = postService.approvePost(post_id, approve, request);

@@ -4,7 +4,6 @@ package com.example.demo.controller;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;
@@ -17,9 +16,10 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import com.example.demo.model.User;
 
-import com.example.demo.util.JwtService;
-
+import com.example.demo.service.JwtService;
 import com.example.demo.service.UserService;
+
+import com.example.demo.repository.UserRepository;
 
 import com.example.demo.dto.AuthenticationResult;
 
@@ -28,9 +28,12 @@ public class AuthenticateController {
 
     private final OAuth2AuthorizedClientService authorizedClientService;
 
-    public Oauth2Controller(OAuth2AuthorizedClientService authorizedClientService) {
+    public AuthenticateController(OAuth2AuthorizedClientService authorizedClientService) {
         this.authorizedClientService = authorizedClientService;
     }
+
+    @Autowired
+    private UserRepository userRepository;
 
     @Autowired
     private UserService userService;
@@ -50,17 +53,17 @@ public class AuthenticateController {
             String email = principal.getAttribute("email");
 
             if (email == null) {
-                throw new AuthenticationException();
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
             }
 
-            User user = userService.findByEmail(email);
+            User user = userService.getByEmail(email);
             boolean isRegister = false;
             if (user == null) {
                 user = new User();
                 user.setEmail(email);
                 user.setName(principal.getAttribute("name"));
                 user.setPermission(0);
-                userService.save(user);
+                userRepository.save(user);
                 isRegister = true;
             } else {
                 isRegister = true;
@@ -70,7 +73,7 @@ public class AuthenticateController {
             AuthenticationResult result = new AuthenticationResult(token, isRegister);
             return ResponseEntity.ok(result);
 
-        } catch (AuthenticationException e) {
+        } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
     }
