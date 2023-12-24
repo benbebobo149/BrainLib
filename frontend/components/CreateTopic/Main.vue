@@ -18,20 +18,7 @@
       </div>
       <div class="h-3/4 flex bg-slate-50 p-6 items-start justify-end">
 
-        <div class="flex-col justify-start">
-          <div>
-            <input type="text" class="text-black text-2xl" :style="{ fontSize: fontSize[0] }" @input="updateContent(0)"
-              placeholder="Add Topic">
-          </div>
-          <div class="mt-10">
-            <input type="text" class="text-black text-2xl" :style="{ fontSize: fontSize[1] }" @input="updateContent(1)"
-              placeholder="Add Title">
-          </div>
-          <div class="mt-10">
-            <input type="text" class="text-black text-2xl" :style="{ fontSize: fontSize[2] }" @input="updateContent(2)"
-              placeholder="Description">
-          </div>
-        </div>
+
       </div>
 
     </div>
