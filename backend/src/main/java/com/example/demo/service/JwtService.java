@@ -122,8 +122,9 @@ public class JwtService {
 
     public JwtResult parseRequest(HttpServletRequest request) {
         String token = request.getHeader("Authorization").substring(7);
+    
         Integer userId = extractUserId(token);
-
+    
         if (userId == null) {
             return null;
         }

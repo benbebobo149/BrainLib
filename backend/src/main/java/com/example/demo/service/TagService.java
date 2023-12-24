@@ -42,7 +42,6 @@ public class TagService {
         }
 
         User user = jwtResult.getUser();
-
         if (user.getPermission() == 0) {
             result.setResultCode(1);
         } else {
