@@ -32,10 +32,10 @@
             </div>
             
             <div v-if="userPermission[1].permission == 2" class="flex h-1/4 w-full p-1">
-                <NuxtLink to="./" class="w-[20%] h-auto flex justify-center">
+                <NuxtLink to="http://localhost:3000/admini" class="w-[20%] h-auto flex justify-center">
                     <img src="/PhotoSticker/Admin.png" alt="" class="w-full h-auto">
                 </NuxtLink>
-                <NuxtLink class="text-[1vw] flex items-center ml-5 w-[80%] h-auto">
+                <NuxtLink to="http://localhost:3000/admini" class="text-[1vw] flex items-center ml-5 w-[80%] h-auto">
                     <p>Admin Page</p>
                 </NuxtLink>
             </div>
