@@ -39,24 +39,12 @@ import ListNav from "./ListNav.vue";
 import Signin from "./Signin.vue";
 import PhotoSticker from "./PhotoSticker.vue";
 import axios from 'axios';
+
 const config = useRuntimeConfig();
-//import { useCookie } from "vue-cookie";
-
-// const user = useCookie('user');
-// console.log(user);
-const user = ref(null);
-
-// const setUserCookie = (value) => {
-//     user.value = value;
-//     useCookie.set('user', user, 1); 
-//     console.log("user.value");
-// };
 
 const EnterVisible = ref(false);
 
 const NotSignin = ref(true);
-
-//const google_token = ref(null);
 
 const openModal = () => {
     EnterVisible.value = true;
@@ -73,9 +61,6 @@ const SearchContent = ref('');
 
 const GoogleClick = () => {
     NotSignin.value = false;
-
-    // google_token.value = 'token';
-    // useCookie.set('google_token', google_token, 1); // 保存 1 天
     console.log("GoogleClick in InPageNav.vue");
     sendData();
 };
@@ -92,22 +77,22 @@ CheckLoggin();
 
 const sendData = () => {
     axios.post(`${config.public.apiURL}/authenticate`, {
-
         "name": "jake",
         "email": "16789@hhdbuc"
-    }, {
-        headers: {
-            // 'Authorization': 'Bearer ' + token.value,
-            'Content-Type': 'application/json',
-            'accept': 'application/json'
-        }
-    })
+    },
+        {
+            headers: {
+                // 'Authorization': 'Bearer ' + token.value,
+                'Content-Type': 'application/json',
+                'accept': 'application/json'
+            }
+        })
         .then((res) => {
             // if code is 200, then hide the modal
             console.log(res);
             if (res.status == 200) {
                 const token = useCookie('token');
-                token.value = res.data.token;
+                token.value = res.data.token;//存取token
             }
         })
         .catch((err) => {
