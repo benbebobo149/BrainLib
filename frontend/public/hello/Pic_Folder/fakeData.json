@@ -14,5 +14,13 @@
     "location": "Fake Location 2",
     "date": "10/11/2023",
     "buttonText": "cars"
+  },
+  {
+    "id": 3,
+    "pic": "/hello/MainPic2.png",
+    "title": "Fake Activity 4",
+    "location": "Fake Location 2",
+    "date": "9/11/2023",
+    "buttonText": "cars"
   }
 ]
