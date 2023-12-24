@@ -7,19 +7,16 @@ import BoxSucc from '@/components/ModelBox/BoxSucc.vue';
 // import MainPageActivityTags from '@/components/MainPage/MainPageActivityTags.vue';
 const popupState = ref(true);
 </script>
-<template>
-  
+<template> 
   <div class="w-full">
     <div class=" bg-bgcolor w-screen">
-
       <!-- 左半邊 -->
       <div class="flex">
         <div class=" w-9/12 bg-bgcolor h-full rounded-sm border-r border-terotory">
-
           <div class=" top-100 h-[10vh]">
             <div
-              class=" w-[20vw] ml-[5rem] text-terotory text-xl font-normal font-Roboto leading-10   rounded-sm border-b border-terotory">
-              <h2 class=" left-[3vw] relative">適合你的文章</h2>
+              class=" w-[20vw] ml-[5rem] text-terotory text-[2vw] font-normal font-Roboto leading-10   rounded-sm border-b border-terotory">
+              <h2 class=" left-[3vw] relative">美術</h2>
             </div>
           </div>
           <!-- 預覽文章1 -->

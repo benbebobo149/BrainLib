@@ -31,7 +31,7 @@
                 
             </div>
             
-            <div v-if="Admin" class="flex h-1/4 w-full p-1">
+            <div v-if="userPermission[1].permission == 2" class="flex h-1/4 w-full p-1">
                 <NuxtLink to="./" class="w-[20%] h-auto flex justify-center">
                     <img src="/PhotoSticker/Admin.png" alt="" class="w-full h-auto">
                 </NuxtLink>
@@ -45,7 +45,10 @@
   
 <script setup>
 import { ref } from 'vue';
+import user from '@/public/personal/UserFakeData.json';
 
+const userPermission = ref(user);
+console.log(userPermission.value[1].permission);
 const PhotoListVisible = ref(false);
 
 const openModal = () => {
@@ -58,11 +61,23 @@ const closeModal = () => {
 };
 
 const LogOut = () => {
+    const google_token = useCookie('token');
+    google_token.value = null;
+    //move to specific page
+    const moveToPage = () => {
+    reloadNuxtApp({path: '/',ttl: 1000});
+    
+    };
+    moveToPage();
     console.log("LogOut in PhotoSticker.vue");
     alert("確認是否登出");
+
 };
 
 const Admin = ref(false);
+
+
+
 
 
 </script>
