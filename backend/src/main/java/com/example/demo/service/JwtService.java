@@ -10,6 +10,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import javax.crypto.SecretKey;
 import io.jsonwebtoken.SignatureException;
 import io.jsonwebtoken.security.Keys;
+import java.nio.charset.StandardCharsets;
+import jakarta.annotation.PostConstruct;
 
 import com.example.demo.model.User;
 
@@ -24,13 +26,23 @@ import java.util.Optional;
 @Component
 public class JwtService {
 
-    SecretKey key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
-
+    private SecretKey key;
+    
     @Autowired
     private UserRepository userRepository;
-
+    
+    @Value("${jwt.secret}")
+    private String secret;
+    
     @Value("${jwt.expiration}")
     private Long expirationTime;
+
+    @PostConstruct
+    public void init() {
+        byte[] secretBytes = secret.getBytes(StandardCharsets.UTF_8);
+        key = Keys.hmacShaKeyFor(secretBytes);
+    
+    }
 
     public String generateToken(User user) {
         return Jwts.builder()
