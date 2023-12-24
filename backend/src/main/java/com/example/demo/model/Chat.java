@@ -49,7 +49,7 @@ public class Chat {
         return timestamp;
     }
 
-    public void setSender_id(User sender) {
+    public void setSender(User sender) {
         this.sender = sender;
     }
 
