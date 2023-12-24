@@ -46,9 +46,10 @@ const closePopup = () => {
 
 
 //read data from database
-import fakeData from './public/hello/Pic_Folder/fakeData.json'; // Adjust the path accordingly
+import fakeData from '@/public/ActivityFakeData/ActivityFakeData.json'; // Adjust the path accordingly
 const activities = ref(fakeData);
 </script>
+
 <template>
     <div v-for="activity in activities" :key="activity.id"
         class="w-[56vw] h-[30vh] bg-bgcolor border-b border-terotory mx-2 my-5 flex">
@@ -64,10 +65,10 @@ const activities = ref(fakeData);
             <div class="h-[5vh] my-[6vh]">
                 {{ activity.location }}
             </div>
-            <div>
-                <div v-for="buttonText in activity.buttonTexts" :key="buttonText.id"
-                    class="w-[8vw] h-[2vw] ml-[1vw] bg-purple-200 rounded absolute text-center text-neutral-900 text-[1.25vw] font-normal font-'Roboto'">
-                    {{ buttonText }}
+            <div class="flex">
+                <div v-for="tag in activity.tags" :key="tag"
+                    class="w-[8vw] h-[2vw] ml-[1vw] bg-purple-200 rounded  text-center text-neutral-900 text-[1.25vw] font-normal font-'Roboto'">
+                    <p>{{ tag.tag_name }}</p>
                 </div>
             </div>
         </div>

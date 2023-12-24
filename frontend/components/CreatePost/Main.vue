@@ -1,5 +1,5 @@
 <template>
-  <div class="flex h-[15vh]">
+  <div class="flex h-[92vh]">
     <!-- Left Section -->
     <div class="w-1/2 h-full flex flex-col">
       <!-- Top Section (1/4 height) -->
@@ -16,11 +16,15 @@
           </div>
         </div>
       </div>
+      <div class="h-3/4 flex bg-slate-50 p-6 items-start justify-end">
+
+    
+      </div>
 
     </div>
 
     <!-- Right Section -->
-    <div class="w-1/2 flex flex-col">
+    <div class="w-1/2 h-full flex flex-col">
       <!-- Top Subsection (1/4 height) -->
       <div class="flex flex-row h-1/4 bg-slate-50 text-black justify-center items-end p-8">
         <label for="fileInput" class="cursor-pointer">
@@ -35,19 +39,16 @@
       </div>
 
       <!-- Bottom Subsection (3/4 height) -->
-
+      <div class="h-3/4 bg-slate-50 text-black p-8">
+      </div>
     </div>
-  </div>
-  <div class="w-screen bg-bgcolor flex flex-col justify-center items-center">
-    <h1 class="text-[3vw] font-bold text-center">輸入框示範</h1>
-    <Editor class="w-[60%]" />
   </div>
 </template>
 
 <script setup>
 import { ref } from 'vue';
 import AddTag from './AddTag.vue';
-import Editor from '@/components/codeTemplate/Editor.vue'
+
 const fontSize = ref(["1rem", "1rem", "1rem"]);
 
 const updateContent = (index) => {

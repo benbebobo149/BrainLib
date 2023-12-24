@@ -14,6 +14,17 @@
             {
                 "tag_id": 0,
                 "tag_name": "string"
+            },
+            {
+                "tag_id": 1,
+                "tag_name": "程式設計"
+            },
+            {
+                "tag_id": 1,
+                "tag_name": "程式設計"
+            },{
+                "tag_id": 2,
+                "tag_name": "數學"
             }
         ],
         "is_thumb_up": true

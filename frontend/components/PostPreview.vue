@@ -37,7 +37,7 @@ const clickButton = () => {
 			<div class="w-[8vw] bg-bgcolor"></div>
 			<div class=" w-3/4 bg-bgcolor">
 				<div class="w-full h-[7vh] bg-green-250 text-black text-[2vw] font-semibold font-Roboto leading-10">
-					{{ post.title}}</div>
+					{{ post.title }}</div>
 				<div class="w-full h-[10vh] left-[1rem]">
 					<div class=" bg-bgcolor text-zinc-600 text-[1.25vw] font-normal font-Roboto ">
 						{{ post.content }}
@@ -45,23 +45,30 @@ const clickButton = () => {
 				</div>
 
 				<div class="w-full h-[7vh]  rounded-sm border-b border-terotory mx-2  flex">
-					<img class=" w-[6vh] h-[6vh] rounded-full  mx-2 " src="https://via.placeholder.com/95x96" />
-					<h2 class="w-[20vw] h-[2vw] text-black text-[1.25vw] font-normal font-Roboto leading-loose">
-						{{ post.author }}
-					</h2>
-					<h1
-						class="w-[8vw] h-[2vw] left-[20vw] ml-8 bg-purple-200 rounded absolute text-center text-neutral-900 text-[1.25vw] font-normal font-'Roboto'">
-						{{ post.topic }}</h1>
+					<div class="flex w-[10vw]">
+						<img class=" w-[6vh] h-[6vh] rounded-full  mx-2 " src="https://via.placeholder.com/95x96" />
+						<h2 class="w-[6vw] h-[2vw] text-black text-[1.5vw] font-normal font-Roboto leading-loose">
+							{{ post.username }}
+						</h2>
+					</div>
 
-					<img class=" w-[4vh] h-[4vh] ml-[3vw] " src="@/PostPreview/Thumb.png" />
-					<h2 class="w-[6vw] h-[2vw] ml-[1vw] text-black text-[1.25vw] font-normal font-Roboto leading-loose">
-						{{ post.thumb_up }}
-					</h2>
+					<div class="w-[21vw] h-[5vw] flex justify-center">
+						<div v-for="tag in post.tags" :key="tag"
+							class="w-[7vw] h-[1.5vw] ml-[1vw] bg-purple-200 rounded  text-center text-neutral-900 text-[1vw] font-normal font-'Roboto'">
+							<p>{{ tag.tag_name }}</p>
+						</div>
+					</div>
+					<div class="w-[12vw] flex"><img class=" w-[4vh] h-[4vh] ml-[1vw] " src="@/PostPreview/Thumb.png" />
+						<h2 class="w-[6vw] h-[2vw] ml-[1vw] text-black text-[1.25vw] font-normal font-Roboto leading-loose">
+							{{ post.thumb_up }}
+						</h2>
 
-					<img class=" w-[4vh] h-[4vh]  mx-[1vw]" src="@/PostPreview/ChatRightDots.png" />
-					<h2 class="w-[6vw] h-[2vw] text-black text-[1.25vw] font-normal font-Roboto leading-loose">
-						{{ post.comments }}
-					</h2>
+						<img class=" w-[4vh] h-[4vh]  mx-[1vw]" src="@/PostPreview/ChatRightDots.png" />
+						<h2 class="w-[6vw] h-[2vw] text-black text-[1.25vw] font-normal font-Roboto leading-loose">
+							{{ post.comments }}
+						</h2>
+					</div>
+
 				</div>
 
 

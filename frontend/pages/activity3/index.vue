@@ -7,5 +7,6 @@ import Main from '~/components/CreateTopic/Main.vue'
   <div>
     <Header />
     <Main />
+
   </div>
 </template>
