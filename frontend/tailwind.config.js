@@ -24,6 +24,7 @@ export default {
         'terotory': '#A39292',
         'bgcolor': '#FFFBFF',
         'error': '#FFF0F0',
+        'hovercolor': '#E8DEF8',
       },
       fontFamily: {
         roboto: ['Roboto', 'sans-serif'],

@@ -26,68 +26,31 @@
       </div>
       <div class="w-auto h-[76%] bg-violet-100 overflow-y-hidden">
         <div class="w-auto h-full bg-violet-100 overflow-y-scroll hide-scrollbar fill-available">
-          <NuxtLink to="./"
+          <NuxtLink :to="topic.topic_url" v-for="topic in topics" :key="topic.tag_id"
             class="flex w-auto h-[8vh] items-center justify-center m-3 border  border-terotory rounded-md">
-            <p class="text-[2vw] ">美術</p>
+            <p class="text-[2vw] ">{{ topic.tag_name }}</p>
           </NuxtLink>
-          <NuxtLink to="./"
-            class="flex w-auto h-[8vh] items-center justify-center m-3 border  border-terotory rounded-md">
-            <p class="text-[2vw] ">考試</p>
-          </NuxtLink>
-          <NuxtLink to="./"
-            class="flex w-auto h-[8vh] items-center justify-center m-3 border  border-terotory rounded-md">
-            <p class="text-[2vw] ">新生</p>
-          </NuxtLink>
-          <NuxtLink to="./"
-            class="flex w-auto h-[8vh] items-center justify-center m-3 border  border-terotory rounded-md">
-            <p class="text-[2vw] ">資電</p>
-          </NuxtLink>
-          <NuxtLink to="./"
-            class="flex w-auto h-[8vh] items-center justify-center m-3 border  border-terotory rounded-md">
-            <p class="text-[2vw] ">商管</p>
-          </NuxtLink>
-          <NuxtLink to="./"
-            class="flex w-auto h-[8vh] items-center justify-center m-3 border  border-terotory rounded-md">
-            <p class="text-[2vw] ">文學</p>
-          </NuxtLink>
-          <NuxtLink to="./"
-            class="flex w-auto h-[8vh] items-center justify-center m-3 border  border-terotory rounded-md">
-            <p class="text-[2vw] ">語言</p>
-          </NuxtLink>
-          <NuxtLink to="./"
-            class="flex w-auto h-[8vh] items-center justify-center m-3 border  border-terotory rounded-md">
-            <p class="text-[2vw] ">數學</p>
-          </NuxtLink>
-          <NuxtLink to="./"
-            class="flex w-auto h-[8vh] items-center justify-center m-3 border  border-terotory rounded-md">
-            <p class="text-[2vw] ">設計</p>
-          </NuxtLink>
-          <!-- <NuxtLink :to="i.url" v-for="i in TopicName.listNav" :key="i.id"
-            class="flex w-auto h-[8vh] items-center justify-center m-3 border  border-terotory rounded-md">
-            <p class="text-[2vw] ">{{ i.name }}</p>
-          </NuxtLink> -->
         </div>
       </div>
     </div>
-
   </div>
 </template>
 
 <script setup>
 import { ref } from 'vue';
-//匯入TopicName.json
-// import TopicName from '@/assets/TopicName.json';
+
+import Topic from '@/public/TagFakeData/TagFakeData.json';
+
+const topics = ref(Topic);
 
 const ListNavVisible = ref(false);
 
 const openModal = () => {
   ListNavVisible.value = true;
 };
-
 const closeModal = () => {
   ListNavVisible.value = false;
 };
-
 
 </script>
 
@@ -97,7 +60,6 @@ const closeModal = () => {
   display: none;
   /* 隱藏滾動條 - WebKit browsers */
 }
-
 /* 使用 Flexbox 使容器充滿空間 */
 .fill-available {
   display: flex;

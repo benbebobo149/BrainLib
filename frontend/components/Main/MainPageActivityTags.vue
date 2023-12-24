@@ -1,20 +1,7 @@
 
 <script setup>
 import { ref } from "vue";
-import activities from './public/hello/Pic_Folder/fakeData.json'; // Adjust the path accordingly
-// define props
-// const props = defineProps({
-//   activity: {
-//     type: Object,
-//     default: () => ({
-//       title: 'Activity Not Found', author: 'Author Not Found',
-//       content: 'Content Not Found', topic: 'Topic ', location: 'Location Not Found', date: 'Date Not Found'
-//     })
-//   }
-// });
-// change props to ref 
-// const { activity } = toRefs(props);
-
+import activities from './public/ActivityFakeData/ActivityFakeData.json'; 
 </script>
 
 <template>
