@@ -1,5 +1,5 @@
 # Brainlib 
-This is the application that let scholor to publish post and create the event.
+This is the application that let scholar to publish post and create the event.
 
 # how to install
 
@@ -103,4 +103,4 @@ frontend : nuxt3 + tailwind
 
 database : postgres + adminer
 
-backend : spring + hibernate 
+backend : spring + spring data jpa + oauth2 client + jwt 
