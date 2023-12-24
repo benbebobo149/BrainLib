@@ -7,22 +7,18 @@ import BoxSucc from '@/components/ModelBox/BoxSucc.vue';
 // import MainPageActivityTags from '@/components/MainPage/MainPageActivityTags.vue';
 const popupState = ref(true);
 </script>
-<template>
-  
+<template> 
   <div class="w-full">
     <div class=" bg-bgcolor w-screen">
-
       <!-- 左半邊 -->
       <div class="flex">
         <div class=" w-9/12 bg-bgcolor h-full rounded-sm border-r border-terotory">
-
           <div class=" top-100 h-[10vh]">
             <div
-              class=" w-[20vw] ml-[5rem] text-terotory text-xl font-normal font-Roboto leading-10   rounded-sm border-b border-terotory">
+              class=" w-[20vw] ml-[5rem] text-terotory text-[2vw] font-normal font-Roboto leading-10   rounded-sm border-b border-terotory">
               <h2 class=" left-[3vw] relative">美術</h2>
             </div>
           </div>
-
           <!-- 預覽文章1 -->
           <div class=" bg-bgcolor content-center -z-10" v-for="index in 10" :key="index">
             <div class="h-full w-auto"></div>
@@ -30,7 +26,6 @@ const popupState = ref(true);
           </div>
           <BoxSucc v-if="popupState" @close="() => popupState = false"></BoxSucc>
         </div>
-
         <!-- 右半邊 -->
         <div class=" w-3/12 bg-bgcolor h-full ">
           <div class=" h-[100vh]">

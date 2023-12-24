@@ -22,7 +22,6 @@ const popupState = ref(true);
               <h2 class=" left-[3vw] relative">適合你的文章</h2>
             </div>
           </div>
-
           <!-- 預覽文章1 -->
           <div class=" bg-bgcolor content-center -z-10" v-for="index in 10" :key="index">
             <div class="h-full w-auto"></div>
@@ -30,7 +29,6 @@ const popupState = ref(true);
           </div>
           <BoxSucc v-if="popupState" @close="() => popupState = false"></BoxSucc>
         </div>
-
         <!-- 右半邊 -->
         <div class=" w-3/12 bg-bgcolor h-full ">
           <div class=" h-[100vh]">

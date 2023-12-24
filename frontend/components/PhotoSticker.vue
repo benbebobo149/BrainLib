@@ -58,8 +58,17 @@ const closeModal = () => {
 };
 
 const LogOut = () => {
+    const google_token = useCookie('token');
+    google_token.value = null;
+    //move to specific page
+    const moveToPage = () => {
+    reloadNuxtApp({path: '/',ttl: 1000});
+    
+    };
+    moveToPage();
     console.log("LogOut in PhotoSticker.vue");
     alert("確認是否登出");
+
 };
 
 const Admin = ref(false);

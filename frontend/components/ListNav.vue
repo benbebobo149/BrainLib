@@ -26,7 +26,7 @@
       </div>
       <div class="w-auto h-[76%] bg-violet-100 overflow-y-hidden">
         <div class="w-auto h-full bg-violet-100 overflow-y-scroll hide-scrollbar fill-available">
-          <NuxtLink :to="`/main/${topic.tag_id}`" v-for="topic in topics" :key="topic.tag_id"
+          <NuxtLink :to="`/main/${topic.tag_id}`"  @click="closeModal" v-for="topic in topics" :key="topic.tag_id"
             class="flex w-auto h-[8vh] items-center justify-center m-3 border  border-terotory rounded-md">
             <p class="text-[2vw] ">{{ topic.tag_name }}</p>
           </NuxtLink>
