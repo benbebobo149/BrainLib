@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "pic": "/hello/MainPic2.png",
+    "title": "Fake Activity 1",
+    "location": "Fake Location 1",
+    "date": "11/11/2023",
+    "buttonTexts":{"1":"cars", "2":"bikes", "3":"trucks"}
+  },
+    {
+    "id": 2,
+    "pic": "/hello/MainPic2.png",
+    "title": "Fake Activity 2",
+    "location": "Fake Location 2",
+    "date": "11/11/2023",
+    "buttonTexts": [{"1":"cars", "2":"bikes", "3":"trucks"}]
+  },{
+    "id": 3,
+    "pic": "/hello/MainPic2.png",
+    "title": "Fake Activity 2",
+    "location": "Fake Location 2",
+    "date": "11/11/2023",
+    "buttonTexts": [
+      {
+        "1": "cars",
+        "2": "bikes",
+        "3": "trucks"
+      }
+    ]
+  }
+
+]

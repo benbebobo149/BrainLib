@@ -9,7 +9,7 @@ const userData ={
     name: 'ben',
     age: 20
 }
-const areData = 'Vietnam'
+const areaData = 'Vietnam'
 const footerState = ref(false)
 const open = () => {
     footerState.value = true
@@ -28,6 +28,7 @@ const getData = async () => {
     const data = await res.json()
     console.log(res)
 }
+
 // read data from database
 const readData = async () =>
 {
@@ -76,9 +77,10 @@ const getArea = async () => {
 getData()
 </script>
 <template>
+    
     <h1 class="bg-black text-white">This is Header</h1>
     <button type="button" @click="open()"> Open footer</button>
-    <Modal :user="userData" :area="areData" @close="close()"/>
+    <Modal :user="userData" :area="areaData" @close="close()"/>
     <input type="text">
     <button>
 
