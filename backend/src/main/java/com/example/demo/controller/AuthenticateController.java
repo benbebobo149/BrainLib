@@ -80,7 +80,7 @@ public class AuthenticateController {
     //         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
     //     }
     // }
-
+    @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/authenticate")
     public ResponseEntity<?> authenticate(@RequestBody User user) {
         try {
