@@ -22,7 +22,7 @@ export default {
         'terotory': '#A39292',
         'bgcolor': '#FFFBFF',
         'error': '#FFF0F0',
-        // other new colors...
+        'hovercolor': '#E8DEF8',
       },
       fontFamily: {
         'sans': ['Roboto'],

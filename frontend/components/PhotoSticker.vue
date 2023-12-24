@@ -2,10 +2,10 @@
     <button @click="openModal" class="w-auto h-full">
         <img src="@/PhotoSticker.png" class="w-auto h-[80%]" alt="PhotoSticker">
     </button>
-    <div v-if="PhotoListVisible" class="PhotoList fixed w-[15%] h-[25%] bg-purple-50 flex  mt-[7vh]">
-        <button @click="closeModal" class="h-[3%] absolute left-0 text-md font-bold cursor-pointer">&times;</button>
-        <div class="w-full h-auto bg-purple-50 items-center justify-center ml-2">
-            <div class="hover:bg-fuchsia-100 ease-in-out flex h-[25%] w-auto p-1">
+    <div v-if="PhotoListVisible" class="PhotoList fixed w-[15%] h-[25%] bg-purple-50 flex  mt-[7vh] ">
+        <!-- <button @click="closeModal" class="h-[3%] absolute left-0 text-md font-bold cursor-pointer">&times;</button> -->
+        <div class="w-full h-auto bg-purple-50 items-center justify-center">
+            <div class="hover:bg-purple-100 ease-in-out flex h-[25%] w-auto p-1">
                 <NuxtLink to="http://localhost:3000/personal" class="w-[20%] h-auto flex justify-center">
                     <img src="/PhotoSticker/PersonalProfile.png" alt="" class="w-full h-auto">
                 </NuxtLink>
@@ -13,7 +13,7 @@
                     <p>Personal Profile</p>
                 </NuxtLink>
             </div>
-            <div class="flex h-1/4 w-full p-1">
+            <div class="hover:bg-purple-100 flex h-1/4 w-full p-1">
                 <NuxtLink to="http://localhost:3000/personal/Change" class="w-[20%] h-auto flex justify-center">
                     <img src="/PhotoSticker/Edit.png" alt="" class="w-full h-auto">
                 </NuxtLink>
@@ -21,7 +21,7 @@
                     <p>Edit Profile</p>
                 </NuxtLink>
             </div>
-            <div class="flex h-1/4 w-full p-1">
+            <div class="flex h-1/4 w-full p-1 hover:bg-purple-100">
                 <button @click="LogOut" class="w-[20%] h-auto flex justify-center">
                     <img src="/PhotoSticker/LogOut.png" alt="" class="w-full h-auto">
                 </button>
@@ -49,7 +49,7 @@ import { ref } from 'vue';
 const PhotoListVisible = ref(false);
 
 const openModal = () => {
-    PhotoListVisible.value = true;
+    PhotoListVisible.value = !PhotoListVisible.value;
     console.log("open model in PhotoSticker.vue");
 };
 
@@ -63,9 +63,14 @@ const LogOut = () => {
 };
 
 const Admin = ref(false);
+
+
 </script>
 <style scoped>
     .PhotoList{
         box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    }
+    :hover.List{
+        background-color: #F9DEDC ease-in-out;
     }
 </style>
