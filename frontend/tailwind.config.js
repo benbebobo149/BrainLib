@@ -1,5 +1,5 @@
 /** @type {import('tailwindcss').Config} */
-import '@/public/fonts.css'
+// import '@/public/fonts.css'
 
 export default {
   content: [
