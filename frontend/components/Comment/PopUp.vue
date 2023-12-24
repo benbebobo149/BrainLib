@@ -17,8 +17,9 @@
           </div>
           <div class="flex flex-col w-full h-5/6 bg-blue-500 relative">
             <div class="flex w-full h-1/4 bg-white">
-              <img :src="fakeData3.people2" alt="Organizers Image" class="w-auto h-14 self-center justify-self-center">
-              <p class="text-black text-xl font-bold ml-2 self-center">{{ fakeData3.name2 }}</p>
+              <img :src="fakeData3.people2" alt="Organizers Image"
+                class="w-auto h-14 mb-5 self-center justify-self-center">
+              <p class="text-black text-xl font-bold ml-2 mb-5 self-center">{{ fakeData3.name2 }}</p>
             </div>
             <div class="flex w-full h-3/4 bg-white relative">
               <!-- Rectangle13 image -->
