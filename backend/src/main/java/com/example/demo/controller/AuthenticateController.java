@@ -25,6 +25,7 @@ import com.example.demo.service.UserService;
 import com.example.demo.repository.UserRepository;
 
 import com.example.demo.dto.AuthenticationResult;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 @RestController
 public class AuthenticateController {
