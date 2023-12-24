@@ -15,7 +15,7 @@ import com.example.demo.dto.TagResult;
 import java.util.List;
 
 @RestController
-@RequestMapping("/tags")
+@RequestMapping("/tag")
 public class TagController {
     @Autowired
     private TagService tagService;
