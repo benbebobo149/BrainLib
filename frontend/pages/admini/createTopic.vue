@@ -67,15 +67,15 @@ const sendData = () => {
 					<div class=" h-[4vw] content-center text-[3vw] relative my-[4vh] mx-[10vw]">
 						this is Topic
 					</div>
-					<div class="left-[25vw] my-[4vh]  text-black text-xl font-normal font-['Roboto'] leading-7  relative">
+					<div class="left-[25vw] my-[4vh]  text-black text-xl font-normal font-'Roboto' leading-7  relative">
 						Topic name
 					</div>
 
 					<div
 						class=" left-[8vw] w-[18vw] h-[8vh]  bg-white mx-[20vw] rounded-md border border-black border-opacity-10  relative">
 						<input v-model="topicName"
-							class="left-[8vw] w-[18vw] h-[8vh] grow shrink basis-0 rounded-lg text-black text-opacity-50 text-lg font-normal font-Roboto leading-7"
-							type="text" placeholder="    topicName">
+							class="left-[8vw] w-[18vw] h-[8vh] grow shrink basis-0 rounded-lg text-black text-opacity-50 text-lg font-normal font-Roboto leading-7  pl-[1vw]"
+							type="text" placeholder="topicName">
 					</div>
 
 					<div class="left-[25vw] my-[4vh]  text-black text-xl font-normal font-'Roboto' leading-7 relative">
@@ -85,18 +85,18 @@ const sendData = () => {
 					<div
 						class=" left-[8vw] w-[18vw] h-[8vh]  bg-white mx-[20vw] rounded-md border border-black border-opacity-10  relative">
 						<input v-model="topicDescription"
-							class="left-[8vw] w-[18vw] h-[8vh] grow shrink basis-0  rounded-lg text-black text-opacity-50 text-lg font-normal font-'Roboto' leading-7"
-							type="text" placeholder="    topicDescription">
-						<button @click="sendData()" class="bg-black text-color-white">
+							class="left-[8vw] w-[18vw] h-[8vh] grow shrink basis-0  rounded-lg text-black text-opacity-50 text-lg font-normal font-'Roboto' leading-7 pl-[1vw]"
+							type="text" placeholder="topicDescription" >
+						<!-- <button @click="sendData()" class="bg-black text-color-white">
 							click me
-						</button>
+						</button> -->
 					</div>
 
 					<div class=" w-[25vw] h-[4vw] my-[10vh] mx-[25vw]">
 						<div
 							class="left-[8vw] w-[8vw] h-[8vh]  p-3 bg-primary rounded-lg flex-col justify-center items-center inline-flex relative">
 							<div class="text-white  text-xl font-normal font-'Roboto' leading-7  cursor-pointer"
-								@click="createEvent">Create</div>
+								@click="sendData()">Create</div>
 						</div>
 					</div>
 				</div>
