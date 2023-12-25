@@ -20,7 +20,7 @@ const popupState = ref(true);
             </div>
           </div>
           <div class="w-full h-3/4 overflow-y-hidden ">
-            <div class="w-auto h-full overflow-y-scroll hide-scrollbar fill-available p-0 animate-pulse">
+            <div class="w-auto h-full overflow-y-scroll hide-scrollbar fill-available p-0 ">
               <PostPreview class="" />
             </div>
           </div>

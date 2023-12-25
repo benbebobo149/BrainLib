@@ -58,11 +58,11 @@ const activities = ref(fakeData);
                 <img src="https://via.placeholder.com/95x96" alt="no image found">
             </div>
         </div>
-        <div class="w-[24vw] h-[6vh] bg-bgcolor ">
+        <div class="w-[24vw] h-[4vh] bg-bgcolor ">
             <div class=" mx-auto text-[2vw]">
                 {{ activity.title }}
             </div>
-            <div class="h-[5vh] my-[6vh]">
+            <div class="h-[5vh] my-[3vh]">
                 {{ activity.location }}
             </div>
             <div class="flex">

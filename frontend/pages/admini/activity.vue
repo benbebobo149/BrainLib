@@ -25,7 +25,7 @@ const goToPage = () => {
 			</div>
 
 			<!-- 右邊部分 -->
-			<div class="w-4/5 h-full bg-bgcolorborder-l border-terotory absolute right-0">
+			<div class="w-4/5 h-full bg-bgcolor border-l border-terotory absolute right-0">
 				<div class="h-[10vh] bg-bgcolor ">
 					<div class=" text-bgcolor ">
 						<h1 class="left-20 w-[45vw] h-[0.5vw] text-[3vw] text-terotory font-normal font-'Roboto' relative">
