@@ -1,5 +1,5 @@
 <template>
-  <div class="flex h-[92vh]">
+  <div class="flex h-[22vh]">
     <!-- Left Section -->
     <div class="w-1/2 h-full flex flex-col">
       <!-- Top Section (1/4 height) -->
@@ -16,10 +16,7 @@
           </div>
         </div>
       </div>
-      <div class="h-3/4 flex bg-slate-50 p-6 items-start justify-end">
 
-
-      </div>
 
     </div>
 
@@ -27,31 +24,27 @@
     <div class="w-1/2 h-full flex flex-col">
       <!-- Top Subsection (1/4 height) -->
       <div class="flex flex-row h-1/4 bg-slate-50 text-black justify-center items-end p-8">
-        <label for="fileInput" class="cursor-pointer">
-          <img src="/hello/AddFile.png" alt="Add file" class="w-auto h-[4vh] mr-10">
-        </label>
         <label for="tagInput" class="cursor-pointer" @click="showRegistrationPopup">
           <img src="/hello/AddTag.png" alt="Add tag" class="w-auto h-[4vh] mr-10">
         </label>
         <img src="/hello/Preview.png" alt="Preview" class="w-auto h-[4vh] mr-10">
         <input id="fileInput" type="file" style="display: none;" @change="handleFileChange" />
-        <AddTag v-if="showPopup" @close="closeRegistrationPopup" />
+        <AddTag v-if="showPopup" class="z-10" @close="closeRegistrationPopup" />
       </div>
 
       <!-- Bottom Subsection (3/4 height) -->
-      <div class="h-3/4 bg-slate-50 text-black p-8">
-      </div>
+
     </div>
   </div>
   <div class="w-screen flex flex-col justify-center items-center">
-    <h1 class="text-[3vw] font-bold text-center">輸入框示範</h1>
-    <Editor class="w-[80%]" />
+    <h1 class="text-[2vw] font-bold text-terotory text-center">輸入框示範</h1>
+    <Editor class="w-[60%]" />
   </div>
 </template>
 
 <script setup>
 import { ref } from 'vue';
-import AddTag from './AddTag.vue';
+import AddTag from '@/components/CreatePost/AddTag.vue';
 // import Editor.vue
 import Editor from '@/components/codeTemplate/Editor.vue'
 

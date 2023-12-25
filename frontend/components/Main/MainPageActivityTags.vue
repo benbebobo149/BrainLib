@@ -7,7 +7,7 @@ import activities from './public/ActivityFakeData/ActivityFakeData.json';
 <template>
   <div>
     <div v-for="activity in activities" :key="activity.date" class="">
-      <div class="w-[18vw] h-[7vh] bg-purple-200 rounded-3xl  mx-auto text-neutral-900 
+      <div class="w-[18vw] h-[7vh] bg-purple-200 rounded-2xl  mx-auto text-neutral-900 
         text-xl font-normal ">
         <div class="h-[8vh] my-[3vh] font-'Roboto' content-center   mt-[3vh]">
           <p class="text-center"> {{ activity.title }}

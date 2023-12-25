@@ -19,9 +19,9 @@ const popupState = ref(true);
               <p class="ml-[2vw] ">Post you might be intersting</p>
             </div>
           </div>
-          <div class="w-full h-3/4 overflow-y-hidden">
-            <div class="w-auto h-full overflow-y-scroll hide-scrollbar fill-available p-0">
-              <PostPreview />
+          <div class="w-full h-3/4 overflow-y-hidden ">
+            <div class="w-auto h-full overflow-y-scroll hide-scrollbar fill-available p-0 animate-pulse">
+              <PostPreview class="" />
             </div>
           </div>
         </div>
