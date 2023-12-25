@@ -8,39 +8,35 @@ import BoxSucc from '@/components/ModelBox/BoxSucc.vue';
 const popupState = ref(true);
 </script>
 <template>
-  
-  <div class="w-full">
-    <div class=" bg-bgcolor w-screen">
+  <div class="w-full h-full">
+    <div class=" bg-bgcolor w-screen ]">
 
       <!-- 左半邊 -->
       <div class="flex">
-        <div class=" w-9/12 bg-bgcolor h-full rounded-sm border-r border-terotory">
-
-          <div class=" top-100 h-[10vh]">
-            <div
-              class=" w-[20vw] ml-[5rem] text-terotory text-xl font-normal font-Roboto leading-10   rounded-sm border-b border-terotory">
-              <h2 class=" left-[3vw] relative">適合你的文章</h2>
+        <div class="w-9/12 h-screen bg-bgcolor border-r border-terotory  ">
+          <div class="w-full h-1/4 bg-bgcolor flex items-center text-[2vw] p-10 ">
+            <div class=" w-1/2 h-full ml-[5vw] text-terotory border-b border-terotory flex items-end">
+              <p class="ml-[2vw] ">Post you might be intersting</p>
             </div>
           </div>
-          <!-- 預覽文章1 -->
-          <div class=" bg-bgcolor content-center -z-10" v-for="index in 10" :key="index">
-            <div class="h-full w-auto"></div>
-            <PostPreview/>
+          <div class="w-full h-3/4 overflow-y-hidden">
+            <div class="w-auto h-full overflow-y-scroll hide-scrollbar fill-available p-0">
+              <PostPreview />
+            </div>
           </div>
-          <BoxSucc v-if="popupState" @close="() => popupState = false"></BoxSucc>
         </div>
         <!-- 右半邊 -->
         <div class=" w-3/12 bg-bgcolor h-full ">
           <div class=" h-[100vh]">
             <!-- 熱門標籤 -->
-            <div class="h-[35vh]  bg-bgcolor my-[4vh] mx-auto rounded-sm border-b border-terotory">
+            <div class="h-[35vh]  bg-bgcolor my-[4vh] mx-auto rounded-sm border-b border-terotory  overflow-y-hidden">
               <div class="w-[20vw] mx-auto">
                 <div class=" text-black text-xl font-normal font-Roboto">Trending Topics/Tags
                 </div>
               </div>
 
               <div class="flex justify-around w-full h-auto my-[1vh]">
-                <MainTrendingTopic v-for="index in 1" :key="index" />
+                <MainTrendingTopic v-for="index in 1" :key="index" class="overflow-y-scroll hide-scrollbar " />
               </div>
             </div>
             <!-- 活動 -->
@@ -49,9 +45,10 @@ const popupState = ref(true);
                 <div class=" text-black text-xl font-normal font-Roboto">Recent Activity
                 </div>
               </div>
-              <div class="flex w-3/12 h-[10vh] mx-[2rem] my-[2vh] relative hide-scrollbar fill-available">
-                  <MainPageActivityTags/>
-                
+              <div class="flex w-[20vw] h-[50vh] mx-[2rem] my-[2vh] ">
+                <div class=" overflow-y-scroll hide-scrollbar fill-available p-0">
+                  <MainPageActivityTags />
+                </div>
               </div>
             </div>
           </div>
@@ -77,5 +74,10 @@ InPageNav {
 .fill-available {
   display: flex;
   flex-direction: column;
+}
+
+body {
+  margin: 0;
+  padding: 0;
 }
 </style>
