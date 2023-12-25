@@ -36,9 +36,9 @@ const rejectPost = () => {
 </script>
 
 <template>
-    <div v-for="post in Posts" :key="post.post_id" class="flex mx-1 z-0">
+    <div v-for="post in Posts" :key="post.post_id" class="w-[70vw] flex mx-1 z-0">
         <!-- 預覽文章1 -->
-        <div class="w-full h-[24vh]  box-border my-[0.7rem] relative flex items-start ">
+        <div class="w-full h-[22vh]  box-border my-[0.7rem] relative flex items-start ">
             <div class="w-[8vw] bg-bgcolor"></div>
             <div class=" w-3/4 bg-bgcolor">
                 <div class="w-full h-[7vh] bg-green-250 text-black text-[2vw] font-semibold font-Roboto leading-10">
@@ -78,7 +78,6 @@ const rejectPost = () => {
             <div class=" w-1/4 h-[18vh]">
                 <img class="w-full h-[10vw] my-1 " src="https://via.placeholder.com/240x148" />
             </div>
-            <div class="w-[8vw] bg-bgcolor"></div>
         </div>
 
         <div class="h-[full]  bg-bgcolor ">
