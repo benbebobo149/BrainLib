@@ -33,10 +33,14 @@ public class TagService {
     public TagResult createTag(Tag tag, HttpServletRequest request) {
 
         JwtResult jwtResult = jwtService.parseRequest(request);
-        
         TagResult result = new TagResult();
 
-        if (!(jwtResult != null) && (!jwtResult.getPassed())) {
+        if (jwtResult == null) {
+            result.setResultCode(1);
+            return result;
+        }
+        
+        if (!jwtResult.getPassed()) {
             result.setResultCode(1);
             return result;
         }
@@ -56,8 +60,12 @@ public class TagService {
     public int deleteTag(Integer id, HttpServletRequest request) {
 
         JwtResult jwtResult = jwtService.parseRequest(request);
+
+        if (jwtResult == null) {
+            return 1;
+        }
         
-        if (!(jwtResult != null) && (!jwtResult.getPassed())) {
+        if (!jwtResult.getPassed()) {
             return 1;
         }
         
@@ -82,10 +90,14 @@ public class TagService {
     public TagResult updateTag(Integer id, Tag tagDetails, HttpServletRequest request) {
 
         JwtResult jwtResult = jwtService.parseRequest(request);
-
         TagResult result = new TagResult();
 
-        if (!(jwtResult != null) && (!jwtResult.getPassed())) {
+        if (jwtResult == null) {
+            result.setResultCode(1);
+            return result;
+        }
+        
+        if (!jwtResult.getPassed()) {
             result.setResultCode(1);
             return result;
         }

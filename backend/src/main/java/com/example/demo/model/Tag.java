@@ -17,7 +17,7 @@ public class Tag {
     @Column(name = "tagName", nullable = false)
     private String tagName;
 
-    @Column(name = "tagAbbr", nullable = false)
+    @Column(name = "tagAbbr", nullable = true)
     private String tagAbbr;
 
     @OneToOne(mappedBy = "tag", cascade = CascadeType.ALL)
