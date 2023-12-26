@@ -97,10 +97,11 @@ public class AuthenticateController {
                 newUser = new User();
                 newUser.setEmail(email);
                 newUser.setName(user.getName());
-                newUser.setPermission(0);
+                newUser.setPermission(user.getPermission());
                 userRepository.save(newUser);
                 isRegister = true;
             } else {
+                newUser = checkUser;
                 isRegister = true;
             }
             
