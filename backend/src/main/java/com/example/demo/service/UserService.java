@@ -46,7 +46,12 @@ public class UserService {
         JwtResult jwtResult = jwtService.parseRequest(request);
         UserResult result = new UserResult();
         
-        if (!(jwtResult != null) && (!jwtResult.getPassed())) {
+        if (jwtResult == null) {
+            result.setResultCode(1);
+            return result;
+        }
+        
+        if (!jwtResult.getPassed()) {
             result.setResultCode(1);
             return result;
         }
@@ -77,7 +82,12 @@ public class UserService {
 
         UserResult result = new UserResult();
 
-        if (!(jwtResult != null) && (!jwtResult.getPassed())) {
+        if (jwtResult == null) {
+            result.setResultCode(1);
+            return result;
+        }
+        
+        if (!jwtResult.getPassed()) {
             result.setResultCode(1);
             return result;
         }
