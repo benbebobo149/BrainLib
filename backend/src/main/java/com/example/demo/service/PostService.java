@@ -60,8 +60,13 @@ public class PostService {
         JwtResult jwtResult = jwtService.parseRequest(request);
 
         PostResult result = new PostResult();
-
-        if (!(jwtResult != null) && (!jwtResult.getPassed())) {
+        
+        if (jwtResult == null) {
+            result.setResultCode(1);
+            return result;
+        }
+        
+        if (!jwtResult.getPassed()) {
             result.setResultCode(1);
             return result;
         }
@@ -90,8 +95,13 @@ public class PostService {
         JwtResult jwtResult = jwtService.parseRequest(request);
 
         PostResult result = new PostResult();
-
-        if (!(jwtResult != null) && (!jwtResult.getPassed())) {
+        
+        if (jwtResult == null) {
+            result.setResultCode(1);
+            return result;
+        }
+        
+        if (!jwtResult.getPassed()) {
             result.setResultCode(1);
             return result;
         }
@@ -142,8 +152,13 @@ public class PostService {
         JwtResult jwtResult = jwtService.parseRequest(request);
 
         PostResult result = new PostResult();
-
-        if (!(jwtResult != null) && (!jwtResult.getPassed())) {
+        
+        if (jwtResult == null) {
+            result.setResultCode(1);
+            return result;
+        }
+        
+        if (!jwtResult.getPassed()) {
             result.setResultCode(1);
             return result;
         }
@@ -174,8 +189,13 @@ public class PostService {
         JwtResult jwtResult = jwtService.parseRequest(request);
 
         PostResult result = new PostResult();
-
-        if (!(jwtResult != null) && (!jwtResult.getPassed())) {
+        
+        if (jwtResult == null) {
+            result.setResultCode(1);
+            return result;
+        }
+        
+        if (!jwtResult.getPassed()) {
             result.setResultCode(1);
             return result;
         }
@@ -199,8 +219,13 @@ public class PostService {
         JwtResult jwtResult = jwtService.parseRequest(request);
 
         PostResult result = new PostResult();
-
-        if (!(jwtResult != null) && (!jwtResult.getPassed())) {
+        
+        if (jwtResult == null) {
+            result.setResultCode(1);
+            return result;
+        }
+        
+        if (!jwtResult.getPassed()) {
             result.setResultCode(1);
             return result;
         }
@@ -240,7 +265,6 @@ public class PostService {
             appreciatorRepository.save(newAppreciator);
         }
 
-        result.setPost(postRepository.save(post));
         result.setResultCode(0);
 
         return result;
@@ -250,8 +274,13 @@ public class PostService {
         JwtResult jwtResult = jwtService.parseRequest(request);
 
         PostResult result = new PostResult();
-
-        if (!(jwtResult != null) && (!jwtResult.getPassed())) {
+        
+        if (jwtResult == null) {
+            result.setResultCode(1);
+            return result;
+        }
+        
+        if (!jwtResult.getPassed()) {
             result.setResultCode(1);
             return result;
         }
@@ -284,8 +313,13 @@ public class PostService {
         JwtResult jwtResult = jwtService.parseRequest(request);
 
         CommentListResult result = new CommentListResult();
-
-        if (!(jwtResult != null) && (!jwtResult.getPassed())) {
+        
+        if (jwtResult == null) {
+            result.setResultCode(1);
+            return result;
+        }
+        
+        if (!jwtResult.getPassed()) {
             result.setResultCode(1);
             return result;
         }
@@ -306,8 +340,13 @@ public class PostService {
         JwtResult jwtResult = jwtService.parseRequest(request);
 
         CommentResult result = new CommentResult();
-
-        if (!(jwtResult != null) && (!jwtResult.getPassed())) {
+        
+        if (jwtResult == null) {
+            result.setResultCode(1);
+            return result;
+        }
+        
+        if (!jwtResult.getPassed()) {
             result.setResultCode(1);
             return result;
         }
@@ -330,8 +369,13 @@ public class PostService {
         JwtResult jwtResult = jwtService.parseRequest(request);
 
         CommentResult result = new CommentResult();
-
-        if (!(jwtResult != null) && (!jwtResult.getPassed())) {
+        
+        if (jwtResult == null) {
+            result.setResultCode(1);
+            return result;
+        }
+        
+        if (!jwtResult.getPassed()) {
             result.setResultCode(1);
             return result;
         }
@@ -356,8 +400,13 @@ public class PostService {
         JwtResult jwtResult = jwtService.parseRequest(request);
 
         CommentResult result = new CommentResult();
-
-        if (!(jwtResult != null) && (!jwtResult.getPassed())) {
+        
+        if (jwtResult == null) {
+            result.setResultCode(1);
+            return result;
+        }
+        
+        if (!jwtResult.getPassed()) {
             result.setResultCode(1);
             return result;
         }

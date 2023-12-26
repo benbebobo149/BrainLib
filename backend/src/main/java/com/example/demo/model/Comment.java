@@ -5,6 +5,8 @@ import com.example.demo.model.User;
 import com.example.demo.model.Post;
 
 import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "Comments")

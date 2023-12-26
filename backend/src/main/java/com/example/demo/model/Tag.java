@@ -28,7 +28,7 @@ public class Tag {
 
     // getters and setters
 
-    public Integer getTag_id() {
+    public Integer getTagId() {
         return id;
     }
 

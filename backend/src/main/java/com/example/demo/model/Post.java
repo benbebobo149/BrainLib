@@ -8,6 +8,8 @@ import com.example.demo.model.SusPost;
 import com.example.demo.model.Appreciator;
 
 import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.util.List;
 
 @Entity
@@ -18,7 +20,7 @@ public class Post {
     private Integer id;
 
     @ManyToOne
-    @JoinColumn(name = "users", nullable = false)
+    @JoinColumn(name = "users", nullable = false, referencedColumnName = "id")
     private User user;
 
     @Column(name = "title", nullable = false)
@@ -27,16 +29,16 @@ public class Post {
     @Column(name = "content", nullable = false)
     private String content;
 
-    @Column(name = "image", nullable = false)
+    @Column(name = "image", columnDefinition = "VARCHAR(255) DEFAULT 'default_post_image.jpg'")
     private String image;
 
-    @Column(name = "thumb_up", nullable = false)
+    @Column(name = "thumb_up", columnDefinition = "int default 0")
     private Integer thumbUp;
 
-    @Column(name = "visible", nullable = false)
+    @Column(name = "visible", columnDefinition = "boolean default false")
     private Boolean visible;
 
-    @Column(name = "is_suspend", nullable = false)
+    @Column(name = "is_suspend", columnDefinition = "boolean default false")
     private Boolean isSuspend;
 
     @OneToMany(mappedBy = "post")
@@ -50,6 +52,13 @@ public class Post {
 
     @OneToMany(mappedBy = "post")
     private List<Appreciator> appreciators;
+
+
+    public Post() {
+        this.thumbUp = 0;
+        this.visible = false;
+        this.isSuspend = false;
+    }
 
     // getters and setters
     public Integer getId() {

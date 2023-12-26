@@ -127,9 +127,9 @@ public class PostController {
     }
 
     @PutMapping("/{post_id}/report")
-    public ResponseEntity<?> reportPost(@PathVariable Integer id, @RequestBody String reason, HttpServletRequest request) {
+    public ResponseEntity<?> reportPost(@PathVariable Integer post_id, @RequestBody String reason, HttpServletRequest request) {
         try {
-            PostResult result = postService.reportPost(id, reason, request);
+            PostResult result = postService.reportPost(post_id, reason, request);
     
             switch (result.getResultCode()) {
                 case 0: // 成功
@@ -246,7 +246,7 @@ public class PostController {
         }
     }
 
-    @PostMapping("/all")
+    @GetMapping("/all")
     public ResponseEntity<?> getAllPosts() {
         try {
             List<Post> posts = postService.getAllPosts();
@@ -261,11 +261,13 @@ public class PostController {
         }
     }
 
-    @DeleteMapping("/my/all")
+    @GetMapping("/my/all")
     public ResponseEntity<List<Post>> getPostsByUser(HttpServletRequest request) {
         try {
             String token = request.getHeader("Authorization").substring(7);
             Integer userId = jwtService.extractUserId(token);
+
+            System.out.println(userId);
 
             List<Post> posts = postService.getPostsByUserId(userId);
     

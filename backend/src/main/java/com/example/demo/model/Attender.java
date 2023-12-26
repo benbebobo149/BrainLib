@@ -5,6 +5,9 @@ import com.example.demo.model.User;
 import com.example.demo.model.Activity;
 
 import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 @Table(name = "Attenders")

@@ -35,7 +35,7 @@ public class User {
     @Column(name = "profile", nullable = true)
     private String profile;
 
-    @Column(name = "image", columnDefinition = "VARCHAR(255) DEFAULT 'default_image.jpg'")
+    @Column(name = "image", columnDefinition = "VARCHAR(255) DEFAULT 'default_user_image.jpg'")
     private String image;
 
     @JsonManagedReference
