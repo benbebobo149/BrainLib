@@ -3,13 +3,14 @@ package com.example.demo.model;
 
 import com.example.demo.model.Activity;
 import com.example.demo.model.Comment;
-import com.example.demo.model.Chat;
+// import com.example.demo.model.Chat;
 import com.example.demo.model.Post;
 import com.example.demo.model.Attender;
 import com.example.demo.model.Appreciator;
 import com.example.demo.model.SusPost;
 
 import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -37,6 +38,7 @@ public class User {
     @Column(name = "image", columnDefinition = "VARCHAR(255) DEFAULT 'default_image.jpg'")
     private String image;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "user")
     private List<Activity> activities;
 
@@ -55,11 +57,11 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<Comment> comments;
 
-    @OneToMany(mappedBy = "sender")
-    private List<Chat> sentChat;
+    // @OneToMany(mappedBy = "sender")
+    // private List<Chat> sentChat;
 
-    @OneToMany(mappedBy = "receiver")
-    private List<Chat> receivedChat;
+    // @OneToMany(mappedBy = "receiver")
+    // private List<Chat> receivedChat;
 
 
     // getters
@@ -107,20 +109,20 @@ public class User {
         return comments;
     }
 
-    public List<Chat> getSentChat() {
-        return sentChat;
-    }
+    // public List<Chat> getSentChat() {
+    //     return sentChat;
+    // }
 
-    public List<Chat> getReceivedChat() {
-        return receivedChat;
-    }
+    // public List<Chat> getReceivedChat() {
+    //     return receivedChat;
+    // }
 
-    public Set<Chat> getConversation() {
-        Set<Chat> conversation = Stream.concat(sentChat.stream(), receivedChat.stream())
-                                       .distinct()
-                                       .collect(Collectors.toSet());
-        return conversation;
-    }
+    // public Set<Chat> getConversation() {
+    //     Set<Chat> conversation = Stream.concat(sentChat.stream(), receivedChat.stream())
+    //                                    .distinct()
+    //                                    .collect(Collectors.toSet());
+    //     return conversation;
+    // }
 
     // setters
 

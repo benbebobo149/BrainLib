@@ -5,6 +5,7 @@ import com.example.demo.model.User;
 import com.example.demo.model.Attender;
 
 import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -17,7 +18,8 @@ public class Activity {
     private Integer id;
 
     @ManyToOne
-    @JoinColumn(name = "users", nullable = false, referencedColumnName = "id")
+    @JsonBackReference
+    @JoinColumn(name = "user_id", nullable = false, referencedColumnName = "id")
     private User user;
 
     @Column(name = "title", nullable = false)
@@ -32,7 +34,7 @@ public class Activity {
     @Column(name = "visible", columnDefinition = "boolean default false")
     private Boolean visible;
     
-    @Column(name = "dateTime", nullable = false)
+    @Column(name = "dateTime", nullable = true)
     private Date dateTime;
 
     @OneToMany(mappedBy = "activity")
