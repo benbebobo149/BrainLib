@@ -3,10 +3,15 @@ package com.example.demo.model;
 
 import com.example.demo.model.TrendTag;
 import com.example.demo.model.Post;
+import com.example.demo.model.PostTag;
 
 import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import java.util.List;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 @Entity
 @Table(name = "Tags")
 public class Tag {
@@ -17,18 +22,12 @@ public class Tag {
     @Column(name = "tagName", nullable = false)
     private String tagName;
 
-    @Column(name = "tagAbbr", nullable = false)
-    private String tagAbbr;
-
     @OneToOne(mappedBy = "tag", cascade = CascadeType.ALL)
     private TrendTag trendTag;
 
-    @OneToMany(mappedBy = "tag", cascade = CascadeType.ALL)
-    private List<PostTag> posts;
-
     // getters and setters
 
-    public Integer getTag_id() {
+    public Integer getId() {
         return id;
     }
 
@@ -36,19 +35,7 @@ public class Tag {
         return tagName;
     }
 
-    public String getTagAbbr() {
-        return tagAbbr;
-    }
-
-    public List<PostTag> getPosts() {
-        return posts;
-    }
-
     public void setTagName(String tagName) {
         this.tagName = tagName;
-    }
-
-    public void setTagAbbr(String tagAbbr) {
-        this.tagAbbr = tagAbbr;
     }
 }

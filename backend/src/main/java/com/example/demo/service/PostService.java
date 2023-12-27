@@ -28,6 +28,7 @@ import com.example.demo.repository.AppreciatorRepository;
 import com.example.demo.repository.SusPostRepository;
 import com.example.demo.repository.CommentRepository;
 import com.example.demo.repository.TagRepository;
+import com.example.demo.repository.PostTagRepository;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -40,6 +41,9 @@ public class PostService {
 
     @Autowired
     private AppreciatorRepository appreciatorRepository;
+
+    @Autowired
+    private PostTagRepository postTagRepository;
 
     @Autowired
     private CommentRepository commentRepository;
@@ -60,8 +64,13 @@ public class PostService {
         JwtResult jwtResult = jwtService.parseRequest(request);
 
         PostResult result = new PostResult();
-
-        if (!(jwtResult != null) && (!jwtResult.getPassed())) {
+        
+        if (jwtResult == null) {
+            result.setResultCode(1);
+            return result;
+        }
+        
+        if (!jwtResult.getPassed()) {
             result.setResultCode(1);
             return result;
         }
@@ -90,8 +99,13 @@ public class PostService {
         JwtResult jwtResult = jwtService.parseRequest(request);
 
         PostResult result = new PostResult();
-
-        if (!(jwtResult != null) && (!jwtResult.getPassed())) {
+        
+        if (jwtResult == null) {
+            result.setResultCode(1);
+            return result;
+        }
+        
+        if (!jwtResult.getPassed()) {
             result.setResultCode(1);
             return result;
         }
@@ -141,9 +155,37 @@ public class PostService {
 
         JwtResult jwtResult = jwtService.parseRequest(request);
 
-        PostResult result = new PostResult();
+        Post originalPost = postRepository.findById(id).orElse(null);
+        List<Tag> originalTags = originalPost.getTags();
 
-        if (!(jwtResult != null) && (!jwtResult.getPassed())) {
+        List<Tag> newTags = postDetails.getTags();
+
+        List<Tag> tagsToDelete = new ArrayList<>(originalTags);
+        tagsToDelete.removeAll(newTags);
+
+        List<Tag> tagsToAdd = new ArrayList<>(newTags);
+        tagsToAdd.removeAll(originalTags);
+
+        for (Tag tag : tagsToDelete) {
+            PostTag postTag = postTagRepository.findByPostAndTag(originalPost, tag);
+            postTagRepository.delete(postTag);
+        }
+
+        for (Tag tag : tagsToAdd) {
+            PostTag postTag = new PostTag();
+            postTag.setPost(originalPost);
+            postTag.setTag(tag);
+            postTagRepository.save(postTag);
+        }
+
+        PostResult result = new PostResult();
+        
+        if (jwtResult == null) {
+            result.setResultCode(1);
+            return result;
+        }
+        
+        if (!jwtResult.getPassed()) {
             result.setResultCode(1);
             return result;
         }
@@ -156,7 +198,6 @@ public class PostService {
                 post.setContent(postDetails.getContent());
                 post.setImage(postDetails.getImage());
                 post.setVisible(postDetails.getVisible());
-                post.setTags(postDetails.getTags());
                 result.setPost(postRepository.save(post));
                 result.setResultCode(0);
             } else {
@@ -174,8 +215,13 @@ public class PostService {
         JwtResult jwtResult = jwtService.parseRequest(request);
 
         PostResult result = new PostResult();
-
-        if (!(jwtResult != null) && (!jwtResult.getPassed())) {
+        
+        if (jwtResult == null) {
+            result.setResultCode(1);
+            return result;
+        }
+        
+        if (!jwtResult.getPassed()) {
             result.setResultCode(1);
             return result;
         }
@@ -199,8 +245,13 @@ public class PostService {
         JwtResult jwtResult = jwtService.parseRequest(request);
 
         PostResult result = new PostResult();
-
-        if (!(jwtResult != null) && (!jwtResult.getPassed())) {
+        
+        if (jwtResult == null) {
+            result.setResultCode(1);
+            return result;
+        }
+        
+        if (!jwtResult.getPassed()) {
             result.setResultCode(1);
             return result;
         }
@@ -214,7 +265,7 @@ public class PostService {
 
         User user = jwtResult.getUser();
 
-        List<Appreciator> appreciators = post.getAppreciators();
+        List<Appreciator> appreciators = appreciatorRepository.findByPost(post);
         List<User> users = appreciators.stream().map(Appreciator::getAppreciator).toList();
         Appreciator appreciator = null;
 
@@ -240,7 +291,6 @@ public class PostService {
             appreciatorRepository.save(newAppreciator);
         }
 
-        result.setPost(postRepository.save(post));
         result.setResultCode(0);
 
         return result;
@@ -250,8 +300,13 @@ public class PostService {
         JwtResult jwtResult = jwtService.parseRequest(request);
 
         PostResult result = new PostResult();
-
-        if (!(jwtResult != null) && (!jwtResult.getPassed())) {
+        
+        if (jwtResult == null) {
+            result.setResultCode(1);
+            return result;
+        }
+        
+        if (!jwtResult.getPassed()) {
             result.setResultCode(1);
             return result;
         }
@@ -284,20 +339,26 @@ public class PostService {
         JwtResult jwtResult = jwtService.parseRequest(request);
 
         CommentListResult result = new CommentListResult();
-
-        if (!(jwtResult != null) && (!jwtResult.getPassed())) {
+        
+        if (jwtResult == null) {
             result.setResultCode(1);
             return result;
         }
-
+        
+        if (!jwtResult.getPassed()) {
+            result.setResultCode(1);
+            return result;
+        }
+        
         Post post = postRepository.findById(id).orElse(null);
+        List<Comment> comments = commentRepository.findByPost(post);
 
-        if (post == null) {
+        if (post == null || comments.size() == 0) {
             result.setResultCode(2);
             return result;
         } else {
-            result.setComments(post.getComments());
             result.setResultCode(0);
+            result.setComments(comments);
         }
         return result;
     }
@@ -306,8 +367,13 @@ public class PostService {
         JwtResult jwtResult = jwtService.parseRequest(request);
 
         CommentResult result = new CommentResult();
-
-        if (!(jwtResult != null) && (!jwtResult.getPassed())) {
+        
+        if (jwtResult == null) {
+            result.setResultCode(1);
+            return result;
+        }
+        
+        if (!jwtResult.getPassed()) {
             result.setResultCode(1);
             return result;
         }
@@ -330,8 +396,13 @@ public class PostService {
         JwtResult jwtResult = jwtService.parseRequest(request);
 
         CommentResult result = new CommentResult();
-
-        if (!(jwtResult != null) && (!jwtResult.getPassed())) {
+        
+        if (jwtResult == null) {
+            result.setResultCode(1);
+            return result;
+        }
+        
+        if (!jwtResult.getPassed()) {
             result.setResultCode(1);
             return result;
         }
@@ -356,8 +427,13 @@ public class PostService {
         JwtResult jwtResult = jwtService.parseRequest(request);
 
         CommentResult result = new CommentResult();
-
-        if (!(jwtResult != null) && (!jwtResult.getPassed())) {
+        
+        if (jwtResult == null) {
+            result.setResultCode(1);
+            return result;
+        }
+        
+        if (!jwtResult.getPassed()) {
             result.setResultCode(1);
             return result;
         }
@@ -384,9 +460,28 @@ public class PostService {
             return new ArrayList<>();
         }
 
-        List<PostTag> postTags = tag.getPosts();
-        List<Post> posts = postTags.stream().map(PostTag::getPost).toList();
+        List<PostTag> postTags = postTagRepository.findByTag(tag);
+        List<Post> posts = new ArrayList<>();
 
+        for (PostTag postTag : postTags) {
+            posts.add(postTag.getPost());
+        }
+
+        return posts;
+    }
+
+    public List<Post> getSuspendPosts(HttpServletRequest request) {
+        JwtResult jwtResult = jwtService.parseRequest(request);
+        
+        if (jwtResult == null) {
+            return new ArrayList<>();
+        }
+        
+        if (!jwtResult.getPassed()) {
+            return new ArrayList<>();
+        }
+
+        List<Post> posts = postRepository.findByIsSuspend(true);
         return posts;
     }
 }

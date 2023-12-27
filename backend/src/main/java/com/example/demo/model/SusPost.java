@@ -5,7 +5,11 @@ import com.example.demo.model.Post;
 import com.example.demo.model.User;
 
 import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 @Entity
 @Table(name = "SusPosts")
 public class SusPost {
@@ -16,7 +20,7 @@ public class SusPost {
     @ManyToOne
     @JoinColumn(name = "post", nullable = false)
     private Post post;
-
+    
     @ManyToOne
     @JoinColumn(name = "suspender", nullable = false)
     private User suspender;

@@ -3,18 +3,22 @@ package com.example.demo.model;
 
 import com.example.demo.model.Activity;
 import com.example.demo.model.Comment;
-import com.example.demo.model.Chat;
+// import com.example.demo.model.Chat;
 import com.example.demo.model.Post;
 import com.example.demo.model.Attender;
 import com.example.demo.model.Appreciator;
 import com.example.demo.model.SusPost;
 
 import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 @Entity
 @Table(name = "Users")
 public class User {
@@ -34,32 +38,14 @@ public class User {
     @Column(name = "profile", nullable = true)
     private String profile;
 
-    @Column(name = "image", columnDefinition = "VARCHAR(255) DEFAULT 'default_image.jpg'")
+    @Column(name = "image", columnDefinition = "VARCHAR(255) DEFAULT 'default_user_image.jpg'")
     private String image;
 
-    @OneToMany(mappedBy = "user")
-    private List<Activity> activities;
+    // @OneToMany(mappedBy = "sender")
+    // private List<Chat> sentChat;
 
-    @OneToMany(mappedBy = "user")
-    private List<Post> posts;
-
-    @OneToMany(mappedBy = "user")
-    private List<Attender> joinActivity;
-
-    @OneToMany(mappedBy = "appreciator")
-    private List<Appreciator> appreciatedPosts;
-
-    @OneToMany(mappedBy = "suspender")
-    private List<SusPost> suspendedPosts;
-
-    @OneToMany(mappedBy = "user")
-    private List<Comment> comments;
-
-    @OneToMany(mappedBy = "sender")
-    private List<Chat> sentChat;
-
-    @OneToMany(mappedBy = "receiver")
-    private List<Chat> receivedChat;
+    // @OneToMany(mappedBy = "receiver")
+    // private List<Chat> receivedChat;
 
 
     // getters
@@ -87,40 +73,20 @@ public class User {
         return image;
     }
 
-    public List<Activity> getActivities() {
-        return activities;
-    }
+    // public List<Chat> getSentChat() {
+    //     return sentChat;
+    // }
 
-    public List<Attender> getJoinActivity() {
-        return joinActivity;
-    }
+    // public List<Chat> getReceivedChat() {
+    //     return receivedChat;
+    // }
 
-    public List<Post> getPosts() {
-        return posts;
-    }
-
-    public List<SusPost> getSusPost() {
-        return suspendedPosts;
-    }
-
-    public List<Comment> getComments() {
-        return comments;
-    }
-
-    public List<Chat> getSentChat() {
-        return sentChat;
-    }
-
-    public List<Chat> getReceivedChat() {
-        return receivedChat;
-    }
-
-    public Set<Chat> getConversation() {
-        Set<Chat> conversation = Stream.concat(sentChat.stream(), receivedChat.stream())
-                                       .distinct()
-                                       .collect(Collectors.toSet());
-        return conversation;
-    }
+    // public Set<Chat> getConversation() {
+    //     Set<Chat> conversation = Stream.concat(sentChat.stream(), receivedChat.stream())
+    //                                    .distinct()
+    //                                    .collect(Collectors.toSet());
+    //     return conversation;
+    // }
 
     // setters
 
