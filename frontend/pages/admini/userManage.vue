@@ -3,7 +3,10 @@ import PostPreview from '@/components/PostPreview';
 import AdiminiLeftBar from '~/components/Admini/AdiminiLeftBar.vue';
 import AdminiUser from '~/components/Admini/AdminiUser.vue';
 import InPageNav from '~/components/InPageNav.vue';
+import axios from 'axios';
 
+import BoxSucc from '~/components/ModelBox/BoxSucc.vue';
+import BoxError from '~/components/ModelBox/BoxError.vue';
 const SelectAllModerators = () => {
 	console.log("Select All Moderators");
 };
@@ -11,6 +14,11 @@ const SelectAllAdministrators = () => {
 	console.log("Select All Administrators");
 };
 
+
+const updateData = () => {
+	console.log(selectedOption.value); // This will log the value of the selected option
+	
+};
 </script>
 
 <template>
@@ -46,9 +54,7 @@ const SelectAllAdministrators = () => {
 
 						<div class="flex">
 							<div class=" content-center relative ml-[10vw]">
-								<AdminiUser />
-								<AdminiUser />
-								<AdminiUser />
+								<AdminiUser @submit="updateData"/>
 							</div>
 						</div>
 					</div>

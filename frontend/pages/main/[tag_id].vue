@@ -47,7 +47,7 @@ const popupState = ref(true);
                 <div class=" text-black text-xl font-normal font-Roboto">Recent Activity
                 </div>
               </div>
-              <div class="flex w-[20vw] h-[50vh] mx-[2rem] my-[2vh] ">
+              <div class="flex w-[20vw] h-[44vh] mx-[2rem] my-[2vh] ">
                 <div class=" overflow-y-scroll hide-scrollbar fill-available p-0">
                   <MainPageActivityTags />
                 </div>
