@@ -27,5 +27,8 @@
   "people3": "/hello/Ellipse2.png",
   "name1": "benbenboo",
   "name2": "booohhlala",
-  "name3": "beooeoeo"
+  "name3": "beooeoeo",
+  "mainImage": "/hello/MainPic.png",
+  "regNum": "20",
+  "map": "/hello/Gmap.png"
 }

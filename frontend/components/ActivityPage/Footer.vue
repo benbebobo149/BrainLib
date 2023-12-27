@@ -9,7 +9,7 @@
 
     <!-- Right part of the footer (40%) -->
     <div class="w-2/5 h-full bg-slate-100 flex flex-col items-center justify-center">
-      <p class="text-black text-3xl font-bold">0</p>
+      <p class="text-black text-3xl font-bold">{{ fakeData.regNum }}</p>
       <img src="/hello/GroupStart.png" alt="Footer Image" class="h-25 w-60" @click="showRegistrationPopup" />
     </div>
   </div>
@@ -42,7 +42,7 @@
         <div class="flex flex-col w-full h-3/4">
           <p class="text-black text-2xl font-bold mt-5 ml-10">Where</p>
           <p class="text-black text-xl mt-3 ml-10 self-center">{{ fakeData.whereDetails }}</p>
-          <img src="/hello/Gmap.png" alt="Centered Image" class="h-auto w-[30vw] mt-5 self-center" />
+          <img :src="fakeData.map" alt="Centered Image" class="h-auto w-[30vw] mt-5 self-center" />
         </div>
       </div>
     </div>
@@ -65,9 +65,9 @@
   </div>
 </template>
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref } from 'vue';
 import RegistrationSuccessPopup from './RegistrationSuccessPopup.vue';
-import fakeData from './public/hello/Pic_Folder/fakeData3.json'; // Adjust the path accordingly
+import fakeData from './public/hello/Pic_Folder/fakeData3.json';
 
 const showPopup = ref(false);
 
@@ -78,16 +78,6 @@ const showRegistrationPopup = () => {
 const closeRegistrationPopup = () => {
   console.log('Closing Registration Popup');
   showPopup.value = false;
-};
-
-// Load fake data on component mount
-onMounted(() => {
-  // Simulate an asynchronous data loading process
-  setTimeout(() => {
-    // Populate data from fakeData
-    document.title = fakeData.title;
-    // Add more assignments for other data properties as needed
-  }, 500);
-});
+}
 </script>
 

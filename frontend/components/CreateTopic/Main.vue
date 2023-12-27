@@ -16,6 +16,10 @@
           </div>
         </div>
       </div>
+      <div class="h-3/4 flex bg-slate-50 p-6 items-start justify-end">
+
+
+      </div>
 
     </div>
 
