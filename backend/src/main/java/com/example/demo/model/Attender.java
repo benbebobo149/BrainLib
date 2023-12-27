@@ -6,9 +6,10 @@ import com.example.demo.model.Activity;
 
 import jakarta.persistence.*;
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
-
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 @Entity
 @Table(name = "Attenders")
 public class Attender {
@@ -16,10 +17,12 @@ public class Attender {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @JsonBackReference(value = "user-attender")
     @ManyToOne
     @JoinColumn(name = "users", nullable = false)
     private User user;
 
+    @JsonBackReference(value = "activity-attender")
     @ManyToOne
     @JoinColumn(name = "activity", nullable = false)
     private Activity activity;

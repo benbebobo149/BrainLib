@@ -10,8 +10,11 @@ import com.example.demo.model.Appreciator;
 import jakarta.persistence.*;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import java.util.List;
 
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 @Entity
 @Table(name = "posts")
 public class Post {
@@ -19,6 +22,7 @@ public class Post {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @JsonBackReference(value = "user-post")
     @ManyToOne
     @JoinColumn(name = "users", nullable = false, referencedColumnName = "id")
     private User user;
@@ -41,15 +45,19 @@ public class Post {
     @Column(name = "is_suspend", columnDefinition = "boolean default false")
     private Boolean isSuspend;
 
+    @JsonManagedReference(value = "post-posttag")
     @OneToMany(mappedBy = "post")
     private List<PostTag> tags;
 
+    @JsonManagedReference(value = "post-comment")
     @OneToMany(mappedBy = "post")
     private List<Comment> comments;
 
+    @JsonManagedReference(value = "post-suspost")
     @OneToMany(mappedBy = "post")
     private List<SusPost> suspendInfo;
 
+    @JsonManagedReference(value = "post-appreciator")
     @OneToMany(mappedBy = "post")
     private List<Appreciator> appreciators;
 

@@ -11,11 +11,14 @@ import com.example.demo.model.SusPost;
 
 import jakarta.persistence.*;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 @Entity
 @Table(name = "Users")
 public class User {
@@ -38,22 +41,27 @@ public class User {
     @Column(name = "image", columnDefinition = "VARCHAR(255) DEFAULT 'default_user_image.jpg'")
     private String image;
 
-    @JsonManagedReference
+    @JsonManagedReference(value = "user-activity")
     @OneToMany(mappedBy = "user")
     private List<Activity> activities;
 
+    @JsonManagedReference(value = "user-post")
     @OneToMany(mappedBy = "user")
     private List<Post> posts;
-
+    
+    @JsonManagedReference(value = "user-attender")
     @OneToMany(mappedBy = "user")
     private List<Attender> joinActivity;
 
+    @JsonManagedReference(value = "user-appreciator")
     @OneToMany(mappedBy = "appreciator")
     private List<Appreciator> appreciatedPosts;
 
+    @JsonManagedReference(value = "user-suspost")
     @OneToMany(mappedBy = "suspender")
     private List<SusPost> suspendedPosts;
 
+    @JsonManagedReference(value = "user-comment")
     @OneToMany(mappedBy = "user")
     private List<Comment> comments;
 

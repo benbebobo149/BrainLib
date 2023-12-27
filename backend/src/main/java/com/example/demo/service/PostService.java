@@ -438,4 +438,19 @@ public class PostService {
 
         return posts;
     }
+
+    public List<Post> getSuspendPosts(HttpServletRequest request) {
+        JwtResult jwtResult = jwtService.parseRequest(request);
+        
+        if (jwtResult == null) {
+            return new ArrayList<>();
+        }
+        
+        if (!jwtResult.getPassed()) {
+            return new ArrayList<>();
+        }
+
+        List<Post> posts = postRepository.findByIsSuspend(true);
+        return posts;
+    }
 }

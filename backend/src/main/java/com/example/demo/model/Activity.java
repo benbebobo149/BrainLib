@@ -7,11 +7,13 @@ import com.example.demo.model.Attender;
 import jakarta.persistence.*;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 @Entity
 @Table(name = "Activities")
 public class Activity {
@@ -20,6 +22,7 @@ public class Activity {
     private Integer id;
 
     @ManyToOne
+    @JsonBackReference(value = "user-activity")
     @JoinColumn(name = "user_id", nullable = false, referencedColumnName = "id")
     private User user;
 
@@ -38,6 +41,7 @@ public class Activity {
     @Column(name = "dateTime", nullable = true)
     private Date dateTime;
 
+    @JsonManagedReference(value = "activity-attender")
     @OneToMany(mappedBy = "activity")
     private Set<Attender> attenders;
 

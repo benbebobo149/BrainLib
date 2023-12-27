@@ -17,6 +17,7 @@ import com.example.demo.service.JwtService;
 import com.example.demo.dto.PostResult;
 import com.example.demo.dto.CommentListResult;
 import com.example.demo.dto.CommentResult;
+import com.example.demo.dto.ApproveResult;
 
 import java.util.List;
 
@@ -267,8 +268,6 @@ public class PostController {
             String token = request.getHeader("Authorization").substring(7);
             Integer userId = jwtService.extractUserId(token);
 
-            System.out.println(userId);
-
             List<Post> posts = postService.getPostsByUserId(userId);
     
             if (posts.size() > 0) {
@@ -277,13 +276,15 @@ public class PostController {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
             }
         } catch (Exception e) {
+            System.out.println(e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
 
-    @PostMapping("/posts/{post_id}/approve")
-    public ResponseEntity<?> approvePost(@PathVariable Integer post_id, @RequestBody boolean approve, HttpServletRequest request) {
+    @PostMapping("/{post_id}/approve")
+    public ResponseEntity<?> approvePost(@PathVariable Integer post_id, @RequestBody ApproveResult approveResult, HttpServletRequest request) {
         try {
+            boolean approve = approveResult.isApprove();
             PostResult result = postService.approvePost(post_id, approve, request);
     
             switch (result.getResultCode()) {
@@ -300,4 +301,20 @@ public class PostController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
+
+    @GetMapping("/suspend")
+    public ResponseEntity<?> getSuspendPosts(HttpServletRequest request) {
+        try {
+            List<Post> posts = postService.getSuspendPosts(request);
+    
+            if (posts.size() > 0) {
+                return ResponseEntity.ok(posts);
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
 }
