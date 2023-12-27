@@ -28,10 +28,6 @@ public class Tag {
     @OneToOne(mappedBy = "tag", cascade = CascadeType.ALL)
     private TrendTag trendTag;
 
-    @JsonBackReference(value = "tag-postTag")
-    @OneToMany(mappedBy = "tag", cascade = CascadeType.ALL)
-    private List<PostTag> posts;
-
     // getters and setters
 
     public Integer getId() {
@@ -44,10 +40,6 @@ public class Tag {
 
     public String getTagAbbr() {
         return tagAbbr;
-    }
-
-    public List<PostTag> getPosts() {
-        return posts;
     }
 
     public void setTagName(String tagName) {

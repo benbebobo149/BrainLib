@@ -17,12 +17,10 @@ public class Attender {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @JsonBackReference(value = "user-attender")
     @ManyToOne
     @JoinColumn(name = "users", nullable = false)
     private User user;
 
-    @JsonBackReference(value = "activity-attender")
     @ManyToOne
     @JoinColumn(name = "activity", nullable = false)
     private Activity activity;

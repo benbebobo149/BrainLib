@@ -41,30 +41,6 @@ public class User {
     @Column(name = "image", columnDefinition = "VARCHAR(255) DEFAULT 'default_user_image.jpg'")
     private String image;
 
-    @JsonManagedReference(value = "user-activity")
-    @OneToMany(mappedBy = "user")
-    private List<Activity> activities;
-
-    @JsonManagedReference(value = "user-post")
-    @OneToMany(mappedBy = "user")
-    private List<Post> posts;
-    
-    @JsonManagedReference(value = "user-attender")
-    @OneToMany(mappedBy = "user")
-    private List<Attender> joinActivity;
-
-    @JsonManagedReference(value = "user-appreciator")
-    @OneToMany(mappedBy = "appreciator")
-    private List<Appreciator> appreciatedPosts;
-
-    @JsonManagedReference(value = "user-suspost")
-    @OneToMany(mappedBy = "suspender")
-    private List<SusPost> suspendedPosts;
-
-    @JsonManagedReference(value = "user-comment")
-    @OneToMany(mappedBy = "user")
-    private List<Comment> comments;
-
     // @OneToMany(mappedBy = "sender")
     // private List<Chat> sentChat;
 
@@ -95,26 +71,6 @@ public class User {
 
     public String getImage() {
         return image;
-    }
-
-    public List<Activity> getActivities() {
-        return activities;
-    }
-
-    public List<Attender> getJoinActivity() {
-        return joinActivity;
-    }
-
-    public List<Post> getPosts() {
-        return posts;
-    }
-
-    public List<SusPost> getSusPost() {
-        return suspendedPosts;
-    }
-
-    public List<Comment> getComments() {
-        return comments;
     }
 
     // public List<Chat> getSentChat() {

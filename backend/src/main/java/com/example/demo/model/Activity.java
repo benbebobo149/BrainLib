@@ -22,7 +22,6 @@ public class Activity {
     private Integer id;
 
     @ManyToOne
-    @JsonBackReference(value = "user-activity")
     @JoinColumn(name = "user_id", nullable = false, referencedColumnName = "id")
     private User user;
 
@@ -41,10 +40,6 @@ public class Activity {
     @Column(name = "dateTime", nullable = true)
     private Date dateTime;
 
-    @JsonManagedReference(value = "activity-attender")
-    @OneToMany(mappedBy = "activity")
-    private Set<Attender> attenders;
-
     // getters and setters
 
     public Integer getId() {
@@ -53,10 +48,6 @@ public class Activity {
 
     public User getUser() {
         return user;
-    }
-
-    public Set<Attender> getAttenders() {
-        return attenders;
     }
 
     public String getTitle() {

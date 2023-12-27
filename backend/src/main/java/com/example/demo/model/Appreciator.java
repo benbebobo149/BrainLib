@@ -17,12 +17,10 @@ public class Appreciator {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @JsonBackReference(value = "post-appreciator")
     @ManyToOne
     @JoinColumn(name = "post", nullable = false, referencedColumnName = "id")
     private Post post;
 
-    @JsonBackReference(value = "user-appreciator")
     @ManyToOne
     @JoinColumn(name = "appreciator", nullable = false, referencedColumnName = "id")
     private User appreciator;

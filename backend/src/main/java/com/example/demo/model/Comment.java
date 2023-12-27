@@ -17,18 +17,19 @@ public class Comment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @JsonBackReference(value = "post-comment")
     @ManyToOne
     @JoinColumn(name = "post", nullable = false, referencedColumnName = "id")
     private Post post;
 
-    @JsonBackReference(value = "user-comment")
     @ManyToOne
     @JoinColumn(name = "users", nullable = false, referencedColumnName = "id")
     private User user;
 
     @Column(name = "content", nullable = false)
     private String content;
+
+    @Column(name = "created_at", nullable = false)
+    private String createdAt;
 
     // getters and setters
 
@@ -48,6 +49,10 @@ public class Comment {
         return content;
     }
 
+    public String getCreatedAt() {
+        return createdAt;
+    }
+
     public void setPost(Post post) {
         this.post = post;
     }
@@ -58,5 +63,9 @@ public class Comment {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
     }
 }

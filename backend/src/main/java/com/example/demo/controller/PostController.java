@@ -71,6 +71,8 @@ public class PostController {
     @PutMapping("/{post_id}")
     public ResponseEntity<?> updatePost(@PathVariable Integer post_id, @RequestBody Post post, HttpServletRequest request) {
         try {
+            // get tag from request body
+            List<Tag> tags = post.getTags();
             PostResult result = postService.updatePost(post_id, post, request);
     
             switch (result.getResultCode()) {

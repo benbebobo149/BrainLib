@@ -17,12 +17,10 @@ public class SusPost {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @JsonBackReference(value = "post-suspost")
     @ManyToOne
     @JoinColumn(name = "post", nullable = false)
     private Post post;
-
-    @JsonBackReference(value = "user-suspost")
+    
     @ManyToOne
     @JoinColumn(name = "suspender", nullable = false)
     private User suspender;

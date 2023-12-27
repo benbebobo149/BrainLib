@@ -16,17 +16,21 @@ import org.springframework.beans.factory.annotation.Value;
 import org.json.JSONObject;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.example.demo.service.JwtService;
 import com.example.demo.dto.JwtResult;
 
 @RestController
 public class FileUploadController  {
-    
+
+    @Autowired
+    private JwtService jwtService;
+
     @Value("${my.custom.imgurToken}")
     private String imgurToken;
 
@@ -35,11 +39,7 @@ public class FileUploadController  {
     public ResponseEntity<?> handleFileUpload(@RequestParam("image") MultipartFile file, HttpServletRequest request) {
         JwtResult jwtResult = jwtService.parseRequest(request);
             
-        if (jwtResult == null) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-        }
-        
-        if (!jwtResult.getPassed()) {
+        if (jwtResult == null && !jwtResult.getPassed()) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
 

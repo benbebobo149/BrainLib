@@ -14,15 +14,26 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 @Entity
 @Table(name = "posts")
 public class Post {
+
+    @ManyToMany
+    @JoinTable(
+        name = "post_tag",
+        joinColumns = @JoinColumn(name = "post"),
+        inverseJoinColumns = @JoinColumn(name = "tag")
+    )
+    private List<Tag> tags;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @JsonBackReference(value = "user-post")
     @ManyToOne
     @JoinColumn(name = "users", nullable = false, referencedColumnName = "id")
     private User user;
@@ -44,23 +55,6 @@ public class Post {
 
     @Column(name = "is_suspend", columnDefinition = "boolean default false")
     private Boolean isSuspend;
-
-    @JsonManagedReference(value = "post-posttag")
-    @OneToMany(mappedBy = "post")
-    private List<PostTag> tags;
-
-    @JsonManagedReference(value = "post-comment")
-    @OneToMany(mappedBy = "post")
-    private List<Comment> comments;
-
-    @JsonManagedReference(value = "post-suspost")
-    @OneToMany(mappedBy = "post")
-    private List<SusPost> suspendInfo;
-
-    @JsonManagedReference(value = "post-appreciator")
-    @OneToMany(mappedBy = "post")
-    private List<Appreciator> appreciators;
-
 
     public Post() {
         this.thumbUp = 0;
@@ -101,20 +95,8 @@ public class Post {
         return isSuspend;
     }
 
-    public List<PostTag> getTags() {
+    public List<Tag> getTags() {
         return tags;
-    }
-
-    public List<Comment> getComments() {
-        return comments;
-    }
-
-    public List<SusPost> getSuspendInfo() {
-        return suspendInfo;
-    }
-
-    public List<Appreciator> getAppreciators() {
-        return appreciators;
     }
 
     public void setUser(User user) {
@@ -133,10 +115,6 @@ public class Post {
         this.image = image;
     }
 
-    public void setTags(List<PostTag> tags) {
-        this.tags = tags;
-    }
-
     public void setThumbUp(Integer thumbUp) {
         this.thumbUp = thumbUp;
     }
@@ -149,15 +127,7 @@ public class Post {
         this.isSuspend = isSuspend;
     }
 
-    public void setComments(List<Comment> comments) {
-        this.comments = comments;
-    }
-
-    public void setSuspendInfo(List<SusPost> suspendInfo) {
-        this.suspendInfo = suspendInfo;
-    }
-
-    public void setAppreciators(List<Appreciator> appreciators) {
-        this.appreciators = appreciators;
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
     }
 }
