@@ -16,9 +16,13 @@ import org.springframework.beans.factory.annotation.Value;
 import org.json.JSONObject;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
 import org.springframework.web.bind.annotation.CrossOrigin;
+
+import com.example.demo.service.JwtService;
+import com.example.demo.dto.JwtResult;
 
 @RestController
 public class FileUploadController  {
@@ -28,10 +32,21 @@ public class FileUploadController  {
 
     @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/uploadFile")
-    public ResponseEntity<Map<String, Object>> handleFileUpload(@RequestParam("image") MultipartFile file) {
+    public ResponseEntity<?> handleFileUpload(@RequestParam("image") MultipartFile file, HttpServletRequest request) {
+        JwtResult jwtResult = jwtService.parseRequest(request);
+            
+        if (jwtResult == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+        
+        if (!jwtResult.getPassed()) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+
     HttpClient httpclient = HttpClients.createDefault();
     HttpPost httppost = new HttpPost("https://api.imgur.com/3/image");
     httppost.setHeader("Authorization", "Bearer " + imgurToken);
+
 
     try {
       HttpEntity reqEntity = MultipartEntityBuilder.create()

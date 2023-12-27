@@ -20,6 +20,7 @@ import com.example.demo.dto.CommentResult;
 import com.example.demo.dto.ApproveResult;
 
 import java.util.List;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 @RestController
 @RequestMapping("/post")
@@ -30,6 +31,7 @@ public class PostController {
     @Autowired
     private JwtService jwtService;
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping
     public ResponseEntity<?> createPost(@RequestBody Post post, HttpServletRequest request) {
         try {
@@ -49,6 +51,7 @@ public class PostController {
         }
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/search")
     public ResponseEntity<?> searchPosts(@RequestParam String keyword) {
         try {
@@ -64,6 +67,7 @@ public class PostController {
         }
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @PutMapping("/{post_id}")
     public ResponseEntity<?> updatePost(@PathVariable Integer post_id, @RequestBody Post post, HttpServletRequest request) {
         try {
@@ -85,6 +89,7 @@ public class PostController {
         }
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @DeleteMapping("/{post_id}")
     public ResponseEntity<?> deletePost(@PathVariable Integer post_id, HttpServletRequest request) {
         try {
@@ -106,6 +111,7 @@ public class PostController {
         }
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @PutMapping("/{post_id}/like")
     public ResponseEntity<?> likePost(@PathVariable Integer post_id, HttpServletRequest request) {
         try {
@@ -127,6 +133,7 @@ public class PostController {
         }
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @PutMapping("/{post_id}/report")
     public ResponseEntity<?> reportPost(@PathVariable Integer post_id, @RequestBody String reason, HttpServletRequest request) {
         try {
@@ -148,6 +155,7 @@ public class PostController {
         }
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/{post_id}/comments")
     public ResponseEntity<?> getComments(@PathVariable Integer post_id, HttpServletRequest request) {
         try {
@@ -169,6 +177,7 @@ public class PostController {
         }
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/{post_id}/comments")
     public ResponseEntity<?> addComment(@PathVariable Integer post_id, @RequestBody Comment comment, HttpServletRequest request) {
         try {
@@ -190,6 +199,7 @@ public class PostController {
         }
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @PutMapping("/comments/{comment_id}")
     public ResponseEntity<?> updateComment(@PathVariable Integer comment_id, @RequestBody Comment newComment, HttpServletRequest request) {
         try {
@@ -211,6 +221,7 @@ public class PostController {
         }
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @DeleteMapping("/comments/{comment_id}")
     public ResponseEntity<?> deleteComment(@PathVariable Integer comment_id, HttpServletRequest request) {
         try {
@@ -232,6 +243,7 @@ public class PostController {
         }
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/all/{tag_id}")
     public ResponseEntity<?> searchTagsPost(@PathVariable Integer tag_id) {
         try {
@@ -247,6 +259,7 @@ public class PostController {
         }
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/all")
     public ResponseEntity<?> getAllPosts() {
         try {
@@ -262,6 +275,7 @@ public class PostController {
         }
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/my/all")
     public ResponseEntity<List<Post>> getPostsByUser(HttpServletRequest request) {
         try {
@@ -281,6 +295,7 @@ public class PostController {
         }
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/{post_id}/approve")
     public ResponseEntity<?> approvePost(@PathVariable Integer post_id, @RequestBody ApproveResult approveResult, HttpServletRequest request) {
         try {
@@ -302,6 +317,7 @@ public class PostController {
         }
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/suspend")
     public ResponseEntity<?> getSuspendPosts(HttpServletRequest request) {
         try {

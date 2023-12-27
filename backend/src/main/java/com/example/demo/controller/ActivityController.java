@@ -12,6 +12,7 @@ import com.example.demo.model.Activity;
 import com.example.demo.service.ActivityService;
 
 import com.example.demo.dto.ActivityResult;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.util.List;
 
@@ -21,6 +22,7 @@ public class ActivityController {
     @Autowired
     private ActivityService activityService;
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/all")
     public ResponseEntity<?> getAllActivities() {
         try {
@@ -36,6 +38,7 @@ public class ActivityController {
         }
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping
     public ResponseEntity<?> createActivity(@RequestBody Activity activity, HttpServletRequest request) {
         try {
@@ -56,6 +59,7 @@ public class ActivityController {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @DeleteMapping("/{activity_id}")
     public ResponseEntity<?> deleteActivity(@PathVariable Integer activity_id, HttpServletRequest request) {
         try {
@@ -77,6 +81,7 @@ public class ActivityController {
         }
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @PutMapping("/{activity_id}")
     public ResponseEntity<?> updateActivity(@PathVariable Integer activity_id, @RequestBody Activity activityDetails, HttpServletRequest request) {
         try {
@@ -98,6 +103,7 @@ public class ActivityController {
         }
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/{activity_id}")
     public ResponseEntity<?> getActivityById(@PathVariable Integer activity_id) {
         try {
