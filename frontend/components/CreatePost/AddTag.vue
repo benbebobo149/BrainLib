@@ -8,7 +8,7 @@
         
         <input v-model="enteredText"
           class="absolute top-0 left-0 right-0 bottom-0 p-2 w-full h-full bg-transparent border-none rounded-full"
-          placeholder="Enter your text" />
+          placeholder="Enter your text" @keyup.enter="saveAndClosePopup"/>
       </div>
 
       <img src="/hello/Confirm.png" alt="Save and Close Button" class="h-[5vh] w-auto mt-4 cursor-pointer"
@@ -26,11 +26,30 @@ const closePopup = () => {
   emit('close');
 };
 
+// const saveAndClosePopup = () => {
+//   console.log('Entered Text:', enteredText.value);
+//   emit('close');
+//   closePopup();
+// };
+
 const saveAndClosePopup = () => {
-  console.log('Entered Text:', enteredText.value);
-  emit('close');
-  closePopup();
-};
+  // 加上 trim() 去除頭尾空白並防止沒鍵入文字
+  var value = this.newTodo.trim;
+  // 如果輸入欄空白就不會往下執行
+  if (!value) {
+    return;
+  } var value = this.newTodo;
+  // 賦予 id - 將當下的時間轉為數字
+  var timestamp = Math.floor(Date.now());
+  // 把資料以物件格式推進 todos 陣列
+  this.todos.push({ id: timestamp, title: value, });
+  this.newTodo = '';
+
+
+    console.log('Entered Text:', enteredText.value);
+    emit('close');
+    closePopup();
+}
 </script>
 
 <style scoped>

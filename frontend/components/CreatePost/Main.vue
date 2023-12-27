@@ -1,6 +1,6 @@
 <template>
   <div class="bg-slate-50">
-    <div class="flex h-[22vh]">
+    <div class="flex h-[12vh]">
       <!-- Left Section -->
       <div class="w-1/2 h-full flex flex-col">
         <!-- Top Section (1/4 height) -->
@@ -37,18 +37,30 @@
 
       </div>
     </div>
-    <div class="w-screen flex flex-col justify-center items-center">
-      <h1 class="text-[2vw] font-bold text-terotory text-center">輸入框示範</h1>
-      <Editor class="w-[60%]" />
+    <div class="h-[12vh]">
+      <!-- <addedTags /> -->
+
+    </div>
+    <div class="w-screen bg-slate-50 flex flex-col justify-center items-center">
+      <h1 class="text-[2vw] font-bold text-terotory text-center">貼文</h1>
+      <Editor class="w-[60%]" @openSucc="() => succVisible = true"  @openError="errorVisible = false"/>
     </div>
   </div>
+  <BoxSucc v-if="succVisible" class="z-10" @close="succVisible = false"></BoxSucc>
+  <BoxError v-if="errorVisible" @close="errorVisible = false"></BoxError>
 </template>
 
 <script setup>
 import { ref } from 'vue';
 import AddTag from '@/components/CreatePost/AddTag.vue';
 // import Editor.vue
-import Editor from '@/components/codeTemplate/Editor.vue'
+import Editor from '@/components/CreatePost/Editor.vue'
+import addedTags from '@/components/CreatePost/Tags.vue';
+import BoxSucc from '../ModelBox/BoxSucc.vue';
+import BoxError from '../ModelBox/BoxError.vue';
+
+const succVisible = ref(false);
+const errorVisible = ref(false);
 
 const fontSize = ref(["1rem", "1rem", "1rem"]);
 
@@ -56,9 +68,6 @@ const updateContent = (index) => {
   const element = document.querySelector(`[contenteditable]:nth-child(${index + 1})`);
   const content = element.innerText;
 };
-
-const handleFileChange = () => {
-}
 
 const showPopup = ref(false);
 
@@ -70,10 +79,15 @@ const closeRegistrationPopup = () => {
   showPopup.value = false;
 };
 
+
+//tags
 const tags = ref([]);
 const addTags = (tag) => {
   tags.value.push(tag);
 };
+
+//added tags
+
 </script>
 
 <style scoped>
