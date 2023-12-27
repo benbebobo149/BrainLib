@@ -11,6 +11,9 @@ import com.example.demo.model.SusPost;
 
 import jakarta.persistence.*;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Entity
 @Table(name = "Users")
@@ -110,6 +113,13 @@ public class User {
 
     public List<Chat> getReceivedChat() {
         return receivedChat;
+    }
+
+    public Set<Chat> getConversation() {
+        Set<Chat> conversation = Stream.concat(sentChat.stream(), receivedChat.stream())
+                                       .distinct()
+                                       .collect(Collectors.toSet());
+        return conversation;
     }
 
     // setters

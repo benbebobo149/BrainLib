@@ -21,8 +21,8 @@ public class SusPost {
     @JoinColumn(name = "suspender", nullable = false)
     private User suspender;
 
-    @Column(name = "is_reviewed", nullable = false)
-    private Boolean is_reviewed;
+    @Column(name = "isReviewed", nullable = false)
+    private Boolean isReviewed;
 
     @Column(name = "reason", nullable = false)
     private String reason;
@@ -42,7 +42,7 @@ public class SusPost {
     }
 
     public Boolean getIs_reviewed() {
-        return is_reviewed;
+        return isReviewed;
     }
 
     public String getReason() {
@@ -61,8 +61,8 @@ public class SusPost {
         this.suspender = suspender;
     }
 
-    public void setIs_reviewed(Boolean is_reviewed) {
-        this.is_reviewed = is_reviewed;
+    public void setIsReviewed(Boolean isReviewed) {
+        this.isReviewed = isReviewed;
     }
 
     public void setReason(String reason) {

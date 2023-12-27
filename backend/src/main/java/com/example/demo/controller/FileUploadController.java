@@ -1,5 +1,4 @@
 package com.example.demo.controller;
-
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -8,13 +7,18 @@ import org.apache.http.entity.ContentType;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.SpringApplication;
 import java.io.IOException;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Value;
+import org.json.JSONObject;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import java.util.HashMap;
+import java.util.Map;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 @RestController
 public class FileUploadController  {
@@ -22,34 +26,37 @@ public class FileUploadController  {
     @Value("${my.custom.imgurToken}")
     private String imgurToken;
 
-    @GetMapping("/uploadFile")
-    public String hello(@RequestParam(value = "name", defaultValue = "World") String name) {
-      return String.format("Hello %s!", name);
+    @CrossOrigin(origins = "http://localhost:3000")
+    @PostMapping("/uploadFile")
+    public ResponseEntity<Map<String, Object>> handleFileUpload(@RequestParam("image") MultipartFile file) {
+    HttpClient httpclient = HttpClients.createDefault();
+    HttpPost httppost = new HttpPost("https://api.imgur.com/3/image");
+    httppost.setHeader("Authorization", "Bearer " + imgurToken);
+
+    try {
+      HttpEntity reqEntity = MultipartEntityBuilder.create()
+              .addBinaryBody("image", file.getInputStream(), ContentType.create(file.getContentType()), file.getOriginalFilename())
+              .build();
+
+      httppost.setEntity(reqEntity);
+
+      HttpResponse response = httpclient.execute(httppost);
+      HttpEntity resEntity = response.getEntity();
+
+      if (resEntity != null) {
+          String responseString = EntityUtils.toString(resEntity);
+          JSONObject jsonObject = new JSONObject(responseString);
+          String imageUrl =  jsonObject.getJSONObject("data").getString("link");
+          Map<String, Object> fileMap = new HashMap<>();
+          fileMap.put("url", imageUrl);
+          Map<String, Object> responseBody = new HashMap<>();
+          responseBody.put("success", 1);
+          responseBody.put("file", fileMap);
+          return new ResponseEntity<Map<String, Object>>(responseBody, HttpStatus.OK);
+      }
+    } catch (IOException e) {
+      return new ResponseEntity<Map<String, Object>>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
-    public String uploadFile() {
-        // just return hello world for now
-        return "Hello World";
-
-        // HttpClient httpclient = HttpClients.createDefault();
-        // HttpPost httppost = new HttpPost("https://api.imgur.com/3/image");
-        // httppost.setHeader("Authorization", "Bearer " + imgurToken);
-
-        // HttpEntity reqEntity = MultipartEntityBuilder.create()
-        //         .addBinaryBody("image", file.getInputStream(), ContentType.create(file.getContentType()), file.getOriginalFilename())
-        //         .build();
-
-        // httppost.setEntity(reqEntity);
-
-        // HttpResponse response = httpclient.execute(httppost);
-        // HttpEntity resEntity = response.getEntity();
-
-        // if (resEntity != null) {
-        //     String responseString = EntityUtils.toString(resEntity);
-        //     // Parse the responseString to get the image link
-        //     // Return the image link
-        //     return responseString;
-        // }
-
-        // return null;
+      return new ResponseEntity<Map<String, Object>>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

@@ -2,12 +2,13 @@
 package com.example.demo.model;
 
 import com.example.demo.model.User;
-import com.example.demo.model.PostTag;
+import com.example.demo.model.Comment;
+import com.example.demo.model.Tag;
 import com.example.demo.model.SusPost;
 import com.example.demo.model.Appreciator;
 
 import jakarta.persistence.*;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Table(name = "posts")
@@ -39,16 +40,16 @@ public class Post {
     private Boolean isSuspend;
 
     @OneToMany(mappedBy = "post")
-    private Set<PostTag> tags;
+    private List<PostTag> tags;
 
     @OneToMany(mappedBy = "post")
-    private Set<Comment> comments;
+    private List<Comment> comments;
 
     @OneToMany(mappedBy = "post")
-    private Set<SusPost> suspendInfo;
+    private List<SusPost> suspendInfo;
 
     @OneToMany(mappedBy = "post")
-    private Set<Appreciator> appreciators;
+    private List<Appreciator> appreciators;
 
     // getters and setters
     public Integer getId() {
@@ -83,19 +84,19 @@ public class Post {
         return isSuspend;
     }
 
-    public Set<PostTag> getTags() {
+    public List<PostTag> getTags() {
         return tags;
     }
 
-    public Set<Comment> getComments() {
+    public List<Comment> getComments() {
         return comments;
     }
 
-    public Set<SusPost> getSuspendInfo() {
+    public List<SusPost> getSuspendInfo() {
         return suspendInfo;
     }
 
-    public Set<Appreciator> getAppreciators() {
+    public List<Appreciator> getAppreciators() {
         return appreciators;
     }
 
@@ -115,6 +116,10 @@ public class Post {
         this.image = image;
     }
 
+    public void setTags(List<PostTag> tags) {
+        this.tags = tags;
+    }
+
     public void setThumbUp(Integer thumbUp) {
         this.thumbUp = thumbUp;
     }
@@ -125,5 +130,17 @@ public class Post {
 
     public void setIsSuspend(Boolean isSuspend) {
         this.isSuspend = isSuspend;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
+
+    public void setSuspendInfo(List<SusPost> suspendInfo) {
+        this.suspendInfo = suspendInfo;
+    }
+
+    public void setAppreciators(List<Appreciator> appreciators) {
+        this.appreciators = appreciators;
     }
 }
