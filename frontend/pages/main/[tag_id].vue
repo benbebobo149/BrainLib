@@ -9,10 +9,10 @@ const popupState = ref(true);
 </script>
 <template>
   <div class="w-full">
-    <div class=" bg-bgcolor w-screen">
+    <div class=" bg-bgcolor w-screen  max-w-full max-h-full">
       <!-- 左半邊 -->
       <div class="flex">
-        <div class="w-9/12 h-screen bg-bgcolor border-r border-terotory  ">
+        <div class="w-9/12 h-screen bg-bgcolor ">
           <div class="w-full h-1/4 bg-bgcolor flex items-center text-[2.3vw] p-10 ">
             <div class=" w-1/2 h-full ml-[5vw] border-b border-terotory flex items-end">
               <p class="ml-[2vw] font-bold">tag_name</p>
@@ -25,7 +25,7 @@ const popupState = ref(true);
           </div>
         </div>
         <!-- 右半邊 -->
-        <div class=" w-3/12 bg-bgcolor h-full ">
+        <div class=" w-3/12 bg-bgcolor h-full  border-l border-terotory right-0 fixed">
           <div class=" h-[100vh]">
             <!-- 熱門標籤 -->
             <div class="h-[35vh]  bg-bgcolor my-[4vh] mx-auto rounded-sm border-b border-terotory  overflow-y-hidden">
@@ -34,8 +34,11 @@ const popupState = ref(true);
                 </div>
               </div>
 
-              <div class="flex justify-around w-full h-auto my-[1vh]">
-                <MainTrendingTopic v-for="index in 1" :key="index" class="overflow-y-scroll hide-scrollbar " />
+              <div class="flex justify-around w-full h-auto my-[3vh]  ">
+                <div class="overflow-y-scroll hide-scrollbar fill-available p-0
+                ">
+                  <MainTrendingTopic />
+                </div>
               </div>
             </div>
             <!-- 活動 -->

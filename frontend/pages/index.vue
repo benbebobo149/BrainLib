@@ -4,11 +4,11 @@
       <div class="flex w-full h-[85%]">
         <div class="w-1/2 h-full">
           <div class="flex w-full h-3/4 items-end bg-purple-100">
-            <img src="Biglogo.png" alt="logo" class="mx-auto w-auto h-[90%]">
+            <img src="Biglogo.png" alt="logo" class="mx-auto w-auto h-[90%] ">
           </div>
           <div class="flex w-full h-1/4 bg-purple-100">
             <NuxtLink to="http://localhost:3000/main" class="w-1/3 h-1/3 m-auto">
-              <img src="Start.png" alt="GetStart" class="w-auto h-full">
+              <img src="Start.png" alt="GetStart" class="w-auto h-full ">
             </NuxtLink>
           </div>
         </div>
@@ -23,7 +23,7 @@
       </div>
       <div class="flex w-full h-[10%] bg-purple-100">
         <NuxtLink to="http://localhost:3000/main" class=" flex w-auto h-full m-auto">
-          <img src="DoubleDown.png" alt="DoubleDown" class="w-auto h-full">
+          <img src="DoubleDown.png" alt="DoubleDown" class="w-auto h-full animate-bounce">
         </NuxtLink>
       </div>
     </div>
