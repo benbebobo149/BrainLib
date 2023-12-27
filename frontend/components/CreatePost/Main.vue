@@ -66,7 +66,7 @@ const fontSize = ref(["1rem", "1rem", "1rem"]);
 
 const updateContent = (index) => {
   const element = document.querySelector(`[contenteditable]:nth-child(${index + 1})`);
-  const content = element.innerText;
+  const content = element.innerTezxt;
 };
 
 const showPopup = ref(false);

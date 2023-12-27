@@ -2,7 +2,7 @@
     {
         "activity_id": 0,
         "user_id": 0,
-        "title": "string",
+        "title": "React Workshop",
         "content": {},
         "location": "string",
         "visible": true,

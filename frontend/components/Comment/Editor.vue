@@ -65,11 +65,7 @@ const editor = new EditorJS({
 </style>
 <template>
     <div class="flex flex-col justify-center items-center">
-        <div id="editorjs" class="w-full h- border-2 border-terotory "></div>
-        <div class="flex justify-end self-end mt-2 mr-96">
-            <button @click="sendMessage"
-                class="text-white bg-primary hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 focus:outline-non">傳送內容</button>
-        </div>
+        <div id="editorjs" class="w-[50vw] h- border-2 border-terotory mb-10"></div>
 
     </div>
 </template>

@@ -49,7 +49,7 @@
           <img src="/hello/AddTag.png" alt="Add tag" class="w-auto h-[4vh] mr-10">
         </label>
         <NuxtLink to="http://localhost:3000/activityPage" class="self-end justify-self-end">
-          <img src="/hello/Preview.png" alt="Preview" class="w-auto h-[4vh] mr-10">
+          <img src="/hello/Confirm.png" alt="Preview" class="w-auto h-[5vh] mr-10">
         </NuxtLink>
         <input id="fileInput" type="file" style="display: none;" @change="handleFileChange" />
         <AddTag v-if="showPopup" @close="closeRegistrationPopup" @save="handleSaveTag" />

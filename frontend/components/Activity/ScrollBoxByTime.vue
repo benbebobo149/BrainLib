@@ -6,14 +6,19 @@
         <div class="ml-10">
           <p class="text-2xl text-black font-bold underline mt-2">{{ activity.title }}</p>
           <p class="text-xl text-black mt-10">{{ activity.location }}</p>
-          <img src="/hello/Rectangle8.png" alt="Register Button" class="h-[2vh] w-10 mt-10 rounded-full" />
+          <div class="flex flex-row">
+            <div v-for="tag in activity.tags" :key="tag.tag_id"
+              class="bg-purple-200 h-6 w-auto rounded-full text-center text-neutral-900 text-s font-normal px-2 mt-5 ml-2">
+              <p class="text-m text-black">{{ tag.tag_name }}</p>
+            </div>
+          </div>
         </div>
         <div class="ml-auto mb-2 flex items-start justify-end">
           <p class="text-xl text-end text-black mt-2 self-startS">{{ activity.date }}</p>
         </div>
       </NuxtLink>
       <div class="ml-auto mb-auto flex items-center justify-end">
-        <img src="/hello/GroupStart.png" alt="Register Button" class="h-[5vh] w-auto" @click="showRegistrationPopup" />
+        <img src="/hello/GroupStart.png" alt="Register Button" class="h-[5vh] w-auto mb-5">
       </div>
       <div v-if="index < activities.length - 1" class="border-b border-black border-1"></div>
     </div>
