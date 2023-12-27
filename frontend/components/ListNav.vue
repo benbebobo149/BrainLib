@@ -6,18 +6,18 @@
     <div class="relative w-[25%] h-auto bg-violet-100">
       <button @click="closeModal" class="absolute right-2 text-xl font-bold cursor-pointer">&times;</button>
       <div class="w-auto h-[8%] flex bg-violet-100 items-center border-b border-terotory">
-        <NuxtLink to="http://localhost:3000/main" class="flex w-auto h-[80%] ml-[.5vw]">
+        <NuxtLink to="/main" @click="closeModal" class="flex w-auto h-[80%] ml-[.5vw]">
           <img src="@/logo.png" alt="logo" class="w-full h-auto">
         </NuxtLink>
-        <NuxtLink to="http://localhost:3000/main" class="flex w-auto h-[80%] items-center ">
+        <NuxtLink to="/main" @click="closeModal" class="flex w-auto h-[80%] items-center ">
           <p class="text-[2vw] ml-[2vw] ">Home Page</p>
         </NuxtLink>
       </div>
       <div class="w-auto h-[8%] flex bg-violet-100 items-center mt-1 border-b border-terotory">
-        <NuxtLink to="./" class="flex w-auto h-[80%] bg-violet-100 ml-[.5vw]">
+        <NuxtLink to="/activity" @click="closeModal" class="flex w-auto h-[80%] bg-violet-100 ml-[.5vw]">
           <img src="/ListNav/Calendar.png" alt="Calendar" class="w-auto h-full">
         </NuxtLink>
-        <NuxtLink to="http://localhost:3000/activity" class="flex w-auto h-[80%] items-center ml-[2.5vw] ">
+        <NuxtLink to="/activity" @click="closeModal" class="flex w-auto h-[80%] items-center ml-[2.5vw] ">
           <p class="text-[2vw]">Activity Page</p>
         </NuxtLink>
       </div>

@@ -6,18 +6,18 @@
         <!-- <button @click="closeModal" class="h-[3%] absolute left-0 text-md font-bold cursor-pointer">&times;</button> -->
         <div class="w-full h-auto bg-purple-50 items-center justify-center">
             <div class="hover:bg-purple-100 ease-in-out flex h-[25%] w-auto p-1">
-                <NuxtLink to="http://localhost:3000/personal" class="w-[20%] h-auto flex justify-center">
+                <NuxtLink to="/personal" class="w-[20%] h-auto flex justify-center">
                     <img src="/PhotoSticker/PersonalProfile.png" alt="" class="w-full h-auto">
                 </NuxtLink>
-                <NuxtLink to="http://localhost:3000/personal" class="text-[1vw] flex items-center w-[80%] h-auto ml-5">
+                <NuxtLink to="/personal" class="text-[1vw] flex items-center w-[80%] h-auto ml-5">
                     <p>Personal Profile</p>
                 </NuxtLink>
             </div>
             <div class="hover:bg-purple-100 flex h-1/4 w-full p-1">
-                <NuxtLink to="http://localhost:3000/personal/Change" class="w-[20%] h-auto flex justify-center">
+                <NuxtLink to="/personal/Change" class="w-[20%] h-auto flex justify-center">
                     <img src="/PhotoSticker/Edit.png" alt="" class="w-full h-auto">
                 </NuxtLink>
-                <NuxtLink to="http://localhost:3000/personal/Change" class="text-[1vw] flex items-center ml-5 w-[80%] h-auto">
+                <NuxtLink to="/personal/Change" class="text-[1vw] flex items-center ml-5 w-[80%] h-auto">
                     <p>Edit Profile</p>
                 </NuxtLink>
             </div>
@@ -32,10 +32,10 @@
             </div>
             
             <div v-if="userPermission[1].permission == 2" class="flex h-1/4 w-full p-1">
-                <NuxtLink to="http://localhost:3000/admini" class="w-[20%] h-auto flex justify-center">
+                <NuxtLink to="/admini" class="w-[20%] h-auto flex justify-center">
                     <img src="/PhotoSticker/Admin.png" alt="" class="w-full h-auto">
                 </NuxtLink>
-                <NuxtLink to="http://localhost:3000/admini" class="text-[1vw] flex items-center ml-5 w-[80%] h-auto">
+                <NuxtLink to="/admini" class="text-[1vw] flex items-center ml-5 w-[80%] h-auto">
                     <p>Admin Page</p>
                 </NuxtLink>
             </div>
@@ -73,12 +73,7 @@ const LogOut = () => {
     alert("確認是否登出");
 
 };
-
 const Admin = ref(false);
-
-
-
-
 
 </script>
 <style scoped>

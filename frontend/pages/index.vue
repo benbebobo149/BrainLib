@@ -7,7 +7,7 @@
             <img src="Biglogo.png" alt="logo" class="mx-auto w-auto h-[90%]">
           </div>
           <div class="flex w-full h-1/4 bg-purple-100">
-            <NuxtLink to="http://localhost:3000/main" class="w-1/3 h-1/3 m-auto">
+            <NuxtLink to="/main" class="w-1/3 h-1/3 m-auto">
               <img src="Start.png" alt="GetStart" class="w-auto h-full">
             </NuxtLink>
           </div>
@@ -22,7 +22,7 @@
         </div>
       </div>
       <div class="flex w-full h-[10%] bg-purple-100">
-        <NuxtLink to="http://localhost:3000/main" class=" flex w-auto h-full m-auto">
+        <NuxtLink to="/main" class=" flex w-auto h-full m-auto">
           <img src="DoubleDown.png" alt="DoubleDown" class="w-auto h-full">
         </NuxtLink>
       </div>

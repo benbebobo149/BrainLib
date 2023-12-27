@@ -49,13 +49,13 @@
             </div>
             <div class="flex w-auto h-[15%]">
                 <div class="w-1/2 h-1/2 bg-purple-50 flex justify-center">
-                    <NuxtLink to="http://localhost:3000/personal"
+                    <NuxtLink to="/personal"
                         class="w-1/2 h-auto flex justify-center items-center bg-purple-50">
                         <img src="@/Change/cancel.png" alt="" class="w-auto h-full">
                     </NuxtLink>
                 </div>
                 <div class="w-1/2 h-1/2 bg-purple-50 flex justify-center">
-                    <NuxtLink to="http://localhost:3000/personal"
+                    <NuxtLink to="/personal"
                         class="w-1/2 h-auto flex justify-center items-center bg-purple-50">
                         <img src="@/Change/Confirm.png" alt="" class="w-auto h-full">
                     </NuxtLink>
