@@ -10,7 +10,7 @@ const props = defineProps({
 //get data from database
 const getActivityData = () => {
     const token = useCookie('token');
-    axios.get(`${config.public.apiURL}/activity`, { // config.public.apiURL + "/tag"
+    axios.get(`${config.public.apiURL}/tag`, { // config.public.apiURL + "/tag"
     }, {
         headers: {
             'Authorization': 'Bearer ' + token.value,

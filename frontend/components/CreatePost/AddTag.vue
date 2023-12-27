@@ -1,14 +1,15 @@
 <template>
   <div class="popup-overlay">
     <div class="rounded-lg flex flex-col bg-white justify-center items-center p-5">
-      <img src="/hello/XLg.png" alt="Close Button" class="h-[3vh] w-auto justify-self-end self-end cursor-pointer" @click="closePopup">
+      <img src="/hello/XLg.png" alt="Close Button" class="h-[3vh] w-auto justify-self-end self-end cursor-pointer"
+        @click="closePopup">
 
       <div class="relative mb-4">
         <img src="/hello/Rectangle7.png" alt="Rectangle Box" class="h-[8vh] w-auto cursor-pointer" />
-        
+
         <input v-model="enteredText"
           class="absolute top-0 left-0 right-0 bottom-0 p-2 w-full h-full bg-transparent border-none rounded-full"
-          placeholder="Enter your text" @keyup.enter="saveAndClosePopup"/>
+          placeholder="Enter your text" @keyup.enter="saveAndClosePopup" />
       </div>
 
       <img src="/hello/Confirm.png" alt="Save and Close Button" class="h-[5vh] w-auto mt-4 cursor-pointer"
@@ -34,21 +35,18 @@ const closePopup = () => {
 
 const saveAndClosePopup = () => {
   // 加上 trim() 去除頭尾空白並防止沒鍵入文字
-  var value = this.newTodo.trim;
+  // var value = this.newTodo.trim;
   // 如果輸入欄空白就不會往下執行
-  if (!value) {
-    return;
-  } var value = this.newTodo;
-  // 賦予 id - 將當下的時間轉為數字
-  var timestamp = Math.floor(Date.now());
-  // 把資料以物件格式推進 todos 陣列
-  this.todos.push({ id: timestamp, title: value, });
-  this.newTodo = '';
-
-
+  if (enteredText.value) {
     console.log('Entered Text:', enteredText.value);
+    emit('additem', enteredText.value);
+    enteredText.value = '';
     emit('close');
     closePopup();
+    return;
+  }
+  emit('close');
+  closePopup();
 }
 </script>
 

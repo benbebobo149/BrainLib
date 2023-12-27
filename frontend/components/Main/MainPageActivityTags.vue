@@ -6,7 +6,7 @@ import activities from './public/ActivityFakeData/ActivityFakeData.json';
 //get data from database
 const getActivityData = () => {
   const token = useCookie('token');
-  axios.get(`${config.public.apiURL}/activity`, { // config.public.apiURL + "/tag"
+  axios.get(`${config.public.apiURL}/activity/all`, { // config.public.apiURL + "/tag"
 
     activity_id: 0,
   }, {

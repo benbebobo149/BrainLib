@@ -30,7 +30,7 @@
           </label>
           <img src="/hello/Preview.png" alt="Preview" class="w-auto h-[4vh] mr-10">
           <input id="fileInput" type="file" style="display: none;" @change="handleFileChange" />
-          <AddTag v-if="showPopup" class="z-10" @close="closeRegistrationPopup" />
+          <AddTag v-if="showPopup" class="z-10" @close="closeRegistrationPopup" @additem="addTags" />
         </div>
 
         <!-- Bottom Subsection (3/4 height) -->
@@ -43,6 +43,17 @@
     </div>
     <div class="w-screen bg-slate-50 flex flex-col justify-center items-center">
       <h1 class="text-[2vw] font-bold text-terotory text-center">Create Post</h1>
+      <div class="my-[2vh] flex">
+        <P>
+          tags:
+        </P>
+        <div v-for="tag in tags" class="mx-[1vw] flex">
+          <div
+            class="mx-auto rounded-sm border border-terotory text-center text-neutral-900 text-l font-normal font-'Roboto' leading-7 p-[0.5vh]">
+            {{ tag }}
+          </div>
+        </div>
+      </div>
 
       <Editor class="w-[60%]" @openSucc="() => succVisible = true" @openError="errorVisible = false" />
     </div>
@@ -63,7 +74,7 @@ import BoxError from '../ModelBox/BoxError.vue';
 const succVisible = ref(false);
 const errorVisible = ref(false);
 
-const fontSize = ref(["1rem", "1rem", "1rem"]);
+
 
 const updateContent = (index) => {
   const element = document.querySelector(`[contenteditable]:nth-child(${index + 1})`);

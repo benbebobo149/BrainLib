@@ -104,9 +104,15 @@ const editor = new EditorJS({
 </style>
 <template>
     <div class="flex flex-col justify-center">
+        <div v-for="tag in tags" class="flex">
+        <div
+          class="mx-auto rounded-sm border border-terotory text-center text-neutral-900 text-l font-normal font-'Roboto' leading-7 p-[0.5vh]">
+          {{ tag }}
+        </div>
+      </div>
         <div class="w-auto h-1/3 flex content-cneter ">
             <input type="text"  v-model="postTitle"
-                class="w-auto h-[8vh] pl-[1vw] text-terotory mb-[2vh]">
+                class="w-auto text-[3vw] h-[8vh] pl-[1vw] mb-[2vh]">
             <div class="w-auto h-1/3 text-[1vw] mt-[3vh] ml-[1vw] text-stone-500">
                 <p>enter your title here.</p>
             </div>
