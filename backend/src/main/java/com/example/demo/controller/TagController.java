@@ -26,7 +26,7 @@ public class TagController {
         try {
             List<Tag> allTags = tagService.getAllTags();
     
-            if (allTags != null) {
+            if (allTags.size() > 0) {
                 return ResponseEntity.ok(allTags);
             } else {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
@@ -46,6 +46,8 @@ public class TagController {
                     return ResponseEntity.ok(result.getTag());
                 case 1: // 沒有權限
                     return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+                case 2: // 名稱重複
+                    return ResponseEntity.status(HttpStatus.CONFLICT).build();
                 default: // 其他錯誤
                     return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
             }
@@ -68,6 +70,8 @@ public class TagController {
                     return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
                 case 2: // 找不到
                     return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+                case 3: // 名稱重複
+                    return ResponseEntity.status(HttpStatus.CONFLICT).build();
                 default: // 其他錯誤
                     return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
             }

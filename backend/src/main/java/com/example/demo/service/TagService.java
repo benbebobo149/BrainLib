@@ -45,6 +45,13 @@ public class TagService {
             return result;
         }
 
+        Tag OptionalTag = tagRepository.findByTagName(tag.getTagName());
+
+        if (OptionalTag != null) {
+            result.setResultCode(2);
+            return result;
+        }
+
         User user = jwtResult.getUser();
         if (user.getPermission() == 0) {
             result.setResultCode(1);
@@ -110,13 +117,21 @@ public class TagService {
             tag = OptionalTag.get();
         }
 
+        Tag OptionalTag2 = tagRepository.findByTagName(tagDetails.getTagName());
+
+        if (OptionalTag2 != null) {
+            if (OptionalTag2.getId() != id) {
+                result.setResultCode(3);
+                return result;
+            }
+        }
+
         if (user.getPermission() == 0) {
             result.setResultCode(1);
         } else if (tag == null) {
             result.setResultCode(2);
         } else{
             tag.setTagName(tagDetails.getTagName());
-            tag.setTagAbbr(tagDetails.getTagAbbr());
 
             result.setTag(tagRepository.save(tag));
             result.setResultCode(0);

@@ -22,9 +22,6 @@ public class Tag {
     @Column(name = "tagName", nullable = false)
     private String tagName;
 
-    @Column(name = "tagAbbr", nullable = true)
-    private String tagAbbr;
-
     @OneToOne(mappedBy = "tag", cascade = CascadeType.ALL)
     private TrendTag trendTag;
 
@@ -38,15 +35,7 @@ public class Tag {
         return tagName;
     }
 
-    public String getTagAbbr() {
-        return tagAbbr;
-    }
-
     public void setTagName(String tagName) {
         this.tagName = tagName;
-    }
-
-    public void setTagAbbr(String tagAbbr) {
-        this.tagAbbr = tagAbbr;
     }
 }
