@@ -11,7 +11,7 @@
           </div>
         </label>
       </div>
-      <div class="mt-10" v-for=" activity in activities" :key="activity.id">
+      <div class="mt-10" v-for="(activity, index) in activities" :key="activity.id">
         <NuxtLink to="http://localhost:3000/activityPage" class="flex flex-row">
           <img :src="activity.pic" alt="Activity Pic" class="h-auto w-[20vw] mt-8 mb-8" />
           <div class="ml-10">
@@ -26,6 +26,7 @@
         <div class="ml-auto mb-auto flex items-center justify-end">
           <img src="/hello/GroupStart.png" alt="Register Button" class="h-[5vh] w-auto" @click="showRegistrationPopup" />
         </div>
+        <div v-if="index < activities.length - 1" class="border-b border-black border-1"></div>
       </div>
     </div>
     <RegistrationSuccessPopup v-if="showPopup" @close="closeRegistrationPopup" />

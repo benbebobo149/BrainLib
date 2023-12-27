@@ -1,16 +1,25 @@
 <script setup>
-import EditorJS from '/@editorjs/editorjs';
-import Header from '/@editorjs/header';
-import List from '/@editorjs/list';
-import ImageTool from '/@editorjs/image';
+import EditorJS from '@editorjs/editorjs';
+import Header from '@editorjs/header';
+import List from '@editorjs/list';
+import ImageTool from '@editorjs/image';
 const config = useRuntimeConfig()
+
+const emit = defineEmits();
 
 // click the button and console log the content
 const sendMessage = () => {
+    emit('openSucc')
     editor.save().then((outputData) => {
         console.log('Article data: ', outputData)
+        const moveToPage = () => {
+            reloadNuxtApp({ path: '/personal', ttl:8000 });
+
+        };
+        setTimeout(moveToPage(), 10000);
     }).catch((error) => {
         console.log('Saving failed: ', error)
+        emit('openError')
     })
 }
 const editor = new EditorJS({

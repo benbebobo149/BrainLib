@@ -1,10 +1,10 @@
 <script setup>
 import Header from '~/components/InPageNav.vue'
-import Main from '~/components/CreateActivity/Main.vue'
+import Main from '~/components/Comment/PopUp.vue'
 </script>
 <template>
   <div>
-    <!-- <Header /> -->
-    <Main/>
+    <Header />
+    <Main />
   </div>
 </template>

@@ -9,10 +9,7 @@
             <div class="w-full h-3/4 overflow-y-hidden">
                 <div class="w-auto h-full overflow-y-scroll hide-scrollbar fill-available p-0">
                     <PostPreview />
-                    <PostPreview />
-                    <PostPreview />
-                    <PostPreview />
-                    <PostPreview />
+
                 </div>
             </div>
         </div>

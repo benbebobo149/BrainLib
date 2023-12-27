@@ -36,15 +36,15 @@ const DeleteAccount = () => {
 				<button @click="DeleteAccount" class="h-[3vw] w-[3vw] justify-center">
 					<img src="@/PhotoSticker/DeleteAccount.png" alt="Delete Account" class="w-full h-auto">
 				</button>
-				<button @click="DeleteAccount" class="w-[10vw] text-[vw] flex items-center ml-5  h-auto">
-					<p>Delete User</p>
+				<button @click="DeleteAccount" class="w-[10vw] text-[vw] flex  justify-center ml-5  h-auto">
+					<p class="text-red-700">Delete User</p>
 				</button>
 			</div>
 
 			<!-- <img class="left-[20vw] w-[3vw] h-[3vw] ml-[0.5rem] relative flex cursor-pointer items-center"
 				src="@/PageAdmini/GearFill.png" @click="handleClick" /> -->
 			<div class="left-[4vw] w-[3vw] h-[3vw] ml-[2vw] relative flex cursor-pointer items-center">
-				<AdiminiUserAuthrity class="bg-primary broder"></AdiminiUserAuthrity>
+				<AdiminiUserAuthrity class="bg- broder"></AdiminiUserAuthrity>
 			</div>
 		</div>
 	</div>
