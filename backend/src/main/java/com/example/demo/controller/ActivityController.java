@@ -81,27 +81,27 @@ public class ActivityController {
         }
     }
 
-    @CrossOrigin(origins = "http://localhost:3000")
-    @PutMapping("/{activity_id}")
-    public ResponseEntity<?> updateActivity(@PathVariable Integer activity_id, @RequestBody Activity activityDetails, HttpServletRequest request) {
-        try {
-            ActivityResult result = activityService.updateActivity(activity_id, activityDetails, request);
+    // @CrossOrigin(origins = "http://localhost:3000")
+    // @PutMapping("/{activity_id}")
+    // public ResponseEntity<?> updateActivity(@PathVariable Integer activity_id, @RequestBody Activity activityDetails, HttpServletRequest request) {
+    //     try {
+    //         ActivityResult result = activityService.updateActivity(activity_id, activityDetails, request);
     
-            switch (result.getResultCode()) {
-                case 0: // 成功
-                    return ResponseEntity.ok(result.getActivity());
-                case 1: // 沒有權限
-                    return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-                case 2: // 找不到
-                    return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-                default: // 其他錯誤
-                    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-            }
-        } catch (Exception e) {
-            // 處理其他可能的錯誤
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
-    }
+    //         switch (result.getResultCode()) {
+    //             case 0: // 成功
+    //                 return ResponseEntity.ok(result.getActivity());
+    //             case 1: // 沒有權限
+    //                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+    //             case 2: // 找不到
+    //                 return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+    //             default: // 其他錯誤
+    //                 return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+    //         }
+    //     } catch (Exception e) {
+    //         // 處理其他可能的錯誤
+    //         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+    //     }
+    // }
 
     @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/{activity_id}")

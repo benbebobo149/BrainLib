@@ -35,8 +35,8 @@ public class ActivityService {
 
         ActivityResult result = new ActivityResult();
 
-        User user = jwtResult.getUser();
-        activity.setUser(user);
+        Integer userId = jwtResult.getUserId();
+        activity.setUserId(userId);
 
         if (jwtResult == null) {
             result.setResultCode(1);
