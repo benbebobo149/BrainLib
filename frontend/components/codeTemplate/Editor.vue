@@ -1,8 +1,8 @@
 <script setup>
-import EditorJS from '/@editorjs/editorjs';
-import Header from '/@editorjs/header';
-import List from '/@editorjs/list';
-import ImageTool from '/@editorjs/image';
+import EditorJS from './@editorjs/editorjs';
+import Header from './@editorjs/header';
+import List from './@editorjs/list';
+import ImageTool from './@editorjs/image';
 const config = useRuntimeConfig()
 
 // click the button and console log the content
