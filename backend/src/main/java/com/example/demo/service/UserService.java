@@ -93,6 +93,12 @@ public class UserService {
         }
         
         User user = userRepository.findById(id).orElse(null);
+        
+        if (user == null) {
+            result.setResultCode(2);
+            return result;
+        }
+
         User userByName = userRepository.findByName(userDetails.getName()).orElse(null);
 
         if (user.getName() == userByName.getName()) {
@@ -100,21 +106,17 @@ public class UserService {
             return result;
         }
 
-        if (user != null) {
-            if (user.getId() == userDetails.getId()) {
-                user.setName(userDetails.getName());
-                user.setEmail(userDetails.getEmail());
-                user.setProfile(userDetails.getProfile());
-                user.setPermission(userDetails.getPermission());
-                user.setImage(userDetails.getImage());
-                userRepository.save(user);
-                result.setResultCode(0);
-                result.setUser(user);
-            } else {
-                result.setResultCode(1);
-            }
+        if (user.getId() == userDetails.getId()) {
+            user.setName(userDetails.getName());
+            user.setEmail(userDetails.getEmail());
+            user.setProfile(userDetails.getProfile());
+            user.setPermission(userDetails.getPermission());
+            user.setImage(userDetails.getImage());
+            userRepository.save(user);
+            result.setResultCode(0);
+            result.setUser(user);
         } else {
-            result.setResultCode(2);
+            result.setResultCode(1);
         }
 
         return result;
