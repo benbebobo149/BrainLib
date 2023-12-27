@@ -25,6 +25,7 @@ import com.example.demo.service.UserService;
 import com.example.demo.repository.UserRepository;
 
 import com.example.demo.dto.AuthenticationResult;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 @RestController
 public class AuthenticateController {
@@ -80,7 +81,7 @@ public class AuthenticateController {
     //         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
     //     }
     // }
-
+    @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/authenticate")
     public ResponseEntity<?> authenticate(@RequestBody User user) {
         try {

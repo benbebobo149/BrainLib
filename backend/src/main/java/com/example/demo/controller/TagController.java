@@ -13,13 +13,14 @@ import com.example.demo.service.TagService;
 import com.example.demo.dto.TagResult;
 
 import java.util.List;
-
+// import cors
+import org.springframework.web.bind.annotation.CrossOrigin;
 @RestController
 @RequestMapping("/tag")
 public class TagController {
     @Autowired
     private TagService tagService;
-
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping
     public ResponseEntity<?> getAllTags() {
         try {
@@ -34,7 +35,7 @@ public class TagController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
-
+    @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping
     public ResponseEntity<?> createTag(@RequestBody Tag tag, HttpServletRequest request) {
         try {
@@ -50,10 +51,11 @@ public class TagController {
             }
         } catch (Exception e) {
             // 處理其他可能的錯誤
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+            return ResponseEntity.ok(e);
+           // return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
-
+    @CrossOrigin(origins = "http://localhost:3000")
     @PutMapping("/{tag_id}")
     public ResponseEntity<?> updateTag(@PathVariable Integer tag_id, @RequestBody Tag tagDetails, HttpServletRequest request) {
         try {
@@ -74,7 +76,7 @@ public class TagController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
-
+    @CrossOrigin(origins = "http://localhost:3000")
     @DeleteMapping("/{tag_id}")
     public ResponseEntity<?> deleteTag(@PathVariable Integer tag_id, HttpServletRequest request) {
         try {
