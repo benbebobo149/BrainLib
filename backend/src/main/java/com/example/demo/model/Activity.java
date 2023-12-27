@@ -24,7 +24,7 @@ public class Activity {
 
     @JsonIdentityReference(alwaysAsId = true)
     @ManyToOne
-    @JoinColumn(name = "user", nullable = false, referencedColumnName = "id")
+    @JoinColumn(name = "users", nullable = false, referencedColumnName = "id")
     private User user;
 
     @Column(name = "title", nullable = false)
