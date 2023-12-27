@@ -93,6 +93,12 @@ public class UserService {
         }
         
         User user = userRepository.findById(id).orElse(null);
+        User userByName = userRepository.findByName(userDetails.getName()).orElse(null);
+
+        if (user.getName() == userByName.getName()) {
+            result.setResultCode(3);
+            return result;
+        }
 
         if (user != null) {
             if (user.getId() == userDetails.getId()) {

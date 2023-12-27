@@ -67,6 +67,8 @@ public class UserController {
                     return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
                 case 2: // 找不到
                     return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+                case 3: // 姓名已被使用
+                    return ResponseEntity.status(HttpStatus.CONFLICT).build();
                 default: // 其他錯誤
                     return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
             }
