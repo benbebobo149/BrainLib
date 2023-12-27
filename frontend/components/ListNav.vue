@@ -2,9 +2,8 @@
   <button @click="openModal" class="w-auto h-full">
     <img src="@/ListNav.png" class="w-auto h-[80%]" alt="ListNav">
   </button>
-  <div v-if="ListNavVisible" class="fixed inset-0 flex bg-black bg-opacity-30 w-screen h-screen max-h-full">
-    <div class="relative w-[25%] h-auto bg-violet-100">
-      <button @click="closeModal" class="absolute right-2 text-xl font-bold cursor-pointer">&times;</button>
+  <div @click="closeModal" v-if="ListNavVisible" class="fixed inset-0 flex bg-black bg-opacity-30 w-screen h-screen max-h-full">
+    <div id="slideLeft" class="relative w-[25%] h-auto bg-violet-100">
       <div class="w-auto h-[8%] flex bg-violet-100 items-center border-b border-terotory">
         <NuxtLink to="/main" @click="closeModal" class="flex w-auto h-[80%] ml-[.5vw]">
           <img src="@/logo.png" alt="logo" class="w-full h-auto">
@@ -56,6 +55,27 @@ const route = useRoute();
 </script>
 
 <style scoped>
+#slideLeft {
+  left: -600px;
+  -webkit-animation: slide 0.5s forwards;
+  -webkit-animation-delay: 0.5s;
+  animation: slide 1.0s forwards;
+  animation-delay: 0.1s;
+}
+
+@-webkit-keyframes slide {
+  100% {
+    left: 0;
+  }
+}
+
+@keyframes slide {
+  100% {
+    left: 0;
+  }
+}
+
+
 /* 自訂的 CSS 類別 */
 .hide-scrollbar::-webkit-scrollbar {
   display: none;

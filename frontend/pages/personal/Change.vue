@@ -3,23 +3,22 @@
         <div class="w-1/4 h-auto bg-purple-50"></div>
         <div class="w-1/2 h-auto bg-purple-50">
             <div class="flex w-auto h-[35%]  justify-center mt-2 bg-purple-50">
-                <div class="w-1/3 h-auto bg-purple-50 flex justify-center items-center">
-                    <img src="@/UserPhoto.png" alt="" class="w-auto h-[50%]">
-                </div>
-                <div class="w-1/3 h-auto bg-purple-50 flex items-center">
-                    <div class="flex w-[15%] h-auto items-center bg-purple-50">
-
-                        <label for="fileInput" class="cursor-pointer flex items-center">
-                            <img src="@/Change/UpLoad.png" alt="" w-auto h-full>
+                <div id="app" class="w-[60%] h-auto bg-purple-50 flex justify-center items-center rounded-md">
+                    <div class="w-[50%] h-[70%] rounded-full  bg-stone-300 flex justify-center items-center overflow-hidden">
+                        <img v-if="image" :src="image" width="200" class="w-full h-auto  object-cover" />
+                    </div>
+                    <div class="w-[40%] h-auto flex items-center">
+                        <label for="file-input" class="w-[20%] h-full ">
+                            <img src="@/Change/UpLoad.png" alt="@/UserPhoto.png" class="w-auto h-full">
                         </label>
-                        <input id="fileInput" type="file" accept=".jpg, .png" style="display: none;"
-                            @change="handleFileChange">
+                        <input id="file-input" type="file" @change="fileSelected" style="display: none;">
+                        <p class="w-[80%] h-auto text-[1vw]">Update Your Photo</p>
                     </div>
-                    <div class="flex w-[80%] h-auto items-center text-sm ml-1.5 bg-purple-50">
-                        <p>Update Your Photo</p>
-                    </div>
+
+
                 </div>
-                <div class="w-1/3 h-auto flex items-center bg-purple-50">
+                <div class="w-[20%] h-auto bg-purple-50 flex items-center"></div>
+                <div class="w-1/4 h-auto flex items-center bg-purple-50">
                     <button @click="RemovePhoto" class="flex w-[80%] h-auto items-center text-sm bg-purple-50 text-red-500">
                         <p>Remove Photo</p>
                     </button>
@@ -30,7 +29,7 @@
                     <p class="text-[2vw]">Your Name</p>
                 </div>
                 <div class="w-auto h-1/3 bg-purple-50">
-                    <input type="text" v-model="ChangeNmae" class="w-full h-full">
+                    <input type="text" v-model="ChangeName" class="w-full h-full">
                 </div>
                 <div class="w-auto h-1/3 bg-purple-50 text-[1vw] text-stone-500">
                     <p>Appears on your Profile page, as your byline, and in your responses.</p>
@@ -49,13 +48,12 @@
             </div>
             <div class="flex w-auto h-[15%]">
                 <div class="w-1/2 h-1/2 bg-purple-50 flex justify-center">
-                    <NuxtLink to="/personal"
-                        class="w-1/2 h-auto flex justify-center items-center bg-purple-50">
+                    <NuxtLink to="/personal" class="w-1/2 h-auto flex justify-center items-center bg-purple-50">
                         <img src="@/Change/cancel.png" alt="" class="w-auto h-full">
                     </NuxtLink>
                 </div>
                 <div class="w-1/2 h-1/2 bg-purple-50 flex justify-center">
-                    <NuxtLink to="/personal"
+                    <NuxtLink to="/personal" @click="sendData(),sendImage() "
                         class="w-1/2 h-auto flex justify-center items-center bg-purple-50">
                         <img src="@/Change/Confirm.png" alt="" class="w-auto h-full">
                     </NuxtLink>
@@ -65,7 +63,7 @@
         <div class="w-1/4 h-auto">
             <div class="w-auto h-3/4 bg-purple-50"></div>
             <div class="w-auto h-1/4 flex items-center justify-end">
-                <button @click="DeleteAccount" class="w-[9%] h-auto bg-spurple-50">
+                <button @click="deleteUser" class="w-[9%] h-auto bg-spurple-50">
                     <img src="@/PhotoSticker/DeleteAccount.png" alt="" class="w-auto h-full">
                 </button>
                 <div class=" mr-5 text-[1vw] text-red-500">
@@ -79,9 +77,11 @@
 
 <script setup>
 import { ref } from 'vue';
+import axios from 'axios';
 
-const ChangeNmae = ref('');
+const ChangeName = ref('');
 const ChangeIntroduction = ref('');
+const config = useRuntimeConfig();
 
 const handleFileChange = (event) => {
     const file = event.target.files[0];
@@ -95,14 +95,124 @@ const handleFileChange = (event) => {
         return;
     }
 };
-const Photo = ref('');
-Photo.value = 'UserPhoto.png';
-const DeleteAccount = () => {
-    console.log("DeleteAccount in PhotoSticker.vue");
-    alert("確認是否刪除帳號");
-};
+
+
 const RemovePhoto = () => {
     console.log("RemovePhoto in PhotoSticker.vue");
     alert("確認是否刪除照片");
+    image.value = '';
+};
+
+const sendData = () => {
+    console.log(ChangeName.value);
+    console.log(ChangeIntroduction.value);
+    const token = useCookie('token');
+    const userid = useCookie('userid');
+    axios.put(`${config.public.apiURL}/user/${userid}`, {
+        "username": ChangeName.value,
+        "bio": ChangeIntroduction.value,
+    },
+        {
+            headers: {
+                'Authorization': 'Bearer ' + token.value,
+                'Content-Type': 'application/json',
+                'accept': 'application/json'
+            }
+        })
+        .then((res) => {
+            // if code is 200, then hide the modal
+            console.log(res);
+            if (res.status == 200) {
+                // const token = useCookie('token');
+                // token.value = res.data.token;//存取token
+                console.log("success");
+                // refresh the page
+                window.location.reload();
+            }
+        })
+        .catch((err) => {
+            // if code is 404, then show error message 
+            console.log(err);
+            // if (err.response.status == 404) {
+            if (err.response.status == 404) {
+                console.log("Not Found");
+            }
+            // }
+        })
+
+}
+
+const deleteUser = () => {
+    console.log("DeleteAccount in PhotoSticker.vue");
+    alert("確認是否刪除帳號");
+    const token = useCookie('token');
+    const userid = useCookie('userid');
+    axios.delete(`${config.public.apiURL}/user/${userid}`, {
+        headers: {
+            'Authorization': 'Bearer ' + token.value,
+            'Content-Type': 'application/json',
+            'accept': 'application/json'
+        }
+    })
+        .then((res) => {
+            // if code is 200, then hide the modal
+            console.log(res);
+            if (res.status == 204) {
+                console.log("No Content");
+            }
+        })
+        .catch((err) => {
+            // if code is 401, then show error message 
+            console.log(err);
+            if (err.response.status == 404) {
+                console.log("Not Found");
+            }
+        })
+}
+const image = ref('');
+const file = ref(null);
+
+const fileSelected = (e) => {
+    file.value = e.target.files.item(0);
+    const reader = new FileReader();
+    reader.addEventListener('load', imageLoaded);
+    reader.readAsDataURL(file.value);
+};
+
+const imageLoaded = (e) => {
+    image.value = e.target.result;
+};
+
+const upload = () => {
+    axios.post('/upload', { image: image.value });
+};
+
+const sendImage = () => {
+  // 省略其他代碼
+
+  const token = useCookie('token');
+  const imageFile = image.value; // 從某處獲取圖片檔案
+
+  const formData = new FormData();
+  formData.append('image', imageFile);
+
+  axios.post(`${config.public.apiURL}/uploadImage`, formData, {
+    headers: {
+      'Authorization': 'Bearer ' + token.value,
+      'Content-Type': 'multipart/form-data'
+    }
+  })
+  .then((res) => {
+    console.log(res);
+    if (res.status == 200) {
+      console.log("Image upload success");
+      window.location.reload();
+    }
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+
+  // 省略其他代碼
 };
 </script>

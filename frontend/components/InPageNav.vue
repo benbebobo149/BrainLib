@@ -76,6 +76,7 @@ const CheckLoggin = () => {
 CheckLoggin();
 
 const sendData = () => {
+    const userid = useCookie('userid');
     axios.post(`${config.public.apiURL}/authenticate`, {
         "name": "jake",
         "email": "16789@hhdbuc"

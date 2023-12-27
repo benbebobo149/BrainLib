@@ -1,14 +1,12 @@
 <script setup>
 import PostPreview from '@/components/PostPreview';
-import InPageNav from '~/components/InPageNav.vue';
 import MainPageActivityTags from '@/components/Main/MainPageActivityTags.vue';
 import MainTrendingTopic from '~/components/Main/MainTrendingTopic.vue';
-import BoxSucc from '@/components/ModelBox/BoxSucc.vue';
-// import MainPageActivityTags from '@/components/MainPage/MainPageActivityTags.vue';
+
 const popupState = ref(true);
 </script>
 <template>
-  <div class="w-full h-full ">
+  <div id="mainPage" class="w-full h-full ">
     <div class=" bg-bgcolor w-screen  max-w-full max-h-full">
 
       <!-- 左半邊 -->
@@ -62,6 +60,19 @@ const popupState = ref(true);
 </template>
 
 <style scoped>
+/* .slide-up-enter-active, .slide-up-leave-active {
+  transition: all .5s ease;
+}
+
+.slide-up-enter, .slide-up-leave-to {
+  transform: translateY(100%);
+}
+
+.slide-up-leave, .slide-up-enter-to {
+  transform: translateY(0);
+} */
+
+
 InPageNav {
   z-index: 10;
   position: fixed;

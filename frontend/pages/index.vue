@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <div class="w-screen max-w-full h-screen  bg-purple-100 -z-30">
+  <div >
+    <div @wheel="onWheel" class="w-screen max-w-full h-screen  bg-purple-100 -z-30">
       <div class="flex w-full h-[85%]">
         <div id="slideLeft" class="w-1/2 h-full">
           <div class="flex w-full h-3/4 items-end bg-purple-100">
@@ -31,9 +31,21 @@
 </template>
 
 <script setup>
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 
+const router = useRouter();
+const onWheel = (event) => {
+  if (event.deltaY > 0) {
+    setTimeout(() => {
+      router.push({ name: 'main', params: { transition: 'slide-up' } });
+    }, 500); // 2000 毫秒的延遲
+  }
+};
 </script>
 <style scoped>
+
+
 #slideLeft {
   position: absolute;
   left: -600px;

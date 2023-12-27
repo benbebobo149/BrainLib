@@ -10,6 +10,7 @@ import { ref } from 'vue';
 
 const topicDescription = ref('');
 const topicName = ref('');
+
 const sendData = () => {
 	console.log(topicName.value);
 	const token = useCookie('token');
