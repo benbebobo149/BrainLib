@@ -6,6 +6,32 @@ import MainTrendingTopic from '~/components/Main/MainTrendingTopic.vue';
 import BoxSucc from '@/components/ModelBox/BoxSucc.vue';
 // import MainPageActivityTags from '@/components/MainPage/MainPageActivityTags.vue';
 const popupState = ref(true);
+
+const getPostData = () => {
+  const token = useCookie('token');
+  axios.get(`${config.public.apiURL}/post`, { // config.public.apiURL + "/tag"
+  }, {
+    headers: {
+      'Authorization': 'Bearer ' + token.value,
+      'Content-Type': 'application/json',
+      'accept': 'application/json'
+    }
+  })
+    .then((res) => {
+      // if code is 200, then hide the modal
+      console.log(res);
+      if (res.status == 200) {
+        console.log("success get post data");
+      }
+    })
+    .catch((err) => {
+      // if code is 401, then show error message 
+      console.log(err);
+      if (err.response.status == 404) {
+        console.log("fail get post data");
+      }
+    })
+}
 </script>
 <template>
   <div class="w-full h-full ">

@@ -94,9 +94,9 @@ const sendData = () => {
 
 					<div class=" w-[25vw] h-[4vw] my-[10vh] mx-[25vw]">
 						<div
-							class="left-[8vw] w-[8vw] h-[8vh]  p-3 bg-primary rounded-lg flex-col justify-center items-center inline-flex relative">
+							class="left-[8vw] w-[8vw] h-[8vh]  p-3 bg-primary rounded-lg flex-col justify-center items-center inline-flex relative" @click="sendData()">
 							<div class="text-white  text-xl font-normal font-'Roboto' leading-7  cursor-pointer"
-								@click="sendData()">Create</div>
+								>Create</div>
 						</div>
 					</div>
 				</div>

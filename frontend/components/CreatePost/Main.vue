@@ -42,8 +42,9 @@
 
     </div>
     <div class="w-screen bg-slate-50 flex flex-col justify-center items-center">
-      <h1 class="text-[2vw] font-bold text-terotory text-center">貼文</h1>
-      <Editor class="w-[60%]" @openSucc="() => succVisible = true"  @openError="errorVisible = false"/>
+      <h1 class="text-[2vw] font-bold text-terotory text-center">Create Post</h1>
+
+      <Editor class="w-[60%]" @openSucc="() => succVisible = true" @openError="errorVisible = false" />
     </div>
   </div>
   <BoxSucc v-if="succVisible" class="z-10" @close="succVisible = false"></BoxSucc>
@@ -78,6 +79,10 @@ const showRegistrationPopup = () => {
 const closeRegistrationPopup = () => {
   showPopup.value = false;
 };
+
+
+
+
 
 
 //tags

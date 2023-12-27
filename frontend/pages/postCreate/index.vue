@@ -1,5 +1,6 @@
 <script setup >
 import Main from '~/components/CreatePost/Main.vue'
+
 </script>
 
 <template>
