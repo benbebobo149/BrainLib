@@ -1,0 +1,96 @@
+[
+    {
+        "activity_id": 0,
+        "user_id": 0,
+        "title": "string",
+        "content": {},
+        "location": "string",
+        "visible": true,
+        "dateTime": "2023-12-20T15:23:34.439Z",
+        "tags": [
+            {
+                "tag_id": 0,
+                "tag_name": "string"
+            }
+        ]
+    },
+    {
+        "activity_id": 1,
+        "user_id": 1,
+        "title": "資服競賽",
+        "content": {},
+        "location": "台北市",
+        "visible": true,
+        "dateTime": "2023-12-20T15:23:34.439Z",
+        "tags": [
+            {
+                "tag_id": 1,
+                "tag_name": "程式設計"
+            },
+            {
+                "tag_id": 4,
+                "tag_name": "美術"
+            }
+        ]
+    },
+    {
+        "activity_id": 2,
+        "user_id": 2,
+        "title": "微積分大會考",
+        "content": {},
+        "location": "中央大學",
+        "visible": true,
+        "dateTime": "2023-12-20T15:23:34.439Z",
+        "tags": [
+            {
+                "tag_id": 2,
+                "tag_name": "數學"
+            }
+        ]
+    },
+    {
+        "activity_id": 3,
+        "user_id": 3,
+        "title": "文言文國學大擂台",
+        "content": {},
+        "location": "文學一館",
+        "visible": true,
+        "dateTime": "2023-12-20T15:23:34.439Z",
+        "tags": [
+            {
+                "tag_id": 3,
+                "tag_name": "語文"
+            }
+        ]
+    },
+    {
+        "activity_id": 4,
+        "user_id": 4,
+        "title": "寫生比賽",
+        "content": {},
+        "location": "大江河濱公園",
+        "visible": true,
+        "dateTime": "2023-12-20T15:23:34.439Z",
+        "tags": [
+            {
+                "tag_id": 4,
+                "tag_name": "美術"
+            }
+        ]
+    },
+    {
+        "activity_id": 5,
+        "user_id": 5,
+        "title": "智慧醫療學術研討會",
+        "content": {},
+        "location": "生醫系館",
+        "visible": true,
+        "dateTime": "2023-12-20T15:23:34.439Z",
+        "tags": [
+            {
+                "tag_id": 5,
+                "tag_name": "醫學"
+            }
+        ]
+    }
+]

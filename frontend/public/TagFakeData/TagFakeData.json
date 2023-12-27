@@ -1,0 +1,58 @@
+[
+    {
+        "tag_id": 0,
+        "tag_name": "string"
+    },
+    {
+        "tag_id": 1,
+        "tag_name": "程式設計"
+    },
+    {
+        "tag_id": 2,
+        "tag_name": "數學"
+    },
+    {
+        "tag_id": 3,
+        "tag_name": "語文"
+    },
+    {
+        "tag_id": 4,
+        "tag_name": "美術"
+    },
+    {
+        "tag_id": 5,
+        "tag_name": "醫學"
+    },
+    {
+        "tag_id": 6,
+        "tag_name": "科學"
+    },
+    {
+        "tag_id": 7,
+        "tag_name": "經濟"
+    },
+    {
+        "tag_id": 8,
+        "tag_name": "商業"
+    },
+    {
+        "tag_id": 9,
+        "tag_name": "金融"
+    },
+    {
+        "tag_id": 10,
+        "tag_name": "法律"
+    },
+    {
+        "tag_id": 11,
+        "tag_name": "心理學"
+    },
+    {
+        "tag_id": 12,
+        "tag_name": "哲學"
+    },
+    {
+        "tag_id": 13,
+        "tag_name": "歷史"
+    }
+]

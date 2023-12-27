@@ -4,7 +4,6 @@ import Main from '~/components/Activity/Main.vue'
 </script>
 <template>
   <div>
-    <Header />
     <Main />
   </div>
 </template>

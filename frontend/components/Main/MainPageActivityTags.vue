@@ -1,29 +1,19 @@
+
+<script setup>
+import { ref } from "vue";
+import activities from './public/ActivityFakeData/ActivityFakeData.json'; 
+</script>
+
 <template>
-  <div >
-    <div class="relative">
-      <div
-        class="w-[20vw] h-[10vh] bg-purple-200 rounded-3xl top-[1rem] absolute text-center text-neutral-900 text-xl font-normal font-'Roboto'">
-        <!-- Use a for loop to display 10 names in 10 <h1> tags -->
-        <h1 v-for="(name, index) in names.slice(0, 10)" :key="index">{{ name }}</h1>
+  <div>
+    <div v-for="activity in activities" :key="activity.date" class="">
+      <div class="w-[18vw] h-full bg-purple-200 rounded-2xl  mx-auto text-neutral-900 
+        text-xl font-normal flex-col">
+        <div class="h-full font-'Roboto' flex justify-center py-[1vh] my-[2vh]">
+          <p class="text-center "> {{ activity.title }}
+          </p>
+        </div>
       </div>
     </div>
   </div>
 </template>
-
-<script setup>
-import { ref } from "vue";
-
-const names = ref([
-  "Alice",
-  "Bob",
-  "Charlie",
-  "David",
-  "Emma",
-  "Frank",
-  "Grace",
-  "Henry",
-  "Ivy",
-  "Jack",
-  // Add more names as needed
-]);
-</script>

@@ -1,0 +1,50 @@
+[
+    {
+        "user_id": 0,
+        "username": "string",
+        "email": "user@example.com",
+        "permission": 0,
+        "profile_image": "string",
+        "bio": "string"
+    },
+    {
+        "user_id": "1",
+        "username": "Jake",
+        "email": "Jake@example.com",
+        "permission": 2,
+        "profile_image": "string",
+        "bio": "在求職之路上遇到許多人的幫助，於是決定撰寫求職相關文章回饋社會的少女。以吃食社會學與哲學維生。"
+    },
+    {
+        "user_id": "2",
+        "username": "Jane",
+        "email": "Jane@example.com",
+        "permission": 1,
+        "profile_image": "string",
+        "bio": "在求職之路上遇到許多人的幫助，於是決定撰寫求職相關文章回饋社會的少女。以吃食社會學與哲學維生。"
+    },
+    {
+        "user_id": "3",
+        "username": "John",
+        "email": "John@example.com",
+        "permission": 0,
+        "profile_image": "string",
+        "bio": "在求職之路上遇到許多人的幫助，於是決定撰寫求職相關文章回饋社會的少女。以吃食社會學與哲學維生。"
+    },
+    {
+        "user_id": "4",
+        "username": "Jill",
+        "email": "Jill@example.com",
+        "permission": 3,
+        "profile_image": "string",
+        "bio": "在求職之路上遇到許多人的幫助，於是決定撰寫求職相關文章回饋社會的少女。以吃食社會學與哲學維生。"
+    },
+    {
+        "user_id": "5",
+        "username": "May",
+        "email": "May@example.com",
+        "permission": 0,
+        "profile_image": "string",
+        "bio": "在求職之路上遇到許多人的幫助，於是決定撰寫求職相關文章回饋社會的少女。以吃食社會學與哲學維生。"
+    }
+]

@@ -1,6 +1,6 @@
 <template>
     <button @click="Google">
-        <img src="Signin/Google.png" alt="Google">
+        <img src="@/Signin/Google.png" alt="Google">
     </button>
 </template>
 
