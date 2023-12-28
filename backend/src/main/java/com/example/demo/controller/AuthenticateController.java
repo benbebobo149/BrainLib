@@ -69,10 +69,8 @@ public class AuthenticateController {
     } else {
       isRegister = true;
     }
-
     final String jwt_token = jwtService.generateToken(checkUser);
     AuthenticationResult result = new AuthenticationResult(jwt_token, isRegister);
-    System.out.println(jwt_token);
     return ResponseEntity.ok(result);
   }
 }

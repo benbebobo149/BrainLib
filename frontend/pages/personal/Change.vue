@@ -6,11 +6,11 @@
                 <div id="app" class="w-[60%] h-auto bg-purple-50 flex justify-center items-center rounded-md">
                     <div
                         class="w-[50%] h-[70%] rounded-full  bg-stone-300 flex justify-center items-center overflow-hidden">
-                        <img v-if="image" :src="image" width="200" class="w-full h-auto  object-cover" />
+                        <img v-if="inputImage" :src="inputImage" width="200" class="w-full h-auto  object-cover" />
                     </div>
                     <div class="w-[40%] h-auto flex items-center">
                         <label for="file-input" class="w-[20%] h-full ">
-                            <img src="@/Change/UpLoad.png" alt="@/UserPhoto.png" class="w-auto h-full">
+                            <img src="@/Change/UpLoad.png" class="w-auto h-full">
                         </label>
                         <input id="file-input" type="file" @change="fileSelected" style="display: none;">
                         <p class="w-[80%] h-auto text-[1vw]">Update Your Photo</p>
@@ -19,18 +19,14 @@
 
                 </div>
                 <div class="w-[20%] h-auto bg-purple-50 flex items-center"></div>
-                <div class="w-1/4 h-auto flex items-center bg-purple-50">
-                    <button @click="RemovePhoto" class="flex w-[80%] h-auto items-center text-sm bg-purple-50 text-red-500">
-                        <p>Remove Photo</p>
-                    </button>
-                </div>
+
             </div>
             <div class="w-auto h-[25%]  justify-center">
                 <div class="w-auto h-1/3 bg-purple-50 flex">
                     <p class="text-[2vw]">Your Name</p>
                 </div>
                 <div class="w-auto h-1/3 bg-purple-50">
-                    <input type="text" v-model="ChangeName" class="w-full h-full">
+                    <input type="text" v-model="inputName" class="w-full h-full">
                 </div>
                 <div class="w-auto h-1/3 bg-purple-50 text-[1vw] text-stone-500">
                     <p>Appears on your Profile page, as your byline, and in your responses.</p>
@@ -41,7 +37,7 @@
                     <p class="text-[2vw]">Bio</p>
                 </div>
                 <div class="w-auto h-1/3 bg-pruple-50">
-                    <input type="text" v-model="ChangeIntroduction" class="w-full h-full">
+                    <input type="text" v-model="inputProfile" class="w-full h-full">
                 </div>
                 <div class="w-auto h-1/3 bg-purple-50 text-[1vw] text-stone-500">
                     <p>Appears on your Profile and next to your stories.</p>
@@ -49,12 +45,12 @@
             </div>
             <div class="flex w-auto h-[15%]">
                 <div class="w-1/2 h-1/2 bg-purple-50 flex justify-center">
-                    <NuxtLink to="/personal" class="w-1/2 h-auto flex justify-center items-center bg-purple-50">
+                    <NuxtLink class="w-1/2 h-auto flex justify-center items-center bg-purple-50">
                         <img src="@/Change/cancel.png" alt="" class="w-auto h-full">
                     </NuxtLink>
                 </div>
                 <div class="w-1/2 h-1/2 bg-purple-50 flex justify-center">
-                    <button @click="handleClick" class="w-1/2 h-auto flex justify-center items-center bg-purple-50">
+                    <button @click="submit()" class="w-1/2 h-auto flex justify-center items-center bg-purple-50">
                         <img src="@/Change/Confirm.png" alt="" class="w-auto h-full">
                     </button>
                 </div>
@@ -79,39 +75,25 @@
 import { ref } from 'vue';
 import axios from 'axios';
 
-const ChangeName = ref('');
-const ChangeIntroduction = ref('');
 const config = useRuntimeConfig();
-
-const handleFileChange = (event) => {
-    const file = event.target.files[0];
-    const acceptedExtensions = ['image/jpeg', 'image/png'];
-
-    const fileType = file.type;
-
-    // 檢查檔案格式
-    if (!acceptedExtensions.includes(fileType)) {
-        alert('請上傳 .jpg 或 .png 格式的文件');
-        return;
-    }
-};
-
-
-const RemovePhoto = () => {
-    console.log("RemovePhoto in PhotoSticker.vue");
-    if (confirm("確認是否刪除照片")) {
-        image.value = '';
-    }
-};
-
-const sendData = (pic) => {
-    console.log(ChangeName.value);
-    console.log(ChangeIntroduction.value);
+const inputProfile = ref('')
+const inputName = ref('')
+const inputImage = ref('');
+const file = ref(null);
+const imgHasChanged = ref(false);
+const sendData = () => {
     const token = useCookie('token');
-    const userid = useCookie('userid');
-    axios.put(`${config.public.apiURL}/user/${userid}`, {
-        "username": ChangeName.value,
-        "bio": ChangeIntroduction.value,
+    const id = useCookie('id');
+    console.log(id.value)
+    const permission = useCookie('permission');
+    const email = useCookie('email');
+    axios.put(`${config.public.apiURL}/user/${id.value}`, {
+        "id": id.value,
+        "name": inputName.value,
+        "profile": inputProfile.value,
+        "image": inputImage.value,
+        "email": email.value,
+        "permission": permission.value
     },
         {
             headers: {
@@ -121,14 +103,8 @@ const sendData = (pic) => {
             }
         })
         .then((res) => {
-            // if code is 200, then hide the modal
-            console.log(res);
             if (res.status == 200) {
-                // const token = useCookie('token');
-                // token.value = res.data.token;//存取token
                 console.log("success");
-                // refresh the page
-                window.location.reload();
             }
         })
         .catch((err) => {
@@ -143,31 +119,58 @@ const sendData = (pic) => {
     const moveToPage = () => {
         reloadNuxtApp({ path: '/personal', ttl: 1000 });
     };
+    getUserInfo();
     moveToPage();
+}
 
+const getUserInfo = () => {
+    const id = useCookie('id');
+    const token = useCookie('token');
+    const name = useCookie('name');
+    const image = useCookie('image');
+    const permission = useCookie('permission');
+    const email = useCookie('email');
+    const profile = useCookie('profile');
+    axios.get(`${config.public.apiURL}/user/${id.value}`, {
+        headers: {
+            'Authorization': `Bearer ${token.value}`, //the token is a variable which holds the token
+            'Content-Type': 'application/json',
+        }
+    })
+        .then(response => {
+            email.value = response.data.email;
+            permission.value = response.data.permission;
+            name.value = response.data.name;
+            id.value = response.data.id;
+            image.value = response.data.image;
+            profile.value = response.data.profile;
+            inputName.value = name.value;
+            inputProfile.value = response.data.profile;
+            inputImage.value = image.value;
+        })
+        .catch(error => {
+            console.error(error);
+        });
 }
 
 const deleteUser = () => {
     console.log("DeleteAccount in PhotoSticker.vue");
     if (confirm("確認是否刪除帳號 (此動作無法復原!!)")) {
         const token = useCookie('token');
-        const userid = useCookie('userid');
-        axios.delete(`${config.public.apiURL}/user/${userid}`, {
+        const id = useCookie('id');
+        axios.delete(`${config.public.apiURL}/user/${id.value}`, {
             headers: {
                 'Authorization': 'Bearer ' + token.value,
                 'Content-Type': 'application/json',
                 'accept': 'application/json'
             }
         })
-            .then((res) => {
-                // if code is 200, then hide the modal
-                console.log(res);
-                if (res.status == 204) {
-                    console.log("No Content");
-                }
+            .then(() => {
+                const token = useCookie('token');
+                token.value = null;
+                reloadNuxtApp({ path: "/main", ttl: 500 });
             })
             .catch((err) => {
-                // if code is 401, then show error message 
                 console.log(err);
                 if (err.response.status == 404) {
                     console.log("Not Found");
@@ -176,8 +179,6 @@ const deleteUser = () => {
     }
 
 }
-const image = ref('');
-const file = ref(null);
 
 const fileSelected = (e) => {
     file.value = e.target.files.item(0);
@@ -187,11 +188,8 @@ const fileSelected = (e) => {
 };
 
 const imageLoaded = (e) => {
-    image.value = e.target.result;
-};
-
-const upload = () => {
-    axios.post('/upload', { image: image.value });
+    inputImage.value = e.target.result;
+    imgHasChanged.value = true;
 };
 
 function base64ToFile(base64Str, filename) {
@@ -212,7 +210,7 @@ function base64ToFile(base64Str, filename) {
 const sendImage = () => {
     const token = useCookie('token');
 
-    const imageFile = base64ToFile(image.value, 'image.jpg'); // 從某處獲取圖片檔案
+    const imageFile = base64ToFile(inputImage.value, 'image.jpg'); // 從某處獲取圖片檔案
 
     const formData = new FormData();
     formData.append('image', imageFile);
@@ -227,24 +225,21 @@ const sendImage = () => {
             console.log(res);
             if (res.status == 200) {
                 console.log("Image upload success");
-                sendData(res.data.url);
+                inputImage.value = res.data.file.url;
+                sendData();
             }
         })
         .catch((err) => {
             console.log(err);
         });
-
-    // 省略其他代碼
 };
-let clickCount = ref(0);
 
-const handleClick = () => {
-    clickCount.value++;
-    if (clickCount.value % 2 === 1) {
-        sendImage();//奇數點擊數
+const submit = () => {
+    if (imgHasChanged.value) {
+        sendImage();
     } else {
-        sendData();//偶數點擊數
+        sendData();
     }
-};
-
+}
+getUserInfo();
 </script>
