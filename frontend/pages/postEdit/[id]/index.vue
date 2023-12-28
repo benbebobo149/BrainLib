@@ -167,12 +167,6 @@ const sendImage = async () => {
 };
 //send data to backend
 const updatePost = () => {
-    console.log("updatePost");
-    console.log(inputTitle.value);
-    console.log(inputEditorData.value);
-    console.log(inputImage.value);
-    console.log(tags.value);
-
     axios.put(`${config.public.apiURL}/post/${id}`, { // config.public.apiURL + "/tag"
         "title": inputTitle.value,
         "content": inputEditorData.value,
@@ -189,9 +183,7 @@ const updatePost = () => {
             // if code is 200, then hide the modal
             console.log(res);
             if (res.status == 200) {
-                // window.location.reload();
-                // alert("create success!");
-                // succVisible.value = true;
+                window.location.reload();
             }
         })
         .catch((err) => {

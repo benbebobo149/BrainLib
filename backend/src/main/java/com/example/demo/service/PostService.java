@@ -299,18 +299,15 @@ public class PostService {
 
     List<PostTag> originalPostTags = postTagRepository.findByPost(post);
 
-    List<Tag> originalTags = new ArrayList<>();
-    for (PostTag postTag : originalPostTags) {
-      originalTags.add(postTag.getTag());
-    }
-    List<TagRequest> tagr = postDetails.getTags();
-    List<Tag> tags = new ArrayList<>();
-    for (TagRequest tag : tagr) {
-      tags.add(tagRepository.findById(tag.getId()).orElse(null));
-    }
-
-    originalTags.removeAll(tags);
-    tags.removeAll(originalTags);
+        List<Tag> originalTags = new ArrayList<>();
+        for (PostTag postTag : originalPostTags) {
+            originalTags.add(postTag.getTag());
+        }
+        List<TagRequest> tagr = postDetails.getTags();
+        List<Tag> tags = new ArrayList<>();
+        for (TagRequest tag : tagr) {
+            tags.add(tagRepository.findById(tag.getId()).orElse(null));
+        }
 
     for (Tag tag : originalTags) {
       PostTag postTag = postTagRepository.findByPostAndTag(post, tag);
@@ -332,9 +329,10 @@ public class PostService {
       return result;
     }
 
-    post.setTitle(postDetails.getTitle());
-    post.setContent(postDetails.getContent());
-    post.setImage(postDetails.getImage());
+        post.setTitle(postDetails.getTitle());
+        post.setContent(postDetails.getContent());
+        post.setImage(postDetails.getImage());
+        postRepository.save(post);
 
     postDetails.setId(post.getId());
     postDetails.setUser(post.getUser().getId());
