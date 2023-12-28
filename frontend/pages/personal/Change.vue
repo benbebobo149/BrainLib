@@ -99,8 +99,9 @@ const handleFileChange = (event) => {
 
 const RemovePhoto = () => {
     console.log("RemovePhoto in PhotoSticker.vue");
-    alert("確認是否刪除照片");
-    image.value = '';
+    if (confirm("確認是否刪除照片")) {
+        image.value = '';
+    }
 };
 
 const sendData = (pic) => {
@@ -148,30 +149,32 @@ const sendData = (pic) => {
 
 const deleteUser = () => {
     console.log("DeleteAccount in PhotoSticker.vue");
-    alert("確認是否刪除帳號");
-    const token = useCookie('token');
-    const userid = useCookie('userid');
-    axios.delete(`${config.public.apiURL}/user/${userid}`, {
-        headers: {
-            'Authorization': 'Bearer ' + token.value,
-            'Content-Type': 'application/json',
-            'accept': 'application/json'
-        }
-    })
-        .then((res) => {
-            // if code is 200, then hide the modal
-            console.log(res);
-            if (res.status == 204) {
-                console.log("No Content");
+    if (confirm("確認是否刪除帳號")) {
+        const token = useCookie('token');
+        const userid = useCookie('userid');
+        axios.delete(`${config.public.apiURL}/user/${userid}`, {
+            headers: {
+                'Authorization': 'Bearer ' + token.value,
+                'Content-Type': 'application/json',
+                'accept': 'application/json'
             }
         })
-        .catch((err) => {
-            // if code is 401, then show error message 
-            console.log(err);
-            if (err.response.status == 404) {
-                console.log("Not Found");
-            }
-        })
+            .then((res) => {
+                // if code is 200, then hide the modal
+                console.log(res);
+                if (res.status == 204) {
+                    console.log("No Content");
+                }
+            })
+            .catch((err) => {
+                // if code is 401, then show error message 
+                console.log(err);
+                if (err.response.status == 404) {
+                    console.log("Not Found");
+                }
+            })
+    }
+
 }
 const image = ref('');
 const file = ref(null);
