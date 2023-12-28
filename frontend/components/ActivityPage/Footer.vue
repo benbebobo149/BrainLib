@@ -25,7 +25,7 @@
     </div>
     <div class="w-3/4 flex flex-col h-full bg-slate-100">
       <p class="text-black text-xl mt-5">About this event</p>
-      <p class="text-black text-xl mt-5">{{ activities.eventDetails }}</p>
+      <p class="text-black text-xl mt-5">{{ activities.content }}</p>
     </div>
   </div>
   <div class="flex flex-col w-full bg-gray-400 h-[100vh]">
@@ -42,11 +42,11 @@
       <div class="flex flex-col w-1/2 h-full">
         <div class="flex flex-col w-full h-1/4">
           <p class="text-black text-2xl font-bold mt-5 ml-10">When</p>
-          <p class="text-black text-xl mt-3 ml-10">{{ activities.datetime }}</p>
+          <p class="text-black text-xl mt-3 ml-10">{{ activities.dateTime }}</p>
         </div>
         <div class="flex flex-col w-full h-3/4">
           <p class="text-black text-2xl font-bold mt-5 ml-10">Where</p>
-          <p class="text-black text-xl mt-3 ml-10 self-center">{{ activities.whereDetails }}</p>
+          <p class="text-black text-xl mt-3 ml-10 self-center">{{ activities.location }}</p>
           <img :src="activities.map" alt="Centered Image" class="h-auto w-[30vw] mt-5 self-center" />
         </div>
       </div>
@@ -55,7 +55,7 @@
       <div class="flex w-1/3 h-full">
         <p class="text-black text-2xl self-start ml-10 mt-2">Organizers</p>
         <img :src="activities.organizer" alt="Organizers Image" class="w-16 h-16 self-center justify-self-center">
-        <p class="text-black text-xl font-bold ml-2 self-center">{{ activities.user }}</p>
+        <p class="text-black text-xl font-bold ml-2 self-center">{{ activities.name }}</p>
       </div>
     </div>
     <RegistrationSuccessPopup v-if="showPopup" @close="closeRegistrationPopup" />
@@ -67,12 +67,22 @@ import RegistrationSuccessPopup from './RegistrationSuccessPopup.vue';
 import axios from 'axios';
 const config = useRuntimeConfig();
 
-const activities = ref(fakeData[0]);
+const activities = ref('');
+
+// define props
+const props = defineProps({
+  id: {
+    type: String,
+    required: true
+  }
+})
+// change props to ref 
+const { id } = toRefs(props)
 
 //get data from database
 const getActivityData = () => {
   const token = useCookie('token');
-  axios.get(`${config.public.apiURL}/activity/${activity_id}`, { // config.public.apiURL + "/tag"
+  axios.get(`${config.public.apiURL}/activity/${id.value}`, { // config.public.apiURL + "/tag"
   }, {
     headers: {
       'Authorization': 'Bearer ' + token.value,

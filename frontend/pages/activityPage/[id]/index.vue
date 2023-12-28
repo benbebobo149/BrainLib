@@ -10,6 +10,6 @@ const id = route.params.id;
   <div>
     <!-- <Header /> -->
     <Main :id="id" />
-    <Footer />
+    <Footer :id="id"  />
   </div>
 </template>
