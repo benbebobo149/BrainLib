@@ -47,7 +47,7 @@
         <P>
           tags:
         </P>
-        <div v-for="tag in tags" class="mx-[1vw] flex" @click="removeTag">
+        <div v-for="tag in tags" key="tag.id" class="mx-[1vw] flex" @click="removeTag">
           <div
             class="mx-auto rounded-sm border border-terotory text-center text-neutral-900 text-l font-normal font-'Roboto' leading-7 p-[0.5vh] cursor-pointer">
             {{ tag }}
@@ -93,15 +93,62 @@ const closeRegistrationPopup = () => {
 
 
 
+//get data from database
+import axios from 'axios';
+const config = useRuntimeConfig();
+const props = defineProps({
+  id: {
+    type: String,
+    required: true
+  }
+})
+// change props to ref 
+const { id } = toRefs(props)
+
+const Post = ref('');
+
+//get data from database
+const getPost = () => {
+  const token = useCookie('token');
+  axios.get(`${config.public.apiURL}/post/all/${id.value}`, { // config.public.apiURL + "/tag"
+  }, {
+    headers: {
+      'Authorization': 'Bearer ' + token.value,
+      'Content-Type': 'application/json',
+      'accept': 'application/json'
+    }
+  })
+    .then((res) => {
+      // if code is 200, then hide the modal
+      console.log(res);
+      if (res.status == 200) {
+        console.log("success to get all post");
+        Post.value = res.data;
+      }
+    })
+    .catch((err) => {
+      // if code is 401, then show error message 
+      console.log(err);
+      if (err.response.status == 404) {
+        console.log("fail to get all post");
+      } else if (err.response.status == 500) {
+        console.log("fail to get all post");
+      }
+    })
+}
+
+getPost();
 
 
 
 //tags
-const tags = ref([]);
+const tags = ref(Post.value.tags);
+console.log("tags.value= " + tags.value);
 //added tags
 const addTags = (tag) => {
   tags.value.push(tag);
 };
+
 //remove tags
 // Remove tag
 const removeTag = (index) => {
