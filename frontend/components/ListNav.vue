@@ -94,11 +94,19 @@ const route = useRoute();
 <style scoped>
 #slideLeft {
   left: -600px;
-  -webkit-animation: slide 0.5s forwards;
-  -webkit-animation-delay: 0.5s;
-  animation: slide 1.0s forwards;
+  -webkit-animation: slide 0.2s forwards;
+  -webkit-animation-delay: 0.1s;
+  animation: slide 0.5s forwards;
   animation-delay: 0.1s;
 }
+/* not work animation */
+
+/* #slideLeft-leave-active {
+  transition: transform 0.8s ease;
+}
+#slideLeft-leave-to {
+  transform: translateX(-100%);
+} */
 
 @-webkit-keyframes slide {
   100% {

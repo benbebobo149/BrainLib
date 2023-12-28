@@ -6,14 +6,20 @@
         <div class="ml-10">
           <p class="text-2xl text-black font-bold underline mt-2">{{ activity.title }}</p>
           <p class="text-xl text-black mt-10">{{ activity.location }}</p>
-          <img src="/hello/Rectangle8.png" alt="Register Button" class="h-[2vh] w-10 mt-10 rounded-full" />
+          <div class="flex flex-row">
+            <div v-for="tag in activity.tags" :key="tag.tag_id"
+              class="bg-purple-200 h-6 w-auto rounded-full text-center text-neutral-900 text-s font-normal px-2 mt-5 ml-2">
+              <p class="text-m text-black">{{ tag.tag_name }}</p>
+            </div>
+          </div>
         </div>
         <div class="ml-auto mb-2 flex items-start justify-end">
           <p class="text-xl text-end text-black mt-2 self-startS">{{ activity.date }}</p>
         </div>
       </NuxtLink>
-      <div class="ml-auto mb-auto flex items-center justify-end">
-        <img src="/hello/GroupStart.png" alt="Register Button" class="h-[5vh] w-auto" @click="showRegistrationPopup" />
+      <div class="ml-auto mb-auto flex justify-end items-start">
+        <img src="/hello/GroupStart.png" alt="Register Button" class="h-[5vh] w-auto mb-5"
+          @click="showRegistrationPopup" />
       </div>
       <div v-if="index < activities.length - 1" class="border-b border-black border-1"></div>
     </div>
@@ -24,9 +30,42 @@
 
 <script setup>
 import { ref } from 'vue';
-import RegistrationSuccessPopup from './RegistrationSuccessPopup.vue';
-import fakeData from './public/hello/Pic_Folder/fakeData.json';
+import RegistrationSuccessPopup from './RegistrationSuccessPopup.vue'; import axios from 'axios';
+const config = useRuntimeConfig();
 
+const activities = ref([]);
+
+//get data from database
+const getActivityData = () => {
+  const token = useCookie('token');
+  axios.get(`${config.public.apiURL}/activity/all`, { // config.public.apiURL + "/tag"
+  }, {
+    headers: {
+      'Authorization': 'Bearer ' + token.value,
+      'Content-Type': 'application/json',
+      'accept': 'application/json'
+    }
+  })
+    .then((res) => {
+      // if code is 200, then hide the modal
+      console.log(res);
+      if (res.status == 200) {
+        console.log("success");
+        activities.value = res.data;
+      }
+    })
+    .catch((err) => {
+      // if code is 401, then show error message 
+      console.log(err);
+      if (err.response.status == 404) {
+        console.log("fail");
+      } else if (err.response.status == 500) {
+        console.log("fail");
+      }
+    })
+}
+
+getActivityData();
 const showPopup = ref(false);
 
 const showRegistrationPopup = () => {
@@ -38,7 +77,6 @@ const closeRegistrationPopup = () => {
   showPopup.value = false;
 };
 
-const activities = ref(fakeData);
 
 </script>
 

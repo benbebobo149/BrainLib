@@ -1,5 +1,5 @@
 <template>
-  <div class="flex h-[15vh]">
+  <div class="flex h-[30vh]">
     <!-- Left Section -->
     <div class="w-1/2 h-full flex flex-col">
       <!-- Top Section (1/4 height) -->
@@ -15,10 +15,6 @@
             Username
           </div>
         </div>
-      </div>
-      <div class="h-3/4 flex bg-slate-50 p-6 items-start justify-end">
-
-
       </div>
 
     </div>
@@ -42,22 +38,13 @@
 
     </div>
   </div>
-  <div class="w-screen bg-bgcolor flex flex-col justify-center items-center">
-    <h1 class="text-[3vw] font-bold text-center">輸入框示範</h1>
-    <Editor class="w-[60%]" />
-  </div>
 </template>
 
 <script setup>
 import { ref } from 'vue';
 import AddTag from './AddTag.vue';
-import Editor from '@/components/codeTemplate/Editor.vue'
-const fontSize = ref(["1rem", "1rem", "1rem"]);
 
-const updateContent = (index) => {
-  const element = document.querySelector(`[contenteditable]:nth-child(${index + 1})`);
-  const content = element.innerText;
-};
+const fontSize = ref(["1rem", "1rem", "1rem"]);
 
 const handleFileChange = () => {
 }

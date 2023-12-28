@@ -1,16 +1,25 @@
 <script setup>
-import EditorJS from './@editorjs/editorjs';
-import Header from './@editorjs/header';
-import List from './@editorjs/list';
-import ImageTool from './@editorjs/image';
+import EditorJS from '@editorjs/editorjs';
+import Header from '@editorjs/header';
+import List from '@editorjs/list';
+import ImageTool from '@editorjs/image';
 const config = useRuntimeConfig()
+
+const emit = defineEmits();
 
 // click the button and console log the content
 const sendMessage = () => {
+    emit('openSucc')
     editor.save().then((outputData) => {
         console.log('Article data: ', outputData)
+        const moveToPage = () => {
+            reloadNuxtApp({ path: '/personal', ttl: 8000 });
+
+        };
+        setTimeout(moveToPage(), 10000);
     }).catch((error) => {
         console.log('Saving failed: ', error)
+        emit('openError')
     })
 }
 const editor = new EditorJS({
@@ -55,12 +64,8 @@ const editor = new EditorJS({
 .ce-header h1 {}
 </style>
 <template>
-    <div class="flex flex-col justify-center">
-        <div id="editorjs" class="w-full h- border-2 border-terotory "></div>
-        <div class="flex justify-end mt-2">
-            <button @click="sendMessage"
-                class="text-white bg-primary hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 focus:outline-non">傳送內容</button>
-        </div>
+    <div class="flex flex-col justify-center items-center">
+        <div id="editorjs" class="w-[50vw] h- border-2 border-terotory mb-10"></div>
 
     </div>
 </template>
