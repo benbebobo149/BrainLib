@@ -12,7 +12,7 @@
     <div class="flex w-full h-11/12 mt-10 justify-center items-start">
       <component :is="currentScrollBox" class="scrollable-box" />
     </div>
-    <NuxtLink to="http://localhost:3000/activity2" class="fixed bottom-4 right-4">
+    <NuxtLink  class="fixed bottom-4 right-4">
       <img src="/hello/CreateActivity.png" alt="Create Activity" class="w-auto h-[8vh]">
     </NuxtLink>
   </div>

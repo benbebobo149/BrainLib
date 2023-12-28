@@ -1,7 +1,7 @@
 <template>
   <div class="scrollable-container">
     <div class="w-full flex-row p-4 bg-white" v-for="(activity, index) in activities" :key="activity.id">
-      <NuxtLink to="http://localhost:3000/activityPage" class="flex flex-row">
+      <NuxtLink :to="'/ActivityPage/' + activity.id" class="flex flex-row">
         <img :src="activity.pic" alt="Activity Pic" class="h-auto w-[20vw] mt-8 mb-8" />
         <div class="ml-10">
           <p class="text-2xl text-black font-bold underline mt-2">{{ activity.title }}</p>
