@@ -2,22 +2,21 @@
   <button @click="openModal" class="w-auto h-full">
     <img src="@/ListNav.png" class="w-auto h-[80%]" alt="ListNav">
   </button>
-  <div v-if="ListNavVisible" class="fixed inset-0 flex bg-black bg-opacity-30 w-screen h-screen max-h-full">
-    <div class="relative w-[25%] h-auto bg-violet-100">
-      <button @click="closeModal" class="absolute right-2 text-xl font-bold cursor-pointer">&times;</button>
+  <div @click="closeModal" v-if="ListNavVisible" class="fixed inset-0 flex bg-black bg-opacity-30 w-screen h-screen max-h-full">
+    <div id="slideLeft" class="relative w-[25%] h-auto bg-violet-100">
       <div class="w-auto h-[8%] flex bg-violet-100 items-center border-b border-terotory">
-        <NuxtLink to="http://localhost:3000/main" class="flex w-auto h-[80%] ml-[.5vw]">
+        <NuxtLink to="/main" @click="closeModal" class="flex w-auto h-[80%] ml-[.5vw]">
           <img src="@/logo.png" alt="logo" class="w-full h-auto">
         </NuxtLink>
-        <NuxtLink to="http://localhost:3000/main" class="flex w-auto h-[80%] items-center ">
+        <NuxtLink to="/main" @click="closeModal" class="flex w-auto h-[80%] items-center ">
           <p class="text-[2vw] ml-[2vw] ">Home Page</p>
         </NuxtLink>
       </div>
       <div class="w-auto h-[8%] flex bg-violet-100 items-center mt-1 border-b border-terotory">
-        <NuxtLink to="./" class="flex w-auto h-[80%] bg-violet-100 ml-[.5vw]">
+        <NuxtLink to="/activity" @click="closeModal" class="flex w-auto h-[80%] bg-violet-100 ml-[.5vw]">
           <img src="/ListNav/Calendar.png" alt="Calendar" class="w-auto h-full">
         </NuxtLink>
-        <NuxtLink to="http://localhost:3000/activity" class="flex w-auto h-[80%] items-center ml-[2.5vw] ">
+        <NuxtLink to="/activity" @click="closeModal" class="flex w-auto h-[80%] items-center ml-[2.5vw] ">
           <p class="text-[2vw]">Activity Page</p>
         </NuxtLink>
       </div>
@@ -26,7 +25,7 @@
       </div>
       <div class="w-auto h-[76%] bg-violet-100 overflow-y-hidden">
         <div class="w-auto h-full bg-violet-100 overflow-y-scroll hide-scrollbar fill-available">
-          <NuxtLink :to="topic.topic_url" v-for="topic in topics" :key="topic.tag_id"
+          <NuxtLink :to="`/main/${topic.tag_id}`"  @click="closeModal" v-for="topic in topics" :key="topic.tag_id"
             class="flex w-auto h-[8vh] items-center justify-center m-3 border  border-terotory rounded-md">
             <p class="text-[2vw] ">{{ topic.tag_name }}</p>
           </NuxtLink>
@@ -52,9 +51,31 @@ const closeModal = () => {
   ListNavVisible.value = false;
 };
 
+const route = useRoute();
 </script>
 
 <style scoped>
+#slideLeft {
+  left: -600px;
+  -webkit-animation: slide 0.5s forwards;
+  -webkit-animation-delay: 0.5s;
+  animation: slide 1.0s forwards;
+  animation-delay: 0.1s;
+}
+
+@-webkit-keyframes slide {
+  100% {
+    left: 0;
+  }
+}
+
+@keyframes slide {
+  100% {
+    left: 0;
+  }
+}
+
+
 /* 自訂的 CSS 類別 */
 .hide-scrollbar::-webkit-scrollbar {
   display: none;

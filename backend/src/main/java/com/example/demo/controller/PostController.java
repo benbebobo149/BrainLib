@@ -17,8 +17,10 @@ import com.example.demo.service.JwtService;
 import com.example.demo.dto.PostResult;
 import com.example.demo.dto.CommentListResult;
 import com.example.demo.dto.CommentResult;
+import com.example.demo.dto.ApproveResult;
 
 import java.util.List;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 @RestController
 @RequestMapping("/post")
@@ -29,6 +31,7 @@ public class PostController {
     @Autowired
     private JwtService jwtService;
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping
     public ResponseEntity<?> createPost(@RequestBody Post post, HttpServletRequest request) {
         try {
@@ -48,6 +51,7 @@ public class PostController {
         }
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/search")
     public ResponseEntity<?> searchPosts(@RequestParam String keyword) {
         try {
@@ -63,9 +67,12 @@ public class PostController {
         }
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @PutMapping("/{post_id}")
     public ResponseEntity<?> updatePost(@PathVariable Integer post_id, @RequestBody Post post, HttpServletRequest request) {
         try {
+            // get tag from request body
+            List<Tag> tags = post.getTags();
             PostResult result = postService.updatePost(post_id, post, request);
     
             switch (result.getResultCode()) {
@@ -84,6 +91,7 @@ public class PostController {
         }
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @DeleteMapping("/{post_id}")
     public ResponseEntity<?> deletePost(@PathVariable Integer post_id, HttpServletRequest request) {
         try {
@@ -105,6 +113,7 @@ public class PostController {
         }
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @PutMapping("/{post_id}/like")
     public ResponseEntity<?> likePost(@PathVariable Integer post_id, HttpServletRequest request) {
         try {
@@ -126,10 +135,11 @@ public class PostController {
         }
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @PutMapping("/{post_id}/report")
-    public ResponseEntity<?> reportPost(@PathVariable Integer id, @RequestBody String reason, HttpServletRequest request) {
+    public ResponseEntity<?> reportPost(@PathVariable Integer post_id, @RequestBody String reason, HttpServletRequest request) {
         try {
-            PostResult result = postService.reportPost(id, reason, request);
+            PostResult result = postService.reportPost(post_id, reason, request);
     
             switch (result.getResultCode()) {
                 case 0: // 成功
@@ -147,6 +157,7 @@ public class PostController {
         }
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/{post_id}/comments")
     public ResponseEntity<?> getComments(@PathVariable Integer post_id, HttpServletRequest request) {
         try {
@@ -168,6 +179,7 @@ public class PostController {
         }
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/{post_id}/comments")
     public ResponseEntity<?> addComment(@PathVariable Integer post_id, @RequestBody Comment comment, HttpServletRequest request) {
         try {
@@ -189,6 +201,7 @@ public class PostController {
         }
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @PutMapping("/comments/{comment_id}")
     public ResponseEntity<?> updateComment(@PathVariable Integer comment_id, @RequestBody Comment newComment, HttpServletRequest request) {
         try {
@@ -210,6 +223,7 @@ public class PostController {
         }
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @DeleteMapping("/comments/{comment_id}")
     public ResponseEntity<?> deleteComment(@PathVariable Integer comment_id, HttpServletRequest request) {
         try {
@@ -231,6 +245,7 @@ public class PostController {
         }
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/all/{tag_id}")
     public ResponseEntity<?> searchTagsPost(@PathVariable Integer tag_id) {
         try {
@@ -246,7 +261,8 @@ public class PostController {
         }
     }
 
-    @PostMapping("/all")
+    @CrossOrigin(origins = "http://localhost:3000")
+    @GetMapping("/all")
     public ResponseEntity<?> getAllPosts() {
         try {
             List<Post> posts = postService.getAllPosts();
@@ -261,7 +277,8 @@ public class PostController {
         }
     }
 
-    @DeleteMapping("/my/all")
+    @CrossOrigin(origins = "http://localhost:3000")
+    @GetMapping("/my/all")
     public ResponseEntity<List<Post>> getPostsByUser(HttpServletRequest request) {
         try {
             String token = request.getHeader("Authorization").substring(7);
@@ -275,13 +292,16 @@ public class PostController {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
             }
         } catch (Exception e) {
+            System.out.println(e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
 
-    @PostMapping("/posts/{post_id}/approve")
-    public ResponseEntity<?> approvePost(@PathVariable Integer post_id, @RequestBody boolean approve, HttpServletRequest request) {
+    @CrossOrigin(origins = "http://localhost:3000")
+    @PostMapping("/{post_id}/approve")
+    public ResponseEntity<?> approvePost(@PathVariable Integer post_id, @RequestBody ApproveResult approveResult, HttpServletRequest request) {
         try {
+            boolean approve = approveResult.isApprove();
             PostResult result = postService.approvePost(post_id, approve, request);
     
             switch (result.getResultCode()) {
@@ -298,4 +318,21 @@ public class PostController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @GetMapping("/suspend")
+    public ResponseEntity<?> getSuspendPosts(HttpServletRequest request) {
+        try {
+            List<Post> posts = postService.getSuspendPosts(request);
+    
+            if (posts.size() > 0) {
+                return ResponseEntity.ok(posts);
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
 }

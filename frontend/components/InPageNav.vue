@@ -1,5 +1,5 @@
 <template>
-    <div class="flex x-0 w-screen max-w-full h-[7vh] bg-bgcolor shadow-md " ></div>
+    <div class="flex x-0 w-screen max-w-full h-[7vh] bg-bgcolor shadow-md "></div>
     <div class="top-0 z-10 flex w-screen max-w-full h-[7vh] fixed bg-purple-50 shadow-md">
         <div class="flex w-1/2 h-full">
             <div class="flex w-auto h-full ml-4">
@@ -21,17 +21,16 @@
         </div>
 
         <div v-else class="flex w-1/2 h-full justify-end">
-            <NuxtLink to="./" class="flex w-auto h-full items-center mr-[3vw]">
+            <NuxtLink to="/postCreate" class="flex w-auto h-full items-center mr-[1vw]">
                 <img src="@/PencilSquare.png" alt="PencilButton" class="w-auto h-[85%]">
             </NuxtLink>
-            <NuxtLink to="http://localhost:3000/chat" class="flex w-auto h-full items-center mr-[3vw]">
-                <img src="@/Chat.png" alt="Chat" class="w-auto h-[85%]">
-            </NuxtLink>
-            <PhotoSticker class="flex w-auto h-full items-center mr-[3vw]"/>
+            <div class="flex w-auto h-full items-center mr-[3vw] text-yellow-900 text-[1vw]">
+               <p>Create  post</p> 
+            </div>
+            <PhotoSticker class="flex w-auto h-full items-center mr-[3vw]" />
         </div>
     </div>
-    <Signin v-if="EnterVisible" @close_modal="closeModal()" @GoogleClick="GoogleClick" class="z-20" />
-   
+    <Signin v-if="EnterVisible" @close_modal="closeModal()" @GoogleClick="GoogleClick($event)" class="z-20" />
 </template>
 
 <script setup>
@@ -39,6 +38,9 @@ import { ref } from 'vue';
 import ListNav from "./ListNav.vue";
 import Signin from "./Signin.vue";
 import PhotoSticker from "./PhotoSticker.vue";
+import axios from 'axios';
+
+const config = useRuntimeConfig();
 
 const EnterVisible = ref(false);
 
@@ -60,9 +62,47 @@ const SearchContent = ref('');
 const GoogleClick = () => {
     NotSignin.value = false;
     console.log("GoogleClick in InPageNav.vue");
-    // const NotSignin = useCookie(false)
-    // console.log(NotSignin)
+    sendData();
 };
 
+const CheckLoggin = () => {
+    const google_token = useCookie('token');
+    if (google_token.value == null) {
+        NotSignin.value = true;
+    } else {
+        NotSignin.value = false;
+    }
+};
+CheckLoggin();
+
+const sendData = () => {
+    const userid = useCookie('userid');
+    axios.post(`${config.public.apiURL}/authenticate`, {
+        "name": "jake",
+        "email": "16789@hhdbuc"
+    },
+        {
+            headers: {
+                // 'Authorization': 'Bearer ' + token.value,
+                'Content-Type': 'application/json',
+                'accept': 'application/json'
+            }
+        })
+        .then((res) => {
+            // if code is 200, then hide the modal
+            console.log(res);
+            if (res.status == 200) {
+                const token = useCookie('token');
+                token.value = res.data.token;//存取token
+            }
+        })
+        .catch((err) => {
+            // if code is 401, then show error message 
+            console.log(err);
+            // if (err.response.status == 401) {
+
+            // }
+        })
+}
 
 </script>

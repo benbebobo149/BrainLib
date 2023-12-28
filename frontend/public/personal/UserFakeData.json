@@ -11,7 +11,7 @@
         "user_id": "1",
         "username": "Jake",
         "email": "Jake@example.com",
-        "permission": 0,
+        "permission": 2,
         "profile_image": "string",
         "bio": "在求職之路上遇到許多人的幫助，於是決定撰寫求職相關文章回饋社會的少女。以吃食社會學與哲學維生。"
     },

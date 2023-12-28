@@ -1,6 +1,6 @@
 <template>
   <div class="popup-overlay">
-    <div  class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+    <div class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
       <div class="bg-white p-6 rounded shadow-md relative">
         <button @click="closeModal" class="absolute top-2 right-2 text-xl font-bold cursor-pointer">&times;</button>
         <div class="text-center mb-4">
@@ -8,7 +8,7 @@
         </div>
         <div class="flex justify-center gap-4">
           <div>
-            <Google class="w-24 h-24" @click="GoogleClick "></Google>
+            <Google class="w-24 h-24" @click="GoogleClick"></Google>
           </div>
         </div>
       </div>
@@ -36,19 +36,23 @@ const GoogleClick = () => {
   console.log("GoogleClick in signin.vue");
   emit('close_modal')
   emit('GoogleClick')
+  //傳送google_token
+  // const { cookies } = useCookies();
+  // cookies.set('google_token', google_token.value);
+  // console.log(cookies.get('google_token'));
 };
 
 </script>
 <style scoped>
 .popup-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 </style>

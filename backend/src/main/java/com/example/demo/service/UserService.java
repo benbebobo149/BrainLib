@@ -46,7 +46,12 @@ public class UserService {
         JwtResult jwtResult = jwtService.parseRequest(request);
         UserResult result = new UserResult();
         
-        if (!(jwtResult != null) && (!jwtResult.getPassed())) {
+        if (jwtResult == null) {
+            result.setResultCode(1);
+            return result;
+        }
+        
+        if (!jwtResult.getPassed()) {
             result.setResultCode(1);
             return result;
         }
@@ -77,28 +82,41 @@ public class UserService {
 
         UserResult result = new UserResult();
 
-        if (!(jwtResult != null) && (!jwtResult.getPassed())) {
+        if (jwtResult == null) {
+            result.setResultCode(1);
+            return result;
+        }
+        
+        if (!jwtResult.getPassed()) {
             result.setResultCode(1);
             return result;
         }
         
         User user = userRepository.findById(id).orElse(null);
-
-        if (user != null) {
-            if (user.getId() == userDetails.getId()) {
-                user.setName(userDetails.getName());
-                user.setEmail(userDetails.getEmail());
-                user.setProfile(userDetails.getProfile());
-                user.setPermission(userDetails.getPermission());
-                user.setImage(userDetails.getImage());
-                userRepository.save(user);
-                result.setResultCode(0);
-                result.setUser(user);
-            } else {
-                result.setResultCode(1);
-            }
-        } else {
+        
+        if (user == null) {
             result.setResultCode(2);
+            return result;
+        }
+
+        User userByName = userRepository.findByName(userDetails.getName()).orElse(null);
+
+        if (user.getName() == userByName.getName()) {
+            result.setResultCode(3);
+            return result;
+        }
+
+        if (user.getId() == userDetails.getId()) {
+            user.setName(userDetails.getName());
+            user.setEmail(userDetails.getEmail());
+            user.setProfile(userDetails.getProfile());
+            user.setPermission(userDetails.getPermission());
+            user.setImage(userDetails.getImage());
+            userRepository.save(user);
+            result.setResultCode(0);
+            result.setUser(user);
+        } else {
+            result.setResultCode(1);
         }
 
         return result;

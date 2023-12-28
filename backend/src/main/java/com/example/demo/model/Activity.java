@@ -5,10 +5,16 @@ import com.example.demo.model.User;
 import com.example.demo.model.Attender;
 
 import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 @Entity
 @Table(name = "Activities")
 public class Activity {
@@ -16,6 +22,7 @@ public class Activity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @JsonIdentityReference(alwaysAsId = true)
     @ManyToOne
     @JoinColumn(name = "users", nullable = false, referencedColumnName = "id")
     private User user;
@@ -32,11 +39,8 @@ public class Activity {
     @Column(name = "visible", columnDefinition = "boolean default false")
     private Boolean visible;
     
-    @Column(name = "dateTime", nullable = false)
+    @Column(name = "dateTime", nullable = true)
     private Date dateTime;
-
-    @OneToMany(mappedBy = "activity")
-    private Set<Attender> attenders;
 
     // getters and setters
 
@@ -46,10 +50,6 @@ public class Activity {
 
     public User getUser() {
         return user;
-    }
-
-    public Set<Attender> getAttenders() {
-        return attenders;
     }
 
     public String getTitle() {

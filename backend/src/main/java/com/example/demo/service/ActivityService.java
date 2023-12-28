@@ -34,8 +34,16 @@ public class ActivityService {
         JwtResult jwtResult = jwtService.parseRequest(request);
 
         ActivityResult result = new ActivityResult();
+
+        User user = jwtResult.getUser();
+        activity.setUser(user);
+
+        if (jwtResult == null) {
+            result.setResultCode(1);
+            return result;
+        }
         
-        if (!(jwtResult != null) && (!jwtResult.getPassed())) {
+        if (!jwtResult.getPassed()) {
             result.setResultCode(1);
             return result;
         }
@@ -50,7 +58,11 @@ public class ActivityService {
 
         JwtResult jwtResult = jwtService.parseRequest(request);
         
-        if (!(jwtResult != null) && (!jwtResult.getPassed())) {
+        if (jwtResult == null) {
+            return 1;
+        }
+        
+        if (!jwtResult.getPassed()) {
             return 1;
         }
         
@@ -73,7 +85,12 @@ public class ActivityService {
         JwtResult jwtResult = jwtService.parseRequest(request);
         ActivityResult result = new ActivityResult();
         
-        if (!(jwtResult != null) && (!jwtResult.getPassed())) {
+        if (jwtResult == null) {
+            result.setResultCode(1);
+            return result;
+        }
+        
+        if (!jwtResult.getPassed()) {
             result.setResultCode(1);
             return result;
         }

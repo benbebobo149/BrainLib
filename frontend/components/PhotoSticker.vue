@@ -2,42 +2,44 @@
     <button @click="openModal" class="w-auto h-full">
         <img src="@/PhotoSticker.png" class="w-auto h-[80%]" alt="PhotoSticker">
     </button>
-    <div v-if="PhotoListVisible" class="PhotoList fixed w-[15%] h-[25%] bg-purple-50 flex  mt-[7vh] ">
-        <!-- <button @click="closeModal" class="h-[3%] absolute left-0 text-md font-bold cursor-pointer">&times;</button> -->
-        <div class="w-full h-auto bg-purple-50 items-center justify-center">
-            <div class="hover:bg-purple-100 ease-in-out flex h-[25%] w-auto p-1">
-                <NuxtLink to="http://localhost:3000/personal" class="w-[20%] h-auto flex justify-center">
-                    <img src="/PhotoSticker/PersonalProfile.png" alt="" class="w-full h-auto">
-                </NuxtLink>
-                <NuxtLink to="http://localhost:3000/personal" class="text-[1vw] flex items-center w-[80%] h-auto ml-5">
-                    <p>Personal Profile</p>
-                </NuxtLink>
-            </div>
-            <div class="hover:bg-purple-100 flex h-1/4 w-full p-1">
-                <NuxtLink to="http://localhost:3000/personal/Change" class="w-[20%] h-auto flex justify-center">
-                    <img src="/PhotoSticker/Edit.png" alt="" class="w-full h-auto">
-                </NuxtLink>
-                <NuxtLink to="http://localhost:3000/personal/Change" class="text-[1vw] flex items-center ml-5 w-[80%] h-auto">
-                    <p>Edit Profile</p>
-                </NuxtLink>
-            </div>
-            <div class="flex h-1/4 w-full p-1 hover:bg-purple-100">
-                <button @click="LogOut" class="w-[20%] h-auto flex justify-center">
-                    <img src="/PhotoSticker/LogOut.png" alt="" class="w-full h-auto">
-                </button>
-                <button @click="LogOut" class="text-[1vw] flex items-center w-[80%] h-auto ml-5">
-                    <p>Log out</p>
-                </button>
-                
-            </div>
-            
-            <div v-if="Admin" class="flex h-1/4 w-full p-1">
-                <NuxtLink to="./" class="w-[20%] h-auto flex justify-center">
-                    <img src="/PhotoSticker/Admin.png" alt="" class="w-full h-auto">
-                </NuxtLink>
-                <NuxtLink class="text-[1vw] flex items-center ml-5 w-[80%] h-auto">
-                    <p>Admin Page</p>
-                </NuxtLink>
+    <div @click="closeModal" v-if="PhotoListVisible"
+        class="fixed inset-0 flex w-screen h-screen max-h-full">
+        <div class="PhotoList fixed w-[15%] h-[25%] bg-purple-50 flex  mt-[7vh] right-0">
+            <div class="w-full h-auto bg-purple-50 items-center justify-center">
+                <div class="hover:bg-purple-100 ease-in-out flex h-[25%] w-auto p-1">
+                    <NuxtLink to="/personal" class="w-[20%] h-auto flex justify-center">
+                        <img src="/PhotoSticker/PersonalProfile.png" alt="" class="w-full h-auto">
+                    </NuxtLink>
+                    <NuxtLink to="/personal" class="text-[1vw] flex items-center w-[80%] h-auto ml-5">
+                        <p>Personal Profile</p>
+                    </NuxtLink>
+                </div>
+                <div class="hover:bg-purple-100 flex h-1/4 w-full p-1">
+                    <NuxtLink to="/personal/Change" class="w-[20%] h-auto flex justify-center">
+                        <img src="/PhotoSticker/Edit.png" alt="" class="w-full h-auto">
+                    </NuxtLink>
+                    <NuxtLink to="/personal/Change" class="text-[1vw] flex items-center ml-5 w-[80%] h-auto">
+                        <p>Edit Profile</p>
+                    </NuxtLink>
+                </div>
+                <div class="flex h-1/4 w-full p-1 hover:bg-purple-100">
+                    <button @click="LogOut" class="w-[20%] h-auto flex justify-center">
+                        <img src="/PhotoSticker/LogOut.png" alt="" class="w-full h-auto">
+                    </button>
+                    <button @click="LogOut" class="text-[1vw] flex items-center w-[80%] h-auto ml-5">
+                        <p>Log out</p>
+                    </button>
+
+                </div>
+
+                <div v-if="userPermission[1].permission == 2" class="hover:bg-purple-100 flex h-1/4 w-full p-1">
+                    <NuxtLink to="/admini" class="w-[20%] h-auto flex justify-center">
+                        <img src="/PhotoSticker/Admin.png" alt="" class="w-full h-auto">
+                    </NuxtLink>
+                    <NuxtLink to="/admini" class="text-[1vw] flex items-center ml-5 w-[80%] h-auto">
+                        <p>Admin Page</p>
+                    </NuxtLink>
+                </div>
             </div>
         </div>
     </div>
@@ -45,7 +47,10 @@
   
 <script setup>
 import { ref } from 'vue';
+import user from '@/public/personal/UserFakeData.json';
 
+const userPermission = ref(user);
+console.log(userPermission.value[1].permission);
 const PhotoListVisible = ref(false);
 
 const openModal = () => {
@@ -58,19 +63,27 @@ const closeModal = () => {
 };
 
 const LogOut = () => {
+    const google_token = useCookie('token');
+    google_token.value = null;
+    //move to specific page
+    const moveToPage = () => {
+        reloadNuxtApp({ path: '/', ttl: 1000 });
+
+    };
+    moveToPage();
     console.log("LogOut in PhotoSticker.vue");
     alert("確認是否登出");
+
 };
-
 const Admin = ref(false);
-
 
 </script>
 <style scoped>
-    .PhotoList{
-        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    }
-    :hover.List{
-        background-color: #F9DEDC ease-in-out;
-    }
+.PhotoList {
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+:hover.List {
+    background-color: #F9DEDC ease-in-out;
+}
 </style>

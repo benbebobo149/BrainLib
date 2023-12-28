@@ -8,17 +8,34 @@ import com.example.demo.model.SusPost;
 import com.example.demo.model.Appreciator;
 
 import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 @Entity
 @Table(name = "posts")
 public class Post {
+
+    @ManyToMany
+    @JoinTable(
+        name = "post_tag",
+        joinColumns = @JoinColumn(name = "post"),
+        inverseJoinColumns = @JoinColumn(name = "tag")
+    )
+    private List<Tag> tags;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @ManyToOne
-    @JoinColumn(name = "users", nullable = false)
+    @JoinColumn(name = "users", nullable = false, referencedColumnName = "id")
     private User user;
 
     @Column(name = "title", nullable = false)
@@ -27,29 +44,23 @@ public class Post {
     @Column(name = "content", nullable = false)
     private String content;
 
-    @Column(name = "image", nullable = false)
+    @Column(name = "image", columnDefinition = "VARCHAR(255) DEFAULT 'default_post_image.jpg'")
     private String image;
 
-    @Column(name = "thumb_up", nullable = false)
+    @Column(name = "thumb_up", columnDefinition = "int default 0")
     private Integer thumbUp;
 
-    @Column(name = "visible", nullable = false)
+    @Column(name = "visible", columnDefinition = "boolean default false")
     private Boolean visible;
 
-    @Column(name = "is_suspend", nullable = false)
+    @Column(name = "is_suspend", columnDefinition = "boolean default false")
     private Boolean isSuspend;
 
-    @OneToMany(mappedBy = "post")
-    private List<PostTag> tags;
-
-    @OneToMany(mappedBy = "post")
-    private List<Comment> comments;
-
-    @OneToMany(mappedBy = "post")
-    private List<SusPost> suspendInfo;
-
-    @OneToMany(mappedBy = "post")
-    private List<Appreciator> appreciators;
+    public Post() {
+        this.thumbUp = 0;
+        this.visible = false;
+        this.isSuspend = false;
+    }
 
     // getters and setters
     public Integer getId() {
@@ -84,20 +95,8 @@ public class Post {
         return isSuspend;
     }
 
-    public List<PostTag> getTags() {
+    public List<Tag> getTags() {
         return tags;
-    }
-
-    public List<Comment> getComments() {
-        return comments;
-    }
-
-    public List<SusPost> getSuspendInfo() {
-        return suspendInfo;
-    }
-
-    public List<Appreciator> getAppreciators() {
-        return appreciators;
     }
 
     public void setUser(User user) {
@@ -116,10 +115,6 @@ public class Post {
         this.image = image;
     }
 
-    public void setTags(List<PostTag> tags) {
-        this.tags = tags;
-    }
-
     public void setThumbUp(Integer thumbUp) {
         this.thumbUp = thumbUp;
     }
@@ -132,15 +127,7 @@ public class Post {
         this.isSuspend = isSuspend;
     }
 
-    public void setComments(List<Comment> comments) {
-        this.comments = comments;
-    }
-
-    public void setSuspendInfo(List<SusPost> suspendInfo) {
-        this.suspendInfo = suspendInfo;
-    }
-
-    public void setAppreciators(List<Appreciator> appreciators) {
-        this.appreciators = appreciators;
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
     }
 }

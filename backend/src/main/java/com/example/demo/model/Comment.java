@@ -5,7 +5,11 @@ import com.example.demo.model.User;
 import com.example.demo.model.Post;
 
 import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 @Entity
 @Table(name = "Comments")
 public class Comment {
@@ -23,6 +27,9 @@ public class Comment {
 
     @Column(name = "content", nullable = false)
     private String content;
+
+    @Column(name = "created_at", nullable = false)
+    private String createdAt;
 
     // getters and setters
 
@@ -42,6 +49,10 @@ public class Comment {
         return content;
     }
 
+    public String getCreatedAt() {
+        return createdAt;
+    }
+
     public void setPost(Post post) {
         this.post = post;
     }
@@ -52,5 +63,9 @@ public class Comment {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
     }
 }

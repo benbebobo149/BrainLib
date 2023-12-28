@@ -14,6 +14,7 @@ import com.example.demo.dto.UserResult;
 import com.example.demo.service.UserService;
 
 import java.util.List;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 @RestController
 @RequestMapping("/user")
@@ -21,6 +22,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/all")
     public ResponseEntity<?> getAllUsers() {
         try {
@@ -36,6 +38,7 @@ public class UserController {
         }
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/{id}")
     public ResponseEntity<?> getUserById(@PathVariable Integer id) {
         try {
@@ -51,6 +54,7 @@ public class UserController {
         }
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @PutMapping("/{id}")
     public ResponseEntity<?> updateUser(@PathVariable Integer id, @RequestBody User userDetails, HttpServletRequest request) {
         try {
@@ -63,6 +67,8 @@ public class UserController {
                     return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
                 case 2: // 找不到
                     return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+                case 3: // 姓名已被使用
+                    return ResponseEntity.status(HttpStatus.CONFLICT).build();
                 default: // 其他錯誤
                     return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
             }
@@ -72,6 +78,7 @@ public class UserController {
         }
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteUser(@PathVariable Integer id, HttpServletRequest request) {
         try {
@@ -93,6 +100,7 @@ public class UserController {
         }
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/all/{permission}")
     public ResponseEntity<?> getUserByPermission(@PathVariable Integer permission) {
         try {
@@ -108,6 +116,7 @@ public class UserController {
         }
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/by-username/{username}")
     public ResponseEntity<?> getUserByUsername(@PathVariable String username) {
         try {

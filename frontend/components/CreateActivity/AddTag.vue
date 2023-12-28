@@ -7,7 +7,7 @@
       <div class="relative mb-4">
         <img src="/hello/Rectangle7.png" alt="Rectangle Box" class="h-[8vh] w-auto cursor-pointer" />
 
-        <input v-model="enteredText"
+        <input v-model="newNote" type="text"
           class="absolute top-0 left-0 right-0 bottom-0 p-2 w-full h-full bg-transparent border-none rounded-full"
           placeholder="Enter your text" />
       </div>
@@ -31,6 +31,8 @@ const saveAndClosePopup = () => {
   console.log('Entered Text:', enteredText.value);
   closePopup();
 };
+const newNote = ref("");
+const Notes = ref([]);
 </script>
 
 <style scoped>

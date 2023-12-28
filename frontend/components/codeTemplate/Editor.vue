@@ -1,8 +1,8 @@
 <script setup>
-import EditorJS from '@editorjs/editorjs';
-import Header from '@editorjs/header';
-import List from '@editorjs/list';
-import ImageTool from '@editorjs/image';
+import EditorJS from '/@editorjs/editorjs';
+import Header from '/@editorjs/header';
+import List from '/@editorjs/list';
+import ImageTool from '/@editorjs/image';
 const config = useRuntimeConfig()
 
 // click the button and console log the content
@@ -47,19 +47,16 @@ const editor = new EditorJS({
 </script>
 
 <style>
-
 .ce-header {
     font-size: 2.5rem;
     font-weight: bold;
 }
-.ce-header h1{
 
-}
-
+.ce-header h1 {}
 </style>
 <template>
     <div class="flex flex-col justify-center">
-        <div id="editorjs" class="w-full h- border-2 border-terotory	"></div>
+        <div id="editorjs" class="w-full h- border-2 border-terotory "></div>
         <div class="flex justify-end mt-2">
             <button @click="sendMessage"
                 class="text-white bg-primary hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 focus:outline-non">傳送內容</button>
@@ -67,4 +64,3 @@ const editor = new EditorJS({
 
     </div>
 </template>
-  
