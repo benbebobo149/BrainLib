@@ -310,9 +310,6 @@ public class PostService {
             tags.add(tagRepository.findById(tag.getId()).orElse(null));
         }
 
-        originalTags.removeAll(tags);
-        tags.removeAll(originalTags);
-
         for (Tag tag : originalTags) {
             PostTag postTag = postTagRepository.findByPostAndTag(post, tag);
             postTagRepository.delete(postTag);
@@ -333,6 +330,7 @@ public class PostService {
         post.setTitle(postDetails.getTitle());
         post.setContent(postDetails.getContent());
         post.setImage(postDetails.getImage());
+        postRepository.save(post);
 
         postDetails.setId(post.getId());
         postDetails.setUser(post.getUser().getId());

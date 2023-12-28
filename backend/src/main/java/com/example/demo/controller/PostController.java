@@ -89,7 +89,7 @@ public class PostController {
             }
         } catch (Exception e) {
             // 處理其他可能的錯誤
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+            return ResponseEntity.ok(e);
         }
     }
 
