@@ -2,8 +2,7 @@
     <button @click="openModal" class="w-auto h-full">
         <img src="@/PhotoSticker.png" class="w-auto h-[80%]" alt="PhotoSticker">
     </button>
-    <div @click="closeModal" v-if="PhotoListVisible"
-        class="fixed inset-0 flex w-screen h-screen max-h-full">
+    <div @click="closeModal" v-if="PhotoListVisible" class="fixed inset-0 flex w-screen h-screen max-h-full">
         <div class="PhotoList fixed w-[15%] h-[25%] bg-purple-50 flex  mt-[7vh] right-0">
             <div class="w-full h-auto bg-purple-50 items-center justify-center">
                 <div class="hover:bg-purple-100 ease-in-out flex h-[25%] w-auto p-1">
@@ -63,16 +62,18 @@ const closeModal = () => {
 };
 
 const LogOut = () => {
-    const google_token = useCookie('token');
-    google_token.value = null;
-    //move to specific page
-    const moveToPage = () => {
-        reloadNuxtApp({ path: '/', ttl: 1000 });
+    if (confirm("確認是否登出")) {
+        const google_token = useCookie('token');
+        google_token.value = null;
+        //move to specific page
+        const moveToPage = () => {
+            reloadNuxtApp({ path: '/', ttl: 1000 });
 
-    };
-    moveToPage();
-    console.log("LogOut in PhotoSticker.vue");
-    alert("確認是否登出");
+        };
+        moveToPage();
+        console.log("LogOut in PhotoSticker.vue");
+
+    }
 
 };
 const Admin = ref(false);
