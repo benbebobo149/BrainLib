@@ -67,19 +67,16 @@ public class PostService {
 
     public TagPostResult createPost(NewPostResult post, HttpServletRequest request) {
         JwtResult jwtResult = jwtService.parseRequest(request);
-
         TagPostResult result = new TagPostResult();
-        
         if (jwtResult == null) {
             result.setResultCode(1);
             return result;
         }
-        
+
         if (!jwtResult.getPassed()) {
             result.setResultCode(1);
             return result;
         }
-
         Post newPost = new Post();
         User user = jwtResult.getUser();
         newPost.setUser(user);
@@ -89,7 +86,6 @@ public class PostService {
         newPost.setThumbUp(0);
         newPost.setIsSuspend(false);
         Post savedPost = postRepository.save(newPost);
-
         post.setId(savedPost.getId());
         post.setUser(user.getId());
         post.setUsername(user.getName());
@@ -102,14 +98,12 @@ public class PostService {
         if (tagr.size() == 0) {
             return result;
         }
-
         for (TagRequest tag : tagr) {
             PostTag postTag = new PostTag();
             postTag.setPost(savedPost);
             postTag.setTag(tagRepository.findById(tag.getId()).orElse(null));
             postTagRepository.save(postTag);
         }
-
         return result;
     }
 

@@ -15,8 +15,6 @@
                         <input id="file-input" type="file" @change="fileSelected" style="display: none;">
                         <p class="w-[80%] h-auto text-[1vw]">Update Your Photo</p>
                     </div>
-
-
                 </div>
                 <div class="w-[20%] h-auto bg-purple-50 flex items-center"></div>
 

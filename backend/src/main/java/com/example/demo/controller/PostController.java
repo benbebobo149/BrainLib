@@ -51,6 +51,7 @@ public class PostController {
             }
         } catch (Exception e) {
             // 處理其他可能的錯誤
+            System.out.println(e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
