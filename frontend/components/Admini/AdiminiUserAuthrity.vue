@@ -4,9 +4,9 @@ import { ref } from 'vue';
 // Define your reactive data
 const selectedOption = ref('');
 const options = ref([
-    { value: 'normal', text: 'Normal' },
-    { value: 'administrator', text: 'Administrator' },
-    { value: 'moderator', text: 'Moderator' },
+    { value: 0, text: 'Normal' },
+    { value: 1, text: 'Moderator' },
+    { value: 2, text: 'Administrator' },
 ]);
 
 //define emit
