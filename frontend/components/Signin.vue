@@ -8,7 +8,7 @@
         </div>
         <div class="flex justify-center gap-4">
           <div>
-            <Google class="w-24 h-24" @click="GoogleClick"></Google>
+            <Google class="w-24 h-24"></Google>
           </div>
         </div>
       </div>
@@ -18,28 +18,12 @@
 
 <script setup>
 import Google from '@/components/Google.vue';
-//import { useCookies } from 'vue-universal-cookies';
 
 const emit = defineEmits(['close_modal'], ['open_modal'], ['GoogleClick']);
-
-const openModal = () => {
-  console.log("open model in signin.vue");
-  emit('open_modal')
-};
 
 const closeModal = () => {
   emit('close_modal')
   console.log("close model in signin.vue");
-};
-
-const GoogleClick = () => {
-  console.log("GoogleClick in signin.vue");
-  emit('close_modal')
-  emit('GoogleClick')
-  //傳送google_token
-  // const { cookies } = useCookies();
-  // cookies.set('google_token', google_token.value);
-  // console.log(cookies.get('google_token'));
 };
 
 </script>

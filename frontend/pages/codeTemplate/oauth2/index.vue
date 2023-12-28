@@ -1,5 +1,7 @@
 <script setup>
 import axios from 'axios'
+import { jwtDecode } from "jwt-decode";
+
 const config = useRuntimeConfig()
 
 let url = new URL(window.location.href);
@@ -22,6 +24,16 @@ const sendOauthToken = async () => {
             // if code is 200, then hide the modal
             if (res.status == 200) {
                 console.log(res.data)
+                const token = useCookie('token');
+                token.value = res.data.token;//存取token
+                // Decode the token
+                const decoded = jwtDecode(token.value)
+
+                // Get the id and username
+                const id = decoded.id;
+                const username = decoded.username;
+                console.log(id, username);
+                //reloadNuxtApp({ path: "/main", ttl: 500 });
             }
         })
         .catch((err) => {
@@ -34,5 +46,4 @@ const sendOauthToken = async () => {
 
 sendOauthToken();
 </script>
-<template>
-</template>
+<template></template>
