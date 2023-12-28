@@ -1,10 +1,9 @@
 <script setup>
 import AdiminiUserAuthrity from '~/components/Admini/AdiminiUserAuthrity.vue';
-import users from '@/public/hello/Pic_Folder/fakeDataUser.json'
+// import users from '@/public/hello/Pic_Folder/fakeDataUser.json'
 import { ref } from 'vue'
 const showOverlay = ref(false)
-const selectedOption = ref('');
-
+var selectedOption = 0;
 // const handleClick = () => {
 // 	console.log('you had clicked the gear');
 // }
@@ -16,8 +15,8 @@ const DeleteAccount = () => {
 
 const updateData = (value) => {
 	console.log("updateData in ManageUser.vue");
-	selectedOption.value = value;
-
+	selectedOption = value;
+	console.log(" selectedOption is" + selectedOption);
 };
 // const props = defineProps({
 // 	user: {
@@ -29,21 +28,167 @@ const updateData = (value) => {
 // 		})
 // 	}
 // }) 
+
+
+//get data from databaseimport axios from 'axios';
+import axios from 'axios';
+const config = useRuntimeConfig();
+
+const users = ref([]);
+
+//get data from database
+const getAlluser = () => {
+	console.log("DeleteAccount in ManageUser.vue");
+	const token = useCookie('token');
+	axios.get(`${config.public.apiURL}/user/all`, { // config.public.apiURL + "/tag"
+	}, {
+		headers: {
+			'Authorization': 'Bearer ' + token.value,
+			'Content-Type': 'application/json',
+			'accept': 'application/json'
+		}
+	})
+		.then((res) => {
+			// if code is 200, then hide the modal
+			console.log(res);
+			if (res.status == 200) {
+				console.log("success");
+				users.value = res.data;
+			}
+		})
+		.catch((err) => {
+			// if code is 401, then show error message 
+			console.log(err);
+			if (err.response.status == 404) {
+				console.log("fail");
+			} else if (err.response.status == 500) {
+				console.log("fail");
+			}
+		})
+}
+
+getAlluser();
+
+//delete user // didnt finish
+
+const deUser = ref('');
+
+const deleteUser = (userDeleted) => {
+	if (confirm("確認是否刪除帳號")) {
+		console.log("DeleteAccount in ManageUser.vue");
+		const token = useCookie('token');
+		axios.delete(`${config.public.apiURL}/user/${userDeleted.id}`, { // config.public.apiURL + "/tag"
+			id: userDeleted.id,
+		}, {
+			headers: {
+				'Authorization': 'Bearer ' + token.value,
+				'Content-Type': 'application/json',
+				'accept': 'application/json'
+			}
+		})
+			.then((res) => {
+				// if code is 200, then hide the modal
+				console.log(res);
+				if (res.status == 200) {
+					console.log("success to delte");
+					users.value = res.data;
+				}
+			})
+			.catch((err) => {
+				// if code is 401, then show error message 
+				console.log(err);
+				if (err.response.status == 401) {
+					console.log("fail to delte");
+				} else if (err.response.status == 404) {
+					console.log("fail to delte");
+				}
+				else if (err.response.status == 500) {
+					console.log("fail to delte");
+				}
+			})
+	}
+}
+
+//change permission
+let permiLevel = 0;
+
+const changePermission = (userChaged) => {
+	permiLevel = selectedOption;
+	console.log("user id "+userChaged.id);
+	//print user
+	console.log("userChaged.id " + userChaged.id);
+	console.log("userChaged.name " + userChaged.name);
+	console.log("userChaged.email " + userChaged.email);
+	console.log("userChaged.permiLevel " + userChaged.permiLevel);
+	console.log("userChaged.profile " + userChaged.profile);
+	console.log("userChaged.image " + userChaged.image);
+	// check the usr data is null or not if it is null give a temporary value
+	if (userChaged.name == null) {
+		userChaged.name = " ";
+	}
+	if (userChaged.profile == null) {
+		userChaged.profile = " ";
+	}
+	if (userChaged.image == null) {
+		userChaged.image = " ";
+	}
+
+	const token = useCookie('token');
+	axios.put(`${config.public.apiURL}/user/${userChaged.id}`, { // config.public.apiURL + "/tag"
+		"id": userChaged.id,
+		"name": userChaged.name,
+		"email": userChaged.email,
+		"permission": userChaged.permiLevel,
+		"profile": userChaged.profile,
+		"image": userChaged.image
+	}, {
+		headers: {
+			'Authorization': 'Bearer ' + token.value,
+			'Content-Type': 'application/json',
+			'accept': 'application/json'
+		}
+	})
+		.then((res) => {
+			// if code is 200, then hide the modal
+			console.log(res);
+			if (res.status == 200) {
+				console.log("success");
+				users.value = res.data;
+			}
+		})
+		.catch((err) => {
+			// if code is 401, then show error message 
+			console.log(err);
+			if (err.response.status == 401) {
+				console.log("fail");
+			}else if (err.response.status == 404) {
+				console.log("fail");
+			}else if(err.response.status == 409){
+				console.log("fail");
+			}
+			 else if (err.response.status == 500) {
+				console.log("fail");
+			}
+		})
+}
+
 </script>
 
 <template>
 	<div v-for="user in users" :key="user.id" class="">
 		<div class="w-1/4 h-[12vh] bg-green flex">
 			<img class="w-[4vw] h-[4vw] rounded-full" src="https://via.placeholder.com/95x96 " />
-			<div >
-				<p class="ml-[2vh] mt-[2vh] h-[full] w-[20vw] bg-bgcolor text-black text-xl font-normal font-'Roboto' flex-auto item-center">{{ user.name }}</p>
+			<div>
+				<p
+					class="ml-[2vh] mt-[2vh] h-[full] w-[20vw] bg-bgcolor text-black text-xl font-normal font-'Roboto' flex-auto item-center">
+					{{ user.name }}</p>
 			</div>
 
 			<div class="ml-[6vw] ] w-[20vw] flex">
-				<button @click="DeleteAccount" class="h-[3vw] w-[3vw] justify-center">
+				<button @click="deleteUser(user)" class="h-[3vw] w-[3vw] justify-center">
 					<img src="@/PhotoSticker/DeleteAccount.png" alt="Delete Account" class="w-full h-auto">
 				</button>
-				<button @click="DeleteAccount" class="w-[10vw] text-[vw] flex  justify-center ml-5  h-auto">
+				<button @click="deleteUser(user)" class="w-[10vw] text-[vw] flex  justify-center ml-5  h-auto">
 					<p class="text-red-700">Delete User</p>
 				</button>
 			</div>
@@ -51,7 +196,8 @@ const updateData = (value) => {
 			<!-- <img class="left-[20vw] w-[3vw] h-[3vw] ml-[0.5rem] relative flex cursor-pointer items-center"
 				src="@/PageAdmini/GearFill.png" @click="handleClick" /> -->
 			<div class="left-[4vw] w-[3vw] h-[3vw] ml-[2vw] relative flex cursor-pointer items-center">
-				<AdiminiUserAuthrity  @saveCnage="updateData" class="bg- broder"></AdiminiUserAuthrity>
+				<AdiminiUserAuthrity @saveCnage="updateData(), changePermission(user)" class="bg- broder">
+				</AdiminiUserAuthrity>
 			</div>
 		</div>
 	</div>

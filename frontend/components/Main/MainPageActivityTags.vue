@@ -1,14 +1,16 @@
 
 <script setup>
 import { ref } from "vue";
-import activities from './public/ActivityFakeData/ActivityFakeData.json';
+// import activities from './public/ActivityFakeData/ActivityFakeData.json';
+import axios from 'axios';
+const config = useRuntimeConfig();
+
+const activities = ref([]);
 
 //get data from database
 const getActivityData = () => {
   const token = useCookie('token');
   axios.get(`${config.public.apiURL}/activity/all`, { // config.public.apiURL + "/tag"
-
-    activity_id: 0,
   }, {
     headers: {
       'Authorization': 'Bearer ' + token.value,
@@ -21,6 +23,7 @@ const getActivityData = () => {
       console.log(res);
       if (res.status == 200) {
         console.log("success");
+        activities.value = res.data;
       }
     })
     .catch((err) => {
@@ -28,16 +31,18 @@ const getActivityData = () => {
       console.log(err);
       if (err.response.status == 404) {
         console.log("fail");
+      }else if (err.response.status == 500) {
+        console.log("fail");
       }
     })
 }
 
-
+getActivityData();
 </script>
 
 <template>
   <div>
-    <div v-for="activity in activities" :key="activity.date" class="">
+    <div v-for="activity in activities" :key="activity.id" class="">
       <div class="w-[18vw] h-full bg-purple-200 rounded-2xl  mx-auto text-neutral-900 
         text-xl font-normal flex-col">
         <div class="h-full font-'Roboto' flex justify-center py-[1vh] my-[2vh]">

@@ -25,9 +25,9 @@
       </div>
       <div class="w-auto h-[76%] bg-violet-100 overflow-y-hidden">
         <div class="w-auto h-full bg-violet-100 overflow-y-scroll hide-scrollbar fill-available">
-          <NuxtLink :to="`/main/${topic.tag_id}`"  @click="closeModal" v-for="topic in topics" :key="topic.tag_id"
+          <NuxtLink :to="`/main/${topic.id}`"  @click="closeModal" v-for="topic in tags" :key="topic.id"
             class="flex w-auto h-[8vh] items-center justify-center m-3 border  border-terotory rounded-md">
-            <p class="text-[2vw] ">{{ topic.tag_name }}</p>
+            <p class="text-[2vw] ">{{ topic.tagName }}</p>
           </NuxtLink>
         </div>
       </div>
@@ -41,6 +41,43 @@ import { ref } from 'vue';
 import Topic from '@/public/TagFakeData/TagFakeData.json';
 
 const topics = ref(Topic);
+//get data from databaseimport axios from 'axios';
+import axios from 'axios';
+const config = useRuntimeConfig();
+
+const tags = ref([]);
+
+//get data from database
+const getAllTags = () => {
+  const token = useCookie('token');
+  axios.get(`${config.public.apiURL}/tag`, { // config.public.apiURL + "/tag"
+  }, {
+    headers: {
+      'Authorization': 'Bearer ' + token.value,
+      'Content-Type': 'application/json',
+      'accept': 'application/json'
+    }
+  })
+    .then((res) => {
+      // if code is 200, then hide the modal
+      console.log(res);
+      if (res.status == 200) {
+        console.log("success");
+        tags.value = res.data;
+      }
+    })
+    .catch((err) => {
+      // if code is 401, then show error message 
+      console.log(err);
+      if (err.response.status == 404) {
+        console.log("fail");
+      } else if (err.response.status == 500) {
+        console.log("fail");
+      }
+    })
+}
+
+getAllTags();
 
 const ListNavVisible = ref(false);
 

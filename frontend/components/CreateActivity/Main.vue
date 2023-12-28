@@ -26,15 +26,15 @@
           <div class="h-2/3 flex-col justify-start">
             <div>
               <input type="text" class="text-black text-2xl bg-slate-50" :style="{ fontSize: fontSize[0] }"
-                @input="updateContent(0)" placeholder="Enter Title">
+                v-model="title" placeholder="Enter Title">
             </div>
             <div class="mt-10">
               <input type="text" class="text-black text-2xl  bg-slate-50" :style="{ fontSize: fontSize[1] }"
-                @input="updateContent(1)" placeholder="Enter Address">
+                v-model="address" placeholder="Enter Address">
             </div>
             <div class="mt-10">
               <input type="text" class="text-black text-2xl  bg-slate-50" :style="{ fontSize: fontSize[2] }"
-                @input="updateContent(2)" placeholder="Enter Description">
+                v-model="description" placeholder="Enter Description">
             </div>
           </div>
         </div>
@@ -45,12 +45,12 @@
         <label for="fileInput" class="cursor-pointer">
           <img src="/hello/AddFile.png" alt="Add file" class="w-auto h-[4vh] mr-10">
         </label>
-        <label for="tagInput" class="cursor-pointer" @click="showRegistrationPopup">
+        <!-- <label for="tagInput" class="cursor-pointer" @click="showRegistrationPopup">
           <img src="/hello/AddTag.png" alt="Add tag" class="w-auto h-[4vh] mr-10">
-        </label>
-        <NuxtLink to="http://localhost:3000/activityPage" class="self-end justify-self-end">
-          <img src="/hello/Preview.png" alt="Preview" class="w-auto h-[4vh] mr-10">
-        </NuxtLink>
+        </label> -->
+        <!-- <NuxtLink to="http://localhost:3000/activityPage" class="self-end justify-self-end"> -->
+        <img src="/hello/Confirm.png" alt="confirm" class="w-auto h-[6vh] mr-10 cursor-pointer" @click="sendData">
+        <!-- </NuxtLink> -->
         <input id="fileInput" type="file" style="display: none;" @change="handleFileChange" />
         <AddTag v-if="showPopup" @close="closeRegistrationPopup" @save="handleSaveTag" />
       </div>
@@ -63,15 +63,33 @@
       </div>
     </div>
   </div>
+  <BoxSucc v-if="succVisible" class="z-10" @close="succVisible = false"></BoxSucc>
+  <BoxError v-if="errorVisible" @close="errorVisible = false"></BoxError>
 </template>
 
 <script setup>
 import { ref, onMounted } from 'vue';
 import AddTag from './AddTag.vue';
 import fakeData from './public/hello/Pic_Folder/fakeData2.json'; // Adjust the path accordingly
+import axios from 'axios';
+const config = useRuntimeConfig();
+
+
+//model box
+import BoxSucc from '../ModelBox/BoxSucc.vue';
+import BoxError from '../ModelBox/BoxError.vue';
+
+const succVisible = ref(false);
+const errorVisible = ref(false);
+
 
 const fontSize = ref(["1rem", "1rem", "1rem"]);
 const tags = ref([]);
+
+const picture = ref(null);
+const title = ref('');
+const address = ref('');
+const description = ref('');
 
 const updateTags = (tag) => {
   tags.value.push(tag);
@@ -95,6 +113,44 @@ const handleSaveTag = (tag) => {
   updateTags(tag);
   closeRegistrationPopup();
 };
+
+//date time
+const currentDateTime = new Date().toISOString();
+
+
+const sendData = () => {
+  console.log("sendData" + title.value);
+  const token = useCookie('token');
+  axios.post(`${config.public.apiURL}/activity`, { // config.public.apiURL + "/tag"
+    "title": title.value,
+    "content": description.value,
+    "location": address.value,
+    "dateTime": currentDateTime
+  }, {
+    headers: {
+      'Authorization': 'Bearer ' + token.value,
+      'Content-Type': 'application/json',
+      'accept': 'application/json'
+    }
+  })
+    .then((res) => {
+      // if code is 200, then hide the modal
+      console.log(res);
+      if (res.status == 200) {
+        console.log("success");
+        succVisible = true;
+        window.location.href = "localhost:3000/activity"; // redirect to activity page
+      }
+    })
+    .catch((err) => {
+      // if code is 401, then show error message 
+      console.log(err);
+      if (err.response.status == 404) {
+        console.log("fail");
+        errorVisible = true;
+      }
+    })
+}
 
 // Load fake data on component mount
 onMounted(() => {
