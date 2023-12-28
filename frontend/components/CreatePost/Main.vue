@@ -50,7 +50,7 @@
         <div v-for="tag in tags" class="mx-[1vw] flex" @click="removeTag">
           <div
             class="mx-auto rounded-sm border border-terotory text-center text-neutral-900 text-l font-normal font-'Roboto' leading-7 p-[0.5vh] cursor-pointer">
-            {{ tag }}
+            {{ tag.tagName }}
           </div>
         </div>
       </div>
@@ -90,15 +90,14 @@ const closeRegistrationPopup = () => {
   showPopup.value = false;
 };
 
-
-
-
-
-
 //tags
 const tags = ref([]);
 //added tags
 const addTags = (tag) => {
+  // 檢查是否已經有加入過
+  if (tags.value.find(item => item.id == tag.id)) {
+    return;
+  }
   tags.value.push(tag);
 };
 //remove tags

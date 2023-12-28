@@ -3,13 +3,14 @@
     <div class="rounded-lg flex flex-col bg-white justify-center items-center p-5">
       <img src="/hello/XLg.png" alt="Close Button" class="h-[3vh] w-auto justify-self-end self-end cursor-pointer"
         @click="closePopup">
-
+      <p v-if="errorMsg" class="text-red-600"> 請至少選一個 ! </p>
       <div class="relative mb-4">
         <img src="/hello/Rectangle7.png" alt="Rectangle Box" class="h-[8vh] w-auto cursor-pointer" />
-
-        <input v-model="enteredText"
-          class="absolute top-0 left-0 right-0 bottom-0 p-2 w-full h-full bg-transparent border-none rounded-full"
-          placeholder="Enter your text" @keyup.enter="saveAndClosePopup" />
+        
+        <select v-model="selectedTag" class="absolute top-0 left-0 right-0 bottom-0 p-2 w-full h-full bg-transparent border-none rounded-full">
+          <option value="-1">請選擇要加入的Tag</option>
+          <option v-for="tag in tagList" :value=tag.id> {{ tag.tagName }}</option>
+        </select>
       </div>
 
       <img src="/hello/Confirm.png" alt="Save and Close Button" class="h-[5vh] w-auto mt-4 cursor-pointer"
@@ -20,34 +21,46 @@
 
 <script setup>
 import { ref, defineEmits } from 'vue';
-
-const enteredText = ref('');
+import axios from 'axios';
+const config = useRuntimeConfig();
+const tagList = ref([]);
 const emit = defineEmits();
+const errorMsg = ref(false);
+const selectedTag = ref(-1);
 const closePopup = () => {
   emit('close');
 };
 
-// const saveAndClosePopup = () => {
-//   console.log('Entered Text:', enteredText.value);
-//   emit('close');
-//   closePopup();
-// };
+const getTag = () => {
+  axios.get(`${config.public.apiURL}/tag`, {
+    headers: {
+      'Content-Type': 'application/json',
+    }
+  })
+    .then(response => {
+      tagList.value = response.data;
+    })
+    .catch(error => {
+      console.error(error);
+    });
+}
+
 
 const saveAndClosePopup = () => {
-  // 加上 trim() 去除頭尾空白並防止沒鍵入文字
-  // var value = this.newTodo.trim;
-  // 如果輸入欄空白就不會往下執行
-  if (enteredText.value) {
-    console.log('Entered Text:', enteredText.value);
-    emit('additem', enteredText.value);
-    enteredText.value = '';
-    emit('close');
-    closePopup();
+
+  // 如果沒有選擇 tag 就顯示錯誤訊息
+  if(selectedTag.value == -1){
+    errorMsg.value = true;
     return;
   }
+  errorMsg.value = false;
+  // 透過 selectedTag.value 取得選擇的 tag id 在 tagList 中拿到對應的 tag
+  const selectedTagObj = tagList.value.find(tag => tag.id == selectedTag.value);
+  emit('additem', selectedTagObj);
   emit('close');
   closePopup();
 }
+getTag();
 </script>
 
 <style scoped>
