@@ -1,35 +1,10 @@
 <script setup>
-import PostPreview from '@/components/PostPreview';
+import MainPgePostPreview from '@/components/Main/MainPagePostPreview.vue';
 import MainPageActivityTags from '@/components/Main/MainPageActivityTags.vue';
 import MainTrendingTopic from '~/components/Main/MainTrendingTopic.vue';
 
 const popupState = ref(true);
 
-const getPostData = () => {
-  const token = useCookie('token');
-  axios.get(`${config.public.apiURL}/post`, { // config.public.apiURL + "/tag"
-  }, {
-    headers: {
-      'Authorization': 'Bearer ' + token.value,
-      'Content-Type': 'application/json',
-      'accept': 'application/json'
-    }
-  })
-    .then((res) => {
-      // if code is 200, then hide the modal
-      console.log(res);
-      if (res.status == 200) {
-        console.log("success get post data");
-      }
-    })
-    .catch((err) => {
-      // if code is 401, then show error message 
-      console.log(err);
-      if (err.response.status == 404) {
-        console.log("fail get post data");
-      }
-    })
-}
 </script>
 <template>
   <div id="mainPage" class="w-full h-full ">
@@ -45,7 +20,7 @@ const getPostData = () => {
           </div>
           <div class="w-full h-3/4 overflow-y-hidden ">
             <div class="w-auto h-full overflow-y-scroll hide-scrollbar fill-available p-0 ">
-              <PostPreview class="" />
+              <MainPgePostPreview class="" />
             </div>
           </div>
         </div>

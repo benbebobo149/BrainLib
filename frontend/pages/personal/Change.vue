@@ -8,7 +8,7 @@
                         class="w-[50%] h-[70%] rounded-full  bg-stone-300 flex justify-center items-center overflow-hidden">
                         <img v-if="inputImage" :src="inputImage" width="200" class="w-full h-auto  object-cover" />
                     </div>
-                    <div class="w-[40%] h-auto flex items-center">
+                    <div class="w-[40%] h-auto flex items-center ml-[3vw]">
                         <label for="file-input" class="w-[20%] h-full ">
                             <img src="@/Change/UpLoad.png" class="w-auto h-full">
                         </label>
@@ -24,10 +24,10 @@
                     <p class="text-[2vw]">Your Name</p>
                 </div>
                 <div class="w-auto h-1/3 bg-purple-50">
-                    <input type="text" v-model="inputName" class="w-full h-full">
+                    <input type="text" v-model="inputName" class="w-full h-full rounded-md pl-[1vw]">
                 </div>
                 <div class="w-auto h-1/3 bg-purple-50 text-[1vw] text-stone-500">
-                    <p>Appears on your Profile page, as your byline, and in your responses.</p>
+                    <p>Appears on your Profile page, and in your responses.</p>
                 </div>
             </div>
             <div class="w-auto h-[25%]  justify-center">
@@ -35,7 +35,7 @@
                     <p class="text-[2vw]">Bio</p>
                 </div>
                 <div class="w-auto h-1/3 bg-pruple-50">
-                    <input type="text" v-model="inputProfile" class="w-full h-full">
+                    <input type="text" v-model="inputProfile" class="w-full h-full rounded-md pl-[1vw]">
                 </div>
                 <div class="w-auto h-1/3 bg-purple-50 text-[1vw] text-stone-500">
                     <p>Appears on your Profile and next to your stories.</p>

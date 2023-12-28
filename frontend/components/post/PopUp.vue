@@ -91,6 +91,7 @@ const createComment = () => {
       // if code is 200, then hide the modal
       console.log(res);
       if (res.status == 200) {
+        window.location.reload();
         console.log("success");
       }
     })

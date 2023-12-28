@@ -62,8 +62,6 @@ const clickButton = () => {
 	emit('close')
 }
 
-
-
 </script>
 
 <template>
@@ -74,15 +72,15 @@ const clickButton = () => {
 			<div class=" w-3/4 bg-bgcolor">
 				<div class="w-full h-[7vh] bg-green-250 text-black text-[2vw] font-semibold font-Roboto leading-10">
 					{{ post.title }}</div>
-				<div class="w-[12vw] h-[10vh] left-[1rem]">
+				<div class="w-full h-[10vh] left-[1rem]">
 					<div class=" bg-bgcolor text-zinc-600 text-[1.25vw] font-normal font-Roboto ">
-						{{ post.content.blocks }}
+						{{ post.content }}
 					</div>
 				</div>
 
 				<div class="w-full h-[7vh]  rounded-sm border-b border-terotory mx-2  flex">
 					<div class="flex w-[10vw]">
-						<img class=" w-[6vh] h-[6vh] rounded-full  mx-2 " src="https://via.placeholder.com/95x96" />
+						<img  class=" w-[6vh] h-[6vh] rounded-full  mx-2 " src="https://via.placeholder.com/95x96" />
 						<h2 class="w-[6vw] h-[2vw] text-black text-[1.5vw] font-normal font-Roboto leading-loose">
 							{{ post.username }}
 						</h2>

@@ -186,20 +186,20 @@ const changePermission = (userChaged) => {
 				<button @click="deleteUser(user)" class="h-[3vw] w-[3vw] justify-center">
 					<img src="@/PhotoSticker/DeleteAccount.png" alt="Delete Account" class="w-full h-auto">
 				</button>
-				<button @click="deleteUser(user)" class="w-[10vw] text-[vw] flex  justify-center ml-5  h-auto">
+				<button @click="deleteUser(user)" class="w-[10vw] text-[1.5vw] flex  justify-center ml-5  h-auto">
 					<p class="text-red-700">Delete User</p>
 				</button>
 			</div>
 
 			<!-- <img class="left-[20vw] w-[3vw] h-[3vw] ml-[0.5rem] relative flex cursor-pointer items-center"
 				src="@/PageAdmini/GearFill.png" @click="handleClick" /> -->
-			<div class="left-[4vw] w-[3vw] h-[3vw] ml-[2vw] relative flex cursor-pointer items-center">
+			<div class="w-[7vw] h-[4vw] ml-[2vw] relative flex cursor-pointer items-center">
 				<select v-model="user.selectedPermission" class="bg-slate-200 rounded-md my-[1vh]">
 					<option v-for="option in options" :key="option.value" :value="option.value">
 						{{ option.text }}
 					</option>
 				</select>
-				<button class="bg-primary text-white w-full rounded-lg " type="submit" @click="changePermission(user)">Confirm</button>
+				<button class="w-[3vw] h-[2vw] bg-primary text-white w-full rounded-md ml-[1vw]" type="submit" @click="changePermission(user)">Confirm</button>
 			</div>
 		</div>
 	</div>

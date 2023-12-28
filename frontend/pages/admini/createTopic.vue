@@ -28,6 +28,8 @@ const sendData = () => {
 			// if code is 200, then hide the modal
 			console.log(res);
 			if (res.status == 200) {
+				window.location.reload();
+				alert("Create Topic Success");
 				console.log("success");
 			}
 		})
@@ -35,6 +37,8 @@ const sendData = () => {
 			// if code is 401, then show error message 
 			console.log(err);
 			if (err.response.status == 401) {
+				window.location.reload();
+				alert("Create Topic Fail");
 				console.log("fail");
 			}
 		})
@@ -48,13 +52,13 @@ const sendData = () => {
 		<div class="flex ">
 			<!-- 左邊列表 -->
 			<div class="w-1/5 rounded-sm border-r border-terotory  bg-bgcolor ">
-				<div class=" bg-#E8DEF8 w-screen overflow-y-scroll ">
+				<div class=" bg-#E8DEF8 w-screen overflow-y-scroll fixed left-0">
 					<AdiminiLeftBar />
 				</div>
 			</div>
 
 			<!-- 右邊部分 -->
-			<div class="w-4/5 h-[100vh] bg-bgcolor">
+			<div class="w-4/5 h-[100vh] bg-bgcolor fixed right-0">
 				<div class="h-[10vh] bg-bgcolor ">
 
 					<div class=" text-stone-400 ">
@@ -87,17 +91,17 @@ const sendData = () => {
 						class=" left-[8vw] w-[18vw] h-[8vh]  bg-white mx-[20vw] rounded-md border border-black border-opacity-10  relative">
 						<input v-model="topicDescription"
 							class="left-[8vw] w-[18vw] h-[8vh] grow shrink basis-0  rounded-lg text-black text-opacity-50 text-lg font-normal font-'Roboto' leading-7 pl-[1vw]"
-							type="text" placeholder="topicDescription" >
+							type="text" placeholder="topicDescription">
 						<!-- <button @click="sendData()" class="bg-black text-color-white">
 							click me
 						</button> -->
 					</div>
 
 					<div class=" w-[25vw] h-[4vw] my-[10vh] mx-[25vw]">
-						<div
-							class="left-[8vw] w-[8vw] h-[8vh]  p-3 bg-primary rounded-lg flex-col justify-center items-center inline-flex relative" @click="sendData()">
-							<div class="text-white  text-xl font-normal font-'Roboto' leading-7  cursor-pointer"
-								>Create</div>
+						<div class="left-[8vw] w-[8vw] h-[8vh]  p-3 bg-primary rounded-lg flex-col justify-center items-center inline-flex relative"
+							@click="sendData()">
+							<div class="text-white  text-xl font-normal font-'Roboto' leading-7  cursor-pointer">Create
+							</div>
 						</div>
 					</div>
 				</div>
