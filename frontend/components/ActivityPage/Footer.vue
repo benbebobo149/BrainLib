@@ -55,15 +55,7 @@
       <div class="flex w-1/3 h-full">
         <p class="text-black text-2xl self-start ml-10 mt-2">Organizers</p>
         <img :src="activities.organizer" alt="Organizers Image" class="w-16 h-16 self-center justify-self-center">
-        <p class="text-black text-xl font-bold ml-2 self-center">{{ activities.name1 }}</p>
-      </div>
-      <div class="flex w-1/3 h-full justify-center items-center">
-        <img :src="activities.people2" alt="Organizers Image" class="w-16 h-16 self-center justify-self-center">
-        <p class="text-black text-xl font-bold ml-2 self-center">{{ activities.name2 }}</p>
-      </div>
-      <div class="flex w-1/3 h-full justify-center items-center">
-        <img :src="activities.people2" alt="Organizers Image" class="w-16 h-16 self-center justify-self-center">
-        <p class="text-black text-xl font-bold ml-2 self-center">{{ activities.name3 }}</p>
+        <p class="text-black text-xl font-bold ml-2 self-center">{{ activities.user }}</p>
       </div>
     </div>
     <RegistrationSuccessPopup v-if="showPopup" @close="closeRegistrationPopup" />
@@ -72,9 +64,42 @@
 <script setup>
 import { ref } from 'vue';
 import RegistrationSuccessPopup from './RegistrationSuccessPopup.vue';
-import fakeData from './public/ActivityFakeData/ActivityFakeData.json';
+import axios from 'axios';
+const config = useRuntimeConfig();
 
 const activities = ref(fakeData[0]);
+
+//get data from database
+const getActivityData = () => {
+  const token = useCookie('token');
+  axios.get(`${config.public.apiURL}/activity/${activity_id}`, { // config.public.apiURL + "/tag"
+  }, {
+    headers: {
+      'Authorization': 'Bearer ' + token.value,
+      'Content-Type': 'application/json',
+      'accept': 'application/json'
+    }
+  })
+    .then((res) => {
+      // if code is 200, then hide the modal
+      console.log(res);
+      if (res.status == 200) {
+        console.log("success");
+        activities.value = res.data;
+      }
+    })
+    .catch((err) => {
+      // if code is 401, then show error message 
+      console.log(err);
+      if (err.response.status == 404) {
+        console.log("fail");
+      } else if (err.response.status == 500) {
+        console.log("fail");
+      }
+    })
+}
+
+getActivityData();
 
 const showPopup = ref(false);
 
