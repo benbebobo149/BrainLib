@@ -15,7 +15,6 @@ const sendData = () => {
 	console.log(topicName.value);
 	const token = useCookie('token');
 	axios.post(`${config.public.apiURL}/tag`, { // config.public.apiURL + "/tag"
-
 		"tagName": topicName.value,
 	}, {
 		headers: {
