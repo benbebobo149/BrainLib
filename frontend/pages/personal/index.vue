@@ -8,8 +8,7 @@
             </div>
             <div class="w-full h-3/4 overflow-y-hidden">
                 <div class="w-auto h-full overflow-y-scroll hide-scrollbar fill-available p-0">
-                    <PostPreview />
-
+                    <myPostPreview />
                 </div>
             </div>
         </div>
@@ -33,7 +32,7 @@
 
 <script setup>
 import { ref } from 'vue';
-import PostPreview from '@/components/PostPreview.vue';
+import myPostPreview from '@/components/personal/myPostPreview.vue';
 import data from '@/public/personal/UserFakeData.json';
 
 const Photo = ref('');

@@ -286,6 +286,7 @@ public class PostController {
     public ResponseEntity<?> getPostsByUser(HttpServletRequest request) {
         try {
             String token = request.getHeader("Authorization").substring(7);
+            System.out.println(token);
             Integer userId = jwtService.extractUserId(token);
 
             List<NewPostResult> posts = postService.getPostsByUserId(userId);
