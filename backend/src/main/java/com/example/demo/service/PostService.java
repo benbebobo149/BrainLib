@@ -369,6 +369,11 @@ public class PostService {
             postTagRepository.delete(postTag);
         }
 
+        List<Comment> comments = commentRepository.findByPost(post);
+        for (Comment comment : comments) {
+            commentRepository.delete(comment);
+        }
+
         if (post == null) {
             result.setResultCode(2);
         } else if (user.getId() == post.getUser().getId() || user.getPermission() > 0) {
