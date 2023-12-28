@@ -39,7 +39,7 @@
         </div>
       </div>
     </div>
-    <editor v-if="post.content" :content="post.content" :id="123"/>
+    <editor v-if="post.content" :content="post.content"/>
   </div>
   <div>
     <transition name="fade">
@@ -54,7 +54,7 @@
           </div>
           <div class="flex flex-col w-full h-5/6 bg-blue-500 relative">
             <div class="flex w-full h-1/4 bg-white">
-              <img :src="post.value.userImage" alt="Organizers Image"
+              <img :src="fakeData3.name2" alt="Organizers Image"
                 class="w-auto h-14 mb-5 self-center justify-self-center">
               <p class="text-black text-xl font-bold ml-2 mb-5 self-center">{{ fakeData3.name2 }}</p>
             </div>
@@ -104,7 +104,8 @@ const post = ref({
   image: '',
   title: '',
   content: '',
-  tags: []
+  tags: [],
+  comments: []
 });
 
 const config = useRuntimeConfig();
