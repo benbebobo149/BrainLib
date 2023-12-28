@@ -42,14 +42,14 @@
 
     </div>
     <div class="w-screen bg-slate-50 flex flex-col justify-center items-center">
-      <h1 class="text-[2vw] font-bold text-terotory text-center">Create Post</h1>
+      <h1 class="text-[2vw] font-bold text-terotory text-center">Edit Post</h1>
       <div class="my-[2vh] flex">
         <P>
           tags:
         </P>
-        <div v-for="tag in tags" class="mx-[1vw] flex">
+        <div v-for="tag in tags" class="mx-[1vw] flex" @click="removeTag">
           <div
-            class="mx-auto rounded-sm border border-terotory text-center text-neutral-900 text-l font-normal font-'Roboto' leading-7 p-[0.5vh]">
+            class="mx-auto rounded-sm border border-terotory text-center text-neutral-900 text-l font-normal font-'Roboto' leading-7 p-[0.5vh] cursor-pointer">
             {{ tag }}
           </div>
         </div>
@@ -98,12 +98,17 @@ const closeRegistrationPopup = () => {
 
 //tags
 const tags = ref([]);
+//added tags
 const addTags = (tag) => {
   tags.value.push(tag);
 };
-
-//added tags
-
+//remove tags
+// Remove tag
+const removeTag = (index) => {
+  if (window.confirm('Are you sure you want to remove this tag?')) {
+    tags.value.splice(index, 1);
+  }
+};
 </script>
 
 <style scoped>

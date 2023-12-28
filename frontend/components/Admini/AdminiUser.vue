@@ -29,7 +29,7 @@ const DeleteAccount = () => {
 		<div class="w-1/4 h-[12vh] bg-green flex">
 			<img class="w-[4vw] h-[4vw] rounded-full" src="https://via.placeholder.com/95x96 " />
 			<div >
-				<p class="ml-[2vh] mt-[2vh] h-[full] w-[20vw] bg-primary text-black text-xl font-normal font-'Roboto' flex-auto item-center">{{ user.name }}</p>
+				<p class="ml-[2vh] mt-[2vh] h-[full] w-[20vw] bg-bgcolor text-black text-xl font-normal font-'Roboto' flex-auto item-center">{{ user.name }}</p>
 			</div>
 
 			<div class="ml-[6vw] ] w-[20vw] flex">

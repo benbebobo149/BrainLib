@@ -54,7 +54,7 @@ const sendData = () => {
 
 			<!-- 右邊部分 -->
 			<div class="w-4/5 h-[100vh] bg-bgcolor">
-				<div class="h-[10vh] bg-white ">
+				<div class="h-[10vh] bg-bgcolor ">
 
 					<div class=" text-stone-400 ">
 						<h1 class="left-[8vw] w-[45vw]  h-[0.5vw] text-[3vw] font-normal font-'Roboto'

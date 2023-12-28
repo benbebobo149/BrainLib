@@ -15,14 +15,14 @@ const submitForm = () => {
 };
 </script>
 <template>
-    <div>
+    <div >
         <!-- Your other content... -->
-        <select v-model="selectedOption">
+        <select v-model="selectedOption" class="bg-slate-200 rounded-md my-[1vh]">
             <option v-for="option in options" :key="option.value" :value="option.value">
                 {{ option.text }}
             </option>
         </select>
-        <button class="bg-secodery" type="submit" @click="submitForm">Confirm</button>
+        <button class="bg-primary text-white w-full rounded-lg " type="submit" @click="submitForm">Confirm</button>
 
         <!-- Your other content... -->
     </div>
