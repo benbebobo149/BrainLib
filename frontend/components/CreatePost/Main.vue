@@ -24,11 +24,11 @@
       <!-- Right Section -->
       <div class="w-1/2 h-full flex flex-col">
         <!-- Top Subsection (1/4 height) -->
-        <div class="flex flex-row h-1/4 bg-slate-50 text-black justify-center items-end p-8">
-          <label for="tagInput" class="cursor-pointer" @click="showRegistrationPopup">
-            <img src="/hello/AddTag.png" alt="Add tag" class="w-auto h-[4vh] mr-10">
+        <div class="flex flex-row h-1/4 bg-slate-50 text-black justify-center items-end p-8 mt-[2vw]">
+          <label for="tagInput" class="cursor-pointer " @click="showRegistrationPopup">
+            <img src="/hello/AddTag.png" alt="Add tag" class="w-auto h-[4vh] mr-10 ">
           </label>
-          <img src="/hello/Preview.png" alt="Preview" class="w-auto h-[4vh] mr-10">
+          <!-- <img src="/hello/Preview.png" alt="Preview" class="w-auto h-[4vh] mr-10"> -->
           <input id="fileInput" type="file" style="display: none;" @change="handleFileChange" />
           <AddTag v-if="showPopup" class="z-10" @close="closeRegistrationPopup" @additem="addTags" />
         </div>
@@ -51,13 +51,13 @@
         </div>
       </div>
       <div class="w-[60%] h-1/3 flex content-cneter ">
-        <div class="flex">
-          <input type="text" v-model="inputTitle" class="w-auto text-[3vw] h-[8vh] pl-[1vw] mb-[2vh]">
-          <p>enter your title here.</p>
+        <div class="flex mt-[10vh]">
+          <input type="text" v-model="inputTitle" class="w-auto text-[3vw] h-[8vh] border-balck pl-[1vw] mb-[2vh] mx-[1vw] ">
+          <p class="text-terotory">enter your title here.</p>
         </div>
 
-        <div id="app" class="w-[60%] h-auto flex justify-center items-center rounded-md">
-          <div class="w-[50%] h-[70%] rounded-full flex justify-center items-center overflow-hidden">
+        <div id="app" class="w-[30vw] h-[30vh] flex justify-center items-center my-[2vh]">
+          <div class="w-full h-full rounded-md flex justify-center items-center overflow-hidden mx-[1vw]">
             <img v-if="inputImage" :src="inputImage" width="200" class="w-full h-auto  object-cover" />
           </div>
           <div class="w-[40%] h-auto flex items-center">
@@ -65,7 +65,7 @@
               <img src="@/Change/UpLoad.png" class="w-auto h-full">
             </label>
             <input id="file-input" type="file" @change="fileSelected" style="display: none;">
-            <p class="w-[80%] h-auto text-[1vw]">Update Your Post Cover</p>
+            <p class="w-[60%] text-terotory h-auto text-[1vw] mx-[1vw]">Update Your Post Cover</p>
           </div>
         </div>
 
@@ -159,7 +159,7 @@ const sendImage = async () => {
 
 //send data to backend
 const createPost = () => {
-
+  window.location.reload();
   axios.post(`${config.public.apiURL}/post`, { // config.public.apiURL + "/tag"
     "title": inputTitle.value,
     "content": inputEditorData.value,
@@ -177,12 +177,17 @@ const createPost = () => {
       console.log(res);
       if (res.status == 200) {
         console.log("success");
+        alert("create success!");
+
+        succVisible.value = true;
       }
     })
     .catch((err) => {
       // if code is 401, then show error message 
       console.log(err);
+      errorVisible.value = true;
       if (err.response.status == 401) {
+        alert("create fail!");
         console.log("fail");
       }
     })
@@ -222,9 +227,9 @@ const clickSubmit = async (data) => {
   }
   errorInputTitle.value = false;
   if (!imageHasUploaded.value) {
-    errorInputImage.value = true; 
+    errorInputImage.value = true;
     return;
-  } 
+  }
   errorInputImage.value = false;
   await getEditorData(data);
   await sendImage();
