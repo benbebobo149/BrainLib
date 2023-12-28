@@ -22,7 +22,7 @@ const SelectAllAdministrators = () => {
 
 <template>
 	<!-- temp navbar -->
-	<div class=" bg-bgcolor w-screen h-[8vh] ">
+	<div class=" bg-bgcolor w-screen h-[8vh]  max-w-full max-h-full">
 		<div class="flex ">
 			<!-- 左邊列表 -->
 			<div class="w-1/5 h-full bg-bgcolor rounded-sm fixed left-0">

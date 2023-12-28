@@ -48,13 +48,13 @@ const sendData = () => {
 		<div class="flex ">
 			<!-- 左邊列表 -->
 			<div class="w-1/5 rounded-sm border-r border-terotory  bg-bgcolor ">
-				<div class=" bg-#E8DEF8 w-screen overflow-y-scroll ">
+				<div class=" bg-#E8DEF8 w-screen overflow-y-scroll fixed left-0">
 					<AdiminiLeftBar />
 				</div>
 			</div>
 
 			<!-- 右邊部分 -->
-			<div class="w-4/5 h-[100vh] bg-bgcolor">
+			<div class="w-4/5 h-[100vh] bg-bgcolor fixed right-0">
 				<div class="h-[10vh] bg-bgcolor ">
 
 					<div class=" text-stone-400 ">
