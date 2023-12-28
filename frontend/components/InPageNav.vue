@@ -21,11 +21,16 @@
         </div>
 
         <div v-else class="flex w-1/2 h-full justify-end">
-            <NuxtLink to="/postCreate" class="flex w-auto h-full items-center mr-[1vw]">
+            <NuxtLink>
+                
+            </NuxtLink>
+            <NuxtLink to="/postCreate" class="flex w-auto h-full items-center ">
                 <img src="@/PencilSquare.png" alt="PencilButton" class="w-auto h-[85%]">
             </NuxtLink>
-            <div class="flex w-auto h-full items-center mr-[3vw] text-yellow-900 text-[1vw]">
-               <p>Create  post</p> 
+            <div class="flex w-auto h-full items-center mr-[3vw] text-yellow-900 text-[1vw] ">
+                <NuxtLink to="/postCreate">
+                    <p class="pl-[1vw]"> Create post</p>
+                </NuxtLink>
             </div>
             <PhotoSticker class="flex w-auto h-full items-center mr-[3vw]" />
         </div>
