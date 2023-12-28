@@ -47,7 +47,6 @@ import { ref } from 'vue';
 import user from '@/public/personal/UserFakeData.json';
 const image = useCookie('image');
 const permission = useCookie('permission');
-const userPermission = ref(user);
 const PhotoListVisible = ref(false);
 
 const openModal = () => {

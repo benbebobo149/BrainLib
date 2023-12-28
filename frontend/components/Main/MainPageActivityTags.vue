@@ -45,10 +45,10 @@ getActivityData();
     <div v-for="activity in activities" :key="activity.id" class="">
       <div class="w-[18vw] h-full bg-purple-200 rounded-2xl  mx-auto text-neutral-900 
         text-xl font-normal flex-col">
-        <div class="h-full font-'Roboto' flex justify-center py-[1vh] my-[2vh]">
+        <NuxtLink :to="'/ActivityPage/'+activity.id" class="h-full font-'Roboto' flex justify-center py-[1vh] my-[2vh]">
           <p class="text-center "> {{ activity.title }}
           </p>
-        </div>
+        </NuxtLink>
       </div>
     </div>
   </div>
