@@ -259,8 +259,9 @@ const getPostData = async () => {
 const deletePost = () => {
     if (confirm("確認是否刪除文章 (此動作無法復原!!)")) {
         const token = useCookie('token');
-        const id = useCookie('id');
-        axios.delete(`${config.public.apiURL}/post/${id.value}`, {
+        // change string to int
+        axios.delete(`${config.public.apiURL}/post/${id}`,
+        {
             headers: {
                 'Authorization': 'Bearer ' + token.value,
                 'Content-Type': 'application/json',
@@ -268,7 +269,7 @@ const deletePost = () => {
             }
         })
             .then(() => {
-                reloadNuxtApp({ path: "/main", ttl: 500 });
+                reloadNuxtApp({ path: "/personal", ttl: 500 });
             })
             .catch((err) => {
                 console.log(err);

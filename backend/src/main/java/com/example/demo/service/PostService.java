@@ -365,10 +365,15 @@ public class PostService {
     Post post = postRepository.findById(id).orElse(null);
     User user = jwtResult.getUser();
 
-    List<PostTag> postTags = postTagRepository.findByPost(post);
-    for (PostTag postTag : postTags) {
-      postTagRepository.delete(postTag);
-    }
+        List<PostTag> postTags = postTagRepository.findByPost(post);
+        for (PostTag postTag : postTags) {
+            postTagRepository.delete(postTag);
+        }
+
+        List<Comment> comments = commentRepository.findByPost(post);
+        for (Comment comment : comments) {
+            commentRepository.delete(comment);
+        }
 
     if (post == null) {
       result.setResultCode(2);
