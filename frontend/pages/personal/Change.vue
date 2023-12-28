@@ -4,7 +4,8 @@
         <div class="w-1/2 h-auto bg-purple-50">
             <div class="flex w-auto h-[35%]  justify-center mt-2 bg-purple-50">
                 <div id="app" class="w-[60%] h-auto bg-purple-50 flex justify-center items-center rounded-md">
-                    <div class="w-[50%] h-[70%] rounded-full  bg-stone-300 flex justify-center items-center overflow-hidden">
+                    <div
+                        class="w-[50%] h-[70%] rounded-full  bg-stone-300 flex justify-center items-center overflow-hidden">
                         <img v-if="image" :src="image" width="200" class="w-full h-auto  object-cover" />
                     </div>
                     <div class="w-[40%] h-auto flex items-center">
@@ -53,10 +54,9 @@
                     </NuxtLink>
                 </div>
                 <div class="w-1/2 h-1/2 bg-purple-50 flex justify-center">
-                    <NuxtLink to="/personal" @click="sendData(),sendImage() "
-                        class="w-1/2 h-auto flex justify-center items-center bg-purple-50">
+                    <button @click="handleClick" class="w-1/2 h-auto flex justify-center items-center bg-purple-50">
                         <img src="@/Change/Confirm.png" alt="" class="w-auto h-full">
-                    </NuxtLink>
+                    </button>
                 </div>
             </div>
         </div>
@@ -103,7 +103,7 @@ const RemovePhoto = () => {
     image.value = '';
 };
 
-const sendData = () => {
+const sendData = (pic) => {
     console.log(ChangeName.value);
     console.log(ChangeIntroduction.value);
     const token = useCookie('token');
@@ -139,6 +139,10 @@ const sendData = () => {
             }
             // }
         })
+    const moveToPage = () => {
+        reloadNuxtApp({ path: '/personal', ttl: 1000 });
+    };
+    moveToPage();
 
 }
 
@@ -187,32 +191,57 @@ const upload = () => {
     axios.post('/upload', { image: image.value });
 };
 
+function base64ToFile(base64Str, filename) {
+    let arr = base64Str.split(',');
+    let mime = arr[0].match(/:(.*?);/)[1];
+    let bstr = atob(arr[1]);
+    let n = bstr.length;
+    let u8arr = new Uint8Array(n);
+
+    while (n--) {
+        u8arr[n] = bstr.charCodeAt(n);
+    }
+
+    let blob = new Blob([u8arr], { type: mime });
+    return new File([blob], filename, { type: mime });
+}
+
 const sendImage = () => {
-  // 省略其他代碼
+    const token = useCookie('token');
 
-  const token = useCookie('token');
-  const imageFile = image.value; // 從某處獲取圖片檔案
+    const imageFile = base64ToFile(image.value, 'image.jpg'); // 從某處獲取圖片檔案
 
-  const formData = new FormData();
-  formData.append('image', imageFile);
+    const formData = new FormData();
+    formData.append('image', imageFile);
 
-  axios.post(`${config.public.apiURL}/uploadImage`, formData, {
-    headers: {
-      'Authorization': 'Bearer ' + token.value,
-      'Content-Type': 'multipart/form-data'
-    }
-  })
-  .then((res) => {
-    console.log(res);
-    if (res.status == 200) {
-      console.log("Image upload success");
-      window.location.reload();
-    }
-  })
-  .catch((err) => {
-    console.log(err);
-  });
+    axios.post(`${config.public.apiURL}/uploadFile`, formData, {
+        headers: {
+            'Authorization': 'Bearer ' + token.value,
+            'Content-Type': 'multipart/form-data'
+        }
+    })
+        .then((res) => {
+            console.log(res);
+            if (res.status == 200) {
+                console.log("Image upload success");
+                sendData(res.data.url);
+            }
+        })
+        .catch((err) => {
+            console.log(err);
+        });
 
-  // 省略其他代碼
+    // 省略其他代碼
 };
+let clickCount = ref(0);
+
+const handleClick = () => {
+    clickCount.value++;
+    if (clickCount.value % 2 === 1) {
+        sendImage();//奇數點擊數
+    } else {
+        sendData();//偶數點擊數
+    }
+};
+
 </script>
