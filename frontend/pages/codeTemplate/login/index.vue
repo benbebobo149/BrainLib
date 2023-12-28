@@ -1,9 +1,3 @@
-<template>
-    <button @click="startOAuth2Flow">
-        <img src="@/Signin/Google.png" alt="Google">
-    </button>
-</template>
-
 <script setup>
 const startOAuth2Flow = () => {
     const clientId = '341589256904-2b8bl47v3ni78ft9f7ottqh3r6b63sf0.apps.googleusercontent.com';
@@ -30,7 +24,13 @@ const startOAuth2Flow = () => {
         } catch (error) {
             // 处理跨域安全性错误或其他错误
         }
-    }, 200);
+    }, 500);
 }
 
 </script>
+
+<template>
+    <button @click="startOAuth2Flow()">
+        Click me to login
+    </button>
+</template>

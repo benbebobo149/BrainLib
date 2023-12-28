@@ -30,7 +30,7 @@
             <PhotoSticker class="flex w-auto h-full items-center mr-[3vw]" />
         </div>
     </div>
-    <Signin v-if="EnterVisible" @close_modal="closeModal()" @GoogleClick="GoogleClick($event)" class="z-20" />
+    <Signin v-if="EnterVisible" @close_modal="closeModal()" class="z-20" />
 </template>
 
 <script setup>
@@ -38,9 +38,6 @@ import { ref } from 'vue';
 import ListNav from "./ListNav.vue";
 import Signin from "./Signin.vue";
 import PhotoSticker from "./PhotoSticker.vue";
-import axios from 'axios';
-
-const config = useRuntimeConfig();
 
 const EnterVisible = ref(false);
 
@@ -59,12 +56,6 @@ Photo.value = 'PhotoSticker.png';
 
 const SearchContent = ref('');
 
-const GoogleClick = () => {
-    NotSignin.value = false;
-    console.log("GoogleClick in InPageNav.vue");
-    sendData();
-};
-
 const CheckLoggin = () => {
     const google_token = useCookie('token');
     if (google_token.value == null) {
@@ -74,35 +65,4 @@ const CheckLoggin = () => {
     }
 };
 CheckLoggin();
-
-const sendData = () => {
-    const userid = useCookie('userid');
-    axios.post(`${config.public.apiURL}/authenticate`, {
-        "name": "jake",
-        "email": "16789@hhdbuc"
-    },
-        {
-            headers: {
-                // 'Authorization': 'Bearer ' + token.value,
-                'Content-Type': 'application/json',
-                'accept': 'application/json'
-            }
-        })
-        .then((res) => {
-            // if code is 200, then hide the modal
-            console.log(res);
-            if (res.status == 200) {
-                const token = useCookie('token');
-                token.value = res.data.token;//存取token
-            }
-        })
-        .catch((err) => {
-            // if code is 401, then show error message 
-            console.log(err);
-            // if (err.response.status == 401) {
-
-            // }
-        })
-}
-
 </script>

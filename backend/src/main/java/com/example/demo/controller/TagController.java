@@ -43,6 +43,7 @@ public class TagController {
     
             switch (result.getResultCode()) {
                 case 0: // 成功
+                    System.out.println("suceess");
                     return ResponseEntity.ok(result.getTag());
                 case 1: // 沒有權限
                     return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
