@@ -7,6 +7,7 @@ import com.example.demo.model.Tag;
 import jakarta.persistence.*;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
@@ -22,6 +23,7 @@ public class PostTag {
     private Post post;
 
     @ManyToOne
+    @JsonIdentityReference(alwaysAsId = false)
     @JoinColumn(name = "tag", nullable = false)
     private Tag tag;
 
