@@ -79,7 +79,7 @@ const inputName = ref('')
 const inputImage = ref('');
 const file = ref(null);
 const imgHasChanged = ref(false);
-const sendData = () => {
+const sendData = async() => {
     const token = useCookie('token');
     const id = useCookie('id');
     console.log(id.value)
@@ -103,6 +103,7 @@ const sendData = () => {
         .then((res) => {
             if (res.status == 200) {
                 console.log("success");
+                
             }
         })
         .catch((err) => {
@@ -114,14 +115,14 @@ const sendData = () => {
             }
             // }
         })
+    await getUserInfo();
     const moveToPage = () => {
-        reloadNuxtApp({ path: '/personal', ttl: 1000 });
+        reloadNuxtApp({ path: '/personal', ttl: 100 });
     };
-    getUserInfo();
     moveToPage();
 }
 
-const getUserInfo = () => {
+const getUserInfo = async () => {
     const id = useCookie('id');
     const token = useCookie('token');
     const name = useCookie('name');
@@ -129,7 +130,7 @@ const getUserInfo = () => {
     const permission = useCookie('permission');
     const email = useCookie('email');
     const profile = useCookie('profile');
-    axios.get(`${config.public.apiURL}/user/${id.value}`, {
+    await axios.get(`${config.public.apiURL}/user/${id.value}`, {
         headers: {
             'Authorization': `Bearer ${token.value}`, //the token is a variable which holds the token
             'Content-Type': 'application/json',
