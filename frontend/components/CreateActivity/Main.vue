@@ -138,6 +138,8 @@ const sendData = () => {
       console.log(res);
       if (res.status == 200) {
         console.log("success");
+        window.location.reload();
+        alert("Create Activity Success")
         succVisible = true;
         window.location.href = "localhost:3000/activity"; // redirect to activity page
       }

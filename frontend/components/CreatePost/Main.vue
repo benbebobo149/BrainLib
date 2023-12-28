@@ -176,9 +176,8 @@ const createPost = () => {
       // if code is 200, then hide the modal
       console.log(res);
       if (res.status == 200) {
-        console.log("success");
+        window.location.reload();
         alert("create success!");
-
         succVisible.value = true;
       }
     })
