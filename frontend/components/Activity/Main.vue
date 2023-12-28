@@ -4,8 +4,9 @@
       <div class="flex w-1/6 h-full">
       </div>
       <div class="flex w-5/6 h-full justify-start items-start">
-        <button @click="sortByTime" class="text-2xl font-bold text-black">Sort by time</button>
-        <button @click="sortByDistance" class="text-2xl font-bold text-black ml-4">Sort by distance</button>
+        <p class="text-terotory text-[4vw]"> All the activities</p>
+        <!-- <button @click="sortByTime" class="text-2xl font-bold text-black">Sort by time</button>
+        <button @click="sortByDistance" class="text-2xl font-bold text-black ml-4">Sort by distance</button> -->
       </div>
     </div>
     <div class="flex w-full h-11/12 mt-10 justify-center items-start">

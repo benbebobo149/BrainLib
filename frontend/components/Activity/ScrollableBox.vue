@@ -30,9 +30,42 @@
 
 <script setup>
 import { ref } from 'vue';
-import RegistrationSuccessPopup from './RegistrationSuccessPopup.vue';
-import fakeData from './public/hello/Pic_Folder/fakeData.json';
+import RegistrationSuccessPopup from './RegistrationSuccessPopup.vue'; import axios from 'axios';
+const config = useRuntimeConfig();
 
+const activities = ref([]);
+
+//get data from database
+const getActivityData = () => {
+  const token = useCookie('token');
+  axios.get(`${config.public.apiURL}/activity/all`, { // config.public.apiURL + "/tag"
+  }, {
+    headers: {
+      'Authorization': 'Bearer ' + token.value,
+      'Content-Type': 'application/json',
+      'accept': 'application/json'
+    }
+  })
+    .then((res) => {
+      // if code is 200, then hide the modal
+      console.log(res);
+      if (res.status == 200) {
+        console.log("success");
+        activities.value = res.data;
+      }
+    })
+    .catch((err) => {
+      // if code is 401, then show error message 
+      console.log(err);
+      if (err.response.status == 404) {
+        console.log("fail");
+      } else if (err.response.status == 500) {
+        console.log("fail");
+      }
+    })
+}
+
+getActivityData();
 const showPopup = ref(false);
 
 const showRegistrationPopup = () => {
@@ -44,7 +77,6 @@ const closeRegistrationPopup = () => {
   showPopup.value = false;
 };
 
-const activities = ref(fakeData);
 
 </script>
 
