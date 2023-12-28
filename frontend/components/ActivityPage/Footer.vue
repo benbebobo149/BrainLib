@@ -47,7 +47,7 @@
         <div class="flex flex-col w-full h-3/4">
           <p class="text-black text-2xl font-bold mt-5 ml-10">Where</p>
           <p class="text-black text-xl mt-3 ml-10 self-center">{{ activities.location }}</p>
-          <img :src="activities.map" alt="Centered Image" class="h-auto w-[30vw] mt-5 self-center" />
+          <img src="@/public/hello/map2.png" alt="Centered Image" class="h-[40vh] w-[30vw] mt-5 self-center" />
         </div>
       </div>
     </div>
