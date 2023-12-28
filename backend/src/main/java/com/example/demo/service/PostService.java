@@ -25,6 +25,7 @@ import com.example.demo.dto.CommentResult;
 import com.example.demo.dto.NewPostResult;
 import com.example.demo.dto.TagPostResult;
 import com.example.demo.dto.SusPostResult;
+import com.example.demo.dto.TagRequest;
 
 import com.example.demo.repository.PostRepository;
 import com.example.demo.repository.AppreciatorRepository;
@@ -96,33 +97,123 @@ public class PostService {
         result.setPost(post);
         result.setResultCode(0);
 
-        List<Tag> tags = post.getTags();
+        List<TagRequest> tagr = post.getTags();
 
-        if (tags.size() == 0) {
+        if (tagr.size() == 0) {
             return result;
         }
 
-        for (Tag tag : tags) {
+        for (TagRequest tag : tagr) {
             PostTag postTag = new PostTag();
             postTag.setPost(savedPost);
-            postTag.setTag(tag);
+            postTag.setTag(tagRepository.findById(tag.getId()).orElse(null));
             postTagRepository.save(postTag);
         }
 
         return result;
     }
 
-    public List<Post> searchPosts(String keyword) {
-        return postRepository.findByTitleContaining(keyword);
+    public List<NewPostResult> searchPosts(String keyword) {
+        List<Post> posts = postRepository.findByTitleContaining(keyword);
+        List<NewPostResult> newPosts = new ArrayList<>();
+
+        for (Post post : posts) {
+            NewPostResult newPost = new NewPostResult();
+            newPost.setId(post.getId());
+            newPost.setUser(post.getUser().getId());
+            newPost.setUsername(post.getUser().getName());
+            newPost.setThumbUp(post.getThumbUp());
+            newPost.setComments(commentRepository.findByPost(post).size());
+            newPost.setVisible(post.getVisible());
+            newPost.setTitle(post.getTitle());
+            newPost.setContent(post.getContent());
+            newPost.setImage(post.getImage());
+
+            List<TagRequest> tags = new ArrayList<>();
+            List<PostTag> postTags = postTagRepository.findByPost(post);
+
+            for (PostTag postTag : postTags) {
+                TagRequest newTag = new TagRequest();
+                newTag.setId(postTag.getTag().getId());
+                newTag.setTagName(postTag.getTag().getTagName());
+                tags.add(newTag);
+            }
+
+            newPost.setTags(tags);
+
+            newPosts.add(newPost);
+        }
+
+        return newPosts;
     }
 
-    public List<Post> getAllPosts() {
-        return postRepository.findAll();
+    public List<NewPostResult> getAllPosts() {
+        List<Post> posts = postRepository.findAll();
+        List<NewPostResult> newPosts = new ArrayList<>();
+
+        for (Post post : posts) {
+            NewPostResult newPost = new NewPostResult();
+            newPost.setId(post.getId());
+            newPost.setUser(post.getUser().getId());
+            newPost.setUsername(post.getUser().getName());
+            newPost.setThumbUp(post.getThumbUp());
+            newPost.setComments(commentRepository.findByPost(post).size());
+            newPost.setVisible(post.getVisible());
+            newPost.setTitle(post.getTitle());
+            newPost.setContent(post.getContent());
+            newPost.setImage(post.getImage());
+
+            List<TagRequest> tags = new ArrayList<>();
+            List<PostTag> postTags = postTagRepository.findByPost(post);
+
+            for (PostTag postTag : postTags) {
+                TagRequest newTag = new TagRequest();
+                newTag.setId(postTag.getTag().getId());
+                newTag.setTagName(postTag.getTag().getTagName());
+                tags.add(newTag);
+            }
+
+            newPost.setTags(tags);
+
+            newPosts.add(newPost);
+        }
+
+        return newPosts;
     }
 
-    public List<Post> getPostsByUserId(Integer id) {
+    public List<NewPostResult> getPostsByUserId(Integer id) {
         User user = userService.getUserById(id);
-        return postRepository.findByUser(user);
+        List<Post> posts = postRepository.findByUser(user);
+
+        List<NewPostResult> newPosts = new ArrayList<>();
+
+        for (Post post : posts) {
+            NewPostResult newPost = new NewPostResult();
+            newPost.setId(post.getId());
+            newPost.setUser(post.getUser().getId());
+            newPost.setUsername(post.getUser().getName());
+            newPost.setThumbUp(post.getThumbUp());
+            newPost.setComments(commentRepository.findByPost(post).size());
+            newPost.setVisible(post.getVisible());
+            newPost.setTitle(post.getTitle());
+            newPost.setContent(post.getContent());
+            newPost.setImage(post.getImage());
+
+            List<TagRequest> tags = new ArrayList<>();
+            List<PostTag> postTags = postTagRepository.findByPost(post);
+
+            for (PostTag postTag : postTags) {
+                TagRequest newTag = new TagRequest();
+                newTag.setId(postTag.getTag().getId());
+                newTag.setTagName(postTag.getTag().getTagName());
+                tags.add(newTag);
+            }
+
+            newPost.setTags(tags);
+
+            newPosts.add(newPost);
+        }
+        return newPosts;
     }
 
     public PostResult approvePost(Integer id, boolean approve, HttpServletRequest request) {
@@ -160,8 +251,12 @@ public class PostService {
         }
 
         if (post != null && susPost != null && !approve) {
-            postRepository.delete(post);
+            List<PostTag> postTags = postTagRepository.findByPost(post);
+            for (PostTag postTag : postTags) {
+                postTagRepository.delete(postTag);
+            }
             susPostRepository.delete(susPost);
+            postRepository.delete(post);
             result.setResultCode(0);
             return result;
         }
@@ -209,7 +304,11 @@ public class PostService {
         for (PostTag postTag : originalPostTags) {
             originalTags.add(postTag.getTag());
         }
-        List<Tag> tags = postDetails.getTags();
+        List<TagRequest> tagr = postDetails.getTags();
+        List<Tag> tags = new ArrayList<>();
+        for (TagRequest tag : tagr) {
+            tags.add(tagRepository.findById(tag.getId()).orElse(null));
+        }
 
         originalTags.removeAll(tags);
         tags.removeAll(originalTags);
@@ -345,11 +444,14 @@ public class PostService {
         newPost.setContent(post.getContent());
         newPost.setImage(post.getImage());
 
-        List<Tag> tags = new ArrayList<>();
+        List<TagRequest> tags = new ArrayList<>();
         List<PostTag> postTags = postTagRepository.findByPost(post);
 
         for (PostTag postTag : postTags) {
-            tags.add(postTag.getTag());
+            TagRequest newTag = new TagRequest();
+            newTag.setId(postTag.getTag().getId());
+            newTag.setTagName(postTag.getTag().getTagName());
+            tags.add(newTag);
         }
 
         newPost.setTags(tags);
@@ -401,19 +503,7 @@ public class PostService {
     }
 
     public CommentListResult getComments(Integer id, HttpServletRequest request) {
-        JwtResult jwtResult = jwtService.parseRequest(request);
-
         CommentListResult result = new CommentListResult();
-        
-        if (jwtResult == null) {
-            result.setResultCode(1);
-            return result;
-        }
-        
-        if (!jwtResult.getPassed()) {
-            result.setResultCode(1);
-            return result;
-        }
         
         Post post = postRepository.findById(id).orElse(null);
         List<Comment> comments = commentRepository.findByPost(post);
@@ -522,7 +612,7 @@ public class PostService {
         return result;
     }
 
-    public List<Post> searchTagsPost(Integer id) {
+    public List<NewPostResult> searchTagsPost(Integer id) {
         Tag tag = tagRepository.findById(id).orElse(null);
 
         if (tag == null) {
@@ -536,7 +626,36 @@ public class PostService {
             posts.add(postTag.getPost());
         }
 
-        return posts;
+        List<NewPostResult> tagPosts = new ArrayList<>();
+
+        for (Post post : posts) {
+            NewPostResult tagPost = new NewPostResult();
+            tagPost.setId(post.getId());
+            tagPost.setUser(post.getUser().getId());
+            tagPost.setUsername(post.getUser().getName());
+            tagPost.setThumbUp(post.getThumbUp());
+            tagPost.setComments(commentRepository.findByPost(post).size());
+            tagPost.setVisible(post.getVisible());
+            tagPost.setTitle(post.getTitle());
+            tagPost.setContent(post.getContent());
+            tagPost.setImage(post.getImage());
+
+            List<TagRequest> tags = new ArrayList<>();
+            List<PostTag> postTags2 = postTagRepository.findByPost(post);
+
+            for (PostTag postTag : postTags2) {
+                TagRequest newTag = new TagRequest();
+                newTag.setId(postTag.getTag().getId());
+                newTag.setTagName(postTag.getTag().getTagName());
+                tags.add(newTag);
+            }
+
+            tagPost.setTags(tags);
+
+            tagPosts.add(tagPost);
+        }
+
+        return tagPosts;
     }
 
     public List<SusPostResult> getSuspendPosts(HttpServletRequest request) {
@@ -565,11 +684,14 @@ public class PostService {
             newPost.setContent(post.getContent());
             newPost.setImage(post.getImage());
 
-            List<Tag> tags = new ArrayList<>();
+            List<TagRequest> tags = new ArrayList<>();
             List<PostTag> postTags = postTagRepository.findByPost(post);
 
             for (PostTag postTag : postTags) {
-                tags.add(postTag.getTag());
+                TagRequest newTag = new TagRequest();
+                newTag.setId(postTag.getTag().getId());
+                newTag.setTagName(postTag.getTag().getTagName());
+                tags.add(newTag);
             }
 
             newPost.setTags(tags);

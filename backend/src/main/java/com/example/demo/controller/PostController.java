@@ -59,7 +59,7 @@ public class PostController {
     @GetMapping("/search")
     public ResponseEntity<?> searchPosts(@RequestParam String keyword) {
         try {
-            List<Post> allPosts = postService.searchPosts(keyword);
+            List<NewPostResult> allPosts = postService.searchPosts(keyword);
     
             if (allPosts.size() > 0) {
                 return ResponseEntity.ok(allPosts);
@@ -252,7 +252,7 @@ public class PostController {
     @GetMapping("/all/{tag_id}")
     public ResponseEntity<?> searchTagsPost(@PathVariable Integer tag_id) {
         try {
-            List<Post> tagPosts = postService.searchTagsPost(tag_id);
+            List<NewPostResult> tagPosts = postService.searchTagsPost(tag_id);
     
             if (tagPosts.size() > 0) {
                 return ResponseEntity.ok(tagPosts);
@@ -268,7 +268,7 @@ public class PostController {
     @GetMapping("/all")
     public ResponseEntity<?> getAllPosts() {
         try {
-            List<Post> posts = postService.getAllPosts();
+            List<NewPostResult> posts = postService.getAllPosts();
     
             if (posts.size() > 0) {
                 return ResponseEntity.ok(posts);
@@ -282,12 +282,12 @@ public class PostController {
 
     @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/my/all")
-    public ResponseEntity<List<Post>> getPostsByUser(HttpServletRequest request) {
+    public ResponseEntity<?> getPostsByUser(HttpServletRequest request) {
         try {
             String token = request.getHeader("Authorization").substring(7);
             Integer userId = jwtService.extractUserId(token);
 
-            List<Post> posts = postService.getPostsByUserId(userId);
+            List<NewPostResult> posts = postService.getPostsByUserId(userId);
     
             if (posts.size() > 0) {
                 return ResponseEntity.ok(posts);

@@ -8,6 +8,7 @@ import jakarta.persistence.*;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
 
 import java.util.Date;
 
@@ -20,10 +21,12 @@ public class Comment {
     private Integer id;
 
     @ManyToOne
+    @JsonIdentityReference(alwaysAsId = true)
     @JoinColumn(name = "post", nullable = false, referencedColumnName = "id")
     private Post post;
 
     @ManyToOne
+    @JsonIdentityReference(alwaysAsId = true)
     @JoinColumn(name = "users", nullable = false, referencedColumnName = "id")
     private User user;
 

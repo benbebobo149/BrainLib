@@ -3,6 +3,8 @@ package com.example.demo.dto;
 import com.example.demo.model.Post;
 import com.example.demo.model.Tag;
 
+import com.example.demo.dto.TagRequest;
+
 import java.util.List;
 
 public class SusPostResult {
@@ -15,7 +17,7 @@ public class SusPostResult {
     private Integer thumbUp;
     private Integer comments;
     private Boolean visible;
-    private List<Tag> tags;
+    private List<TagRequest> tags;
     private String reason;
 
     public SusPostResult() {
@@ -61,7 +63,7 @@ public class SusPostResult {
 
     public String getImage() { return image; }
 
-    public List<Tag> getTags() { return tags; }
+    public List<TagRequest> getTags() { return tags; }
 
     public void setId(Integer id) {
         this.id = id;
@@ -70,7 +72,7 @@ public class SusPostResult {
 
     public void setContent(String content) { this.content = content; }
 
-    public void setTags(List<Tag> tags) { this.tags = tags; }
+    public void setTags(List<TagRequest> tags) { this.tags = tags; }
 
     public void setImage(String image) { this.image = image; }
 
