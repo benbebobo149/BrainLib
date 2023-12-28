@@ -11,7 +11,7 @@
             </div>
           </div>
           <div class="flex w-full h-1/2 bg-white">
-            <p class="text-black text-[3vw]  font-bold mt-5 ml-5">{{ post.title }}</p>
+            <p class="text-black text-[3vw]  font-bold my-[3vh] ml-5">{{ post.title }}</p>
           </div>
         </div>
       </div>
@@ -30,7 +30,7 @@
             <button @click="openComment">
               <img src="/hello/ChatRightDots.png" alt="ID Pic" class="h-[4vh] w-auto ml-2" /></button>
             <p class="text-black text-l font-bold ml-2">{{ post.comments }}</p>
-            <button @click="copyUrl">
+            <button @click="copyURL">
               <img src="/hello/Share.png" alt="ID Pic" class="h-[4vh] w-auto ml-2" />
             </button>
             <p class="text-black text-l font-bold ml-2">100</p>
@@ -39,11 +39,10 @@
         </div>
       </div>
     </div>
-    
-    <editor v-if="post.content" :content="post.content"/>
+
+    <editor v-if="post.content" :content="post.content" />
     <comment v-if="isNavbarOpen" @closePopup="closePopup" :id="id"></comment>
   </div>
- 
 </template>
 <script setup>
 import comment from "@/components/post/PopUp.vue";
@@ -64,6 +63,15 @@ const post = ref({
 const config = useRuntimeConfig();
 // import Edit from '/components/Comment/Editor.vue'
 
+//copy url
+const copyURL = () => {
+  navigator.clipboard.writeText(window.location.href).then(() => {
+    alert('URL copied to clipboard!');
+  }).catch(err => {
+     alert('Could not copy URL: ', err);
+  });
+}
+
 // define props
 const props = defineProps({
   id: {
@@ -77,7 +85,7 @@ const { id } = toRefs(props)
 const isNavbarOpen = ref(false);
 
 const closePopup = () => {
-  
+
   isNavbarOpen.value = false;
 };
 const openComment = () => {
@@ -105,7 +113,7 @@ const increaseCount = () => {
   count.value++;
 };
 
-const getPostData = async() => {
+const getPostData = async () => {
   await axios.get(`${config.public.apiURL}/post/${id.value}`, {
     headers: {
     }
