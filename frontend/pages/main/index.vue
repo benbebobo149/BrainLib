@@ -15,7 +15,7 @@ const popupState = ref(true);
         <div class="w-9/12 h-screen bg-bgcolor ">
           <div class="w-full h-1/4 bg-bgcolor flex items-center text-[2vw] p-10 ">
             <div class=" w-1/2 h-full ml-[5vw] text-terotory border-b border-terotory flex items-end">
-              <p class="ml-[2vw] ">Post you might be intersting</p>
+              <p class="ml-[2vw] font-bold">all post</p>
             </div>
           </div>
           <div class="w-full h-3/4 overflow-y-hidden ">

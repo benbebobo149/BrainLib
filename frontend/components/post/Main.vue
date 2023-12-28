@@ -126,21 +126,6 @@ const getPostData = async() => {
     });
 }
 
-const getCommentData = async() => {
-  await axios.get(`${config.public.apiURL}/post/${id.value}/comments`, {
-    headers: {
-    }
-  })
-    .then(response => {
-      console.log(response.data);
-      post.value.comments = response.data;
-    })
-    .catch(error => {
-      console.log(error);
-    });
-}
-
-
 const getUserData = async (userid) => {
   await axios.get(`${config.public.apiURL}/user/${userid}`, {
     headers: {

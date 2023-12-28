@@ -5,7 +5,31 @@ import MainPageActivityTags from '@/components/Main/MainPageActivityTags.vue';
 import MainTrendingTopic from '~/components/Main/MainTrendingTopic.vue';
 import BoxSucc from '@/components/ModelBox/BoxSucc.vue';
 // import MainPageActivityTags from '@/components/MainPage/MainPageActivityTags.vue';
-const popupState = ref(true);
+const route = useRoute();
+const id = route.params.tag_id;
+const tagName = ref('所有貼文');
+const tagList = ref([]);
+import axios from 'axios';
+const config = useRuntimeConfig();
+const getTag = () => {
+  if (id == null) {
+    tagName.value = '所有貼文';
+    return;
+  }
+  axios.get(`${config.public.apiURL}/tag`, {
+    headers: {
+      'Content-Type': 'application/json',
+    }
+  })
+    .then(response => {
+      tagList.value = response.data;
+      tagName.value = tagList.value.find(tag => tag.id == id).tagName;
+    })
+    .catch(error => {
+      console.error(error);
+    });
+}
+getTag();
 </script>
 <template>
   <div class="w-full">
@@ -15,12 +39,12 @@ const popupState = ref(true);
         <div class="w-9/12 h-screen bg-bgcolor ">
           <div class="w-full h-1/4 bg-bgcolor flex items-center text-[2.3vw] p-10 ">
             <div class=" w-1/2 h-full ml-[5vw] border-b border-terotory flex items-end">
-              <p class="ml-[2vw] font-bold">tag_name</p>
+              <p class="ml-[2vw] font-bold">{{ tagName }}</p>
             </div>
           </div>
           <div class="w-full h-3/4 overflow-y-hidden">
             <div class="w-auto h-full overflow-y-scroll hide-scrollbar fill-available p-0">
-              <PostPreview />
+              <PostPreview :id="id"/>
             </div>
           </div>
         </div>

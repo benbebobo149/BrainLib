@@ -1,4 +1,3 @@
-
 <script setup>
 
 //get data from database
@@ -24,6 +23,10 @@ const getAllPost = () => {
 			if (res.status == 200) {
 				console.log("success to get all post");
 				Posts.value = res.data;
+				// 將文章內容轉成 preview
+				Posts.value.forEach(post => {
+					post.content = getPreviewContent(post.content);
+				});
 			}
 		})
 		.catch((err) => {
@@ -36,38 +39,33 @@ const getAllPost = () => {
 			}
 		})
 }
+const getPreviewContent = (jsonString) => {
+	const obj = JSON.parse(jsonString);
 
-getAllPost();
+	const textBlocks = obj.blocks.filter(block => block.type === 'paragraph' || block.type === 'header');
 
-// define emit
-const emit = defineEmits(['close'])
+	let previewText = null;
 
+	if (textBlocks.length > 0) {
+		let previewText = textBlocks[0].data.text;
+		let i = 1;
 
-// define props
-// const props = defineProps({
-// 	post: {
-// 		type: Object,
-// 		default: () => ({
-// 			title: 'Not Found', author: 'Author Not Found',
-// 			content: 'Content Not Found', topic: 'Topic ', likes: 0, comments: 0
-// 		})
-// 	}
-// });
-// change props to ref 
-// const { post } = toRefs(props);
+		while (previewText.length < 20 && i < textBlocks.length) {
+			previewText += ' ' + textBlocks[i].data.text;
+			i++;
+		}
 
-// define methods
-const clickButton = () => {
-	console.log('click button')
-	emit('close')
+		return previewText;
+	}
 }
+getAllPost();
 
 </script>
 
 <template>
 	<div v-for="post in Posts" :key="post.post_id" class="flex mx-1 z-0">
 		<!-- 預覽文章1 -->
-		<div class="w-full h-[24vh]  box-border my-[0.7rem] relative flex items-start ">
+		<NuxtLink :to="'post/' + post.id" class="w-full h-[24vh]  box-border my-[0.7rem] relative flex items-start ">
 			<div class="w-[8vw] bg-bgcolor"></div>
 			<div class=" w-3/4 bg-bgcolor">
 				<div class="w-full h-[7vh] bg-green-250 text-black text-[2vw] font-semibold font-Roboto leading-10">
@@ -80,7 +78,7 @@ const clickButton = () => {
 
 				<div class="w-full h-[7vh]  rounded-sm border-b border-terotory mx-2  flex">
 					<div class="flex w-[10vw]">
-						<img  class=" w-[6vh] h-[6vh] rounded-full  mx-2 " src="https://via.placeholder.com/95x96" />
+						<img class=" w-[6vh] h-[6vh] rounded-full  mx-2 " src="https://via.placeholder.com/95x96" />
 						<h2 class="w-[6vw] h-[2vw] text-black text-[1.5vw] font-normal font-Roboto leading-loose">
 							{{ post.username }}
 						</h2>
@@ -112,7 +110,7 @@ const clickButton = () => {
 				<img class="w-full h-[10vw] mb-[3vh] rounded-md" :src=post.image />
 			</div>
 			<div class="w-[8vw] bg-bgcolor"></div>
-		</div>
+		</NuxtLink>
 
 	</div>
 </template>
