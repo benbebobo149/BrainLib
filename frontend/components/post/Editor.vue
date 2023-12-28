@@ -42,6 +42,6 @@ const editor = new EditorJS({
 </style>
 <template>
     <div class="flex flex-col justify-center items-center">
-        <div id="editorjs" class="w-[50vw] h- border-2 border-terotory mb-10"></div>
+        <div id="editorjs" class="w-[50vw] h- border-t  border-terotory mt-[5vh] mb-10"></div>
     </div>
 </template>
