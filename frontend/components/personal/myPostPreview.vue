@@ -1,4 +1,6 @@
 
+import type { NuxtLink } from '#build/components';
+
 <script setup>
 
 //get data from database
@@ -80,8 +82,17 @@ const clickButton = () => {
         <NuxtLink :to="'/post/' + post.id" class="w-full h-[24vh]  box-border my-[0.7rem] relative flex items-start ">
             <div class="w-[8vw] bg-bgcolor"></div>
             <div class=" w-3/4 bg-bgcolor">
-                <div class="w-full h-[7vh] bg-green-250 text-black text-[2vw] font-semibold font-Roboto leading-10">
-                    {{ post.title }}</div>
+                <div class="w-full h-[7vh] bg-green-250 text-black text-[2vw] font-semibold font-Roboto leading-10 flex justify-between">
+                    <div>
+                        {{ post.title }}
+                    </div>
+                    <div>
+                        <NuxtLink :to="'/postEdit/'+ post.id" class="mr-5 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 focus:outline-none"> 編輯 </NuxtLink>  
+                    </div>
+
+                    
+                    </div>
+
                 <div class="w-[12vw] h-[10vh] left-[1rem]">
                     <div class=" bg-bgcolor text-zinc-600 text-[1.25vw] font-normal font-Roboto ">
                         {{ post.content }}
