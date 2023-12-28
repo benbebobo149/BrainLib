@@ -339,4 +339,22 @@ public class PostController {
         }
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
+    @GetMapping("/{post_id}")
+    public ResponseEntity<?> getPostById(@PathVariable Integer post_id) {
+        try {
+            NewPostResult result = postService.getPostById(post_id);
+    
+            switch (result.getResultCode()) {
+                case 0: // 成功
+                    return ResponseEntity.ok(result);
+                case 1: // 找不到
+                    return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+                default: // 其他錯誤
+                    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build(); 
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
 }

@@ -37,11 +37,6 @@ public class FileUploadController  {
     @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/uploadFile")
     public ResponseEntity<?> handleFileUpload(@RequestParam("image") MultipartFile file, HttpServletRequest request) {
-        JwtResult jwtResult = jwtService.parseRequest(request);
-            
-        if (jwtResult == null && !jwtResult.getPassed()) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-        }
 
     HttpClient httpclient = HttpClients.createDefault();
     HttpPost httppost = new HttpPost("https://api.imgur.com/3/image");

@@ -17,16 +17,23 @@ public class NewPostResult {
     private Integer thumbUp;
     private Integer comments;
     private Boolean visible;
+    private int resultCode;
     private List<TagRequest> tags;
 
     public NewPostResult() {
         this.thumbUp = 0;
         this.comments = 0;
         this.visible = true;
+        this.resultCode = 0;
     }
 
     // getter 和 setter 方法
-
+    public void setResultCode(int resultCode) {
+        this.resultCode = resultCode;
+    }
+    public int getResultCode() {
+        return resultCode;
+    }
     public Integer getId() {
         return id;
     }
