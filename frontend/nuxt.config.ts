@@ -10,8 +10,5 @@ export default defineNuxtConfig({
       //apiURL: 'http://ncu.feyumi.com:35001'
       apiURL: 'http://localhost:1234'
     }
-  },  buildModules: [
-    // https://go.nuxtjs.dev/tailwindcss
-    '@nuxtjs/tailwindcss'
-  ],
+  }
 })

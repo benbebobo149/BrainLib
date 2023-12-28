@@ -1,6 +1,6 @@
 <template>
     <button @click="openModal" class="w-auto h-full">
-        <img src="@/PhotoSticker.png" class="w-auto h-[80%]" alt="PhotoSticker">
+        <img :src="image" class="w-auto h-[80%]" alt="PhotoSticker">
     </button>
     <div @click="closeModal" v-if="PhotoListVisible" class="fixed inset-0 flex w-screen h-screen max-h-full">
         <div class="PhotoList fixed w-[15%] h-[25%] bg-purple-50 flex  mt-[7vh] right-0">
@@ -47,7 +47,7 @@
 <script setup>
 import { ref } from 'vue';
 import user from '@/public/personal/UserFakeData.json';
-
+const image = useCookie('image'); 
 const userPermission = ref(user);
 console.log(userPermission.value[1].permission);
 const PhotoListVisible = ref(false);
@@ -76,6 +76,7 @@ const LogOut = () => {
     }
 };
 const Admin = ref(false);
+
 
 </script>
 <style scoped>

@@ -59,7 +59,6 @@ public class UserController {
     public ResponseEntity<?> updateUser(@PathVariable Integer id, @RequestBody User userDetails, HttpServletRequest request) {
         try {
             UserResult result = userService.updateUser(id, userDetails, request);
-    
             switch (result.getResultCode()) {
                 case 0: // 成功
                     return ResponseEntity.ok(result.getUser());
@@ -73,6 +72,7 @@ public class UserController {
                     return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
             }
         } catch (Exception e) {
+            System.out.println(e);
             // 處理其他可能的錯誤
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }

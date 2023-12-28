@@ -16,16 +16,16 @@
         <div class="w-[30%] h-auto bg-bgcolor">
             <div class="w-full h-[60%] bg-bgcolor">
                 <div class="flex w-full h-[80%] bg-bgcolor justify-center items-end">
-                    <img src="@/UserPhoto.png" alt="UserPhoto" class="w-auto h-[70%] rounded-full border-2 border-terotory">
+                    <img :src=image alt="UserPhoto" class="w-auto h-[70%] rounded-full border-2 border-terotory">
                 </div>
                 <div class="flex justify-center items-center w-full h-[20%] bg-bgcolor">
                     <div class=" w-1/2 h-full border-b border-terotory flex items-center justify-center">
-                        <p class="text-[2vw]">{{ user.username }}</p>
+                        <p class="text-[2vw]">{{ name }}</p>
                     </div>
                 </div>
             </div>
             <div class="w-full h-[40%] bg-bgcolor flex justify-center">
-                <p class="text-[1.3vw] p-12 pt-3">{{ user.bio }}</p>
+                <p class="text-[1.3vw] p-12 pt-3">{{ profile }}</p>
             </div>
         </div>
     </div>
@@ -39,6 +39,9 @@ import data from '@/public/personal/UserFakeData.json';
 const Photo = ref('');
 Photo.value = 'UserPhoto.png';
 const user = ref(data[1]);
+const image = useCookie('image');
+const profile = useCookie('profile');
+const name = useCookie('name');
 </script>
 
 

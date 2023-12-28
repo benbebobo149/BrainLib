@@ -29,9 +29,10 @@ const sendOauthToken = async () => {
                 const decoded = jwtDecode(token.value)
 
                 // Get the id and username
+                
                 const id = decoded.id;
                 getUserInfo(id);
-                reloadNuxtApp({ path: "/main", ttl: 500 });
+                
             }
         })
         .catch((err) => {
@@ -51,13 +52,19 @@ const getUserInfo = (user_id) => {
         }
     })
         .then(response => {
-            //console.log(response.data);
             const name = useCookie('name');
             const id = useCookie('id');
             const image = useCookie('image');   
+            const permission = useCookie('permission');
+            const email = useCookie('email');
+            const profile = useCookie('profile');
+            email.value = response.data.email;
+            permission.value = response.data.permission;
             name.value = response.data.name;
             id.value = response.data.id;
             image.value = response.data.image;
+            profile.value = response.data.profile;
+            reloadNuxtApp({ path: "/main", ttl: 500 });
         })
         .catch(error => {
             console.error(error);

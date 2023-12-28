@@ -67,9 +67,8 @@ import { ref } from 'vue';
 import AddTag from '@/components/CreatePost/AddTag.vue';
 // import Editor.vue
 import Editor from '@/components/CreatePost/Editor.vue'
-import addedTags from '@/components/CreatePost/tags.vue';
-import BoxSucc from '../ModelBox/BoxSucc.vue';
-import BoxError from '../ModelBox/BoxError.vue';
+import BoxSucc from '@/components/ModelBox/BoxSucc.vue';
+import BoxError from '@/components/ModelBox/BoxError.vue';
 
 const succVisible = ref(false);
 const errorVisible = ref(false);
