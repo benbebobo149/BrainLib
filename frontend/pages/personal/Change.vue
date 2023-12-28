@@ -175,7 +175,6 @@ const deleteUser = () => {
                 }
             })
     }
-
 }
 
 const fileSelected = (e) => {

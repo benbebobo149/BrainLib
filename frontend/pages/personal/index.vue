@@ -33,11 +33,9 @@
 <script setup>
 import { ref } from 'vue';
 import myPostPreview from '@/components/personal/myPostPreview.vue';
-import data from '@/public/personal/UserFakeData.json';
 
 const Photo = ref('');
 Photo.value = 'UserPhoto.png';
-const user = ref(data[1]);
 const image = useCookie('image');
 const profile = useCookie('profile');
 const name = useCookie('name');
