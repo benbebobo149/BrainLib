@@ -48,9 +48,9 @@ getAllTags();
 
 <template>
     <div class="grid grid-cols-3 gap-4">
-        <div v-for="tag in tags" :key="tag.id"
+        <NuxtLink :to="`/main/${topic.id}`" @click="closeModal" v-for="topic in tags" :key="topic.id"
             class="mx-auto rounded-sm border border-terotory text-center text-neutral-900 text-l font-normal font-'Roboto' leading-7 p-[0.5vh]">
-            {{ tag.tagName }}
-        </div>
+            {{ topic.tagName }}
+        </NuxtLink>
     </div>
 </template>
