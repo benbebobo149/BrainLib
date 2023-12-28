@@ -70,7 +70,7 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import AddTag from './AddTag.vue';
-// import fakeData from './public/hello/Pic_Folder/fakeData2.json'; // Adjust the path accordingly
+import fakeData from './public/hello/Pic_Folder/fakeData2.json'; // Adjust the path accordingly
 import axios from 'axios';
 const config = useRuntimeConfig();
 
