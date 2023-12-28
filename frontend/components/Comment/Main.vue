@@ -1,14 +1,51 @@
 <template>
-  <button @click="toggleNavbar" class="top-4 right-4 p-2 bg-blue-500 text-white rounded-full justify-end items-end">
-    Toggle Navbar
-  </button>
+  <div class="flex flex-col w-full h-[92vh]">
+    <div class="flex flex-col w-full h-1/2 justify-center items-center">
+      <div class="flex flex-row w-full h-1/2 bg-white">
+        <div class="flex w-1/3 h-full bg-white"></div>
+        <div class="flex flex-col w-2/3 h-full justify-start items-start bg-white">
+          <div class="flex w-full h-1/2 bg-white">
+            <div v-for="tag in posts.tags" :key="tag.tag_id"
+              class="w-[7vw] h-[1.5vw] ml-[1vw] mt-5 bg-purple-200 rounded  text-center text-neutral-900 text-[1vw] font-normal font-'Roboto'">
+              <p>{{ tag.tag_name }}</p>
+            </div>
+          </div>
+          <div class="flex w-full h-1/2 bg-white">
+            <p class="text-black text-2xl font-bold mt-5 ml-5">{{ posts.title }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="flex w-full h-1/2 bg-white">
+        <div class="flex w-1/3 h-full bg-white"></div>
+        <div class="flex flex-row w-2/3 h-full bg-white">
+          <div class="flex w-1/3 h-full justify-start items-center bg-white">
+            <img :src="posts.image" alt="ID Pic" class="h-[8vh] w-auto" />
+            <p class="text-black text-xl font-bold ml-4">{{ posts.username }}</p>
+          </div>
+          <div class="flex w-2/3 h-full items-center bg-white">
+            <button @click="increaseCount">
+              <img src="/hello/Thumb.png" alt="ID Pic" class="h-[4vh] w-auto" />
+            </button>
+            <p class="text-black text-l font-bold ml-2">{{ count }}</p>
+            <button @click="toggleNavbar">
+              <img src="/hello/ChatRightDots.png" alt="ID Pic" class="h-[4vh] w-auto ml-2" /></button>
+            <p class="text-black text-l font-bold ml-2">100</p>
+            <button @click="copyUrl">
+              <img src="/hello/Share.png" alt="ID Pic" class="h-[4vh] w-auto ml-2" />
+            </button>
+            <p class="text-black text-l font-bold ml-2">100</p>
+            <img src="/hello/ExclamationCircle.png" alt="ID Pic" class="h-[4vh] w-auto ml-2" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="text-black text-2xl font-bold mt-5 ml-5 self-center">{{ posts.content }}</p>
+
+  </div>
   <div>
     <transition name="fade">
       <div v-if="isNavbarOpen" class="fixed inset-0 bg-black bg-opacity-50" @click="closePopup"></div>
     </transition>
-
-
-
     <transition name="slide">
       <div v-if="isNavbarOpen" class="fixed flex-col inset-y-0 right-0 w-96 bg-white shadow-md p-4 mt-5 rounded-xl">
         <div class="flex flex-col w-full h-1/2">
@@ -54,11 +91,13 @@
     </transition>
   </div>
 </template>
-
 <script setup>
 import { ref } from 'vue';
 import fakeData4 from './public/hello/Pic_Folder/fakeData4.json';
 import fakeData3 from './public/hello/Pic_Folder/fakeData3.json';
+import fakeData from './public/PostFakeData/PostFakeData.json';
+import Edit from '/components/Comment/Editor.vue'
+
 
 const isNavbarOpen = ref(false);
 const closePopup = () => {
@@ -69,8 +108,29 @@ const toggleNavbar = () => {
   isNavbarOpen.value = !isNavbarOpen.value;
 };
 const comments = ref(fakeData4);
-</script>
 
+const copyUrl = async () => {
+  const url = window.location.href;
+};
+
+try {
+  await navigator.clipboard.writeText(url);
+  console.log('URL copied to clipboard:', url);
+  // You can add additional feedback or actions here if needed
+} catch (error) {
+  console.error('Error copying to clipboard:', error);
+  // You can handle errors or provide feedback to the user
+}
+// Initialize count
+let count = ref(0);
+
+// Function to increase the count
+const increaseCount = () => {
+  count.value++;
+};
+const posts = ref(fakeData[0]);
+
+</script>
 <style scoped>
 .slide-enter-active,
 .slide-leave-active {
@@ -82,4 +142,3 @@ const comments = ref(fakeData4);
   transform: translateX(100%);
 }
 </style>
-

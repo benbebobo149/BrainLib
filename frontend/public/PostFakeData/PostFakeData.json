@@ -2,7 +2,9 @@
     {
         "post_id": 0,
         "title": "string",
-        "content": {},
+        "content": {
+            "hi this ia a test": "hi this ia a test"
+        },
         "image": "string",
         "created_at": "2023-12-20T14:46:59.018Z",
         "visible": true,
@@ -22,7 +24,8 @@
             {
                 "tag_id": 1,
                 "tag_name": "程式設計"
-            },{
+            },
+            {
                 "tag_id": 2,
                 "tag_name": "數學"
             }
