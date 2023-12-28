@@ -10,7 +10,7 @@ const showOverlay = ref(false)
 
 const DeleteAccount = () => {
 	console.log("DeleteAccount in ManageUser.vue");
-	alert("確認是否刪除帳號");
+	confirm("確認是否刪除帳號");
 };
 // const props = defineProps({
 // 	user: {
