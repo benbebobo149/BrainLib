@@ -8,15 +8,22 @@ var selectedOption = 0;
 // 	console.log('you had clicked the gear');
 // }
 
+const options = ref([
+    { value: 0, text: 'Normal' },
+    { value: 1, text: 'Moderator' },
+    { value: 2, text: 'Administrator' },
+]);
+
 const DeleteAccount = () => {
 	console.log("DeleteAccount in ManageUser.vue");
 	confirm("確認是否刪除帳號");
 };
 
-const updateData = (value) => {
+const updateData = async (value) => {
 	console.log("updateData in ManageUser.vue");
 	selectedOption = value;
 	console.log(" selectedOption is" + selectedOption);
+
 };
 // const props = defineProps({
 // 	user: {
@@ -113,15 +120,6 @@ const deleteUser = (userDeleted) => {
 let permiLevel = 0;
 
 const changePermission = (userChaged) => {
-	permiLevel = selectedOption;
-	console.log("user id "+userChaged.id);
-	//print user
-	console.log("userChaged.id " + userChaged.id);
-	console.log("userChaged.name " + userChaged.name);
-	console.log("userChaged.email " + userChaged.email);
-	console.log("userChaged.permiLevel " + userChaged.permiLevel);
-	console.log("userChaged.profile " + userChaged.profile);
-	console.log("userChaged.image " + userChaged.image);
 	// check the usr data is null or not if it is null give a temporary value
 	if (userChaged.name == null) {
 		userChaged.name = " ";
@@ -138,7 +136,7 @@ const changePermission = (userChaged) => {
 		"id": userChaged.id,
 		"name": userChaged.name,
 		"email": userChaged.email,
-		"permission": userChaged.permiLevel,
+		"permission": userChaged.selectedPermission,
 		"profile": userChaged.profile,
 		"image": userChaged.image
 	}, {
@@ -161,12 +159,12 @@ const changePermission = (userChaged) => {
 			console.log(err);
 			if (err.response.status == 401) {
 				console.log("fail");
-			}else if (err.response.status == 404) {
+			} else if (err.response.status == 404) {
 				console.log("fail");
-			}else if(err.response.status == 409){
+			} else if (err.response.status == 409) {
 				console.log("fail");
 			}
-			 else if (err.response.status == 500) {
+			else if (err.response.status == 500) {
 				console.log("fail");
 			}
 		})
@@ -196,8 +194,12 @@ const changePermission = (userChaged) => {
 			<!-- <img class="left-[20vw] w-[3vw] h-[3vw] ml-[0.5rem] relative flex cursor-pointer items-center"
 				src="@/PageAdmini/GearFill.png" @click="handleClick" /> -->
 			<div class="left-[4vw] w-[3vw] h-[3vw] ml-[2vw] relative flex cursor-pointer items-center">
-				<AdiminiUserAuthrity @saveCnage="updateData(), changePermission(user)" class="bg- broder">
-				</AdiminiUserAuthrity>
+				<select v-model="user.selectedPermission" class="bg-slate-200 rounded-md my-[1vh]">
+					<option v-for="option in options" :key="option.value" :value="option.value">
+						{{ option.text }}
+					</option>
+				</select>
+				<button class="bg-primary text-white w-full rounded-lg " type="submit" @click="changePermission(user)">Confirm</button>
 			</div>
 		</div>
 	</div>

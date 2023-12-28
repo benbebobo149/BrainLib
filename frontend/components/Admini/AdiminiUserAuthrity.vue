@@ -13,7 +13,7 @@ const options = ref([
 const emit = defineEmits();
 
 const submitForm = () => {
-    console.log(selectedOption.value); // This will log the value of the selected option
+    console.log("inside"+ selectedOption.value); // This will log the value of the selected option
     emit('saveCnage', selectedOption.value);
 };
 </script>

@@ -32,30 +32,46 @@
           <input id="fileInput" type="file" style="display: none;" @change="handleFileChange" />
           <AddTag v-if="showPopup" class="z-10" @close="closeRegistrationPopup" @additem="addTags" />
         </div>
-
-        <!-- Bottom Subsection (3/4 height) -->
-
       </div>
     </div>
-    <div class="h-[12vh]">
-      <!-- <addedTags /> -->
 
-    </div>
     <div class="w-screen bg-slate-50 flex flex-col justify-center items-center">
       <h1 class="text-[2vw] font-bold text-terotory text-center">Create Post</h1>
+      <p v-if="errorInputTitle" class="text-center text-red-600">請輸入標題 ! !</p>
+      <p v-if="errorInputImage" class="text-center text-red-600">請上傳封面照片 ! !</p>
       <div class="my-[2vh] flex">
-        <P>
+        <p>
           tags:
-        </P>
+        </p>
         <div v-for="tag in tags" class="mx-[1vw] flex" @click="removeTag">
           <div
             class="mx-auto rounded-sm border border-terotory text-center text-neutral-900 text-l font-normal font-'Roboto' leading-7 p-[0.5vh] cursor-pointer">
-            {{ tag }}
+            {{ tag.tagName }}
           </div>
         </div>
       </div>
+      <div class="w-[60%] h-1/3 flex content-cneter ">
+        <div class="flex">
+          <input type="text" v-model="inputTitle" class="w-auto text-[3vw] h-[8vh] pl-[1vw] mb-[2vh]">
+          <p>enter your title here.</p>
+        </div>
 
-      <Editor class="w-[60%]" @openSucc="() => succVisible = true" @openError="errorVisible = false" />
+        <div id="app" class="w-[60%] h-auto flex justify-center items-center rounded-md">
+          <div class="w-[50%] h-[70%] rounded-full flex justify-center items-center overflow-hidden">
+            <img v-if="inputImage" :src="inputImage" width="200" class="w-full h-auto  object-cover" />
+          </div>
+          <div class="w-[40%] h-auto flex items-center">
+            <label for="file-input" class="w-[20%] h-full ">
+              <img src="@/Change/UpLoad.png" class="w-auto h-full">
+            </label>
+            <input id="file-input" type="file" @change="fileSelected" style="display: none;">
+            <p class="w-[80%] h-auto text-[1vw]">Update Your Post Cover</p>
+          </div>
+        </div>
+
+      </div>
+
+      <Editor class="w-[60%]" @editorData="clickSubmit" />
     </div>
   </div>
   <BoxSucc v-if="succVisible" class="z-10" @close="succVisible = false"></BoxSucc>
@@ -69,18 +85,18 @@ import AddTag from '@/components/CreatePost/AddTag.vue';
 import Editor from '@/components/CreatePost/Editor.vue'
 import BoxSucc from '@/components/ModelBox/BoxSucc.vue';
 import BoxError from '@/components/ModelBox/BoxError.vue';
-
+import axios from 'axios';
 const succVisible = ref(false);
 const errorVisible = ref(false);
-
-
-
-const updateContent = (index) => {
-  const element = document.querySelector(`[contenteditable]:nth-child(${index + 1})`);
-  const content = element.innerTezxt;
-};
-
+const inputTitle = ref('');
+const inputEditorData = ref();
 const showPopup = ref(false);
+const inputImage = ref('');
+const file = ref(null);
+const config = useRuntimeConfig();
+const errorInputTitle = ref(false);
+const errorInputImage = ref(false);
+const imageHasUploaded = ref(false)
 
 const showRegistrationPopup = () => {
   showPopup.value = true;
@@ -90,24 +106,130 @@ const closeRegistrationPopup = () => {
   showPopup.value = false;
 };
 
-
-
-
-
+const getEditorData = async (data) => {
+  // change proxy object to json
+  const jsonData = JSON.stringify(toRaw(data));
+  inputEditorData.value = jsonData;
+};
 
 //tags
 const tags = ref([]);
 //added tags
 const addTags = (tag) => {
+  // 檢查是否已經有加入過
+  if (tags.value.find(item => item.id == tag.id)) {
+    return;
+  }
   tags.value.push(tag);
 };
-//remove tags
+
 // Remove tag
 const removeTag = (index) => {
   if (window.confirm('Are you sure you want to remove this tag?')) {
     tags.value.splice(index, 1);
   }
 };
+
+//upload image
+const sendImage = async () => {
+  const token = useCookie('token');
+
+  const imageFile = base64ToFile(inputImage.value, 'image.jpg'); // 從某處獲取圖片檔案
+
+  const formData = new FormData();
+  formData.append('image', imageFile);
+
+  await axios.post(`${config.public.apiURL}/uploadFile`, formData, {
+    headers: {
+      'Authorization': 'Bearer ' + token.value,
+      'Content-Type': 'multipart/form-data'
+    }
+  })
+    .then((res) => {
+      console.log(res);
+      if (res.status == 200) {
+        console.log("Image upload success");
+        inputImage.value = res.data.file.url;
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+//send data to backend
+const createPost = () => {
+
+  axios.post(`${config.public.apiURL}/post`, { // config.public.apiURL + "/tag"
+    "title": inputTitle.value,
+    "content": inputEditorData.value,
+    "image": inputImage.value,
+    "tags": tags.value
+  }, {
+    headers: {
+      'Authorization': 'Bearer ' + useCookie('token').value, // useCookie('token').value
+      'Content-Type': 'application/json',
+      'accept': 'application/json'
+    }
+  })
+    .then((res) => {
+      // if code is 200, then hide the modal
+      console.log(res);
+      if (res.status == 200) {
+        console.log("success");
+      }
+    })
+    .catch((err) => {
+      // if code is 401, then show error message 
+      console.log(err);
+      if (err.response.status == 401) {
+        console.log("fail");
+      }
+    })
+}
+
+const fileSelected = (e) => {
+  file.value = e.target.files.item(0);
+  const reader = new FileReader();
+  reader.addEventListener('load', imageLoaded);
+  reader.readAsDataURL(file.value);
+  imageHasUploaded.value = true;
+};
+
+const imageLoaded = (e) => {
+  inputImage.value = e.target.result;
+};
+
+function base64ToFile(base64Str, filename) {
+  let arr = base64Str.split(',');
+  let mime = arr[0].match(/:(.*?);/)[1];
+  let bstr = atob(arr[1]);
+  let n = bstr.length;
+  let u8arr = new Uint8Array(n);
+
+  while (n--) {
+    u8arr[n] = bstr.charCodeAt(n);
+  }
+
+  let blob = new Blob([u8arr], { type: mime });
+  return new File([blob], filename, { type: mime });
+}
+
+const clickSubmit = async (data) => {
+  if (inputTitle.value == '') {
+    errorInputTitle.value = true;
+    return;
+  }
+  errorInputTitle.value = false;
+  if (!imageHasUploaded.value) {
+    errorInputImage.value = true; 
+    return;
+  } 
+  errorInputImage.value = false;
+  await getEditorData(data);
+  await sendImage();
+  createPost();
+}
 </script>
 
 <style scoped>
