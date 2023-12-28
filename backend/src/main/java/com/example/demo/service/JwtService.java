@@ -140,6 +140,7 @@ public class JwtService {
 
         JwtResult result = new JwtResult();
         result.setUser(user);
+        result.setUser_id(userId);
         result.setPassed(validateToken(token, user));
 
         return result;

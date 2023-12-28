@@ -11,4 +11,5 @@ import java.util.List;
 public interface PostTagRepository extends JpaRepository<PostTag, Integer> {
     PostTag findByPostAndTag(Post post, Tag tag);
     List<PostTag> findByTag(Tag tag);
+    List<PostTag> findByPost(Post post);
 }

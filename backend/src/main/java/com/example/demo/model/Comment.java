@@ -8,6 +8,9 @@ import jakarta.persistence.*;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+
+import java.util.Date;
 
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 @Entity
@@ -18,10 +21,12 @@ public class Comment {
     private Integer id;
 
     @ManyToOne
+    @JsonIdentityReference(alwaysAsId = true)
     @JoinColumn(name = "post", nullable = false, referencedColumnName = "id")
     private Post post;
 
     @ManyToOne
+    @JsonIdentityReference(alwaysAsId = true)
     @JoinColumn(name = "users", nullable = false, referencedColumnName = "id")
     private User user;
 
@@ -30,6 +35,10 @@ public class Comment {
 
     @Column(name = "created_at", nullable = false)
     private String createdAt;
+
+    public Comment() {
+        this.createdAt = new Date().toString();
+    }
 
     // getters and setters
 
