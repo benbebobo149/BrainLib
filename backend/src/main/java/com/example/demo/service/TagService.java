@@ -45,20 +45,19 @@ public class TagService {
             return result;
         }
 
+        User user = jwtResult.getUser();
+        if (user.getPermission() == 0) {
+            result.setResultCode(1);
+        }
+
         Tag OptionalTag = tagRepository.findByTagName(tag.getTagName());
 
         if (OptionalTag != null) {
             result.setResultCode(2);
             return result;
         }
-
-        User user = jwtResult.getUser();
-        if (user.getPermission() == 0) {
-            result.setResultCode(1);
-        } else {
-            result.setTag(tagRepository.save(tag));
-            result.setResultCode(0);
-        }
+        result.setTag(tagRepository.save(tag));
+        result.setResultCode(0);
 
         return result;
     }

@@ -44,9 +44,7 @@ public class AuthenticateController {
     headers.set("Authorization", "Bearer " + token);
 
     HttpEntity<String> entity = new HttpEntity<>("parameters", headers);
-    System.out.println(
-      "https://www.googleapis.com/oauth2/v3/userinfo?access_token=" + token
-    );
+
     RestTemplate restTemplate = new RestTemplate();
     ResponseEntity<String> response = restTemplate.exchange(
       "https://www.googleapis.com/oauth2/v3/userinfo?access_token=" + token,
@@ -59,22 +57,22 @@ public class AuthenticateController {
     // get email
     String email = jsonObject.getString("email");
     User checkUser = userService.getByEmail(email);
-    User newUser = new User();
 
     boolean isRegister = false;
     if (checkUser == null) {
-      newUser = new User();
-      newUser.setEmail(email);
-      newUser.setName(null);
-      newUser.setPermission(2);
-      userRepository.save(newUser);
+      checkUser = new User();
+      checkUser.setEmail(email);
+      checkUser.setName(null);
+      checkUser.setPermission(2);
+      userRepository.save(checkUser);
       isRegister = true;
     } else {
       isRegister = true;
     }
 
-    final String jwt_token = jwtService.generateToken(newUser);
+    final String jwt_token = jwtService.generateToken(checkUser);
     AuthenticationResult result = new AuthenticationResult(jwt_token, isRegister);
+    System.out.println(jwt_token);
     return ResponseEntity.ok(result);
   }
 }
