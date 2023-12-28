@@ -15,10 +15,9 @@ const SelectAllAdministrators = () => {
 };
 
 
-const updateData = () => {
-	console.log(selectedOption.value); // This will log the value of the selected option
-	
-};
+
+
+
 </script>
 
 <template>
@@ -54,7 +53,7 @@ const updateData = () => {
 
 						<div class="flex">
 							<div class=" content-center relative ml-[10vw]">
-								<AdminiUser @submit="updateData"/>
+								<AdminiUser/>
 							</div>
 						</div>
 					</div>

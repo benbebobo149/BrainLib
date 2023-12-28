@@ -74,7 +74,6 @@ const LogOut = () => {
         console.log("LogOut in PhotoSticker.vue");
 
     }
-
 };
 const Admin = ref(false);
 

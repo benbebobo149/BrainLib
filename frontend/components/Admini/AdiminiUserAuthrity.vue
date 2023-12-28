@@ -9,13 +9,16 @@ const options = ref([
     { value: 'moderator', text: 'Moderator' },
 ]);
 
+//define emit
+const emit = defineEmits();
+
 const submitForm = () => {
     console.log(selectedOption.value); // This will log the value of the selected option
-    emit('submit');
+    emit('saveCnage', selectedOption.value);
 };
 </script>
 <template>
-    <div >
+    <div>
         <!-- Your other content... -->
         <select v-model="selectedOption" class="bg-slate-200 rounded-md my-[1vh]">
             <option v-for="option in options" :key="option.value" :value="option.value">

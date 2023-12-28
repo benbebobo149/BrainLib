@@ -3,6 +3,7 @@ import AdiminiUserAuthrity from '~/components/Admini/AdiminiUserAuthrity.vue';
 import users from '@/public/hello/Pic_Folder/fakeDataUser.json'
 import { ref } from 'vue'
 const showOverlay = ref(false)
+const selectedOption = ref('');
 
 // const handleClick = () => {
 // 	console.log('you had clicked the gear');
@@ -11,6 +12,12 @@ const showOverlay = ref(false)
 const DeleteAccount = () => {
 	console.log("DeleteAccount in ManageUser.vue");
 	confirm("確認是否刪除帳號");
+};
+
+const updateData = (value) => {
+	console.log("updateData in ManageUser.vue");
+	selectedOption.value = value;
+
 };
 // const props = defineProps({
 // 	user: {
@@ -44,7 +51,7 @@ const DeleteAccount = () => {
 			<!-- <img class="left-[20vw] w-[3vw] h-[3vw] ml-[0.5rem] relative flex cursor-pointer items-center"
 				src="@/PageAdmini/GearFill.png" @click="handleClick" /> -->
 			<div class="left-[4vw] w-[3vw] h-[3vw] ml-[2vw] relative flex cursor-pointer items-center">
-				<AdiminiUserAuthrity class="bg- broder"></AdiminiUserAuthrity>
+				<AdiminiUserAuthrity  @saveCnage="updateData" class="bg- broder"></AdiminiUserAuthrity>
 			</div>
 		</div>
 	</div>
