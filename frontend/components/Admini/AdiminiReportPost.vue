@@ -31,9 +31,9 @@ const getAllPost = () => {
 			// if code is 401, then show error message 
 			console.log(err);
 			if (err.response.status == 404) {
-				console.log("fail to get all post");
+				console.log("fail to get  post");
 			} else if (err.response.status == 500) {
-				console.log("fail to get all post");
+				console.log("fail to get  post");
 			}
 		})
 }

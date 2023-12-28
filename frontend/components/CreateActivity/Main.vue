@@ -10,18 +10,18 @@
       </div>
       <div class="h-3/4 flex bg-slate-50 p-6 items-start justify-end">
         <div class="h-full flex flex-col">
-          <div class="h-1/3">
-            <div class="flex flex-row text-black text-xl text-bold items-start justify-start mb-5">
+          <div class="h-[1vh]">
+            <!-- <div class="flex flex-row text-black text-xl text-bold items-start justify-start mb-5">
               Tags:
             </div>
             <div v-for="(tag, index) in tags" :key="index" class="tag">
               {{ tag }}
-            </div>
-            <label for="fileInput" class="cursor-pointer flex items-center">
+            </div> -->
+            <!-- <label for="fileInput" class="cursor-pointer flex items-center">
               <div class="text-black text-3xl text-bold mr-2">Upload Picture</div>
               <img src="/hello/Vector2.png" alt="Upload Button" class="w-auto h-[5vh] mr-10">
-            </label>
-            <input id="fileInput" type="file" style="display: none;" @change="handleFileChange" />
+            </label> -->
+            <!-- <input id="fileInput" type="file" style="display: none;" @change="handleFileChange" /> -->
           </div>
           <div class="h-2/3 flex-col justify-start">
             <div>
@@ -42,9 +42,9 @@
     </div>
     <div class="w-1/2 h-full flex flex-col">
       <div class="flex flex-row h-1/4 bg-slate-50 text-black justify-center items-end p-8">
-        <label for="fileInput" class="cursor-pointer">
+        <!-- <label for="fileInput" class="cursor-pointer">
           <img src="/hello/AddFile.png" alt="Add file" class="w-auto h-[4vh] mr-10">
-        </label>
+        </label> -->
         <!-- <label for="tagInput" class="cursor-pointer" @click="showRegistrationPopup">
           <img src="/hello/AddTag.png" alt="Add tag" class="w-auto h-[4vh] mr-10">
         </label> -->
