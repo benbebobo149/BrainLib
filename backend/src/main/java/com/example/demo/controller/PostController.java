@@ -18,6 +18,10 @@ import com.example.demo.dto.PostResult;
 import com.example.demo.dto.CommentListResult;
 import com.example.demo.dto.CommentResult;
 import com.example.demo.dto.ApproveResult;
+import com.example.demo.dto.NewPostResult;
+import com.example.demo.dto.TagPostResult;
+import com.example.demo.dto.SusPostResult;
+import com.example.demo.dto.ReasonRequest;
 
 import java.util.List;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -33,9 +37,9 @@ public class PostController {
 
     @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping
-    public ResponseEntity<?> createPost(@RequestBody Post post, HttpServletRequest request) {
+    public ResponseEntity<?> createPost(@RequestBody NewPostResult post, HttpServletRequest request) {
         try {
-            PostResult result = postService.createPost(post, request);
+            TagPostResult result = postService.createPost(post, request);
     
             switch (result.getResultCode()) {
                 case 0: // 成功
@@ -69,11 +73,9 @@ public class PostController {
 
     @CrossOrigin(origins = "http://localhost:3000")
     @PutMapping("/{post_id}")
-    public ResponseEntity<?> updatePost(@PathVariable Integer post_id, @RequestBody Post post, HttpServletRequest request) {
+    public ResponseEntity<?> updatePost(@PathVariable Integer post_id, @RequestBody NewPostResult post, HttpServletRequest request) {
         try {
-            // get tag from request body
-            List<Tag> tags = post.getTags();
-            PostResult result = postService.updatePost(post_id, post, request);
+            TagPostResult result = postService.updatePost(post_id, post, request);
     
             switch (result.getResultCode()) {
                 case 0: // 成功
@@ -109,7 +111,7 @@ public class PostController {
             }
         } catch (Exception e) {
             // 處理其他可能的錯誤
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+            return ResponseEntity.ok(e);
         }
     }
 
@@ -117,7 +119,7 @@ public class PostController {
     @PutMapping("/{post_id}/like")
     public ResponseEntity<?> likePost(@PathVariable Integer post_id, HttpServletRequest request) {
         try {
-            PostResult result = postService.likePost(post_id, request);
+            TagPostResult result = postService.likePost(post_id, request);
     
             switch (result.getResultCode()) {
                 case 0: // 成功
@@ -137,9 +139,10 @@ public class PostController {
 
     @CrossOrigin(origins = "http://localhost:3000")
     @PutMapping("/{post_id}/report")
-    public ResponseEntity<?> reportPost(@PathVariable Integer post_id, @RequestBody String reason, HttpServletRequest request) {
+    public ResponseEntity<?> reportPost(@PathVariable Integer post_id, @RequestBody ReasonRequest reason, HttpServletRequest request) {
         try {
-            PostResult result = postService.reportPost(post_id, reason, request);
+            String reasonStr = reason.getReason();
+            PostResult result = postService.reportPost(post_id, reasonStr, request);
     
             switch (result.getResultCode()) {
                 case 0: // 成功
@@ -197,7 +200,7 @@ public class PostController {
             }
         } catch (Exception e) {
             // 處理其他可能的錯誤
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+            return ResponseEntity.ok(e);
         }
     }
 
@@ -323,7 +326,7 @@ public class PostController {
     @GetMapping("/suspend")
     public ResponseEntity<?> getSuspendPosts(HttpServletRequest request) {
         try {
-            List<Post> posts = postService.getSuspendPosts(request);
+            List<SusPostResult> posts = postService.getSuspendPosts(request);
     
             if (posts.size() > 0) {
                 return ResponseEntity.ok(posts);

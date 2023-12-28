@@ -21,15 +21,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Entity
 @Table(name = "posts")
 public class Post {
-
-    @ManyToMany
-    @JoinTable(
-        name = "post_tag",
-        joinColumns = @JoinColumn(name = "post"),
-        inverseJoinColumns = @JoinColumn(name = "tag")
-    )
-    private List<Tag> tags;
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -95,10 +86,6 @@ public class Post {
         return isSuspend;
     }
 
-    public List<Tag> getTags() {
-        return tags;
-    }
-
     public void setUser(User user) {
         this.user = user;
     }
@@ -125,9 +112,5 @@ public class Post {
 
     public void setIsSuspend(Boolean isSuspend) {
         this.isSuspend = isSuspend;
-    }
-
-    public void setTags(List<Tag> tags) {
-        this.tags = tags;
     }
 }

@@ -9,6 +9,8 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
+import java.util.Date;
+
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 @Entity
 @Table(name = "Comments")
@@ -30,6 +32,10 @@ public class Comment {
 
     @Column(name = "created_at", nullable = false)
     private String createdAt;
+
+    public Comment() {
+        this.createdAt = new Date().toString();
+    }
 
     // getters and setters
 
