@@ -54,13 +54,13 @@
         </div>
       </div>
     </div>
-    <div class="flex flex-row w-full h-1/6 bg-slate-100">
+    <!-- <div class="flex flex-row w-full h-1/6 bg-slate-100">
       <div class="flex w-1/3 h-full">
         <p class="text-black text-2xl self-start ml-10 mt-2">Organizers</p>
         <img :src="activities.organizer" alt="Organizers Image" class="w-16 h-16 self-center justify-self-center">
-        <p class="text-black text-xl font-bold ml-2 self-center">{{ activities.name }}</p>
+        <p class="text-black text-xl font-bold ml-2 self-center">{{ activities.user }}</p>
       </div>
-    </div>
+    </div> -->
     <RegistrationSuccessPopup v-if="showPopup" @close="closeRegistrationPopup" />
   </div>
 </template>
