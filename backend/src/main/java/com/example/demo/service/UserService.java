@@ -110,7 +110,6 @@ public class UserService {
             for (PostTag postTag : postTags) {
                 postTagRepository.delete(postTag);
             }
-            postRepository.delete(post);
         }
 
         // delete suspost
@@ -120,17 +119,18 @@ public class UserService {
             susPostRepository.delete(susPost);
         }
 
-        // delete posts
-        for (Post post : posts) {
-            postRepository.delete(post);
-        }
-
         // delete comments
 
         List<Comment> comments = commentRepository.findByUser(user);
         for (Comment comment : comments) {
             commentRepository.delete(comment);
         }
+        
+        // delete posts
+        for (Post post : posts) {
+            postRepository.delete(post);
+        }
+
 
         if (user != null) {
             if (user.getId() == id || user.getPermission() == 2) {
