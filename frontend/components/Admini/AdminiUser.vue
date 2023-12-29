@@ -9,9 +9,9 @@ var selectedOption = 0;
 // }
 
 const options = ref([
-    { value: 0, text: 'Normal' },
-    { value: 1, text: 'Moderator' },
-    { value: 2, text: 'Administrator' },
+	{ value: 0, text: 'Normal' },
+	{ value: 1, text: 'Moderator' },
+	{ value: 2, text: 'Administrator' },
 ]);
 
 const DeleteAccount = () => {
@@ -173,11 +173,12 @@ const changePermission = (userChaged) => {
 <template>
 	<div v-for="user in users" :key="user.id" class="">
 		<div class="w-1/4 h-[12vh] bg-green flex">
-			<img class="w-[4vw] h-[4vw] rounded-full" src="https://via.placeholder.com/95x96 " />
+			<img class="w-[4vw] h-[4vw] rounded-full" alt="not found"
+				:src="user.image || 'https://via.placeholder.com/95x96 '" />
 			<div>
 				<p
-					class="ml-[2vh] mt-[2vh] h-[full] w-[20vw] bg-bgcolor text-black text-xl font-normal font-'Roboto' flex-auto item-center">
-					{{ user.name }}</p>
+					class="ml-[2vh] mt-[2vh] h-[full] w-[10vw] bg-bgcolor text-black text-xl font-normal font-'Roboto' flex-auto item-center">
+					{{ user.name || 'No Name' }}</p>
 			</div>
 
 			<div class="ml-[6vw] ] w-[20vw] flex">
@@ -197,7 +198,8 @@ const changePermission = (userChaged) => {
 						{{ option.text }}
 					</option>
 				</select>
-				<button class="w-[3vw] h-[2vw] bg-primary text-white w-full rounded-md ml-[1vw]" type="submit" @click="changePermission(user)">Confirm</button>
+				<button class="w-[3vw] h-[2vw] bg-primary text-white w-full rounded-md ml-[1vw]" type="submit"
+					@click="changePermission(user)">Confirm</button>
 			</div>
 		</div>
 	</div>
