@@ -67,19 +67,11 @@ import { ref } from 'vue';
 import AddTag from '@/components/EditPost/AddTag.vue';
 // import Editor.vue
 import Editor from '@/components/EditPost/Editor.vue'
-import addedTags from '@/components/EditPost/tags.vue';
 import BoxSucc from '../ModelBox/BoxSucc.vue';
 import BoxError from '../ModelBox/BoxError.vue';
 
 const succVisible = ref(false);
 const errorVisible = ref(false);
-
-
-
-const updateContent = (index) => {
-  const element = document.querySelector(`[contenteditable]:nth-child(${index + 1})`);
-  const content = element.innerText;
-};
 
 const showPopup = ref(false);
 
@@ -90,8 +82,6 @@ const showRegistrationPopup = () => {
 const closeRegistrationPopup = () => {
   showPopup.value = false;
 };
-
-
 
 //get data from database
 import axios from 'axios';

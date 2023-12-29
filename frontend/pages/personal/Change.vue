@@ -66,25 +66,27 @@
             </div>
 
         </div>
+        <loadingModalBox v-if="loading" />
     </div>
 </template>
 
 <script setup>
 import { ref } from 'vue';
 import axios from 'axios';
-
+import loadingModalBox from '@/components/loadingModalBox.vue';
 const config = useRuntimeConfig();
 const inputProfile = ref('')
 const inputName = ref('')
 const inputImage = ref('');
 const file = ref(null);
 const imgHasChanged = ref(false);
-const sendData = async() => {
+const loading = ref(false);
+const sendData = async () => {
     const token = useCookie('token');
     const id = useCookie('id');
-    console.log(id.value)
     const permission = useCookie('permission');
     const email = useCookie('email');
+
     axios.put(`${config.public.apiURL}/user/${id.value}`, {
         "id": id.value,
         "name": inputName.value,
@@ -103,25 +105,23 @@ const sendData = async() => {
         .then((res) => {
             if (res.status == 200) {
                 console.log("success");
-                
+
             }
         })
         .catch((err) => {
             // if code is 404, then show error message 
             console.log(err);
-            // if (err.response.status == 404) {
             if (err.response.status == 404) {
                 console.log("Not Found");
             }
-            // }
         })
     await getUserInfo();
     const moveToPage = () => {
         reloadNuxtApp({ path: '/personal', ttl: 100 });
     };
     moveToPage();
-}
 
+}
 const getUserInfo = async () => {
     const id = useCookie('id');
     const token = useCookie('token');
@@ -233,11 +233,14 @@ const sendImage = () => {
 };
 
 const submit = () => {
+    loading.value = true;
     if (imgHasChanged.value) {
         sendImage();
     } else {
         sendData();
     }
 }
-getUserInfo();
+onMounted(() => {
+    getUserInfo();
+})
 </script>

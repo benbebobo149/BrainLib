@@ -74,20 +74,22 @@
 
             </div>
 
-            <Editor v-if="inputEditorData&&edtiorShow" :content="inputEditorData" class="w-[60%]" @clickSubmit="clickSubmit" />
+            <Editor v-if="inputEditorData && edtiorShow" :content="inputEditorData" class="w-[60%]"
+                @clickSubmit="clickSubmit" />
         </div>
+        <loadingModalBox class="z-50" v-if="loading" />
+        <BoxSucc v-if="succVisible" class="z-10" @editorData=""></BoxSucc>
+        <BoxError v-if="errorVisible" @close="errorVisible = false"></BoxError>
     </div>
-    <BoxSucc v-if="succVisible" class="z-10" @editorData=""></BoxSucc>
-    <BoxError v-if="errorVisible" @close="errorVisible = false"></BoxError>
 </template>
   
 <script setup>
 import { ref } from 'vue';
 import AddTag from '@/components/CreatePost/AddTag.vue';
-// import Editor.vue
 import Editor from '@/components/EditPost/Editor.vue'
 import BoxSucc from '@/components/ModelBox/BoxSucc.vue';
 import BoxError from '@/components/ModelBox/BoxError.vue';
+import loadingModalBox from '@/components/loadingModalBox.vue';
 import axios from 'axios';
 const succVisible = ref(false);
 const errorVisible = ref(false);
@@ -104,7 +106,7 @@ const name = useCookie('name');
 const image = useCookie('image');
 const route = useRoute();
 const id = route.params.id;
-
+const loading = ref(false);
 const showRegistrationPopup = () => {
     showPopup.value = true;
 };
@@ -225,13 +227,13 @@ function base64ToFile(base64Str, filename) {
 }
 
 const clickSubmit = async (data) => {
-    console.log(data);
     if (inputTitle.value == '') {
         errorInputTitle.value = true;
         return;
     }
     errorInputTitle.value = false;
     errorInputImage.value = false;
+    loading.value = true;
     await getEditorData(data);
     if (imageHasUploaded.value) {
         await sendImage();
@@ -261,13 +263,13 @@ const deletePost = () => {
         const token = useCookie('token');
         // change string to int
         axios.delete(`${config.public.apiURL}/post/${id}`,
-        {
-            headers: {
-                'Authorization': 'Bearer ' + token.value,
-                'Content-Type': 'application/json',
-                'accept': 'application/json'
-            }
-        })
+            {
+                headers: {
+                    'Authorization': 'Bearer ' + token.value,
+                    'Content-Type': 'application/json',
+                    'accept': 'application/json'
+                }
+            })
             .then(() => {
                 reloadNuxtApp({ path: "/personal", ttl: 500 });
             })
@@ -281,9 +283,7 @@ const deletePost = () => {
 }
 const edtiorShow = ref(false);
 onMounted(() => {
-  // 在这里你可以执行一些在组件挂载后需要执行的操作
-  // next tick 
-  edtiorShow.value = true;
+    edtiorShow.value = true;
 
 });
 getPostData();

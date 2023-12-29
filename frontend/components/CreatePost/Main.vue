@@ -8,7 +8,7 @@
           <!-- Left Subsection (1/3 width) -->
           <div class="w-1/3 bg-slate-50 p-8">
           </div>
-          
+
           <!-- Right Subsection (2/3 width) -->
           <div class="w-2/3 bg-slate-50 p-8 flex items-center justify-center">
             <img :src="image" alt="username" class="w-auto h-[8vh]" />
@@ -52,7 +52,8 @@
       </div>
       <div class="w-[60%] h-1/3 flex content-cneter ">
         <div class="flex mt-[10vh]">
-          <input type="text" v-model="inputTitle" class="w-auto text-[3vw] h-[8vh] border-balck pl-[1vw] mb-[2vh] mx-[1vw] ">
+          <input type="text" v-model="inputTitle"
+            class="w-auto text-[3vw] h-[8vh] border-balck pl-[1vw] mb-[2vh] mx-[1vw] ">
           <p class="text-terotory">enter your title here.</p>
         </div>
 
@@ -73,21 +74,18 @@
 
       <Editor v-if="edtiorShow" class="w-[60%]" @editorData="clickSubmit" />
     </div>
+    <loadingModalBox class="z-50" v-if="loading" />
   </div>
-  <BoxSucc v-if="succVisible" class="z-10" @close="succVisible = false"></BoxSucc>
-  <BoxError v-if="errorVisible" @close="errorVisible = false"></BoxError>
 </template>
 
 <script setup>
 import { ref } from 'vue';
 import AddTag from '@/components/CreatePost/AddTag.vue';
 import Editor from '@/components/CreatePost/Editor.vue'
-import BoxSucc from '@/components/ModelBox/BoxSucc.vue';
-import BoxError from '@/components/ModelBox/BoxError.vue';
+import loadingModalBox from '@/components/loadingModalBox.vue';
 import axios from 'axios';
 const image = useCookie('image');
 const name = useCookie('name');
-const succVisible = ref(false);
 const errorVisible = ref(false);
 const inputTitle = ref('');
 const inputEditorData = ref();
@@ -99,6 +97,7 @@ const errorInputTitle = ref(false);
 const errorInputImage = ref(false);
 const imageHasUploaded = ref(false)
 const edtiorShow = ref(false);
+const loading = ref(false);
 const showRegistrationPopup = () => {
   showPopup.value = true;
 };
@@ -160,7 +159,6 @@ const sendImage = async () => {
 
 //send data to backend
 const createPost = () => {
-  window.location.reload();
   axios.post(`${config.public.apiURL}/post`, { // config.public.apiURL + "/tag"
     "title": inputTitle.value,
     "content": inputEditorData.value,
@@ -176,14 +174,10 @@ const createPost = () => {
     .then((res) => {
       // if code is 200, then hide the modal
       console.log(res);
-      if (res.status == 200) {
-        reloadNuxtApp({ path: "/personal", ttl: 500 });
-      }
+      reloadNuxtApp({ path: "/personal", ttl: 500 });
     })
     .catch((err) => {
       // if code is 401, then show error message 
-      console.log(err);
-      errorVisible.value = true;
       if (err.response.status == 401) {
         alert("create fail!");
         console.log("fail");
@@ -219,6 +213,7 @@ function base64ToFile(base64Str, filename) {
 }
 
 const clickSubmit = async (data) => {
+
   if (inputTitle.value == '') {
     errorInputTitle.value = true;
     return;
@@ -229,6 +224,7 @@ const clickSubmit = async (data) => {
     return;
   }
   errorInputImage.value = false;
+  loading.value = true;
   await getEditorData(data);
   await sendImage();
   createPost();
