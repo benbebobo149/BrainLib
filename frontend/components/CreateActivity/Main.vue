@@ -42,9 +42,9 @@
     </div>
     <div class="w-1/2 h-full flex flex-col">
       <div class="flex flex-row h-1/4 bg-slate-50 text-black justify-center items-end p-8">
-        <!-- <label for="fileInput" class="cursor-pointer">
+        <label for="fileInput" class="cursor-pointer">
           <img src="/hello/AddFile.png" alt="Add file" class="w-auto h-[4vh] mr-10">
-        </label> -->
+        </label>
         <!-- <label for="tagInput" class="cursor-pointer" @click="showRegistrationPopup">
           <img src="/hello/AddTag.png" alt="Add tag" class="w-auto h-[4vh] mr-10">
         </label> -->
