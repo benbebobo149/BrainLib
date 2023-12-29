@@ -58,8 +58,7 @@ const sendData = () => {
 			<div class="absolute right-0 w-4/5 h-[100vh] bg-bgcolor border-l border-terotory ">
 				<div class="h-[10vh] bg-bgcolor ">
 					<div class=" text-stone-400 ">
-						<h1 class="left-20 w-[45vw]  h-[0.5vw] text-[3vw] font-normal font-'Roboto' relative">Reported
-							Posts</h1>
+						<h1 class="left-20 w-[45vw]  h-[0.5vw] text-[3vw] mt-[20vh] font-normal font-'Roboto' relative">This is administrator page </h1>
 					</div>
 				</div>
 				<div class="ml-[1vw] pb-0">
