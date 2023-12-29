@@ -12,4 +12,5 @@ import java.util.List;
 public interface AppreciatorRepository extends JpaRepository<Appreciator, Integer> {
     Optional<Appreciator> findByPostAndAppreciator(Post post, User appreciator);
     List<Appreciator> findByPost(Post post);
+    List<Appreciator> findByAppreciator(User appreciator);
 }
