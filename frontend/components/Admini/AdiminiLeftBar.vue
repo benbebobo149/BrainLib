@@ -3,7 +3,7 @@
 		<!-- 左邊列表 -->
 		<div class="w-1/5   bg-bgcolor  rounded-sm ">
 			<div class="">
-				<button class=" hover:bg-error ease-in-out duration-200">
+				<!-- <button class=" hover:bg-error ease-in-out duration-200">
 					<NuxtLink to="http://localhost:3000/admini">
 						<div class="flex relative my-2 justify-center content-center">
 								<img class="left-2 w-[5vw] h-[3vw] ml-[0.5rem] relative" src="@/PageAdmini/ExclamationOctagonFill.png" />
@@ -14,9 +14,9 @@
 							</div>
 						</div>
 					</NuxtLink>
-				</button>
+				</button> -->
 
-				<button class="hover:bg-error ease-in-out duration-200">
+				<!-- <button class="hover:bg-error ease-in-out duration-200">
 					<NuxtLink to="http://localhost:3000/admini/activity">
 						<div class="flex relative my-2 justify-center content-center">
 								<img class="left-2 w-[5vw] h-[3vw] ml-[0.5rem] relative" src="@/PageAdmini/CalendarCheckFill.png" />
@@ -27,7 +27,7 @@
 							</div>
 						</div>
 					</NuxtLink>
-				</button>
+				</button> -->
 
 				<button class="hover:bg-error ease-in-out duration-200">
 					<NuxtLink to="http://localhost:3000/admini/createTopic">
