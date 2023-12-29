@@ -5,7 +5,21 @@ import com.example.demo.dto.JwtResult;
 import com.example.demo.dto.UserListResult;
 import com.example.demo.dto.UserResult;
 import com.example.demo.model.User;
+import com.example.demo.model.Activity;
+import com.example.demo.model.Appreciator;
+import com.example.demo.model.Comment;
+import com.example.demo.model.Post;
+import com.example.demo.model.PostTag;
+import com.example.demo.model.SusPost;
+
 import com.example.demo.repository.UserRepository;
+import com.example.demo.repository.ActivityRepository;
+import com.example.demo.repository.AppreciatorRepository;
+import com.example.demo.repository.CommentRepository;
+import com.example.demo.repository.PostRepository;
+import com.example.demo.repository.PostTagRepository;
+import com.example.demo.repository.SusPostRepository;
+
 import com.example.demo.service.JwtService;
 import jakarta.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -15,9 +29,26 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class UserService {
+    @Autowired
+    private UserRepository userRepository;
 
-  @Autowired
-  private UserRepository userRepository;
+    @Autowired
+    private ActivityRepository activityRepository;
+
+    @Autowired
+    private AppreciatorRepository appreciatorRepository;
+
+    @Autowired
+    private CommentRepository commentRepository;
+
+    @Autowired
+    private PostRepository postRepository;
+
+    @Autowired
+    private PostTagRepository postTagRepository;
+
+    @Autowired
+    private SusPostRepository susPostRepository;
 
   @Autowired
   private JwtService jwtService;
@@ -38,21 +69,65 @@ public class UserService {
     return userRepository.findByPermission(permission);
   }
 
-  public UserResult deleteById(Integer id, HttpServletRequest request) {
-    JwtResult jwtResult = jwtService.parseRequest(request);
-    UserResult result = new UserResult();
+    public UserResult deleteById(Integer id, HttpServletRequest request) {
 
-    if (jwtResult == null) {
-      result.setResultCode(1);
-      return result;
-    }
+        JwtResult jwtResult = jwtService.parseRequest(request);
+        UserResult result = new UserResult();
+        
+        if (jwtResult == null) {
+            result.setResultCode(1);
+            return result;
+        }
+        
+        if (!jwtResult.getPassed()) {
+            result.setResultCode(1);
+            return result;
+        }
+        
+        User user = userRepository.findById(id).orElse(null);
 
-    if (!jwtResult.getPassed()) {
-      result.setResultCode(1);
-      return result;
-    }
+        // delete appreciator
 
-    User user = userRepository.findById(id).orElse(null);
+        List<Appreciator> appreciators = appreciatorRepository.findByAppreciator(user);
+        for (Appreciator appreciator : appreciators) {
+            appreciatorRepository.delete(appreciator);
+        }
+
+        // delete activities
+
+        List<Activity> activities = activityRepository.findByUser(user);
+        for (Activity activity : activities) {
+            activityRepository.delete(activity);
+        }
+        // delete postTag
+
+        List<Post> posts = postRepository.findByUser(user);
+        for (Post post : posts) {
+            List<PostTag> postTags = postTagRepository.findByPost(post);
+            for (PostTag postTag : postTags) {
+                postTagRepository.delete(postTag);
+            }
+        }
+
+        // delete suspost
+
+        List<SusPost> susPosts = susPostRepository.findBySuspender(user);
+        for (SusPost susPost : susPosts) {
+            susPostRepository.delete(susPost);
+        }
+
+        // delete comments
+
+        List<Comment> comments = commentRepository.findByUser(user);
+        for (Comment comment : comments) {
+            commentRepository.delete(comment);
+        }
+        
+        // delete posts
+        for (Post post : posts) {
+            postRepository.delete(post);
+        }
+
 
     if (user != null) {
       if (user.getId() == id || user.getPermission() == 2) {

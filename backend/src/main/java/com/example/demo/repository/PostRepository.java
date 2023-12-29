@@ -11,5 +11,4 @@ public interface PostRepository extends JpaRepository<Post, Integer> {
     List<Post> findByTitleContaining(String keyword);
     List<Post> findByUser(User user);
     List<Post> findByIsSuspend(Boolean isSuspend);
-
 }
