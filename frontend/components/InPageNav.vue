@@ -7,11 +7,12 @@
             </div>
             <div class="flex w-4/5 h-full items-center ml-5">
                 <label for="name" class="w-auto h-full flex items-center">
-                    <!-- <img src="@/Search.png" alt="Search" class="w-auto h-full cursor-pointer p-2.5"> -->
-                    <SearchSticker class=""></SearchSticker>
+                    <img src="@/Search.png" alt="Search" class="w-auto h-full cursor-pointer p-2.5">
+                    <SearchSticker v-if="isInputFocused" :datas="SearchData" @mousedown.prevent />
                 </label>
-                <input type="text" id="name" placeholder="Search" v-model="SearchContent"
-                    class="w-5/6 h-3/4 rounded-full bg-secondary2 pl-[2vw] box-border">
+                <input type="text" id="name" placeholder="Search Post Title" v-model="SearchContent"
+                    class="w-5/6 h-3/4 rounded-full bg-secondary2 pl-[2vw] box-border" @focus="isInputFocused = true"
+                    @blur="isInputFocused = false" autocomplete="off">
             </div>
         </div>
 
@@ -45,10 +46,11 @@ import ListNav from "./ListNav.vue";
 import Signin from "./Signin.vue";
 import PhotoSticker from "./PhotoSticker.vue";
 import SearchSticker from "./SearchSticker.vue";
-
+const config = useRuntimeConfig();
 const EnterVisible = ref(false);
-
+import axios from 'axios';
 const NotSignin = ref(true);
+const isInputFocused = ref(false);
 
 const openModal = () => {
     EnterVisible.value = true;
@@ -60,8 +62,30 @@ const closeModal = () => {
 };
 const Photo = ref('');
 Photo.value = 'PhotoSticker.png';
-
+const SearchData = ref([]);
 const SearchContent = ref('');
+watch(SearchContent, (newValue, oldValue) => {
+
+    const getSearchData = async () => {
+        await axios.get(`${config.public.apiURL}/post/search`, {
+            params: {
+                keyword: SearchContent.value, // 这里假设你的关键词存储在 input.value 中
+            }
+        })
+            .then(response => {
+                console.log(response.data);
+                SearchData.value = response.data;
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    }
+    if (newValue.length > 0) {
+        getSearchData();
+    } else {
+        SearchData.value = [];
+    }
+});
 
 const CheckLoggin = () => {
     const google_token = useCookie('token');
