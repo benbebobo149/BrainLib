@@ -1,6 +1,6 @@
 <template>
     <button @click="openModal" class="w-auto h-full">
-        <img :src="image" class="w-auto h-[80%]" alt="PhotoSticker">
+        <img :src="image || 'https://via.placeholder.com/95x96 '" class="w-auto h-[80%]" alt="PhotoSticker">
     </button>
     <Transition>
         <div @click="closeModal" v-if="PhotoListVisible" class="fixed inset-0 flex w-screen h-screen max-h-full">

@@ -15,7 +15,7 @@
         <div class="w-[30%] h-auto bg-bgcolor">
             <div class="w-full h-[60%] bg-bgcolor">
                 <div class="flex w-full h-[80%] bg-bgcolor justify-center items-end">
-                    <img :src=image alt="UserPhoto" class="w-auto h-[70%] rounded-full border-2 border-terotory">
+                    <img :src="image || 'https://via.placeholder.com/95x96 '" alt="UserPhoto" class="w-auto h-[70%] rounded-full border-2 border-terotory">
                 </div>
                 <div class="flex justify-center items-center w-full h-[20%] bg-bgcolor">
                     <div class=" w-1/2 h-full border-b border-terotory flex items-center justify-center">

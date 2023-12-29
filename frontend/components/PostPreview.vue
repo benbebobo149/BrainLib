@@ -123,7 +123,7 @@ const clickButton = () => {
 
 				<div class="w-full h-[7vh]  rounded-sm border-b border-terotory mx-2  flex">
 					<div class="flex w-[10vw]">
-						<img class=" w-[6vh] h-[6vh] rounded-full  mx-2 " :src="post.userImage" />
+						<img class=" w-[6vh] h-[6vh] rounded-full  mx-2 " :src="post.userImage || 'https://via.placeholder.com/95x96 '" />
 						<h2 class="w-[6vw] h-[2vw] text-black text-[1.5vw] font-normal font-Roboto leading-loose">
 							{{ post.username }}
 						</h2>

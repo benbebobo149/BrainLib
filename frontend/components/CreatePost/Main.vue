@@ -11,7 +11,7 @@
 
           <!-- Right Subsection (2/3 width) -->
           <div class="w-2/3 bg-slate-50 p-8 flex items-center justify-center">
-            <img :src="image" alt="username" class="w-auto h-[8vh]" />
+            <img :src="image || 'https://via.placeholder.com/95x96 '" alt="username" class="w-auto h-[8vh]" />
             <div class="text-black text-3xl font-bold ml-4">
               {{ name }}
             </div>
