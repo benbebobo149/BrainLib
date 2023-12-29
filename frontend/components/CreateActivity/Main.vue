@@ -4,8 +4,10 @@
       <div class="h-1/4 flex bg-slate-50 text-black">
         <div class="w-1/3 bg-slate-50 p-8"></div>
         <div class="w-2/3 bg-slate-50 p-8 flex items-center justify-center">
-          <img src="/hello/Ellipse2.png" alt="username" class="w-auto h-[8vh]" />
-          <div class="text-black text-3xl font-bold ml-4">{{ fakeData.username }}</div>
+          <img :src="image" alt="username" class="w-auto h-[8vh]" />
+          <div class="text-black text-3xl font-bold ml-4">
+            {{ name }}
+          </div>
         </div>
       </div>
       <div class="h-3/4 flex bg-slate-50 p-6 items-start justify-end">
@@ -32,7 +34,7 @@
               <input type="text" class="text-black text-2xl  bg-slate-50" :style="{ fontSize: fontSize[1] }"
                 v-model="address" placeholder="Enter Address">
             </div>
-            <div class="mt-10">
+            <div class="mt-10 ">
               <input type="text" class="text-black text-2xl  bg-slate-50" :style="{ fontSize: fontSize[2] }"
                 v-model="description" placeholder="Enter Description">
             </div>
@@ -42,9 +44,9 @@
     </div>
     <div class="w-1/2 h-full flex flex-col">
       <div class="flex flex-row h-1/4 bg-slate-50 text-black justify-center items-end p-8">
-        <label for="fileInput" class="cursor-pointer">
+        <!-- <label for="fileInput" class="cursor-pointer">
           <img src="/hello/AddFile.png" alt="Add file" class="w-auto h-[4vh] mr-10">
-        </label>
+        </label> -->
         <!-- <label for="tagInput" class="cursor-pointer" @click="showRegistrationPopup">
           <img src="/hello/AddTag.png" alt="Add tag" class="w-auto h-[4vh] mr-10">
         </label> -->
@@ -81,6 +83,8 @@ import BoxError from '../ModelBox/BoxError.vue';
 
 const succVisible = ref(false);
 const errorVisible = ref(false);
+const image = useCookie('image');
+const name = useCookie('name');
 
 
 const fontSize = ref(["1rem", "1rem", "1rem"]);
