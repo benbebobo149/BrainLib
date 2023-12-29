@@ -4,8 +4,10 @@
       <div class="h-1/4 flex bg-slate-50 text-black">
         <div class="w-1/3 bg-slate-50 p-8"></div>
         <div class="w-2/3 bg-slate-50 p-8 flex items-center justify-center">
-          <img src="/hello/Ellipse2.png" alt="username" class="w-auto h-[8vh]" />
-          <div class="text-black text-3xl font-bold ml-4">{{ fakeData.username }}</div>
+          <img :src="image" alt="username" class="w-auto h-[8vh]" />
+          <div class="text-black text-3xl font-bold ml-4">
+            {{ name }}
+          </div>
         </div>
       </div>
       <div class="h-3/4 flex bg-slate-50 p-6 items-start justify-end">
@@ -81,6 +83,8 @@ import BoxError from '../ModelBox/BoxError.vue';
 
 const succVisible = ref(false);
 const errorVisible = ref(false);
+const image = useCookie('image');
+const name = useCookie('name');
 
 
 const fontSize = ref(["1rem", "1rem", "1rem"]);
