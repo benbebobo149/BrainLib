@@ -3,19 +3,23 @@ import EditorJS from '@editorjs/editorjs';
 import Header from '@editorjs/header';
 import List from '@editorjs/list';
 import ImageTool from '@editorjs/image';
+import CodeTool from '@editorjs/code';
+import Table from '@editorjs/table'
 const props = defineProps({
     content: {
-    type: String,
-    required: true
-  }
+        type: String,
+        required: true
+    }
 })
 
-const { content} = toRefs(props)
+const { content } = toRefs(props)
 // string to json
+const config = useRuntimeConfig();
 const json = JSON.parse(content.value);
 const editor = new EditorJS({
     holder: 'editorjs',
     readOnly: true,
+    data: JSON.parse(content.value),
     tools: {
         header: {
             class: Header,
@@ -27,10 +31,23 @@ const editor = new EditorJS({
         list: {
             class: List
         }, image: {
-            class: ImageTool
+            class: ImageTool,
+            config: {
+                endpoints: {
+                    byFile: `${config.public.apiURL}/uploadFile`, // Your backend file uploader endpoint
+                    byUrl: `${config.public.apiURL}/fetchUrl`, // Your endpoint that provides uploading by Url
+                }
+            }
         }
-    },
-    data: json
+        , code: CodeTool, table: {
+            class: Table,
+            inlineToolbar: true,
+            config: {
+                rows: 2,
+                cols: 3,
+            },
+        }
+    }
 })
 </script>
 

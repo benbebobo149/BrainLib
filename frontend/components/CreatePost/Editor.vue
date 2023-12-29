@@ -3,11 +3,13 @@ import EditorJS from '@editorjs/editorjs';
 import Header from '@editorjs/header';
 import List from '@editorjs/list';
 import ImageTool from '@editorjs/image';
+import CodeTool from '@editorjs/code';
+import Table from '@editorjs/table'
 const config = useRuntimeConfig();
 
 const emit = defineEmits();
 // click the button and console log the content
-const sendMessage = async() => {
+const sendMessage = async () => {
     const inputData = ref();
     await editor.save().then((outputData) => {
         inputData.value = outputData;
@@ -16,7 +18,7 @@ const sendMessage = async() => {
     }).catch((error) => {
         console.log('Saving failed: ', error)
     });
-    
+
 }
 const editor = new EditorJS({
     /** 
@@ -47,7 +49,15 @@ const editor = new EditorJS({
                 }
             }
         }
-    },
+        , code: CodeTool, table: {
+            class: Table,
+            inlineToolbar: true,
+            config: {
+                rows: 2,
+                cols: 3,
+            },
+        },
+    }
 })
 </script>
 

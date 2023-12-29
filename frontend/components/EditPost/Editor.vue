@@ -3,6 +3,8 @@ import EditorJS from '@editorjs/editorjs';
 import Header from '@editorjs/header';
 import List from '@editorjs/list';
 import ImageTool from '@editorjs/image';
+import CodeTool from '@editorjs/code';
+import Table from '@editorjs/table'
 const props = defineProps({
     content: {
         type: String,
@@ -16,6 +18,8 @@ const config = useRuntimeConfig();
 const emit = defineEmits();
 const editor = new EditorJS({
     holder: 'editorjs',
+
+    data: JSON.parse(content.value),
     tools: {
         header: {
             class: Header,
@@ -35,8 +39,15 @@ const editor = new EditorJS({
                 }
             }
         }
-    },
-    data: JSON.parse(content.value)
+        , code: CodeTool, table: {
+            class: Table,
+            inlineToolbar: true,
+            config: {
+                rows: 2,
+                cols: 3,
+            },
+        }
+    }
 })
 
 const sendMessage = async () => {

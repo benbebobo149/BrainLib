@@ -37,7 +37,7 @@ const SelectAllAdministrators = () => {
 					<div class="mt-[5vh] ml-[10vw] text-stone-400 ">
 						<!-- <h1 class="left-[25vw] w-[45vw]  h-[0.5vw] text-[3vw] font-normal font-['Roboto']
 						 relative">here comes a search box</h1> -->
-						<div class="flex w-4/5 h-full items-center ml-5">
+						<!-- <div class="flex w-4/5 h-full items-center ml-5">
 							<div class="w-full">
 								<button @click="SelectAllModerators" class="text-2xl font-bold text-black ">Select
 									All
@@ -45,7 +45,7 @@ const SelectAllAdministrators = () => {
 								<button @click="SelectAllAdministrators" class="text-2xl font-bold text-black ml-4">Select
 									All Administrators</button>
 							</div>
-						</div>
+						</div> -->
 					</div>
 				</div>
 				<div class="w-[80vw] h-[80vh]  overflow-y-hidden">
@@ -60,7 +60,6 @@ const SelectAllAdministrators = () => {
 				</div>
 			</div>
 		</div>
-
 	</div>
 </template>
 
