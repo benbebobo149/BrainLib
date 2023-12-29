@@ -2,8 +2,14 @@
   <button @click="openModal" class="w-auto h-full">
     <img src="@/ListNav.png" class="w-auto h-[80%]" alt="ListNav">
   </button>
-  <div @click="closeModal" v-if="ListNavVisible" class="fixed inset-0 flex bg-black bg-opacity-30 w-screen h-screen max-h-full">
-    <div id="slideLeft" class="relative w-[25%] h-auto bg-violet-100">
+
+  <transition name="fade">
+    <div @click="closeModal" v-if="ListNavVisible"
+    class="fixed inset-0 flex bg-black bg-opacity-30 w-screen h-screen max-h-full">
+  </div>
+  </transition>
+  <transition name="slide">
+    <div v-if="ListNavVisible" class="absolute left-0 w-[25vw] h-[100vh] bg-violet-100">
       <div class="w-auto h-[8%] flex bg-violet-100 items-center border-b border-terotory">
         <NuxtLink to="/main" @click="closeModal" class="flex w-auto h-[80%] ml-[.5vw]">
           <img src="@/logo.png" alt="logo" class="w-full h-auto">
@@ -25,14 +31,14 @@
       </div>
       <div class="w-auto h-[76%] bg-violet-100 overflow-y-hidden">
         <div class="w-auto h-full bg-violet-100 overflow-y-scroll hide-scrollbar fill-available">
-          <NuxtLink :to="`/main/${topic.id}`"  @click="closeModal" v-for="topic in tags" :key="topic.id"
+          <NuxtLink :to="`/main/${topic.id}`" @click="closeModal" v-for="topic in tags" :key="topic.id"
             class="flex w-auto h-[8vh] items-center justify-center m-3 border  border-terotory rounded-md">
             <p class="text-[2vw] ">{{ topic.tagName }}</p>
           </NuxtLink>
         </div>
       </div>
     </div>
-  </div>
+  </transition>
 </template>
 
 <script setup>
@@ -40,7 +46,6 @@ import { ref } from 'vue';
 
 import Topic from '@/public/TagFakeData/TagFakeData.json';
 
-const topics = ref(Topic);
 //get data from databaseimport axios from 'axios';
 import axios from 'axios';
 const config = useRuntimeConfig();
@@ -88,36 +93,38 @@ const closeModal = () => {
   ListNavVisible.value = false;
 };
 
-const route = useRoute();
 </script>
 
 <style scoped>
-#slideLeft {
-  left: -600px;
-  -webkit-animation: slide 0.2s forwards;
-  -webkit-animation-delay: 0.1s;
-  animation: slide 0.5s forwards;
-  animation-delay: 0.1s;
-}
-/* not work animation */
 
-/* #slideLeft-leave-active {
-  transition: transform 0.8s ease;
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s ease;
 }
-#slideLeft-leave-to {
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+.fade-enter-to,
+.fade-leave-from {
+  opacity: 1;
+}
+
+.slide-enter-active,
+.slide-leave-active {
+  transition: transform 0.5s ease;
+}
+
+.slide-enter-from,
+.slide-leave-to {
   transform: translateX(-100%);
-} */
-
-@-webkit-keyframes slide {
-  100% {
-    left: 0;
-  }
 }
 
-@keyframes slide {
-  100% {
-    left: 0;
-  }
+.slide-enter-to,
+.slide-leave-from {
+  transform: translateX(0);
 }
 
 
@@ -126,6 +133,7 @@ const route = useRoute();
   display: none;
   /* 隱藏滾動條 - WebKit browsers */
 }
+
 /* 使用 Flexbox 使容器充滿空間 */
 .fill-available {
   display: flex;

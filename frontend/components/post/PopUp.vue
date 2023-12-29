@@ -4,12 +4,12 @@
       <div v-if="isNavbarOpen" class="fixed inset-0 bg-black bg-opacity-50" @click="closePopup"></div>
     </transition>
     <transition name="slide">
-      <div v-if="isNavbarOpen" class="fixed flex-col inset-y-0 right-0 w-96 bg-white shadow-md p-4 mt-5 rounded-xl">
+      <div v-if="isNavbarOpen" class="fixed flex-col inset-y-0 right-0 w-96 bg-white shadow-md p-4  ">
         <div class="flex flex-col w-full h-1/2">
-          <div class="flex w-full h-1/6">
+          <!-- <div class="flex w-full h-1/6">
             <img src="/hello/XLg.png" alt="Close Button" class="h-[4vh] w-auto absolute top-4 right-4"
               @click="closePopup">
-          </div>
+          </div> -->
           <div class="flex flex-col w-full h-5/6 bg-blue-500 relative">
             <div class="flex w-full h-1/4 bg-white">
               <img :src="image" alt="Organizers Image" class="w-auto h-14 mb-5 self-center justify-self-center">
@@ -50,7 +50,6 @@
 
 <script setup>
 import { ref } from 'vue';
-import fakeData4 from './public/hello/Pic_Folder/fakeData4.json';
 import axios from 'axios';
 const config = useRuntimeConfig();
 // define props
@@ -70,7 +69,7 @@ const closePopup = () => {
   // 暫停0.5秒
   setTimeout(() => {
     emit('closePopup');
-  }, 2000);
+  }, 500);
 };
 const image = useCookie('image');
 const name = useCookie('name');
@@ -160,10 +159,21 @@ const getUserData = async (userid) => {
   setTimeout(() => {
     isNavbarOpen.value = true;
   }, 100);
+  
   getCommentData();
 </script>
 
 <style scoped>
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
 .slide-enter-active,
 .slide-leave-active {
   transition: transform 0.5s ease;

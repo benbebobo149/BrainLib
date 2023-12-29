@@ -68,7 +68,7 @@ const copyURL = () => {
   navigator.clipboard.writeText(window.location.href).then(() => {
     alert('URL copied to clipboard!');
   }).catch(err => {
-     alert('Could not copy URL: ', err);
+    alert('Could not copy URL: ', err);
   });
 }
 
@@ -85,12 +85,11 @@ const { id } = toRefs(props)
 const isNavbarOpen = ref(false);
 
 const closePopup = () => {
-
   isNavbarOpen.value = false;
 };
 const openComment = () => {
-  console.log('openComment');
   isNavbarOpen.value = true;
+  console.log('openComment' + isNavbarOpen.value);
 };
 
 const copyUrl = async () => {
