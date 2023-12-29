@@ -84,9 +84,7 @@ const deleteUser = (userDeleted) => {
 	if (confirm("確認是否刪除帳號")) {
 		console.log("DeleteAccount in ManageUser.vue");
 		const token = useCookie('token');
-		axios.delete(`${config.public.apiURL}/user/${userDeleted.id}`, { // config.public.apiURL + "/tag"
-			id: userDeleted.id,
-		}, {
+		axios.delete(`${config.public.apiURL}/user/${userDeleted.id}`, {
 			headers: {
 				'Authorization': 'Bearer ' + token.value,
 				'Content-Type': 'application/json',

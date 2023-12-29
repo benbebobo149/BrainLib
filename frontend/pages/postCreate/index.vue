@@ -8,3 +8,6 @@ import Main from '~/components/CreatePost/Main.vue'
         <Main></Main>
     </div>
 </template>
+
+
+<style scoped></style>

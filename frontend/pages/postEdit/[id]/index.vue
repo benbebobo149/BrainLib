@@ -74,7 +74,7 @@
 
             </div>
 
-            <Editor v-if="inputEditorData" :content="inputEditorData" class="w-[60%]" @clickSubmit="clickSubmit" />
+            <Editor v-if="inputEditorData&&edtiorShow" :content="inputEditorData" class="w-[60%]" @clickSubmit="clickSubmit" />
         </div>
     </div>
     <BoxSucc v-if="succVisible" class="z-10" @editorData=""></BoxSucc>
@@ -279,6 +279,13 @@ const deletePost = () => {
             })
     }
 }
+const edtiorShow = ref(false);
+onMounted(() => {
+  // 在这里你可以执行一些在组件挂载后需要执行的操作
+  // next tick 
+  edtiorShow.value = true;
+
+});
 getPostData();
 </script>
   

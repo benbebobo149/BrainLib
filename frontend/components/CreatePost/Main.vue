@@ -8,12 +8,12 @@
           <!-- Left Subsection (1/3 width) -->
           <div class="w-1/3 bg-slate-50 p-8">
           </div>
-
+          
           <!-- Right Subsection (2/3 width) -->
           <div class="w-2/3 bg-slate-50 p-8 flex items-center justify-center">
-            <img src="/hello/Ellipse2.png" alt="username" class="w-auto h-[8vh]" />
+            <img :src="image" alt="username" class="w-auto h-[8vh]" />
             <div class="text-black text-3xl font-bold ml-4">
-              Username
+              {{ name }}
             </div>
           </div>
         </div>
@@ -71,7 +71,7 @@
 
       </div>
 
-      <Editor class="w-[60%]" @editorData="clickSubmit" />
+      <Editor v-if="edtiorShow" class="w-[60%]" @editorData="clickSubmit" />
     </div>
   </div>
   <BoxSucc v-if="succVisible" class="z-10" @close="succVisible = false"></BoxSucc>
@@ -81,11 +81,12 @@
 <script setup>
 import { ref } from 'vue';
 import AddTag from '@/components/CreatePost/AddTag.vue';
-// import Editor.vue
 import Editor from '@/components/CreatePost/Editor.vue'
 import BoxSucc from '@/components/ModelBox/BoxSucc.vue';
 import BoxError from '@/components/ModelBox/BoxError.vue';
 import axios from 'axios';
+const image = useCookie('image');
+const name = useCookie('name');
 const succVisible = ref(false);
 const errorVisible = ref(false);
 const inputTitle = ref('');
@@ -97,7 +98,7 @@ const config = useRuntimeConfig();
 const errorInputTitle = ref(false);
 const errorInputImage = ref(false);
 const imageHasUploaded = ref(false)
-
+const edtiorShow = ref(false);
 const showRegistrationPopup = () => {
   showPopup.value = true;
 };
@@ -176,9 +177,7 @@ const createPost = () => {
       // if code is 200, then hide the modal
       console.log(res);
       if (res.status == 200) {
-        window.location.reload();
-        alert("create success!");
-        succVisible.value = true;
+        reloadNuxtApp({ path: "/personal", ttl: 500 });
       }
     })
     .catch((err) => {
@@ -234,6 +233,12 @@ const clickSubmit = async (data) => {
   await sendImage();
   createPost();
 }
+onMounted(() => {
+  // 在这里你可以执行一些在组件挂载后需要执行的操作
+  // next tick 
+  edtiorShow.value = true;
+
+});
 </script>
 
 <style scoped>

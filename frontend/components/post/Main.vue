@@ -40,7 +40,7 @@
       </div>
     </div>
 
-    <editor v-if="post.content" :content="post.content" />
+    <editor v-if="post.content && edtiorShow" :content="post.content" />
     <comment v-if="isNavbarOpen" @closePopup="closePopup" :id="id"></comment>
   </div>
 </template>
@@ -146,6 +146,13 @@ const getUserData = async (userid) => {
       console.log(error);
     });
 }
+const edtiorShow = ref(false);
+onMounted(() => {
+  // 在这里你可以执行一些在组件挂载后需要执行的操作
+  // next tick 
+  edtiorShow.value = true;
+
+});
 getPostData();
 </script>
 <style scoped>

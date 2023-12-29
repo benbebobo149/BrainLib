@@ -10,5 +10,10 @@ export default defineNuxtConfig({
       //apiURL: 'http://ncu.feyumi.com:35001'
       apiURL: 'http://localhost:1234'
     }
-  }
+  },
+ 
+  app: {
+    pageTransition: { name: 'page', mode: 'out-in' }
+  },
+
 })
