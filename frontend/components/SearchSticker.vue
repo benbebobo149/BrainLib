@@ -11,15 +11,12 @@ const closeSearchModal = () => {
 </script>
 <template>
     <button @click="openSearchModal" class="w-auto h-full">
-        <img :src="image" class="w-auto h-[80%]" alt="PhotoSticker">
+        <img src="@/Search.png"  class="w-auto h-[70%] mx-[1vw]" alt="PhotoSticker">
     </button>
-    <div @click="closeSearchModal" v-if="SearchStickerVisable" class="fixed inset-0 flex w-screen h-screen max-h-full">
-        <div class="PhotoList fixed w-[15%] h-auto bg-purple-50 flex  mt-[7vh] right-0">
-            <div class="w-full h-auto bg-purple-50 items-center justify-center">
+    <div @click="closeSearchModal" v-if="SearchStickerVisable" class=" -z-20">
+        <div class="PhotoList fixed  h-auto bg-purple-50 flex ml-[1vw]  mt-[4vh] ">
+            <div class="w-[30vw] h-auto bg-purple-50 items-center justify-center">
                 <div class="hover:bg-purple-100 ease-in-out flex h-[6.5vh] w-auto p-1">
-                    <NuxtLink to="/personal" class="w-[20%] h-auto flex justify-center">
-                        <img src="/PhotoSticker/PersonalProfile.png" alt="" class="w-full h-auto">
-                    </NuxtLink>
                     <NuxtLink to="/personal" class="text-[1vw] flex items-center w-[80%] h-auto ml-5">
                         <p>Personal Profile</p>
                     </NuxtLink>

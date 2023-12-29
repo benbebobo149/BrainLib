@@ -7,26 +7,12 @@
             </div>
             <div class="flex w-4/5 h-full items-center ml-5">
                 <label for="name" class="w-auto h-full flex items-center">
-                    <img src="@/Search.png" alt="Search" class="w-auto h-full cursor-pointer p-2.5">
+                    <!-- <img src="@/Search.png" alt="Search" class="w-auto h-full cursor-pointer p-2.5"> -->
+                    <SearchSticker class=""></SearchSticker>
                 </label>
                 <input type="text" id="name" placeholder="Search" v-model="SearchContent"
                     class="w-5/6 h-3/4 rounded-full bg-secondary2 pl-[2vw] box-border">
             </div>
-             <div @click="closeSearchModal" v-if="SearchStickerVisable" class="fixed inset-0 flex w-screen h-screen max-h-full">
-            <div class="PhotoList fixed w-[15%] h-auto bg-purple-50 flex  mt-[7vh] right-0">
-                <div class="w-full h-auto bg-purple-50 items-center justify-center">
-                    <div class="hover:bg-purple-100 ease-in-out flex h-[6.5vh] w-auto p-1">
-                        <NuxtLink to="/personal" class="w-[20%] h-auto flex justify-center">
-                            <img src="/PhotoSticker/PersonalProfile.png" alt="" class="w-full h-auto">
-                        </NuxtLink>
-                        <NuxtLink to="/personal" class="text-[1vw] flex items-center w-[80%] h-auto ml-5">
-                            <p>Personal Profile</p>
-                        </NuxtLink>
-                    </div>
-               
-                </div>
-            </div>
-        </div>
         </div>
 
         <div v-if="NotSignin" class="flex justify-end w-1/2 h-auto">
