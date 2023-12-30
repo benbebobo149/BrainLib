@@ -1,7 +1,7 @@
 # Brainlib 
 This is the application that let scholar to publish post and create the event.
 
-# how to install
+## how to install
 
 Before you start this project, remember to ask the admin to give you the github access token. 
 
@@ -19,7 +19,10 @@ sudo docker compose up -d
 ```
 If you use the Window system, openning the Docker Desktop before running docker compose.
 
-## git commit
+
+# developer section
+
+## git commit rule
 
 init: 初始化專案
 
@@ -42,7 +45,7 @@ hotfix: 「即時」修正嚴重 bug
 - 修正部分裝置的 RWD: "RWD: adjust layout on tablet"
 - 完成桌機頁面: "feat: complete desktop and tablet layout"
 
-## branch
+## create your branch 
 
 before you start your project please create your branch first.
 
@@ -99,8 +102,8 @@ database :
 java : follow the tradition of oracle https://www.oracle.com/java/technologies/javase/codeconventions-namingconventions.html
 
 ## framework and library 
-frontend : nuxt3 + tailwind
+frontend : nuxt3 + tailwind + editor.js
 
 database : postgres + adminer
 
-backend : spring + spring data jpa + oauth2 client + jwt 
+backend : spring + spring data jpa + jwt 
