@@ -8,7 +8,7 @@
 const config = useRuntimeConfig();
 const startOAuth2Flow = () => {
     const clientId = config.public.googleClientId;
-    const redirectUri = config.public.apiURL+'/oauth2';
+    const redirectUri = config.public.frontendURL+'/oauth2';
     const scope = 'https://www.googleapis.com/auth/userinfo.email'; // 定义所需的范围
 
     // 构建OAuth 2.0认证URL

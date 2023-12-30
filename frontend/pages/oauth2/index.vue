@@ -29,7 +29,6 @@ const sendOauthToken = async () => {
                 const decoded = jwtDecode(token.value)
 
                 // Get the id and username
-                
                 const id = decoded.id;
                 getUserInfo(id);
                 
@@ -70,8 +69,6 @@ const getUserInfo = (user_id) => {
             console.error(error);
         });
 }
-
-
 sendOauthToken();
 </script>
 <template></template>

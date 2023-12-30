@@ -5,7 +5,7 @@ import InPageNav from "@/components/InPageNav.vue";
 <template>
   <div>
     <InPageNav />
-    <NuxtPage/>
+    <NuxtPage />
 
   </div>
 </template>
