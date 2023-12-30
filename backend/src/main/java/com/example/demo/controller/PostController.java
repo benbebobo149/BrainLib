@@ -17,11 +17,12 @@ import com.example.demo.service.PostService;
 import jakarta.servlet.http.HttpServletRequest;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.beans.factory.annotation.Value;
+
 @RestController
 @RequestMapping("/post")
 public class PostController {
@@ -32,10 +33,6 @@ public class PostController {
   @Autowired
   private JwtService jwtService;
 
-  @Value("${my.custom.frontendURL}")
-  private String frontendURL;
-
-  @CrossOrigin(origins = frontendURL)
   @PostMapping
   public ResponseEntity<?> createPost(
     @RequestBody NewPostResult post,
@@ -61,7 +58,6 @@ public class PostController {
     }
   }
 
-  @CrossOrigin(origins = frontendURL)
   @GetMapping("/search")
   public ResponseEntity<?> searchPosts(@RequestParam String keyword) {
     try {
@@ -77,7 +73,6 @@ public class PostController {
     }
   }
 
-  @CrossOrigin(origins = frontendURL)
   @PutMapping("/{post_id}")
   public ResponseEntity<?> updatePost(
     @PathVariable Integer post_id,
@@ -105,7 +100,6 @@ public class PostController {
     }
   }
 
-  @CrossOrigin(origins = frontendURL)
   @DeleteMapping("/{post_id}")
   public ResponseEntity<?> deletePost(
     @PathVariable Integer post_id,
@@ -132,7 +126,6 @@ public class PostController {
     }
   }
 
-  @CrossOrigin(origins = frontendURL)
   @PutMapping("/{post_id}/like")
   public ResponseEntity<?> likePost(
     @PathVariable Integer post_id,
@@ -159,7 +152,6 @@ public class PostController {
     }
   }
 
-  @CrossOrigin(origins = frontendURL)
   @PutMapping("/{post_id}/report")
   public ResponseEntity<?> reportPost(
     @PathVariable Integer post_id,
@@ -188,7 +180,6 @@ public class PostController {
     }
   }
 
-  @CrossOrigin(origins = frontendURL)
   @GetMapping("/{post_id}/comments")
   public ResponseEntity<?> getComments(
     @PathVariable Integer post_id,
@@ -215,7 +206,6 @@ public class PostController {
     }
   }
 
-  @CrossOrigin(origins = frontendURL)
   @PostMapping("/{post_id}/comments")
   public ResponseEntity<?> addComment(
     @PathVariable Integer post_id,
@@ -243,7 +233,6 @@ public class PostController {
     }
   }
 
-  @CrossOrigin(origins = frontendURL)
   @PutMapping("/comments/{comment_id}")
   public ResponseEntity<?> updateComment(
     @PathVariable Integer comment_id,
@@ -275,7 +264,6 @@ public class PostController {
     }
   }
 
-  @CrossOrigin(origins = frontendURL)
   @DeleteMapping("/comments/{comment_id}")
   public ResponseEntity<?> deleteComment(
     @PathVariable Integer comment_id,
@@ -302,7 +290,6 @@ public class PostController {
     }
   }
 
-  @CrossOrigin(origins = frontendURL)
   @GetMapping("/all/{tag_id}")
   public ResponseEntity<?> searchTagsPost(@PathVariable Integer tag_id) {
     try {
@@ -318,7 +305,6 @@ public class PostController {
     }
   }
 
-  @CrossOrigin(origins = frontendURL)
   @GetMapping("/all")
   public ResponseEntity<?> getAllPosts() {
     try {
@@ -334,7 +320,6 @@ public class PostController {
     }
   }
 
-  @CrossOrigin(origins = frontendURL)
   @GetMapping("/my/all")
   public ResponseEntity<?> getPostsByUser(HttpServletRequest request) {
     try {
@@ -354,7 +339,6 @@ public class PostController {
     }
   }
 
-  @CrossOrigin(origins = frontendURL)
   @PostMapping("/{post_id}/approve")
   public ResponseEntity<?> approvePost(
     @PathVariable Integer post_id,
@@ -382,7 +366,6 @@ public class PostController {
     }
   }
 
-  @CrossOrigin(origins = frontendURL)
   @GetMapping("/suspend")
   public ResponseEntity<?> getSuspendPosts(HttpServletRequest request) {
     try {
@@ -398,7 +381,6 @@ public class PostController {
     }
   }
 
-  @CrossOrigin(origins = frontendURL)
   @GetMapping("/{post_id}")
   public ResponseEntity<?> getPostById(@PathVariable Integer post_id) {
     try {

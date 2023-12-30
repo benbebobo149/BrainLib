@@ -19,10 +19,6 @@ public class TagController {
   @Autowired
   private TagService tagService;
 
-  @Value("${my.custom.frontendURL}")
-  private String frontendURL;
-
-  @CrossOrigin(origins = frontendURL)
   @GetMapping
   public ResponseEntity<?> getAllTags() {
     try {
@@ -38,7 +34,6 @@ public class TagController {
     }
   }
 
-  @CrossOrigin(origins = frontendURL)
   @PostMapping
   public ResponseEntity<?> createTag(
     @RequestBody Tag tag,
@@ -67,7 +62,6 @@ public class TagController {
     }
   }
 
-  @CrossOrigin(origins = frontendURL)
   @PutMapping("/{tag_id}")
   public ResponseEntity<?> updateTag(
     @PathVariable Integer tag_id,
@@ -97,7 +91,6 @@ public class TagController {
     }
   }
 
-  @CrossOrigin(origins = frontendURL)
   @DeleteMapping("/{tag_id}")
   public ResponseEntity<?> deleteTag(
     @PathVariable Integer tag_id,

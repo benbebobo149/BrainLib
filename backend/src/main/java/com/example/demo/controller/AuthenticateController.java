@@ -9,6 +9,7 @@ import com.example.demo.service.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -20,7 +21,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.view.RedirectView;
-import org.springframework.beans.factory.annotation.Value;
 
 @RestController
 public class AuthenticateController {
@@ -34,10 +34,6 @@ public class AuthenticateController {
   @Autowired
   private JwtService jwtService;
 
-  @Value("${my.custom.frontendURL}")
-  private String frontendURL;
-
-  @CrossOrigin(origins = frontendURL)
   @PostMapping("/authenticate")
   public ResponseEntity<?> google(@RequestBody TokenRequest tokenRequest)
     throws Exception {
