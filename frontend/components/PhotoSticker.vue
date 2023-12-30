@@ -46,7 +46,6 @@
   
 <script setup>
 import { ref } from 'vue';
-import user from '@/public/personal/UserFakeData.json';
 const image = useCookie('image');
 const permission = useCookie('permission');
 const PhotoListVisible = ref(false);

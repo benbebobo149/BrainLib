@@ -5,9 +5,10 @@
 </template>
 
 <script setup>
+const config = useRuntimeConfig();
 const startOAuth2Flow = () => {
-    const clientId = '341589256904-2b8bl47v3ni78ft9f7ottqh3r6b63sf0.apps.googleusercontent.com';
-    const redirectUri = 'http://localhost:3000/codeTemplate/oauth2';
+    const clientId = config.public.googleClientId;
+    const redirectUri = config.public.apiURL+'/oauth2';
     const scope = 'https://www.googleapis.com/auth/userinfo.email'; // 定义所需的范围
 
     // 构建OAuth 2.0认证URL
@@ -22,7 +23,7 @@ const startOAuth2Flow = () => {
     const checkUrlPrefix = setInterval(() => {
         try {
             const childUrl = authWindow.location.href;
-            if (childUrl.startsWith('http://localhost:3000/codeTemplate/oauth2')) {
+            if (childUrl.startsWith(redirectUri)) {
                 clearInterval(checkUrlPrefix); // 停止定时器
                 authWindow.close();
                 window.location.href = childUrl; // 替换成您想要的跳转URL

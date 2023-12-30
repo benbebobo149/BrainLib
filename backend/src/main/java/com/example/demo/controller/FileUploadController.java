@@ -33,8 +33,10 @@ public class FileUploadController  {
 
     @Value("${my.custom.imgurToken}")
     private String imgurToken;
+    @Value("${my.custom.frontendURL}")
+    private String frontendURL;
 
-    @CrossOrigin(origins = "http://localhost:3000")
+    @CrossOrigin(origins = frontendURL)
     @PostMapping("/uploadFile")
     public ResponseEntity<?> handleFileUpload(@RequestParam("image") MultipartFile file, HttpServletRequest request) {
 

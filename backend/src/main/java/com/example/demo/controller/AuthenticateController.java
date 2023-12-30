@@ -7,6 +7,7 @@ import com.example.demo.repository.UserRepository;
 import com.example.demo.service.JwtService;
 import com.example.demo.service.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -19,8 +20,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.view.RedirectView;
-import org.json.JSONObject;
-
+import org.springframework.beans.factory.annotation.Value;
 
 @RestController
 public class AuthenticateController {
@@ -34,7 +34,10 @@ public class AuthenticateController {
   @Autowired
   private JwtService jwtService;
 
-  @CrossOrigin(origins = "http://localhost:3000")
+  @Value("${my.custom.frontendURL}")
+  private String frontendURL;
+
+  @CrossOrigin(origins = frontendURL)
   @PostMapping("/authenticate")
   public ResponseEntity<?> google(@RequestBody TokenRequest tokenRequest)
     throws Exception {
@@ -70,8 +73,10 @@ public class AuthenticateController {
       isRegister = true;
     }
     final String jwt_token = jwtService.generateToken(checkUser);
-    AuthenticationResult result = new AuthenticationResult(jwt_token, isRegister);
+    AuthenticationResult result = new AuthenticationResult(
+      jwt_token,
+      isRegister
+    );
     return ResponseEntity.ok(result);
   }
 }
-

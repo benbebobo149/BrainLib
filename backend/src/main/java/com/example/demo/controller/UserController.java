@@ -11,7 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.CrossOrigin;
-
+import org.springframework.beans.factory.annotation.Value;
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -19,7 +19,10 @@ public class UserController {
   @Autowired
   private UserService userService;
 
-  @CrossOrigin(origins = "http://localhost:3000")
+  @Value("${my.custom.frontendURL}")
+  private String frontendURL;
+
+  @CrossOrigin(origins = frontendURL)
   @GetMapping("/all")
   public ResponseEntity<?> getAllUsers() {
     try {
@@ -35,7 +38,7 @@ public class UserController {
     }
   }
 
-  @CrossOrigin(origins = "http://localhost:3000")
+  @CrossOrigin(origins = frontendURL)
   @GetMapping("/{id}")
   public ResponseEntity<?> getUserById(@PathVariable Integer id) {
     try {
@@ -51,7 +54,7 @@ public class UserController {
     }
   }
 
-  @CrossOrigin(origins = "http://localhost:3000")
+  @CrossOrigin(origins = frontendURL)
   @PutMapping("/{id}")
   public ResponseEntity<?> updateUser(
     @PathVariable Integer id,
@@ -81,7 +84,7 @@ public class UserController {
     }
   }
 
-  @CrossOrigin(origins = "http://localhost:3000")
+  @CrossOrigin(origins = frontendURL)
   @DeleteMapping("/{id}")
   public ResponseEntity<?> deleteUser(
     @PathVariable Integer id,
@@ -109,7 +112,7 @@ public class UserController {
     }
   }
 
-  @CrossOrigin(origins = "http://localhost:3000")
+  @CrossOrigin(origins = frontendURL)
   @GetMapping("/all/{permission}")
   public ResponseEntity<?> getUserByPermission(
     @PathVariable Integer permission
@@ -127,7 +130,7 @@ public class UserController {
     }
   }
 
-  @CrossOrigin(origins = "http://localhost:3000")
+  @CrossOrigin(origins = frontendURL)
   @GetMapping("/by-username/{username}")
   public ResponseEntity<?> getUserByUsername(@PathVariable String username) {
     try {
