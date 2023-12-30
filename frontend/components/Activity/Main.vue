@@ -27,13 +27,9 @@
 <script setup>
 import { ref } from 'vue';
 import ScrollableBox from './ScrollableBox.vue';
-import ScrollBoxByTime from './ScrollBoxByTime.vue';
-import ScrollBoxByDistance from './ScrollBoxByDistance.vue';
 
 const components = {
   ScrollableBox,
-  ScrollBoxByTime,
-  ScrollBoxByDistance,
 };
 
 const currentScrollBox = ref(components.ScrollableBox);
