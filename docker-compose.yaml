@@ -7,6 +7,8 @@ services:
       - ./frontend/:/app/frontend/
     ports:
       - 3000:3000
+    environment:
+      GOOGLE_CLIENT_ID:
   backend:
     build:
       context: ./backend
@@ -14,6 +16,8 @@ services:
       - ./backend/:/app/backend/
     ports:
       - 1234:8080
+    environment:
+      IMGUR_API_KEY: 
   db:
     image: postgres
     ports:

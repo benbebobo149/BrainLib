@@ -9,7 +9,7 @@ export default defineNuxtConfig({
     public: {
       apiURL: 'http://localhost:1234',
       frontendURL: 'http://localhost:3000',
-      googleClientId: '341589256904-2b8bl47v3ni78ft9f7ottqh3r6b63sf0.apps.googleusercontent.com'
+      googleClientId : process.env.GOOGLE_CLIENT_ID
     }
   },
  
